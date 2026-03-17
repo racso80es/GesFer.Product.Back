@@ -1,0 +1,8 @@
+#!/bin/sh
+# Genera reporte de interacciones antes de cada commit (auditoria-interacciones-entidades).
+# Instalar: copiar a .git/hooks/pre-commit y (en Unix) chmod +x .git/hooks/pre-commit
+# Decisión: no bloquea el commit si falla la generación (exit 0).
+
+ROOT=$(git rev-parse --show-toplevel)
+cd "$ROOT" && pwsh -NoProfile -File scripts/audits/Generate-InteractionsReport.ps1 2>/dev/null || true
+exit 0

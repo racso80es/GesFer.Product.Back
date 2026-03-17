@@ -1,0 +1,35 @@
+---
+description: Al escribir #Skill, sugerir las skills existentes del proyecto (SddIA/skills). Difusión de SddIA.
+alwaysApply: true
+---
+
+# Sugerencia de skills (#Skill)
+
+Cuando el usuario escriba **#Skill** (solo o en un mensaje), responde sugiriendo las skills existentes del proyecto. **Fuente canónica:** SddIA/norms/interaction-triggers.md; esta regla es difusión para Cursor.
+
+## Comportamiento
+
+1. **Reconocer el disparador:** Si en el mensaje aparece `#Skill`, interpretar que el usuario quiere ver o elegir una skill.
+2. **Listar skills existentes** con formato claro: `skill_id` y descripción breve.
+3. **Incluir** tanto skills con implementación ejecutable (cápsula: Cúmulo paths.skillCapsules[skill-id]) como skills solo de definición (paths.skillsDefinitionPath).
+
+## Listado canónico (fuente: SddIA/skills y Cúmulo paths.skillCapsules / paths.skillsDefinitionPath)
+
+| skill_id | Descripción |
+|----------|-------------|
+| **iniciar-rama** | Crea rama feat/ o fix/ actualizada con master/main. Inicio de acción o tarea. Cápsula: paths.skillCapsules.iniciar-rama |
+| **finalizar-git** | Aceptar PR a master, unificar, eliminar rama, volver a master. Pre-pr / post_pr. Cápsula: paths.skillCapsules.finalizar-git |
+| **invoke-command** | Interceptor de comandos de sistema (git, dotnet, npm, pwsh). Telemetría y registro por rama. Cápsula: paths.skillCapsules.invoke-command |
+| **invoke-commit** | Operaciones de commit con parámetros directos (--message, --files, --all). Sin ficheros .txt. Cápsula: paths.skillCapsules.invoke-commit |
+| **git-operations** | Uso seguro de Git (ramas feat/fix, commits convencionales). Solo definición. |
+| **documentation** | Estándares SSOT y gestión de documentación. Solo definición. |
+| **filesystem-ops** | Operaciones de archivo seguras (PowerShell). Solo definición. |
+| **dotnet-development** | Estándares .NET (build, test, logging). Solo definición. |
+| **frontend-build** | Build Next.js (Product, Admin) fallback. Solo definición. |
+| **security-audit** | Auditoría y hooks pre-commit/pre-push. Solo definición. |
+
+## Respuesta sugerida
+
+Ofrecer el listado en español y añadir, si aplica: *"¿Con cuál quieres trabajar o qué necesitas hacer?"* Para más detalle: definición en paths.skillsDefinitionPath/\<skill-id\>/ (spec.md con frontmatter YAML); implementación en paths.skillCapsules[skill-id] (Cúmulo).
+
+Listado canónico en **SddIA/norms/interaction-triggers.md** (disparador #Skill) y **SddIA/skills/**.

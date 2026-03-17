@@ -1,0 +1,25 @@
+---
+description: SddIA es la única fuente de verdad para comportamiento del asistente; .cursor/rules son difusión
+alwaysApply: true
+---
+
+# SddIA como SSOT (Single Source of Truth)
+
+Las **normas de comportamiento** del asistente en este repositorio las define el dominio **SddIA**. Los archivos en `.cursor/rules` son **difusión** de esas normas para el gestor Cursor: facilitan que el asistente las aplique sin contradicción.
+
+## Fuentes canónicas (consultar cuando apliquen)
+
+- **AGENTS.md** — Protocolo maestro: leyes universales, procesos, activación de roles, disparadores.
+- **SddIA/norms/** — Normas de interacción (interaction-triggers.md, paths-via-cumulo.md, git-via-skills-or-process.md, commands-via-skills-or-tools.md, **entidades-dominio-ecosistema-sddia.md**, **features-documentation-pattern.md**). Entidades de dominio: .md con frontmatter YAML; documentación de features: un .md por acción, sin .json separados.
+- **SddIA/process/** — Procesos de tarea (feature, bug-fix, refactorization, create-tool, correccion-auditorias).
+- **SddIA/actions/** — Acciones del ciclo (spec, clarify, planning, implementation, execution, validate, finalize, sddia-difusion).
+- **Cúmulo** — Rutas del proyecto: `SddIA/agents/cumulo.json` → contrato de paths (paths.featurePath, paths.processPath, paths.skillCapsules, paths.skillsRustPath, paths.toolsRustPath, etc.). No usar rutas literales; ver SddIA/norms/paths-via-cumulo.md. Implementación estándar de skills y tools: Rust (SddIA/constitution.json → configuration.skills_tools_implementation).
+
+## Comportamiento
+
+1. Si una regla en `.cursor/rules` contradice AGENTS.md o SddIA/norms, **prevalece SddIA**.
+2. Al añadir o cambiar procesos, acciones o disparadores en SddIA, actualizar también las reglas de Cursor (acción **sddia-difusion**: SddIA/actions/sddia-difusion/).
+3. Entorno: Windows 11 + PowerShell 7+. No bash ni rutas Unix en comandos.
+
+---
+*Difusión de SddIA para Cursor. Mantener alineado con SddIA al cambiar normas o listados.*

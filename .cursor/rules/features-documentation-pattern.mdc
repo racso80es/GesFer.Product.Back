@@ -1,0 +1,40 @@
+---
+description: Patrón de documentación de features — un solo .md por acción con frontmatter YAML; sin .json separados
+globs: docs/features/**/*.md, docs/bugs/**/*.md
+---
+
+# Patrón de documentación de features (paths.featurePath, paths.fixPath)
+
+**Fuente canónica:** SddIA/norms/features-documentation-pattern.md. Contrato: docs/features/features-contract.md.
+
+## Principio
+
+La documentación de features y fixes sigue el **mismo patrón que skills y tools**: **un solo fichero `.md` por acción**, con **frontmatter YAML** (metadatos) + **cuerpo Markdown**. **No se usan ficheros `.json` separados.**
+
+## Artefactos por acción
+
+| Acción | Archivo | Formato |
+|--------|---------|---------|
+| objectives | objectives.md | frontmatter YAML + Markdown |
+| spec | spec.md | frontmatter YAML + Markdown |
+| clarify | clarify.md | frontmatter YAML + Markdown |
+| planning | plan.md | frontmatter YAML + Markdown |
+| implementation | implementation.md | frontmatter YAML + Markdown |
+| execution | execution.md | frontmatter YAML + Markdown |
+| validate | validacion.md | frontmatter YAML + Markdown |
+| finalize | finalize.md (opc.) | frontmatter YAML + Markdown |
+
+## Comportamiento
+
+1. **Nuevas documentaciones:** Crear solo archivos `.md` con frontmatter YAML + cuerpo Markdown. No crear `spec.json`, `clarify.json`, `plan.json`, `implementation.json`, `execution.json`, `validacion.json` ni `finalize.json`.
+2. **Datos estructurados:** Incluir en el frontmatter YAML del `.md` correspondiente (scope, checks, items, etc.).
+3. **Migración:** Las features existentes con `.json` pueden migrarse consolidando el contenido en el frontmatter del `.md` y eliminando el `.json`.
+
+## Referencias
+
+- **Norma:** SddIA/norms/features-documentation-pattern.md
+- **Contrato:** docs/features/features-contract.md (campos frontmatter por artefacto)
+- **Proceso feature:** SddIA/process/feature/spec.md
+
+---
+*Difusión de SddIA para Cursor. Alineado con entidades-dominio-ecosistema-sddia.*

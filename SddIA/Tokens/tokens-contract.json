@@ -1,0 +1,34 @@
+{
+  "contract_version": "1.0.0",
+  "scope": "paths.tokensPath (SddIA/tokens/)",
+  "description": "Contrato que toda definición de token debe cumplir: definición en paths.tokensPath/<token-id>/ con spec.json (y opcional spec.md). Tokens consumidos por actions, skills, tools, process, patterns, principles para contexto de seguridad y trazabilidad.",
+  "definition_artefacts": [
+    {"ext": ".json", "naming": "spec.json", "path": "paths.tokensPath/<token-id>/", "purpose": "Metadatos machine-readable: token_id, name, version, description, token_definition (identity, context, security, lifecycle, interaction_audit), validation_rules, contract_ref."},
+    {"ext": ".md", "naming": "spec.md", "path": "paths.tokensPath/<token-id>/", "required": false, "purpose": "Especificación legible del token: propósito, campos, reglas de validación. es-ES."}
+  ],
+  "constraints": [
+    "token_id en kebab-case.",
+    "Rutas canónicas solo desde Cúmulo (paths.tokensPath).",
+    "Un token sin spec.json en su carpeta no se considera completo.",
+    "Los tokens que soporten auditoría de interacciones deben incluir los campos interaction_audit (entity_type, entity_id, invoked_by, timestamp) según este contrato. Toda entidad de modelo ha de implementar contrato de Token."
+  ],
+  "consumers": [
+    "paths.actionsPath",
+    "paths.skillsDefinitionPath",
+    "paths.toolsDefinitionPath",
+    "paths.processPath",
+    "paths.patternsPath",
+    "paths.principlesPath",
+    "SddIA/agents/auditor/process-interaction.json",
+    "SddIA/agents/auditor/auditor.json",
+    "SddIA/agents/security-engineer.json"
+  ],
+  "interaction_audit": {
+    "purpose": "Auditar interacciones entre entidades de modelo (implementan contrato de Token): quién utilizó qué entidad de modelo y cuándo; permite agregación (ej. veces usada una entidad, por quién).",
+    "required_fields": ["entity_type", "entity_id", "invoked_by", "timestamp"],
+    "entity_type_definition": "Tipo de entidad de modelo (implementa contrato de Token). Valores ej.: skill, tool, action, process.",
+    "entity_type_enum": ["skill", "tool", "action", "process"],
+    "interaction_log_ref": "paths.auditsPath (Cúmulo); paths.accessLogFile o subcarpeta interactions/; cada registro de token debe ser accesible por el auditor.",
+    "auditor_consumer": "El agente auditor (SddIA/agents/auditor/) es consumidor formal del contrato de Token: debe poder consultar y agregar datos de interacciones a partir de los registros asociados a cada token (invoked_by = identity.issuer, entity_id = identity.subject, entity_type, context.timestamp)."
+  }
+}

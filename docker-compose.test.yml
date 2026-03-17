@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  # Servicio para tests de Backend (Integration)
+  backend-test:
+    image: mcr.microsoft.com/dotnet/sdk:8.0
+    working_dir: /app
+    volumes:
+      - ./:/app
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - DOTNET_CLI_HOME=/tmp/dotnet
+      - ASPNETCORE_ENVIRONMENT=Testing
+    networks:
+      - gesfer_test_network
+
+  # Servicio para tests E2E (Playwright)
+  playwright-test:
+    image: mcr.microsoft.com/playwright:v1.57.0-jammy
+    working_dir: /app/src/Product/Front
+    volumes:
+      - ./:/app
+      - /app/src/Product/Front/node_modules
+      - /app/src/Product/Front/.next
+    environment:
+      - CI=true
+      # URLs para acceder a los servicios desde el contenedor
+      - NEXT_PUBLIC_API_URL=http://gesfer-product-api:5000
+      - API_URL=http://gesfer-product-api:5000
+      - CLIENT_URL=http://gesfer-product-front:3000
+    ipc: host
+    command: npx playwright test
+    networks:
+      - gesfer_test_network
+      - gesfer_network
+
+networks:
+  gesfer_test_network:
+    driver: bridge
+  gesfer_network:
+    external: true

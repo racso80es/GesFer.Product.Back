@@ -1,0 +1,14 @@
+{
+  "toolId": "invoke-mysql-seeds",
+  "version": "1.0.0",
+  "description": "Migraciones EF y seeds de Admin sobre MySQL. Comprueba MySQL, aplica dotnet ef database update y ejecuta seeds (RUN_SEEDS_ONLY).",
+  "contract_ref": "SddIA/tools/tools-contract.md",
+  "components": {
+    "launcher_bat": "Invoke-MySqlSeeds.bat",
+    "launcher_ps1": "Invoke-MySqlSeeds.ps1",
+    "config": "mysql-seeds-config.json",
+    "doc": "mysql-seeds.md",
+    "bin": "invoke_mysql_seeds.exe"
+  },
+  "env": ["Windows 11", "PowerShell 7+", "Docker", ".NET SDK 8"]
+}

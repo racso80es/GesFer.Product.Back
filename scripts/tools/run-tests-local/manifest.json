@@ -1,0 +1,14 @@
+{
+  "toolId": "run-tests-local",
+  "version": "1.0.0",
+  "description": "Ejecuta tests (unit, integration, e2e) en condiciones de validación local. Orquesta opcionalmente prepare-full-env e invoke-mysql-seeds, compila y ejecuta dotnet test según scope.",
+  "contract_ref": "SddIA/tools/tools-contract.json",
+  "components": {
+    "launcher_bat": "Run-Tests-Local.bat",
+    "launcher_ps1": "Run-Tests-Local.ps1",
+    "config": "run-tests-local-config.json",
+    "doc": "run-tests-local.md",
+    "bin": "run_tests_local.exe"
+  },
+  "env": ["Windows 11", "PowerShell 7+", ".NET SDK 8"]
+}

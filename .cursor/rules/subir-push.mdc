@@ -1,0 +1,13 @@
+# Subir (push) — acción ejecutable
+
+**Fuente canónica:** SddIA/norms/interaction-triggers.md (disparador «subir»). Esta regla es difusión para Cursor.
+
+Cuando el usuario escriba **subir**, **subir la rama**, **subir a la nube** o pida publicar la rama en el remoto:
+
+1. **Ejecutar** el push (no limitarse a explicar el paso).
+2. En PowerShell, desde la raíz del repo:
+   - `$branch = git branch --show-current`
+   - `git push -u origin $branch`
+3. Mostrar la salida del comando y confirmar si la rama quedó subida o reportar el error.
+
+Norma completa: SddIA/norms/interaction-triggers.md (disparador «subir»). Acción finalize: paths.actionsPath/finalize/ (paso 4 obligatorio).

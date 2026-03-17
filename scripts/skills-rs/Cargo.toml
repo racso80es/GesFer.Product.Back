@@ -1,0 +1,36 @@
+[package]
+name = "gesfer-skills"
+version = "0.1.0"
+edition = "2021"
+description = "Skills GesFer (contrato skills): implementación por defecto en Rust"
+authors = ["GesFer"]
+license = "UNLICENSED"
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+chrono = { version = "0.4", features = ["serde"] }
+
+[[bin]]
+name = "iniciar_rama"
+path = "src/bin/iniciar_rama.rs"
+
+[[bin]]
+name = "merge_to_master_cleanup"
+path = "src/bin/merge_to_master_cleanup.rs"
+
+[[bin]]
+name = "invoke_command"
+path = "src/bin/invoke_command.rs"
+
+[[bin]]
+name = "verify_pr_protocol"
+path = "src/bin/verify_pr_protocol.rs"
+
+[[bin]]
+name = "push_and_create_pr"
+path = "src/bin/push_and_create_pr.rs"
+
+[[bin]]
+name = "invoke_commit"
+path = "src/bin/invoke_commit.rs"

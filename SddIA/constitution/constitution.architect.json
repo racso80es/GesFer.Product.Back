@@ -1,0 +1,16 @@
+{
+  "principle": "Architectural Foundation",
+  "id": "CFG-ARCH-001",
+  "purpose": "Establish scalable physical and logical structure.",
+  "guidelines": [
+    "Code hierarchy under src/ (Api, Application, Domain, Infrastructure).",
+    "Mandatory Dependency Injection (InversifyJS).",
+    "Interface-first design (Contracts)."
+  ],
+  "status": "Active",
+  "implementation": {
+    "location": "src/ (GesFer.Admin.Back.*; no aplica Desktop en este repo)",
+    "diContainer": "InversifyJS",
+    "contractsPath": "Convention: Domain/Application interfaces (paths from Cúmulo when applicable)."
+  }
+}

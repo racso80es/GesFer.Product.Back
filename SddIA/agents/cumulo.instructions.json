@@ -1,0 +1,30 @@
+{
+  "spec_version": "1.0.0",
+  "contract_id": "cumulo.instructions",
+  "description": "Contrato de instrucciones de mapeo y comportamiento del Cúmulo. Consumido por Cúmulo.",
+  "instructions": [
+    "Map [EVO] -> paths.evolutionPath (paths.evolutionLogFile para EVOLUTION_LOG.md)",
+    "Map [AUD] -> paths.auditsPath (paths.accessLogFile para ACCESS_LOG.md)",
+    "Map [BUG]/[FIX] -> {persist}/ con {persist} = paths.fixPath/<nombre_fix> (base: paths.fixPath)",
+    "Map [TEC] -> paths.architecturePath y paths.infrastructurePath",
+    "Map [DEBT] -> paths.debtPath",
+    "Map [OPS] -> paths.tasksPath",
+    "Map [SPEC] -> paths.actionsPath",
+    "Map [FEA] -> {paths.featurePath}/{feature-name}/",
+    "Map [FIX] -> {paths.fixPath}/{fix-name}/",
+    "Map [PLAN] -> {paths.featurePath}/{feature-name}/{plan-name}/",
+    "Map [CLARIFY] -> {paths.featurePath}/{feature-name}/{clarify-name}/",
+    "Map [IMP] -> {paths.featurePath}/{feature-name}/{implementation-name}/",
+    "Map [TEST] -> {paths.featurePath}/{feature-name}/{test-name}/",
+    "Map [DEP] -> {paths.featurePath}/{feature-name}/{deployment-name}/",
+    "Map [MON] -> {paths.featurePath}/{feature-name}/{monitoring-name}/",
+    "Map [LOG] -> {paths.logPath}/{log-name}.json",
+    "Map [TOOL] -> {paths.toolsPath}/{tool-id}/ (capsula con manifest.json; paths.toolCapsules[tool-id] para ruta canonica). Listado de herramientas: paths.toolsIndexPath.",
+    "Map [TOOL-DEF] -> {paths.toolsDefinitionPath}/{tool-id}/ (definicion spec.md con frontmatter YAML; capa SddIA). Implementacion tecnica (scripts) en paths.toolCapsules[tool-id]; la raiz del path de implementacion la indica Cumulo (paths.toolsPath / paths.toolCapsules).",
+    "Map [SKILL] -> {paths.skillsPath}/{skill-id}/ (capsula con manifest.json; paths.skillCapsules[skill-id]). Listado: paths.skillsIndexPath.",
+    "Map [SKILL-DEF] -> {paths.skillsDefinitionPath}/{skill-id}/ (spec.md con frontmatter YAML). Implementacion en paths.skillCapsules[skill-id]. Ejecutable por defecto en Rust (bin/ en capsula).",
+    "Map [NORMS] -> paths.normsPath (normas de interaccion: disparadores como #Skill; comportamiento del agente definido por SddIA). interaction-triggers.md y interaction-triggers.json.",
+    "Audit documentation dispersion.",
+    "Consolidate audit reports into history."
+  ]
+}

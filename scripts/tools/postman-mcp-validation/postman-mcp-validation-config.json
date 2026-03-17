@@ -1,0 +1,8 @@
+{
+  "version": "1.0.0",
+  "description": "Configuración postman-mcp-validation. Rutas relativas a la raíz del repositorio. internalSecret puede venir de env POSTMAN_INTERNAL_SECRET.",
+  "collectionPath": "docs/postman/GesFer.Admin.Back.API.postman_collection.json",
+  "baseUrl": "http://localhost:5010",
+  "internalSecret": "",
+  "envVarInternalSecret": "POSTMAN_INTERNAL_SECRET"
+}

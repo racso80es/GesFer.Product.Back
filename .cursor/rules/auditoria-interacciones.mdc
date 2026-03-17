@@ -1,0 +1,19 @@
+---
+description: Reporte de interacciones pre-commit y hook; difusión de SddIA (auditor, paths.auditsPath).
+alwaysApply: false
+---
+
+# Auditoría de interacciones (pre-commit)
+
+**Fuente canónica:** paths.featurePath/auditoria-interacciones-entidades/ (spec.md, plan.md, data-source-contract.md). Agente auditor: SddIA/agents/auditor/ (auditor.json, process-interaction.json). Contrato Token: SddIA/tokens/tokens-contract.json (interaction_audit).
+
+## Comportamiento
+
+1. **Antes de cada commit** SddIA genera un reporte de interacciones entre entidades de modelo en **paths.auditsPath** (Cúmulo: ./docs/audits/): ficheros `INTERACCIONES_YYYY-MM-DD_HHmm.json` y `.md`.
+2. **Hook pre-commit:** El generador se ejecuta mediante el hook en **.git/hooks/pre-commit**. La plantilla del hook está en **scripts/git-hooks/pre-commit** (copiar a .git/hooks para activar). Ver scripts/git-hooks/README.md.
+3. **Script generador:** paths.auditsPath y script en **scripts/audits/Generate-InteractionsReport.ps1**. Solo escribe en docs/audits/; lee desde docs/diagnostics/{branch}/execution_history.json o docs/audits/interactions/interactions.json.
+4. **Schema y contrato de lectura:** paths.featurePath/auditoria-interacciones-entidades/interaction-report-schema.md, interaction-report-schema.json, data-source-contract.md.
+
+## Difusión
+
+Esta regla es difusión de SddIA. Al cambiar la feature o el contrato de Token, revisar acción **sddia-difusion** (paths.actionsPath/sddia-difusion/) para mantener .cursor/rules alineados.

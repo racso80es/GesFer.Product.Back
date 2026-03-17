@@ -1,0 +1,150 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AuditResult",
+  "description": "Esquema para el resultado de auditoría de herramientas (audit-result.json).",
+  "type": "object",
+  "required": ["spec_version", "tool_id", "audit_date", "result", "auditor", "phases_results", "json_validation", "functional_validation"],
+  "properties": {
+    "spec_version": {
+      "type": "string",
+      "description": "Versión del esquema de auditoría.",
+      "const": "1.0.0"
+    },
+    "tool_id": {
+      "type": "string",
+      "description": "Identificador de la herramienta auditada (kebab-case).",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "tool_version": {
+      "type": "string",
+      "description": "Versión de la herramienta auditada."
+    },
+    "audit_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Fecha y hora de la auditoría en formato ISO 8601."
+    },
+    "result": {
+      "type": "string",
+      "enum": ["PASS", "FAIL", "PARTIAL"],
+      "description": "Resultado global de la auditoría."
+    },
+    "auditor": {
+      "type": "string",
+      "enum": ["agent", "human"],
+      "description": "Quién realizó la auditoría."
+    },
+    "duration_ms": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Duración total de la auditoría en milisegundos."
+    },
+    "phases_results": {
+      "type": "array",
+      "description": "Resultado de cada fase del proceso de auditoría.",
+      "items": {
+        "type": "object",
+        "required": ["phase_id", "name", "result"],
+        "properties": {
+          "phase_id": {
+            "type": "string",
+            "description": "Identificador de la fase (0-8)."
+          },
+          "name": {
+            "type": "string",
+            "description": "Nombre de la fase."
+          },
+          "result": {
+            "type": "string",
+            "enum": ["PASS", "FAIL", "SKIP"],
+            "description": "Resultado de la fase."
+          },
+          "message": {
+            "type": "string",
+            "description": "Descripción o mensaje de la fase."
+          },
+          "evidence": {
+            "type": "string",
+            "description": "Referencia a evidencia o snippet."
+          }
+        }
+      }
+    },
+    "json_validation": {
+      "type": "object",
+      "description": "Resultado de la validación del retorno JSON.",
+      "required": ["valid", "fields_checked"],
+      "properties": {
+        "valid": {
+          "type": "boolean",
+          "description": "Si la validación JSON fue exitosa."
+        },
+        "fields_checked": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Lista de campos verificados."
+        },
+        "errors": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Lista de errores encontrados."
+        }
+      }
+    },
+    "functional_validation": {
+      "type": "object",
+      "description": "Resultado de la validación funcional.",
+      "required": ["valid", "checks"],
+      "properties": {
+        "valid": {
+          "type": "boolean",
+          "description": "Si la validación funcional fue exitosa."
+        },
+        "checks": {
+          "type": "array",
+          "description": "Lista de verificaciones funcionales.",
+          "items": {
+            "type": "object",
+            "required": ["name", "result"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Nombre de la verificación."
+              },
+              "criteria": {
+                "type": "string",
+                "description": "Criterio de éxito."
+              },
+              "result": {
+                "type": "string",
+                "enum": ["PASS", "FAIL", "SKIP"],
+                "description": "Resultado de la verificación."
+              },
+              "detail": {
+                "type": "string",
+                "description": "Detalle adicional."
+              }
+            }
+          }
+        }
+      }
+    },
+    "command_executed": {
+      "type": "string",
+      "description": "Comando ejecutado para invocar la herramienta."
+    },
+    "parameters_used": {
+      "type": "object",
+      "description": "Parámetros utilizados en la invocación."
+    },
+    "json_output": {
+      "type": "object",
+      "description": "Salida JSON capturada de la herramienta."
+    },
+    "recommendations": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Lista de recomendaciones derivadas de la auditoría."
+    }
+  }
+}

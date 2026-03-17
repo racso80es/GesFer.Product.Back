@@ -1,0 +1,37 @@
+[package]
+name = "gesfer-tools"
+version = "0.1.0"
+edition = "2021"
+description = "Herramientas GesFer (contrato tools): implementación por defecto en Rust"
+authors = ["GesFer"]
+license = "UNLICENSED"
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+chrono = { version = "0.4", features = ["serde"] }
+clap = { version = "4.4", features = ["derive"] }
+tokio = { version = "1.0", features = ["full"] }
+reqwest = { version = "0.11", features = ["json", "blocking"] }
+anyhow = "1.0"
+serde_yaml = "0.9"
+
+[[bin]]
+name = "gesfer_manager"
+path = "src/bin/gesfer_manager.rs"
+
+[[bin]]
+name = "invoke_mysql_seeds"
+path = "src/bin/invoke_mysql_seeds.rs"
+
+[[bin]]
+name = "prepare_full_env"
+path = "src/bin/prepare_full_env.rs"
+
+[[bin]]
+name = "start_api"
+path = "src/bin/start_api.rs"
+
+[[bin]]
+name = "dual_to_frontmatter"
+path = "src/bin/dual_to_frontmatter.rs"

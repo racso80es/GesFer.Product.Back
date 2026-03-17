@@ -1,0 +1,32 @@
+---
+description: Al escribir #Process, sugerir los procesos existentes de tarea (SddIA/process). Difusión de SddIA.
+alwaysApply: true
+---
+
+# Sugerencia de procesos (#Process)
+
+Cuando el usuario escriba **#Process** (solo o en un mensaje), responde sugiriendo los procesos existentes de tarea (SddIA/process). **Fuente canónica:** SddIA/norms/interaction-triggers.md; esta regla es difusión para Cursor.
+
+## Comportamiento
+
+1. **Reconocer el disparador:** Si en el mensaje aparece `#Process`, interpretar que el usuario quiere ver o elegir un proceso.
+2. **Listar procesos existentes** con formato claro: `process_id` y descripción breve.
+3. **Fuente:** paths.processPath (Cúmulo): README.md y carpetas por proceso (feature/, bug-fix/, refactorization/, create-tool/), cada una con spec.md (frontmatter YAML).
+
+## Listado canónico (fuente: SddIA/process/ — Cúmulo paths.processPath)
+
+| process_id | Descripción |
+|------------|-------------|
+| **feature** | Desarrollo de una funcionalidad: rama feat/\<nombre_feature\>, documentación en paths.featurePath/\<nombre_feature\>/ (Cúmulo). |
+| **bug-fix** | Corrección de un bug: rama fix/\<nombre_fix\>, documentación en paths.fixPath/\<nombre_fix\>/ (Cúmulo). Alcance mínimo. |
+| **refactorization** | Refactorización: rama feat/refactorization-\<nombre_refactor\>, documentación en paths.featurePath/refactorization-\<nombre_refactor\>/ (Cúmulo). |
+| **create-tool** | Creación de una nueva herramienta: rama feat/create-tool-\<tool-id\>, cápsula en paths.toolCapsules, índice y Cúmulo actualizados. |
+| **correccion-auditorias** | Corrección de hallazgos de auditoría: rama feat/correccion-segun-auditorias; entrada paths.auditsPath; documentación en paths.featurePath. |
+| **create-template** | Creación de plantilla: rama feat/create-template-\<template-id\>, carpeta en paths.templatesPath. Configuración predefinida de proceso con fin concreto. |
+| **audit-tool** | Auditoría de herramienta: verificación empírica del funcionamiento de una tool. Resultado: informe en paths.auditsPath/tools/\<tool-id\>/. |
+
+## Respuesta sugerida
+
+Ofrecer el listado en español y añadir: *"¿Con cuál quieres iniciar una tarea o necesitas detalle?"* Detalle: paths.processPath/README.md y paths.processPath/&lt;process-id&gt;/ (spec.md con frontmatter YAML).
+
+Listado canónico en **SddIA/norms/interaction-triggers.md** (disparador #Process).

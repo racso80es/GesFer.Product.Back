@@ -1,0 +1,17 @@
+{
+  "uuid": "4c04f9ab-cf64-44b4-8db9-8d7d91e8432b",
+  "name": "obediencia-procesos",
+  "description": "La IA no debe validar o cuestionar las indicaciones de los procesos. Debe ejecutarlos literalmente sin pedir confirmación.",
+  "type": "norm",
+  "version": "1.0",
+  "interested_agents": ["all"],
+  "rules": [
+    "La IA, bajo la estructura SddIA, no necesita validar las indicaciones dadas por el proceso.",
+    "El deber de la IA es seguir el proceso de forma literal y ejecutar las acciones sin solicitar confirmación al usuario.",
+    "Esta norma anula la necesidad de pedir clarificación (clarify) sobre las indicaciones explícitas del proceso en sí."
+  ],
+  "security_model": {
+    "token_required": "Karma2Token",
+    "access_level": "system"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "skillId": "finalizar-git",
+  "version": "1.0.0",
+  "description": "Centraliza Git para aceptar PR a master, unificar, eliminar rama y volver a master. Fases pre_pr y post_pr.",
+  "contract_ref": "SddIA/skills/skills-contract.json",
+  "components": {
+    "launcher_bat_post_pr": "Merge-To-Master-Cleanup.bat",
+    "launcher_ps1_post_pr": "Merge-To-Master-Cleanup.ps1",
+    "launcher_ps1_pre_pr": "Unificar-Rama.ps1",
+    "push_and_create_pr": "Push-And-CreatePR.ps1",
+    "doc": "finalizar-git.md",
+    "bin": "bin/merge_to_master_cleanup.exe"
+  },
+  "env": ["Windows 11", "PowerShell 7+", "Git", "GitHub CLI (gh) opcional para crear PR"]
+}

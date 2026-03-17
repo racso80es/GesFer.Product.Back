@@ -1,0 +1,44 @@
+{
+  "index_version": "1.0.0",
+  "description": "Índice de herramientas en paths.toolsPath. Fuente canónica de rutas: Cúmulo (SddIA/agents/cumulo.json → paths.toolCapsules).",
+  "toolsPath": "./scripts/tools/",
+  "cumulo_ref": "SddIA/agents/cumulo.json",
+  "contract_ref": "SddIA/tools/tools-contract.json",
+  "tools": [
+    {
+      "toolId": "invoke-mysql-seeds",
+      "path": "invoke-mysql-seeds/",
+      "manifest": "invoke-mysql-seeds/manifest.json",
+      "wrapper_bat": "Invoke-MySqlSeeds.bat",
+      "description": "Migraciones EF y seeds de Admin sobre MySQL. Comprueba MySQL, aplica dotnet ef database update y ejecuta seeds (RUN_SEEDS_ONLY)."
+    },
+    {
+      "toolId": "prepare-full-env",
+      "path": "prepare-full-env/",
+      "manifest": "prepare-full-env/manifest.json",
+      "wrapper_bat": "Prepare-FullEnv.bat",
+      "description": "Prepara entorno: Docker (DB, cache, Adminer) y opcionalmente API y clientes. Levanta servicios y espera a MySQL."
+    },
+    {
+      "toolId": "run-tests-local",
+      "path": "run-tests-local/",
+      "manifest": "run-tests-local/manifest.json",
+      "wrapper_bat": "Run-Tests-Local.bat",
+      "description": "Ejecuta tests (unit, integration, e2e) en condiciones de validación local. Orquesta opcionalmente prepare-full-env e invoke-mysql-seeds, compila y ejecuta dotnet test según scope."
+    },
+    {
+      "toolId": "postman-mcp-validation",
+      "path": "postman-mcp-validation/",
+      "manifest": "postman-mcp-validation/manifest.json",
+      "wrapper_bat": "Postman-Mcp-Validation.bat",
+      "description": "Valida endpoints ejecutando la colección Postman (Newman). Herramienta de seguridad externa; salida JSON según tools-contract. Diseño MCP-ready."
+    },
+    {
+      "toolId": "start-api",
+      "path": "start-api/",
+      "manifest": "start-api/manifest.json",
+      "wrapper_bat": "Start-Api.bat",
+      "description": "Levanta la API del proyecto (Admin Back): build opcional, dotnet run, healthcheck. Completa el ciclo infra → datos → API. Ejecutable por terceros."
+    }
+  ]
+}

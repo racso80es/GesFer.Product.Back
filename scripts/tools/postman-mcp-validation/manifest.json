@@ -1,0 +1,14 @@
+{
+  "toolId": "postman-mcp-validation",
+  "version": "1.0.0",
+  "description": "Herramienta de seguridad externa que valida endpoints ejecutando la colección Postman (Newman). Salida JSON según tools-contract. Diseño MCP-ready.",
+  "contract_ref": "SddIA/tools/tools-contract.json",
+  "components": {
+    "launcher_bat": "Postman-Mcp-Validation.bat",
+    "launcher_ps1": "Postman-Mcp-Validation.ps1",
+    "config": "postman-mcp-validation-config.json",
+    "doc": "postman-mcp-validation.md",
+    "bin": "postman_mcp_validation.exe"
+  },
+  "env": ["Windows 11", "PowerShell 7+", "Node.js/npm (Newman)"]
+}

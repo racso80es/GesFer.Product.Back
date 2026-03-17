@@ -1,0 +1,19 @@
+{
+  "version": "1.0.0",
+  "description": "Configuración run-tests-local. Rutas relativas a la raíz del repositorio.",
+  "repoRootRef": "Desde la cápsula: ..\\..\\..",
+  "solutionPath": "src/GesFer.Admin.Back.sln",
+  "projects": {
+    "unit": "src/GesFer.Admin.Back.UnitTests/GesFer.Admin.Back.UnitTests.csproj",
+    "integration": "src/GesFer.Admin.Back.IntegrationTests/GesFer.Admin.Back.IntegrationTests.csproj",
+    "e2e": "src/GesFer.Admin.Back.E2ETests/GesFer.Admin.Back.E2ETests.csproj"
+  },
+  "e2eFilter": "Category=E2E",
+  "e2eEnv": {
+    "E2E_INTERNAL_SECRET": "dev-internal-secret-change-in-production"
+  },
+  "toolsRef": {
+    "prepare-full-env": "prepare-full-env/Prepare-FullEnv.bat",
+    "invoke-mysql-seeds": "invoke-mysql-seeds/Invoke-MySqlSeeds.bat"
+  }
+}

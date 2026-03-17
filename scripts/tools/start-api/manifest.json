@@ -1,0 +1,14 @@
+{
+  "toolId": "start-api",
+  "version": "1.0.0",
+  "description": "Levanta la API del proyecto (Admin Back): build opcional, dotnet run, opcional healthcheck. Ciclo: infra → datos → API.",
+  "contract_ref": "SddIA/tools/tools-contract.md",
+  "components": {
+    "launcher_bat": "Start-Api.bat",
+    "launcher_ps1": "Start-Api.ps1",
+    "config": "start-api-config.json",
+    "doc": "start-api.md",
+    "exe": "start_api.exe"
+  },
+  "env": ["Windows 11", "PowerShell 7+", ".NET SDK 8"]
+}

@@ -1,0 +1,44 @@
+{
+  "token_id": "karma2-token",
+  "name": "Karma2Token",
+  "version": "1.1.0",
+  "description": "Contenedor conceptual de seguridad y contexto para todos los items de SddIA (Actions, Skills, Tools, Processes, Patterns, Principles). Garantiza trazabilidad, autorización y cumplimiento de auditoría. Soporta auditoría de interacciones entre entidades de modelo (quién usó qué y cuándo) para consumo por el agente auditor.",
+  "purpose": "Asegurar que cada ejecución de un item en el sistema tenga un contexto de seguridad validado y trazable; permitir al auditor agregar y consultar interacciones entre entidades de modelo (ej. veces utilizada una entidad, por quién).",
+  "contract_ref": "paths.tokensPath/tokens-contract.json",
+  "token_definition": {
+    "fields": {
+      "identity": {
+        "issuer": {"type": "string", "description": "ID del Agente o Usuario que emite la orden (invoked_by en auditoría de interacciones)."},
+        "subject": {"type": "string", "description": "ID del Item (Action, Skill, Tool, Process) que se ejecuta (entity_id en auditoría de interacciones)."},
+        "role": {"type": "string", "description": "Rol bajo el cual se ejecuta la acción (ej. Architect, Tekton)."}
+      },
+      "context": {
+        "environment": {"type": "string", "enum": ["dev", "test", "prod", "local"], "description": "Entorno de ejecución."},
+        "session_id": {"type": "string", "format": "uuid", "description": "ID de la sesión de trabajo actual."},
+        "timestamp": {"type": "string", "format": "date-time", "description": "Momento de creación del token (timestamp de la interacción)."}
+      },
+      "security": {
+        "hash": {"type": "string", "description": "Firma SHA256 del contenido o parámetros de ejecución para integridad."},
+        "permissions": {"type": "array", "items": {"type": "string"}, "description": "Scopes o permisos requeridos para esta ejecución."},
+        "audit_ref": {"type": "string", "description": "Referencia al registro de auditoría (paths.auditsPath); accesible por el auditor para agregación de interacciones."}
+      },
+      "lifecycle": {
+        "created_at": {"type": "string", "format": "date-time"},
+        "expires_at": {"type": "string", "format": "date-time", "description": "Opcional. Para tokens efímeros."}
+      },
+      "interaction_audit": {
+        "entity_type": {"type": "string", "enum": ["skill", "tool", "action", "process"], "description": "Tipo de entidad de modelo invocada (implementa contrato de Token)."},
+        "entity_id": {"type": "string", "description": "ID de la entidad (skill_id, tool_id, action_id, process_id). Debe coincidir con identity.subject."},
+        "invoked_by": {"type": "string", "description": "Agente o identidad que invoca. Debe coincidir con identity.issuer."},
+        "timestamp": {"type": "string", "format": "date-time", "description": "Momento de la interacción. Debe coincidir con context.timestamp."}
+      }
+    }
+  },
+  "validation_rules": [
+    "Debe estar firmado por un Emisor válido (Agent ID registrado).",
+    "Debe tener una referencia de auditoría válida en paths.auditsPath.",
+    "El hash debe coincidir con el contenido del item ejecutado.",
+    "Los permisos del Emisor deben cubrir los requeridos por el Item.",
+    "Para auditoría de interacciones entre entidades de modelo: entity_type, entity_id, invoked_by y timestamp deben estar presentes; el auditor (SddIA/agents/auditor/) consume estos datos para agregación (ej. veces usada una entidad de modelo, por quién)."
+  ]
+}

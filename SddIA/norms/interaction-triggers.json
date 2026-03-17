@@ -1,0 +1,39 @@
+{
+  "spec_version": "1.0.0",
+  "description": "Disparadores de interacción: comportamiento del agente ante ciertos textos del usuario. El dominio SddIA define este comportamiento.",
+  "source": "SddIA/norms/interaction-triggers.md",
+  "triggers": [
+    {
+      "trigger": "#Skill",
+      "when": "El usuario escribe #Skill (solo o en el mensaje)",
+      "behavior": "Sugerir las skills existentes del proyecto",
+      "list_source": "paths.skillsDefinitionPath (Cúmulo); paths.skillsIndexPath o paths.skillCapsules para implementación",
+      "response": "Listar skill_id y descripción; indicar cápsula si aplica; ofrecer elegir una skill o indicar qué necesita hacer"
+    },
+    {
+      "trigger": "#Action",
+      "when": "El usuario escribe #Action (solo o en el mensaje)",
+      "behavior": "Sugerir las acciones existentes del ciclo de desarrollo",
+      "list_source": "paths.actionsPath (Cúmulo)",
+      "response": "Listar action_id y propósito; ofrecer elegir una acción o pedir detalle."
+    },
+    {
+      "trigger": "#Process",
+      "when": "El usuario escribe #Process (solo o en el mensaje)",
+      "behavior": "Sugerir los procesos existentes de tarea",
+      "list_source": "paths.processPath (Cúmulo)",
+      "response": "Listar process_id y descripción; ofrecer elegir un proceso o pedir detalle."
+    },
+    {
+      "trigger": "subir",
+      "when": "El usuario pide subir, subir la rama o subir a la nube (publicar rama en origin)",
+      "behavior": "Ejecutar git push: git branch --show-current luego git push -u origin <rama>. PowerShell. Reportar éxito o error. No solo documentar; ejecutar.",
+      "list_source": "—",
+      "response": "Ejecutar push y confirmar resultado."
+    }
+  ],
+  "cumulo_ref": "SddIA/agents/cumulo.json",
+  "skills_list_ref": "paths.skillsDefinitionPath",
+  "actions_list_ref": "paths.actionsPath",
+  "process_list_ref": "paths.processPath"
+}

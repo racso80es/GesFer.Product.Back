@@ -1,0 +1,30 @@
+---
+description: Comandos solo vía skills o tools; implementación estándar Rust. Difusión de SddIA/norms/commands-via-skills-or-tools.md
+alwaysApply: true
+---
+
+# Comandos solo vía skills o tools (Rust estándar)
+
+**Fuente canónica:** SddIA/norms/commands-via-skills-or-tools.md. Esta regla es **difusión** para Cursor.
+
+## Principio
+
+**No ejecutar comandos de sistema directamente** en la terminal (ni git, dotnet, npm, pwsh, cargo, etc.). Toda ejecución debe realizarse mediante:
+
+- **Skill** (paths.skillCapsules[skill-id], paths.skillsDefinitionPath)
+- **Herramienta (tool)** (paths.toolCapsules[tool-id], paths.toolsDefinitionPath)
+- **Acción** (paths.actionsPath) o **Proceso** (paths.processPath)
+
+Ejemplos: usar la skill **iniciar-rama** para crear ramas, **finalizar-git** para push/PR, **invoke-command** para ejecutar comandos de sistema de forma trazada.
+
+## Implementación estándar: Rust
+
+En SddIA la implementación por defecto de skills y tools es **Rust** (binarios .exe). Rutas en Cúmulo: paths.skillsRustPath, paths.toolsRustPath. Las cápsulas exponen .bat/.ps1 que invocan el .exe si existe; si no, el script de fallback.
+
+## Comportamiento en Cursor
+
+- Si necesitas ejecutar un comando, propón o documenta la invocación mediante la skill o herramienta correspondiente (p. ej. "Ejecutar skill iniciar-rama con BranchType feat y BranchName X" o "Invocar invoke-command con el comando Y"), **nunca** escribiendo el comando directamente en la terminal.
+- Para git en particular, sigue además SddIA/norms/git-via-skills-or-process.md (referenciada en AGENTS.md).
+
+---
+*Difusión de SddIA. Mantener alineado con SddIA/norms/commands-via-skills-or-tools.md y AGENTS.md (ley COMANDOS).*

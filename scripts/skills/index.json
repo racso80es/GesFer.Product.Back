@@ -1,0 +1,37 @@
+{
+  "index_version": "1.0.0",
+  "description": "Índice de skills con implementación ejecutable en paths.skillsPath. Fuente canónica de rutas: Cúmulo (SddIA/agents/cumulo.json → paths.skillCapsules).",
+  "skillsPath": "./scripts/skills/",
+  "cumulo_ref": "SddIA/agents/cumulo.json",
+  "contract_ref": "SddIA/skills/skills-contract.json",
+  "skills": [
+    {
+      "skillId": "iniciar-rama",
+      "path": "iniciar-rama/",
+      "manifest": "iniciar-rama/manifest.json",
+      "launcher_bat": "iniciar-rama/Iniciar-Rama.bat",
+      "description": "Crea rama feat/ o fix/ actualizada con master/main. Inicio de acción o tarea."
+    },
+    {
+      "skillId": "finalizar-git",
+      "path": "finalizar-git/",
+      "manifest": "finalizar-git/manifest.json",
+      "launcher_bat_post_pr": "finalizar-git/Merge-To-Master-Cleanup.bat",
+      "description": "Pre-pr: Unificar-Rama.ps1, Push-And-CreatePR.ps1 (push + crear PR con gh). Post-pr: Merge-To-Master-Cleanup."
+    },
+    {
+      "skillId": "invoke-command",
+      "path": "invoke-command/",
+      "manifest": "invoke-command/manifest.json",
+      "launcher_bat": "invoke-command/Invoke-Command.bat",
+      "description": "Interceptor de comandos de sistema (git, dotnet, npm, pwsh). Telemetría y registro por rama."
+    },
+    {
+      "skillId": "invoke-commit",
+      "path": "invoke-commit/",
+      "manifest": "invoke-commit/manifest.json",
+      "launcher_bat": "invoke-commit/Invoke-Commit.bat",
+      "description": "Operaciones de commit con parámetros directos (--message, --files, --all). Sin ficheros .txt."
+    }
+  ]
+}
