@@ -1,6 +1,6 @@
-# GesFer.Admin.Back
+# GesFer.Product.Back
 
-Backend (API) del módulo de administración GesFer. Este repositorio contiene **solo** la API y sus capas de aplicación, infraestructura y dominio; el proyecto se mantiene aislado respecto a otras piezas del ecosistema.
+Backend (API) del módulo de Producto GesFer (Sistema de Gestión de Compra/Venta de Chatarra). Este repositorio contiene **solo** la API y sus capas de aplicación, infraestructura y dominio; el proyecto se mantiene aislado respecto a otras piezas del ecosistema.
 
 ---
 
@@ -10,129 +10,145 @@ GesFer es un ecosistema modular que históricamente incluía varios componentes.
 
 | Componente | Descripción | Ubicación |
 |------------|-------------|-----------|
-| **Admin / Back** | API REST de administración | ✅ **GesFer.Admin.Back** (este repo) |
-| **Admin / Front** | Interfaz web de administración | [GesFer.Admin.Front](https://github.com/racso80es/GesFer.Admin.Front) |
-| **Product / Back** | API REST de producto | Repo separado |
+| **Product / Back** | API REST de producto (Gestión, inventario, compra/venta) | ✅ **GesFer.Product.Back** (este repo) |
 | **Product / Front** | Interfaz web de producto | Repo separado |
+| **Admin / Back** | API REST de administración | Repo separado |
+| **Admin / Front** | Interfaz web de administración | Repo separado |
 
-**Resumen:** Este proyecto es el **backend (API)** del módulo **Admin**. El frontend de administración ([GesFer.Admin.Front](https://github.com/racso80es/GesFer.Admin.Front)) consume esta API; ambos repos comparten el protocolo SddIA y la estructura de documentación. La base de datos (`GesFer_Admin`) puede ser compartida con otros componentes del ecosistema.
+**Resumen:** Este proyecto es el **backend (API)** del módulo **Product**. El frontend de producto consume esta API; ambos repos comparten el protocolo SddIA y la estructura de documentación. La base de datos puede ser compartida con otros componentes del ecosistema.
 
 ---
 
-## Contexto técnico
+## Contexto técnico y Arquitectura
 
-- **Stack:** .NET 8, ASP.NET Core Web API, JWT, Entity Framework Core, Serilog, Swagger.
+El proyecto sigue los principios de **Clean Architecture** y **SOLID**, organizado en capas:
+
+- **Stack:** .NET 8, ASP.NET Core Web API, JWT, Entity Framework Core (Code First), Serilog, Swagger/OpenAPI.
 - **Estructura:** Api → Application → Infrastructure → Domain; tests y scripts en `src/`.
-- **Base de datos:** MySQL 8 (por defecto `GesFer_Admin` en `localhost:3306`).
+- **Base de datos:** MySQL 8 (con UTF8MB4).
+- **Caché:** Memcached.
 
 ---
 
-## Requisitos
+## Requisitos Previos
 
 - .NET 8 SDK
 - Windows 11 + PowerShell 7+ (según convención del proyecto; ver `AGENTS.md`)
-- MySQL 8 (local o vía Docker)
+- Docker Desktop (para MySQL y Memcached)
 
 ---
 
-## Ejecución
+## Ejecución y Configuración Inicial
 
-### Opción 1: Solo la API (con BD ya levantada)
+### 1. Iniciar servicios con Docker
 
-Desde la raíz del repositorio, en PowerShell:
+Para levantar MySQL, caché y Adminer en contenedores, desde la raíz del repositorio, ejecuta:
 
-```powershell
-dotnet run --project src/GesFer.Admin.Back.Api/GesFer.Admin.Back.Api.csproj
+```bash
+docker-compose up -d
 ```
 
-Por defecto la API escucha en **http://localhost:5010**. Swagger está disponible en `/swagger`.
+Esto iniciará:
+- MySQL en el puerto 3306 (BD `GesFer_Admin` u otra definida en compose)
+- Memcached en el puerto 11211
+- Adminer (opcional) en el puerto 8080 para gestión visual de BD
 
-### Opción 2: Entorno completo (Docker + API)
+### 2. Crear la base de datos y migraciones
 
-Para levantar MySQL, caché y opcionalmente la API en contenedores:
+Desde el directorio del proyecto de la API:
 
-```powershell
-docker-compose up -d gesfer-db cache adminer
+```bash
+cd src/Api
+dotnet ef migrations add InitialCreate --project ../Infrastructure/GesFer.Infrastructure.csproj
+dotnet ef database update --project ../Infrastructure/GesFer.Infrastructure.csproj
 ```
 
-Luego ejecutar la API localmente (o usar el servicio `gesfer-admin-api` del compose).
+*(Si se dispone de herramientas de seed como `invoke-mysql-seeds` (Cúmulo), utilízalas en su lugar)*
+
+### 3. Ejecutar la API localmente
+
+Desde el directorio del proyecto de la API:
+
+```bash
+cd src/Api
+dotnet run
+```
+
+O puedes compilar/ejecutar la solución completa `src/GesFer.Product.sln`:
+```bash
+dotnet build src/GesFer.Product.sln
+dotnet run --project src/Api/GesFer.Api.csproj
+```
+
+Por defecto la API escucha en los puertos definidos (ej. HTTP: `http://localhost:5010` o HTTPS: `https://localhost:5011`).
+Swagger estará disponible en `/swagger`.
 
 ---
 
-## Autenticación
+## Autenticación y Seguridad
 
-La API admite **dos métodos** de autenticación:
+El sistema implementa autenticación multi-tenant con RBAC (Role-Based Access Control) y soporte para JWT.
 
-| Método | Uso | Header |
-|--------|-----|--------|
-| **JWT Bearer** | Usuarios administrativos (login) | `Authorization: Bearer {token}` |
-| **Shared Secret** | Llamadas sistema a sistema | `X-Internal-Secret: {valor}` |
+### Endpoint de Login (Usuarios del Producto)
 
-### JWT (usuarios Admin)
+```http
+POST /api/auth/login
+Content-Type: application/json
 
-1. **Obtener token:** `POST /api/admin/auth/login` con `{ "Usuario": "admin", "Contraseña": "admin123" }`.
-2. La respuesta incluye `Token`. Copia solo el valor (sin `Bearer `).
-3. **En Swagger UI:** Pulsa «Authorize», pega el token y confirma. Swagger enviará `Authorization: Bearer {token}` en las peticiones.
-4. **En Postman/curl:** Añade el header `Authorization: Bearer {token}`.
-
-> El token expira según `JwtSettings:ExpirationMinutes` (por defecto 60). Tras expirar, hay que hacer login de nuevo.
-
-### Shared Secret (sistema)
-
-Para integraciones entre servicios (p. ej. Product → Admin), envía el header:
-
-```
-X-Internal-Secret: {SharedSecret}
+{
+  "empresa": "NombreEmpresa",
+  "usuario": "usuario",
+  "contraseña": "password"
+}
 ```
 
-El valor se configura en `appsettings` (`SharedSecret`). En desarrollo: `dev-internal-secret-change-in-production`.
+La respuesta incluirá un token JWT y los permisos del usuario para usarse en las cabeceras `Authorization: Bearer {token}`.
 
-### Endpoints protegidos
+### Shared Secret (sistema a sistema)
 
-- **`[AuthorizeSystemOrAdmin]`** — Acepta JWT con rol Admin **o** Shared Secret.
-- **`[Authorize(Policy = "AdminOnly")]`** — Solo JWT con rol Admin (no Shared Secret).
-
-El login (`POST /api/admin/auth/login`) es público.
-
-### Configuración JWT (producción)
-
-En `appsettings` o variables de entorno:
-
-| Clave | Descripción |
-|-------|-------------|
-| `JwtSettings:SecretKey` | Clave secreta (mínimo 32 caracteres para HS256) |
-| `JwtSettings:Issuer` | Emisor del token (p. ej. `GesFerApi`) |
-| `JwtSettings:Audience` | Audiencia (p. ej. `GesFerClient`) |
-| `JwtSettings:ExpirationMinutes` | Minutos hasta expiración (por defecto 60) |
+Para integraciones entre servicios (p. ej. Admin → Product), puede existir una cabecera `X-Internal-Secret: {SharedSecret}` configurada en los endpoints del sistema.
 
 ---
 
-## Credenciales por defecto (desarrollo)
+## Módulos Principales
 
-### Usuario administrativo (login API)
+### 1. Autenticación y Seguridad
+- Login multi-tenant (Empresa + Usuario + Contraseña)
+- Sistema RBAC con permisos directos y por grupos
+- Cálculo automático de permisos combinados
 
-Tras ejecutar migraciones y seeds, existe un usuario de prueba:
+### 2. Inventario y Catálogo
+- **Family**: Familias de artículos con % IVA
+- **Article**: Artículos con código único, precios y stock
 
-| Campo | Valor |
-|-------|-------|
-| **Usuario** | `admin` |
-| **Contraseña** | `admin123` |
+### 3. Tarifas
+- **Tariff**: Tarifas de compra/venta
+- **TariffItem**: Precios específicos por artículo en cada tarifa
 
-Endpoint de login: `POST /api/admin/auth/login` con `{ "Usuario": "admin", "Contraseña": "admin123" }`.
+### 4. Terceros
+- **Supplier**: Proveedores con tarifa de compra opcional
+- **Customer**: Clientes con tarifa de venta opcional
 
-> ⚠️ **Seguridad:** Estas credenciales son solo para desarrollo. En producción usar variables de entorno y seeds seguros.
+### 5. Operaciones de Compra
+- **PurchaseDeliveryNote**: Albaranes de compra (aumentan stock)
+- **PurchaseInvoice**: Facturas de compra
 
-### Base de datos (MySQL)
+### 6. Operaciones de Venta
+- **SalesDeliveryNote**: Albaranes de venta (disminuyen stock)
+- **SalesInvoice**: Facturas de venta
 
-| Campo | Valor por defecto |
-|-------|-------------------|
-| **Host** | `localhost` |
-| **Puerto** | `3306` |
-| **Base de datos** | `GesFer_Admin` |
-| **Usuario** | `admin` |
-| **Contraseña** | `GesFerAdmin@pthrjkl` |
+---
 
-Coinciden con la configuración de `docker-compose.yml` y `appsettings.json`.
+## Características Implementadas
+
+✅ **Soft Delete** global en todas las entidades
+✅ **Multi-tenant** con CompanyId en todas las entidades de negocio
+✅ **Precisión decimal** decimal(18,4) para todos los importes
+✅ **UTF8** configurado para soportar caracteres especiales
+✅ **Gestión automática de stock** en albaranes
+✅ **Cálculo automático de precios** desde tarifas
+✅ **Cálculo automático de IVA** según familia del artículo
+✅ **RBAC** con permisos directos y por grupos
 
 ---
 
@@ -143,7 +159,7 @@ El proyecto incluye herramientas (Cúmulo: `paths.toolCapsules`) para automatiza
 - **prepare-full-env** — Levanta servicios Docker (MySQL, cache, Adminer) y opcionalmente la API.
 - **invoke-mysql-seeds** — Aplica migraciones EF y carga datos de seed.
 - **start-api** — Levanta la API con verificación de health.
-- **run-tests-local** — Ejecuta la suite de tests.
+- **run-tests-local** — Ejecuta la suite de tests (`dotnet test src/GesFer.Product.sln`).
 - **postman-mcp-validation** — Valida la API con Postman/Newman.
 
 ---
