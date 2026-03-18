@@ -1,7 +1,7 @@
 using GesFer.Application.Commands.State;
 using GesFer.Application.Common.Interfaces;
 using GesFer.Application.DTOs.State;
-using GesFer.Shared.Back.Domain.Entities;
+using GesFer.Product.Back.Domain.Entities;
 using GesFer.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -34,7 +34,7 @@ public class CreateStateCommandHandler : ICommandHandler<CreateStateCommand, Sta
         if (existingState != null)
             throw new InvalidOperationException($"Ya existe una provincia con el nombre '{command.Dto.Name}' en este país");
 
-        var state = new GesFer.Shared.Back.Domain.Entities.State
+        var state = new GesFer.Product.Back.Domain.Entities.State
         {
             CountryId = command.Dto.CountryId,
             Name = command.Dto.Name,

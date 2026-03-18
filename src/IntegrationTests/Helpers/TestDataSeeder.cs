@@ -39,7 +39,7 @@ public static class TestDataSeeder
         // Usar JsonDataSeeder para cargar datos de prueba desde test-data.json
         var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
         var logger = loggerFactory.CreateLogger<JsonDataSeeder>();
-        var sanitizer = new GesFer.Shared.Back.Domain.Services.SensitiveDataSanitizer();
+        var sanitizer = new GesFer.Domain.Services.SensitiveDataSanitizer();
         var config = configuration ?? new ConfigurationBuilder()
             .AddInMemoryCollection(new Dictionary<string, string?> { ["Seed:CompanyId"] = "11111111-1111-1111-1111-111111111115" })
             .Build();

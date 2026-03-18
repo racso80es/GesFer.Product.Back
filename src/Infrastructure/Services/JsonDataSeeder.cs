@@ -1,9 +1,9 @@
 using GesFer.Product.Back.Domain.Entities;
-using GesFer.Shared.Back.Domain.Entities;
-using GesFer.Shared.Back.Domain.ValueObjects;
+using GesFer.Product.Back.Domain.Entities;
+using GesFer.Domain.ValueObjects;
 using GesFer.Infrastructure.Configuration;
 using GesFer.Infrastructure.Data;
-using GesFer.Shared.Back.Domain.Services;
+using GesFer.Domain.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;

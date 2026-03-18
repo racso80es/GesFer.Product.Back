@@ -1,7 +1,7 @@
 using GesFer.Application.Commands.City;
 using GesFer.Application.Common.Interfaces;
 using GesFer.Application.DTOs.City;
-using GesFer.Shared.Back.Domain.Entities;
+using GesFer.Product.Back.Domain.Entities;
 using GesFer.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -35,7 +35,7 @@ public class CreateCityCommandHandler : ICommandHandler<CreateCityCommand, CityD
         if (existingCity != null)
             throw new InvalidOperationException($"Ya existe una ciudad con el nombre '{command.Dto.Name}' en esta provincia");
 
-        var city = new GesFer.Shared.Back.Domain.Entities.City
+        var city = new GesFer.Product.Back.Domain.Entities.City
         {
             StateId = command.Dto.StateId,
             Name = command.Dto.Name,
