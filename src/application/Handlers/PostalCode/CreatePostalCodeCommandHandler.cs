@@ -1,7 +1,7 @@
 using GesFer.Application.Commands.PostalCode;
 using GesFer.Application.Common.Interfaces;
 using GesFer.Application.DTOs.PostalCode;
-using GesFer.Shared.Back.Domain.Entities;
+using GesFer.Product.Back.Domain.Entities;
 using GesFer.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -36,7 +36,7 @@ public class CreatePostalCodeCommandHandler : ICommandHandler<CreatePostalCodeCo
         if (existingPostalCode != null)
             throw new InvalidOperationException($"Ya existe un código postal '{command.Dto.Code}' en esta ciudad");
 
-        var postalCode = new GesFer.Shared.Back.Domain.Entities.PostalCode
+        var postalCode = new GesFer.Product.Back.Domain.Entities.PostalCode
         {
             CityId = command.Dto.CityId,
             Code = command.Dto.Code,

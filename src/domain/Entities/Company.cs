@@ -1,10 +1,33 @@
-using GesFer.Shared.Back.Domain.Entities;
-using System.Collections.Generic;
+using GesFer.Domain.Common;
+using GesFer.Domain.ValueObjects;
 
 namespace GesFer.Product.Back.Domain.Entities;
 
-public class Company : GesFer.Shared.Back.Domain.Entities.Company
+/// <summary>
+/// Entidad que representa una empresa (Tenant) en el sistema multi-tenant.
+/// </summary>
+public class Company : BaseEntity
 {
+    public string Name { get; set; } = string.Empty;
+    public TaxId? TaxId { get; set; }
+    public string Address { get; set; } = string.Empty; // Obligatorio
+    public string? Phone { get; set; }
+    public Email? Email { get; set; }
+
+    // Campos de dirección
+    public Guid? PostalCodeId { get; set; }
+    public Guid? CityId { get; set; }
+    public Guid? StateId { get; set; }
+    public Guid? CountryId { get; set; }
+    public Guid? LanguageId { get; set; }
+
+    // Navegación
+    public PostalCode? PostalCode { get; set; }
+    public City? City { get; set; }
+    public State? State { get; set; }
+    public Country? Country { get; set; }
+    public Language? Language { get; set; }
+
     public ICollection<User> Users { get; set; } = new List<User>();
     public ICollection<Article> Articles { get; set; } = new List<Article>();
     public ICollection<Customer> Customers { get; set; } = new List<Customer>();

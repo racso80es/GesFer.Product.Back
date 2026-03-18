@@ -1,5 +1,5 @@
-using GesFer.Shared.Back.Domain.Common;
-using GesFer.Shared.Back.Domain.Entities;
+using GesFer.Domain.Common;
+
 
 namespace GesFer.Product.Back.Domain.Entities;
 
@@ -24,10 +24,10 @@ public class Supplier : BaseEntity
 
     // Navegación (CompanyId FK a Admin)
     public Tariff? BuyTariff { get; set; }
-    public GesFer.Shared.Back.Domain.Entities.PostalCode? PostalCode { get; set; }
-    public GesFer.Shared.Back.Domain.Entities.City? City { get; set; }
-    public GesFer.Shared.Back.Domain.Entities.State? State { get; set; }
-    public GesFer.Shared.Back.Domain.Entities.Country? Country { get; set; }
+    public PostalCode? PostalCode { get; set; }
+    public City? City { get; set; }
+    public State? State { get; set; }
+    public Country? Country { get; set; }
     public ICollection<PurchaseDeliveryNote> PurchaseDeliveryNotes { get; set; } = new List<PurchaseDeliveryNote>();
 }
 

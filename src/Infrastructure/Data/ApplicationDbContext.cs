@@ -1,5 +1,5 @@
 using GesFer.Product.Back.Domain.Entities;
-using GesFer.Shared.Back.Infrastructure.Persistence;
+using GesFer.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 namespace GesFer.Infrastructure.Data;
@@ -34,11 +34,11 @@ public class ApplicationDbContext : DbContext
     public DbSet<SalesDeliveryNote> SalesDeliveryNotes => Set<SalesDeliveryNote>();
     public DbSet<SalesDeliveryNoteLine> SalesDeliveryNoteLines => Set<SalesDeliveryNoteLine>();
     public DbSet<SalesInvoice> SalesInvoices => Set<SalesInvoice>();
-    public DbSet<GesFer.Shared.Back.Domain.Entities.Country> Countries => Set<GesFer.Shared.Back.Domain.Entities.Country>();
-    public DbSet<GesFer.Shared.Back.Domain.Entities.Language> Languages => Set<GesFer.Shared.Back.Domain.Entities.Language>();
-    public DbSet<GesFer.Shared.Back.Domain.Entities.State> States => Set<GesFer.Shared.Back.Domain.Entities.State>();
-    public DbSet<GesFer.Shared.Back.Domain.Entities.City> Cities => Set<GesFer.Shared.Back.Domain.Entities.City>();
-    public DbSet<GesFer.Shared.Back.Domain.Entities.PostalCode> PostalCodes => Set<GesFer.Shared.Back.Domain.Entities.PostalCode>();
+    public DbSet<GesFer.Product.Back.Domain.Entities.Country> Countries => Set<GesFer.Product.Back.Domain.Entities.Country>();
+    public DbSet<GesFer.Product.Back.Domain.Entities.Language> Languages => Set<GesFer.Product.Back.Domain.Entities.Language>();
+    public DbSet<GesFer.Product.Back.Domain.Entities.State> States => Set<GesFer.Product.Back.Domain.Entities.State>();
+    public DbSet<GesFer.Product.Back.Domain.Entities.City> Cities => Set<GesFer.Product.Back.Domain.Entities.City>();
+    public DbSet<GesFer.Product.Back.Domain.Entities.PostalCode> PostalCodes => Set<GesFer.Product.Back.Domain.Entities.PostalCode>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -1,7 +1,7 @@
 using GesFer.Application.Commands.Country;
 using GesFer.Application.Common.Interfaces;
 using GesFer.Application.DTOs.Country;
-using GesFer.Shared.Back.Domain.Entities;
+using GesFer.Product.Back.Domain.Entities;
 using GesFer.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -38,7 +38,7 @@ public class CreateCountryCommandHandler : ICommandHandler<CreateCountryCommand,
         if (!languageExists)
             throw new InvalidOperationException($"No se encontró el idioma con ID {command.Dto.LanguageId}");
 
-        var country = new GesFer.Shared.Back.Domain.Entities.Country
+        var country = new GesFer.Product.Back.Domain.Entities.Country
         {
             Name = command.Dto.Name,
             Code = command.Dto.Code,

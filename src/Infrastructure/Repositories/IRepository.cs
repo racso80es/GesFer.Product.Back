@@ -1,4 +1,4 @@
-using GesFer.Shared.Back.Domain.Common;
+using GesFer.Domain.Common;
 using System.Linq.Expressions;
 
 namespace GesFer.Infrastructure.Repositories;
