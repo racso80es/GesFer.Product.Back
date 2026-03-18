@@ -27,3 +27,4 @@ Este repositorio corresponde al **backend (API)** del ecosistema GesFer, que ha 
 ---
 
 *Este documento se actualizará cuando cambien los objetivos o el alcance del proyecto.*
+- **TODO:** Resolver dependencias compartidas rotas en código C# (`GesFer.Shared.Back.Domain.csproj`), incluyendo `BaseEntity`, Value Objects, etc., para que el proyecto compile de forma verdaderamente independiente y aislada.
