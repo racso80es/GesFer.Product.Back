@@ -12,7 +12,7 @@ using FluentAssertions;
 using Moq;
 using Xunit;
 
-namespace GesFer.IntegrationTests.Services;
+namespace GesFer.Product.Back.IntegrationTests.Services;
 
 public class DbInitializerTests
 {

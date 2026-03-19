@@ -1,6 +1,6 @@
 using GesFer.Product.Back.Api.Services;
 
-namespace GesFer.IntegrationTests.Helpers;
+namespace GesFer.Product.Back.IntegrationTests.Helpers;
 
 /// <summary>
 /// Mock de ISetupService para tests. Evita ejecutar Docker en Initialize_EndpointShouldExist.

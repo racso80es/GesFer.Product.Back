@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using Xunit;
 using BCrypt.Net;
 
-namespace GesFer.IntegrationTests.Controllers;
+namespace GesFer.Product.Back.IntegrationTests.Controllers;
 
 /// <summary>
 /// Tests de integración para AuthController

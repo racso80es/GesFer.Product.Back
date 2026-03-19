@@ -1,7 +1,7 @@
 using System.Net;
 using System.Net.Http;
 
-namespace GesFer.IntegrationTests.Helpers;
+namespace GesFer.Product.Back.IntegrationTests.Helpers;
 
 /// <summary>
 /// Helper para implementar política de reintento en peticiones HTTP.

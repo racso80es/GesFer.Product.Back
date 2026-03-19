@@ -8,7 +8,7 @@ using System.Net.Http.Json;
 using System.Text.Json;
 using Xunit;
 
-namespace GesFer.IntegrationTests.Services;
+namespace GesFer.Product.Back.IntegrationTests.Services;
 
 /// <summary>
 /// Tests del cliente de API de Admin: comunicación HTTP y mapeo a DTOs usando un handler mock.

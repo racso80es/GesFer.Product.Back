@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace GesFer.IntegrationTests;
+namespace GesFer.Product.Back.IntegrationTests;
 
 /// <summary>
 /// Factory para crear una instancia de la aplicación para tests de integración

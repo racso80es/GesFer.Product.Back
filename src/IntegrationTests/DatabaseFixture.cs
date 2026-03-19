@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace GesFer.IntegrationTests;
+namespace GesFer.Product.Back.IntegrationTests;
 
 /// <summary>
 /// Fixture compartido para todos los tests en la colección "DatabaseStep".

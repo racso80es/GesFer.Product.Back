@@ -4,7 +4,7 @@ using System.Net;
 using System.Net.Http.Json;
 using Xunit;
 
-namespace GesFer.IntegrationTests.Controllers;
+namespace GesFer.Product.Back.IntegrationTests.Controllers;
 
 /// <summary>
 /// Tests de integración para GroupController usando DatabaseFixture con Collection Fixture.

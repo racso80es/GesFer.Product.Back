@@ -84,6 +84,7 @@ Tras la Fase 1-4 ejecutada, quedan pendientes:
 
 ## Criterios de aceptación
 
-- [ ] Fase 5: Todos los namespaces IntegrationTests → GesFer.Product.Back.IntegrationTests
-- [ ] Fase 5: Build y tests en verde
-- [ ] Fase 6-8: Documentado / verificado
+- [x] Fase 5: Todos los namespaces IntegrationTests → GesFer.Product.Back.IntegrationTests
+- [x] Fase 5: Build y tests en verde
+- [x] Fase 6: Documentado / verificado (scripts OK)
+- [ ] Fase 8: Dockerfile actualizado (pendiente)

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace GesFer.IntegrationTests.Helpers;
+namespace GesFer.Product.Back.IntegrationTests.Helpers;
 
 /// <summary>
 /// Clase helper para insertar datos de prueba en la base de datos

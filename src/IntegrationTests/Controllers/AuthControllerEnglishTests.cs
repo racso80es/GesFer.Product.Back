@@ -8,7 +8,7 @@ using System.Net.Http.Json;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace GesFer.IntegrationTests.Controllers;
+namespace GesFer.Product.Back.IntegrationTests.Controllers;
 
 [Collection("DatabaseStep")]
 public class AuthControllerEnglishTests

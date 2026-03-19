@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace GesFer.IntegrationTests;
+namespace GesFer.Product.Back.IntegrationTests;
 
 /// <summary>
 /// Colección de tests que se ejecutan de forma secuencial para evitar interferencias

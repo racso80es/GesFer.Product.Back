@@ -1,6 +1,6 @@
 using FluentAssertions;
 using GesFer.Product.Back.Infrastructure.Data;
-using GesFer.IntegrationTests.Helpers;
+using GesFer.Product.Back.IntegrationTests.Helpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net;
@@ -8,7 +8,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace GesFer.IntegrationTests.Controllers;
+namespace GesFer.Product.Back.IntegrationTests.Controllers;
 
 /// <summary>
 /// Tests de integración para SetupController

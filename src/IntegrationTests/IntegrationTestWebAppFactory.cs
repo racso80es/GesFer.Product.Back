@@ -2,7 +2,7 @@ using GesFer.Product.Back.Api;
 using GesFer.Product.Back.Api.Services;
 using GesFer.Product.Back.Infrastructure.Data;
 using GesFer.Product.Back.Infrastructure.Services;
-using GesFer.IntegrationTests.Helpers;
+using GesFer.Product.Back.IntegrationTests.Helpers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +14,7 @@ using Testcontainers;
 using Testcontainers.MySql;
 using Xunit;
 
-namespace GesFer.IntegrationTests;
+namespace GesFer.Product.Back.IntegrationTests;
 
 public class IntegrationTestWebAppFactory<TProgram> : WebApplicationFactory<TProgram>, IAsyncLifetime where TProgram : class
 {
@@ -70,7 +70,7 @@ public class IntegrationTestWebAppFactory<TProgram> : WebApplicationFactory<TPro
             var adminClientDescriptors = services.Where(d => d.ServiceType == typeof(IAdminApiClient)).ToList();
             foreach (var d in adminClientDescriptors)
                 services.Remove(d);
-            services.AddScoped<IAdminApiClient, GesFer.IntegrationTests.Helpers.MockAdminApiClient>();
+            services.AddScoped<IAdminApiClient, GesFer.Product.Back.IntegrationTests.Helpers.MockAdminApiClient>();
 
             // Reemplazar ISetupService por mock para tests (evitar Docker en Initialize_EndpointShouldExist)
             var setupServiceDescriptors = services.Where(d => d.ServiceType == typeof(ISetupService)).ToList();
