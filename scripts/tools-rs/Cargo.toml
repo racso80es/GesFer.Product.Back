@@ -17,10 +17,6 @@ anyhow = "1.0"
 serde_yaml = "0.9"
 
 [[bin]]
-name = "gesfer_manager"
-path = "src/bin/gesfer_manager.rs"
-
-[[bin]]
 name = "invoke_mysql_seeds"
 path = "src/bin/invoke_mysql_seeds.rs"
 
@@ -35,3 +31,11 @@ path = "src/bin/start_api.rs"
 [[bin]]
 name = "dual_to_frontmatter"
 path = "src/bin/dual_to_frontmatter.rs"
+
+[[bin]]
+name = "run_tests_local"
+path = "src/bin/run_tests_local.rs"
+
+[[bin]]
+name = "postman_mcp_validation"
+path = "src/bin/postman_mcp_validation.rs"

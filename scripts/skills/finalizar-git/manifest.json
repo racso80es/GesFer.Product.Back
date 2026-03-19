@@ -5,11 +5,10 @@
   "contract_ref": "SddIA/skills/skills-contract.json",
   "components": {
     "launcher_bat_post_pr": "Merge-To-Master-Cleanup.bat",
-    "launcher_ps1_post_pr": "Merge-To-Master-Cleanup.ps1",
-    "launcher_ps1_pre_pr": "Unificar-Rama.ps1",
-    "push_and_create_pr": "Push-And-CreatePR.ps1",
+    "launcher_bat_pre_pr": "Push-And-CreatePR.bat",
     "doc": "finalizar-git.md",
-    "bin": "bin/merge_to_master_cleanup.exe"
+    "bin": "bin/merge_to_master_cleanup.exe",
+    "bin_push": "bin/push_and_create_pr.exe"
   },
   "env": ["Windows 11", "PowerShell 7+", "Git", "GitHub CLI (gh) opcional para crear PR"]
 }

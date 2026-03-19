@@ -19,7 +19,12 @@ Ejemplos: usar la skill **iniciar-rama** para crear ramas, **finalizar-git** par
 
 ## Implementación estándar: Rust
 
-En SddIA la implementación por defecto de skills y tools es **Rust** (binarios .exe). Rutas en Cúmulo: paths.skillsRustPath, paths.toolsRustPath. Las cápsulas exponen .bat/.ps1 que invocan el .exe si existe; si no, el script de fallback.
+En SddIA la implementación por defecto de skills y tools es **Rust** (binarios .exe). Rutas en Cúmulo: paths.skillsRustPath, paths.toolsRustPath. Las cápsulas exponen .bat que invocan **solo** el .exe en bin/.
+
+## Condición de control: solo .exe
+
+1. **Solo ejecutar .exe:** Invocar únicamente binarios .exe (skills y tools). No ejecutar .ps1, .bat ni .sh como implementación.
+2. **Si no existe .exe:** Añadir todo lo necesario para generarlo: fuente Rust, Cargo.toml, definición en SddIA, cápsula, manifest.json, launcher .bat. Ejecutar install.ps1 (skills-rs o tools-rs) para compilar.
 
 ## Comportamiento en Cursor
 

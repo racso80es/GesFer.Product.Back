@@ -1,8 +1,8 @@
 @echo off
 setlocal
-REM Invoke-Command.bat - Skill invoke-command (Rust en bin/ si existe)
+REM Invoke-Command.bat - Skill invoke-command (Rust en bin/)
 REM Capsula: paths.skillCapsules.invoke-command (scripts/skills/invoke-command/)
-REM Uso: Invoke-Command.ps1 -Command "git status" -Fase Accion
+REM Uso: Invoke-Command.bat --command "git status" --fase Accion
 
 set "SCRIPT_DIR=%~dp0"
 set "REPO_ROOT=%SCRIPT_DIR%..\..\..\"
@@ -15,11 +15,6 @@ if exist "%RUST_EXE%" (
     exit /b %ERRORLEVEL%
 )
 
-set "PS_SCRIPT=%SCRIPT_DIR%Invoke-Command.ps1"
-where pwsh >nul 2>&1
-if %ERRORLEVEL% equ 0 (
-    pwsh -NoProfile -ExecutionPolicy Bypass -File "%PS_SCRIPT%" %*
-) else (
-    powershell -NoProfile -ExecutionPolicy Bypass -File "%PS_SCRIPT%" %*
-)
+echo ERROR: No se encontro invoke_command.exe. Ejecute scripts/skills-rs/install.ps1
 endlocal
+exit /b 1

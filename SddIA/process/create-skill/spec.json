@@ -1,0 +1,32 @@
+{
+  "spec_version": "1.0.0",
+  "process_id": "create-skill",
+  "name": "create-skill",
+  "description": "Creación de skill: rama feat/create-skill-<skill-id>, cápsula en paths.skillCapsules. Implementación obligatoria en Rust (.exe).",
+  "contract_ref": "paths.processPath/process-contract.md",
+  "skills_contract_ref": "SddIA/skills/skills-contract.md",
+  "persist_ref": "paths.featurePath/create-skill-<skill-id>",
+  "paths": {
+    "featurePath_ref": "paths.featurePath",
+    "skillCapsulesRef": "paths.skillCapsules",
+    "skillsDefinitionPath": "./SddIA/skills/",
+    "skillsIndexPath_ref": "paths.skillsIndexPath",
+    "skillsPath_ref": "paths.skillsPath"
+  },
+  "phases": [
+    { "id": "0", "name": "Preparar entorno", "description": "Rama feat/create-skill-<skill-id>; skill iniciar-rama" },
+    { "id": "1", "name": "Objetivos y especificación", "description": "objectives.md, spec.md en carpeta de tarea" },
+    { "id": "2", "name": "Definición en SddIA", "description": "paths.skillsDefinitionPath/<skill-id>/ con spec.md" },
+    { "id": "3", "name": "Implementación Rust", "description": "scripts/skills-rs/src/bin/<skill-name>.rs" },
+    { "id": "4", "name": "Cápsula", "description": "bin/, manifest.json, launcher .bat, documentación .md" },
+    { "id": "5", "name": "Índice y Cúmulo", "description": "Actualizar paths.skillsIndexPath y cumulo.paths.json" },
+    { "id": "6", "name": "Validación", "description": "Verificar .exe, JSON I/O, skills-contract" },
+    { "id": "7", "name": "Cierre", "description": "PR, merge, Evolution Logs" }
+  ],
+  "related_actions": ["spec", "implementation", "validate", "finalize"],
+  "related_skills": ["iniciar-rama"],
+  "triggers": [
+    "Crear nueva skill en paths.skillsPath",
+    "Solicitud de creación de skill con skill-id"
+  ]
+}

@@ -5,7 +5,7 @@ REM Capsula: paths.skillCapsules.finalizar-git (scripts/skills/finalizar-git/)
 REM Uso: Merge-To-Master-Cleanup.bat  o  Merge-To-Master-Cleanup.ps1 -BranchName "feat/xxx" -DeleteRemote
 
 set "SCRIPT_DIR=%~dp0"
-set "REPO_ROOT=%SCRIPT_DIR%..\..\"
+set "REPO_ROOT=%SCRIPT_DIR%..\..\..\"
 cd /d "%REPO_ROOT%"
 
 set "RUST_EXE=%SCRIPT_DIR%bin\merge_to_master_cleanup.exe"
@@ -15,11 +15,6 @@ if exist "%RUST_EXE%" (
     exit /b %ERRORLEVEL%
 )
 
-set "PS_SCRIPT=%SCRIPT_DIR%Merge-To-Master-Cleanup.ps1"
-where pwsh >nul 2>&1
-if %ERRORLEVEL% equ 0 (
-    pwsh -NoProfile -ExecutionPolicy Bypass -File "%PS_SCRIPT%" %*
-) else (
-    powershell -NoProfile -ExecutionPolicy Bypass -File "%PS_SCRIPT%" %*
-)
+echo ERROR: No se encontro merge_to_master_cleanup.exe. Ejecute scripts/skills-rs/install.ps1
 endlocal
+exit /b 1

@@ -6,14 +6,24 @@
 
 **La IA nunca debe ejecutar comandos de sistema directamente** en la shell (ni `git`, `dotnet`, `npm`, `pwsh`, `cargo`, ni cualquier otro comando). Toda ejecución de comandos ha de realizarse **siempre** a través de al menos uno de los siguientes canales:
 
-- **Skill:** p. ej. paths.skillCapsules.invoke-command (interceptor de comandos de sistema), paths.skillCapsules.iniciar-rama, paths.skillCapsules.finalizar-git. Contrato: paths.skillsDefinitionPath/\<skill-id\>/ (archivo .md con frontmatter YAML). Implementación por defecto en Rust (paths.skillsRustPath); fallback PS1/bat en cápsulas.
+- **Skill:** p. ej. paths.skillCapsules.invoke-command (interceptor de comandos de sistema), paths.skillCapsules.iniciar-rama, paths.skillCapsules.finalizar-git. Contrato: paths.skillsDefinitionPath/\<skill-id\>/. Implementación obligatoria en Rust (paths.skillsRustPath); launcher .bat invoca solo .exe en bin/.
 - **Herramienta (tool):** definida en paths.toolsDefinitionPath, implementación en paths.toolCapsules[tool-id] o paths.toolsRustPath. Implementación por defecto en Rust (binarios .exe).
 - **Acción:** definida en paths.actionsPath (spec, planning, implementation, execution, validate, finalize, sddia-difusion, etc.). Las acciones orquestan skills o herramientas que ejecutan los comandos.
 - **Proceso:** definido en paths.processPath (feature, bug-fix, create-tool, etc.). Los procesos invocan acciones y skills; la IA sigue el proceso en lugar de lanzar comandos por su cuenta.
 
 ## Contexto de implementación (Rust)
 
-En SddIA, la **implementación estándar** de skills y tools es **Rust** (binarios .exe). Las rutas paths.skillsRustPath y paths.toolsRustPath (Cúmulo) identifican los proyectos Rust; las cápsulas (paths.skillCapsules, paths.toolCapsules) exponen launchers .bat/.ps1 que invocan el .exe si existe y, si no, el script de fallback.
+En SddIA, la **implementación estándar** de skills y tools es **Rust** (binarios .exe). Las rutas paths.skillsRustPath y paths.toolsRustPath (Cúmulo) identifican los proyectos Rust; las cápsulas (paths.skillCapsules, paths.toolCapsules) exponen launchers .bat que invocan **únicamente** el .exe en `bin/`.
+
+## Condición .exe obligatorio (control IA)
+
+**Regla de control para toda IA:**
+
+1. **Solo ejecutar .exe:** La IA únicamente ha de invocar binarios `.exe` (skills y tools). No ejecutar `.ps1`, `.bat` ni `.sh` como implementación de la skill o tool.
+2. **Si no existe .exe:** Cuando la IA necesite una skill o tool y no encuentre el `.exe` en `<cápsula>/bin/`, debe **añadir todo lo necesario para generarlo**:
+   - **Skills:** Fuente Rust en paths.skillsRustPath, entrada en Cargo.toml, definición en paths.skillsDefinitionPath, cápsula en paths.skillCapsules (manifest.json, launcher .bat que invoque solo .exe). Ejecutar `scripts/skills-rs/install.ps1` para compilar.
+   - **Tools:** Proceso create-tool (paths.processPath/create-tool/): definición en paths.toolsDefinitionPath, fuente Rust en paths.toolsRustPath, cápsula en paths.toolCapsules. Ejecutar `scripts/tools-rs/install.ps1` para compilar y copiar el .exe.
+3. **Sin fallback .ps1:** El .bat en la cápsula invoca solo el .exe; si no existe, error explícito indicando ejecutar el install.ps1 correspondiente.
 
 ## Justificación
 
