@@ -1,7 +1,7 @@
 using FluentAssertions;
 using Xunit;
 
-namespace GesFer.Product.UnitTests.DeliveryNote;
+namespace GesFer.Product.Back.UnitTests.DeliveryNote;
 
 /// <summary>
 /// Kaizen: documenta y protege la fórmula de IVA usada en albaranes (venta/compra).

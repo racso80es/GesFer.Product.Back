@@ -1,4 +1,4 @@
-using GesFer.Api.Services;
+using GesFer.Product.Back.Api.Services;
 
 namespace GesFer.IntegrationTests.Helpers;
 

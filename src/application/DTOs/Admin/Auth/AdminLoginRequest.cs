@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace GesFer.Application.DTOs.Admin.Auth;
+namespace GesFer.Product.Back.Application.DTOs.Admin.Auth;
 
 /// <summary>
 /// Contrato estándar de identidad global (Admin): solo Usuario y Contraseña (sin tenant/empresa).

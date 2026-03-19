@@ -1,10 +1,10 @@
-using GesFer.Application.Commands.Country;
-using GesFer.Application.Common.Interfaces;
-using GesFer.Application.DTOs.Country;
-using GesFer.Infrastructure.Data;
+using GesFer.Product.Back.Application.Commands.Country;
+using GesFer.Product.Back.Application.Common.Interfaces;
+using GesFer.Product.Back.Application.DTOs.Country;
+using GesFer.Product.Back.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace GesFer.Application.Handlers.Country;
+namespace GesFer.Product.Back.Application.Handlers.Country;
 
 public class GetCountryByIdCommandHandler : ICommandHandler<GetCountryByIdCommand, CountryDto?>
 {

@@ -1,10 +1,10 @@
-using GesFer.Application.Commands.TaxTypes;
-using GesFer.Application.Common.Interfaces;
+using GesFer.Product.Back.Application.Commands.TaxTypes;
+using GesFer.Product.Back.Application.Common.Interfaces;
 using GesFer.Product.Application.DTOs.TaxTypes;
-using GesFer.Infrastructure.Data;
+using GesFer.Product.Back.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace GesFer.Application.Handlers.TaxTypes;
+namespace GesFer.Product.Back.Application.Handlers.TaxTypes;
 
 public class GetAllTaxTypesCommandHandler : ICommandHandler<GetAllTaxTypesCommand, List<TaxTypeDto>>
 {

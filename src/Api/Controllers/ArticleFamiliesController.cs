@@ -1,11 +1,11 @@
 using System.Security.Claims;
-using GesFer.Application.Commands.ArticleFamilies;
-using GesFer.Application.Common.Interfaces;
-using GesFer.Application.DTOs.ArticleFamilies;
+using GesFer.Product.Back.Application.Commands.ArticleFamilies;
+using GesFer.Product.Back.Application.Common.Interfaces;
+using GesFer.Product.Back.Application.DTOs.ArticleFamilies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GesFer.Api.Controllers;
+namespace GesFer.Product.Back.Api.Controllers;
 
 [ApiController]
 [Route("api/article-families")]

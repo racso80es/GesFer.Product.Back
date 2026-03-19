@@ -1,5 +1,5 @@
-using GesFer.Api;
-using GesFer.Infrastructure.Data;
+using GesFer.Product.Back.Api;
+using GesFer.Product.Back.Infrastructure.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;

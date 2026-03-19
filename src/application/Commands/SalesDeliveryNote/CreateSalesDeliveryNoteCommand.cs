@@ -1,7 +1,7 @@
-using GesFer.Application.Common.Interfaces;
+using GesFer.Product.Back.Application.Common.Interfaces;
 using GesFer.Product.Back.Domain.Entities;
 
-namespace GesFer.Application.Commands.SalesDeliveryNote;
+namespace GesFer.Product.Back.Application.Commands.SalesDeliveryNote;
 
 /// <summary>
 /// Comando para crear un albarán de venta

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace GesFer.Api.Controllers;
+namespace GesFer.Product.Back.Api.Controllers;
 
 /// <summary>
 /// Controlador para verificar el estado de la API

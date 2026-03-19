@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Reflection;
 using System.Text.Json;
 
-namespace GesFer.Api.Swagger;
+namespace GesFer.Product.Back.Api.Swagger;
 
 /// <summary>
 /// Filtro de esquema para Swagger que muestra valores por defecto desde el atributo [DefaultValue]

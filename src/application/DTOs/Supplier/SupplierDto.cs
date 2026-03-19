@@ -1,4 +1,4 @@
-namespace GesFer.Application.DTOs.Supplier;
+namespace GesFer.Product.Back.Application.DTOs.Supplier;
 
 /// <summary>
 /// DTO para respuesta de proveedor

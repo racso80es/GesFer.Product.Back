@@ -1,6 +1,6 @@
-using GesFer.Application.Common.Interfaces;
+using GesFer.Product.Back.Application.Common.Interfaces;
 
-namespace GesFer.Application.Commands.Group;
+namespace GesFer.Product.Back.Application.Commands.Group;
 
 public record DeleteGroupCommand(Guid Id) : ICommand;
 

@@ -1,4 +1,4 @@
-using GesFer.Domain.Common;
+using GesFer.Product.Back.Domain.Common;
 
 
 namespace GesFer.Product.Back.Domain.Entities;

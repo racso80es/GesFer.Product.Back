@@ -1,11 +1,11 @@
-using GesFer.Application.Commands.User;
-using GesFer.Application.Common.Interfaces;
-using GesFer.Application.DTOs.User;
-using GesFer.Infrastructure.Data;
+using GesFer.Product.Back.Application.Commands.User;
+using GesFer.Product.Back.Application.Common.Interfaces;
+using GesFer.Product.Back.Application.DTOs.User;
+using GesFer.Product.Back.Infrastructure.Data;
 using GesFer.Product.Back.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 
-namespace GesFer.Application.Handlers.User;
+namespace GesFer.Product.Back.Application.Handlers.User;
 
 public class GetUserByIdCommandHandler : ICommandHandler<GetUserByIdCommand, UserDto?>
 {

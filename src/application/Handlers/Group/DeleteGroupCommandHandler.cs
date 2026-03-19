@@ -1,9 +1,9 @@
-using GesFer.Application.Commands.Group;
-using GesFer.Application.Common.Interfaces;
-using GesFer.Infrastructure.Data;
+using GesFer.Product.Back.Application.Commands.Group;
+using GesFer.Product.Back.Application.Common.Interfaces;
+using GesFer.Product.Back.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace GesFer.Application.Handlers.Group;
+namespace GesFer.Product.Back.Application.Handlers.Group;
 
 public class DeleteGroupCommandHandler : ICommandHandler<DeleteGroupCommand>
 {

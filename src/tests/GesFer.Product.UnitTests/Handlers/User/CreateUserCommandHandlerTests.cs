@@ -1,14 +1,14 @@
 using FluentAssertions;
-using GesFer.Application.Commands.User;
-using GesFer.Application.DTOs.User;
-using GesFer.Application.Handlers.User;
-using GesFer.Infrastructure.Data;
+using GesFer.Product.Back.Application.Commands.User;
+using GesFer.Product.Back.Application.DTOs.User;
+using GesFer.Product.Back.Application.Handlers.User;
+using GesFer.Product.Back.Infrastructure.Data;
 using GesFer.Product.Back.Infrastructure.DTOs;
 using GesFer.Product.Back.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 
-namespace GesFer.Product.UnitTests.Handlers.User;
+namespace GesFer.Product.Back.UnitTests.Handlers.User;
 
 public class CreateUserCommandHandlerTests
 {

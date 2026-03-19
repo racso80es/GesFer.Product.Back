@@ -1,9 +1,9 @@
-using GesFer.Domain.Common;
-using GesFer.Infrastructure.Data;
+using GesFer.Product.Back.Domain.Common;
+using GesFer.Product.Back.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace GesFer.Infrastructure.Repositories;
+namespace GesFer.Product.Back.Infrastructure.Repositories;
 
 /// <summary>
 /// Implementación genérica del patrón Repository

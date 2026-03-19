@@ -1,5 +1,5 @@
 using FluentAssertions;
-using GesFer.Application.DTOs.Auth;
+using GesFer.Product.Back.Application.DTOs.Auth;
 using GesFer.IntegrationTests.Helpers;
 using GesFer.Product.Back.Infrastructure.DTOs;
 using System.Net;

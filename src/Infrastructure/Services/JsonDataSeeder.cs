@@ -1,16 +1,16 @@
 using GesFer.Product.Back.Domain.Entities;
 using GesFer.Product.Back.Domain.Entities;
-using GesFer.Domain.ValueObjects;
-using GesFer.Infrastructure.Configuration;
-using GesFer.Infrastructure.Data;
-using GesFer.Domain.Services;
+using GesFer.Product.Back.Domain.ValueObjects;
+using GesFer.Product.Back.Infrastructure.Configuration;
+using GesFer.Product.Back.Infrastructure.Data;
+using GesFer.Product.Back.Domain.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System.Text.Json;
 using BCrypt.Net;
 
-namespace GesFer.Infrastructure.Services;
+namespace GesFer.Product.Back.Infrastructure.Services;
 
 /// <summary>
 /// Resultado de la carga de datos de seed

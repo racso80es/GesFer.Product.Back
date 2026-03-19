@@ -1,5 +1,5 @@
 using FluentAssertions;
-using GesFer.Application.DTOs.User;
+using GesFer.Product.Back.Application.DTOs.User;
 using System.Net;
 using System.Net.Http.Json;
 using Xunit;

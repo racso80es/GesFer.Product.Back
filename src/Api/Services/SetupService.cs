@@ -1,14 +1,14 @@
 using GesFer.Product.Back.Domain.Entities;
 using GesFer.Product.Back.Domain.Entities;
-using GesFer.Infrastructure.Data;
-using GesFer.Domain.Services;
-using GesFer.Infrastructure.Services;
+using GesFer.Product.Back.Infrastructure.Data;
+using GesFer.Product.Back.Domain.Services;
+using GesFer.Product.Back.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Text;
 using BCrypt.Net;
 
-namespace GesFer.Api.Services;
+namespace GesFer.Product.Back.Api.Services;
 
 /// <summary>
 /// Servicio para inicializar el entorno completo

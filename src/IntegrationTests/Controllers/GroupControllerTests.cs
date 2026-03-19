@@ -1,5 +1,5 @@
 using FluentAssertions;
-using GesFer.Application.DTOs.Group;
+using GesFer.Product.Back.Application.DTOs.Group;
 using System.Net;
 using System.Net.Http.Json;
 using Xunit;

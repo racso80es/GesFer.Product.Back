@@ -2,7 +2,7 @@ using GesFer.Product.Back.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace GesFer.Infrastructure.Data.Configurations;
+namespace GesFer.Product.Back.Infrastructure.Data.Configurations;
 
 public class PurchaseDeliveryNoteConfiguration : IEntityTypeConfiguration<PurchaseDeliveryNote>
 {

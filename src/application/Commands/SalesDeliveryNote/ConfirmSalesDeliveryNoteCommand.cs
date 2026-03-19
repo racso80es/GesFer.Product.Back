@@ -1,6 +1,6 @@
-using GesFer.Application.Common.Interfaces;
+using GesFer.Product.Back.Application.Common.Interfaces;
 
-namespace GesFer.Application.Commands.SalesDeliveryNote;
+namespace GesFer.Product.Back.Application.Commands.SalesDeliveryNote;
 
 /// <summary>
 /// Comando para confirmar un albarán de venta

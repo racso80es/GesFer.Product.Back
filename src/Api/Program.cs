@@ -1,5 +1,5 @@
-using GesFer.Api;
-using GesFer.Infrastructure.Data;
+using GesFer.Product.Back.Api;
+using GesFer.Product.Back.Infrastructure.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
@@ -7,7 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Serilog.Events;
 using Serilog.Debugging;
-using GesFer.Infrastructure.Logging;
+using GesFer.Product.Back.Infrastructure.Logging;
 using System.Text;
 
 // Habilitar self-logging de Serilog para diagnosticar problemas

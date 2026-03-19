@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace GesFer.Application.DTOs.Auth;
+namespace GesFer.Product.Back.Application.DTOs.Auth;
 
 /// <summary>
 /// DTO para el login (requiere Empresa, Usuario y Contraseña)

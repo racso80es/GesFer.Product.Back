@@ -1,4 +1,4 @@
-namespace GesFer.Application.Common.Interfaces;
+namespace GesFer.Product.Back.Application.Common.Interfaces;
 
 /// <summary>
 /// Interfaz base para todos los Command Handlers

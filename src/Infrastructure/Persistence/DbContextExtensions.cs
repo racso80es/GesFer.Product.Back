@@ -1,16 +1,16 @@
-using GesFer.Domain.Common;
-using GesFer.Domain.Services;
+using GesFer.Product.Back.Domain.Common;
+using GesFer.Product.Back.Domain.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace GesFer.Infrastructure.Persistence;
+namespace GesFer.Product.Back.Infrastructure.Persistence;
 
 public static class DbContextExtensions
 {
-    public static void ConfigureSharedEntities(this ModelBuilder modelBuilder)
+    public static void ConfigureCommonEntities(this ModelBuilder modelBuilder)
     {
         var entityTypes = modelBuilder.Model.GetEntityTypes()
             .Where(e => typeof(BaseEntity).IsAssignableFrom(e.ClrType));
@@ -36,7 +36,7 @@ public static class DbContextExtensions
         }
     }
 
-    public static void UpdateSharedAuditFields(this ChangeTracker changeTracker)
+    public static void UpdateCommonAuditFields(this ChangeTracker changeTracker)
     {
         var entries = changeTracker.Entries<BaseEntity>();
 

@@ -1,12 +1,12 @@
-using GesFer.Application.DTOs.Admin;
-using GesFer.Infrastructure.Data;
-using GesFer.Infrastructure.Logging;
+using GesFer.Product.Back.Application.DTOs.Admin;
+using GesFer.Product.Back.Infrastructure.Data;
+using GesFer.Product.Back.Infrastructure.Logging;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
-namespace GesFer.Api.Controllers;
+namespace GesFer.Product.Back.Api.Controllers;
 
 /// <summary>
 /// Controlador para el dashboard administrativo en Product API
@@ -40,7 +40,7 @@ public class DashboardController : ControllerBase
         // Validación manual de Shared Secret (o usar atributo si se mueve a Shared)
         // Por ahora, validamos header manualmente para no depender de Admin
         var secretHeader = Request.Headers["X-Internal-Secret"].FirstOrDefault();
-        var configSecret = _configuration["SharedSecret"];
+        var configSecret = _configuration["InternalSecret"];
 
         var isAuthenticated = !string.IsNullOrEmpty(secretHeader) && secretHeader == configSecret;
 

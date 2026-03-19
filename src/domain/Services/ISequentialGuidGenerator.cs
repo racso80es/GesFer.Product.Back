@@ -1,4 +1,4 @@
-namespace GesFer.Domain.Services;
+namespace GesFer.Product.Back.Domain.Services;
 
 /// <summary>
 /// Interfaz para generar GUIDs secuenciales optimizados para diferentes proveedores de base de datos.

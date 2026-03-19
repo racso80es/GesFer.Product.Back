@@ -1,7 +1,7 @@
-using GesFer.Api;
-using GesFer.Api.Services;
-using GesFer.Infrastructure.Data;
-using GesFer.Infrastructure.Services;
+using GesFer.Product.Back.Api;
+using GesFer.Product.Back.Api.Services;
+using GesFer.Product.Back.Infrastructure.Data;
+using GesFer.Product.Back.Infrastructure.Services;
 using GesFer.IntegrationTests.Helpers;
 using GesFer.Product.Back.Infrastructure.Services;
 using Microsoft.AspNetCore.Hosting;

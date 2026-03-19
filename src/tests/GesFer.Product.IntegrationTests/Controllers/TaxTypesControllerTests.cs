@@ -1,10 +1,10 @@
 using FluentAssertions;
 using GesFer.Product.Application.DTOs.TaxTypes;
-using GesFer.Product.IntegrationTests.Abstractions;
+using GesFer.Product.Back.IntegrationTests.Abstractions;
 using System.Net;
 using System.Net.Http.Json;
 
-namespace GesFer.Product.IntegrationTests.Controllers;
+namespace GesFer.Product.Back.IntegrationTests.Controllers;
 
 public class TaxTypesControllerTests : BaseIntegrationTest
 {

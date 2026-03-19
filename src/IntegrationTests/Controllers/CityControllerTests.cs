@@ -1,7 +1,7 @@
 using FluentAssertions;
-using GesFer.Application.DTOs.City;
-using GesFer.Application.DTOs.Country;
-using GesFer.Application.DTOs.State;
+using GesFer.Product.Back.Application.DTOs.City;
+using GesFer.Product.Back.Application.DTOs.Country;
+using GesFer.Product.Back.Application.DTOs.State;
 using System.Net;
 using System.Net.Http.Json;
 using Xunit;

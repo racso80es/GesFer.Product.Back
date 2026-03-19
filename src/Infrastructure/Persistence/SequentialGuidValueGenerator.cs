@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.ValueGeneration;
 using Microsoft.Extensions.DependencyInjection;
 
-using GesFer.Domain.Services;
+using GesFer.Product.Back.Domain.Services;
 
-namespace GesFer.Infrastructure.Persistence;
+namespace GesFer.Product.Back.Infrastructure.Persistence;
 
 /// <summary>
 /// ValueGenerator personalizado de EF Core para generar GUIDs secuenciales automáticamente.

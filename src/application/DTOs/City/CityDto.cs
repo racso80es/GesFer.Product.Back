@@ -1,4 +1,4 @@
-namespace GesFer.Application.DTOs.City;
+namespace GesFer.Product.Back.Application.DTOs.City;
 
 /// <summary>
 /// DTO para respuesta de ciudad

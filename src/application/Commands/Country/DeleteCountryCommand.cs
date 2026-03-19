@@ -1,6 +1,6 @@
-using GesFer.Application.Common.Interfaces;
+using GesFer.Product.Back.Application.Common.Interfaces;
 
-namespace GesFer.Application.Commands.Country;
+namespace GesFer.Product.Back.Application.Commands.Country;
 
 public record DeleteCountryCommand(Guid Id) : ICommand;
 

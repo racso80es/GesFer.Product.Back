@@ -1,13 +1,13 @@
 using FluentAssertions;
-using GesFer.Application.Commands.TaxTypes;
-using GesFer.Application.Handlers.TaxTypes;
+using GesFer.Product.Back.Application.Commands.TaxTypes;
+using GesFer.Product.Back.Application.Handlers.TaxTypes;
 using GesFer.Product.Application.DTOs.TaxTypes;
 using GesFer.Product.Back.Domain.Entities;
-using GesFer.Infrastructure.Data;
+using GesFer.Product.Back.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 
-namespace GesFer.Product.UnitTests.TaxTypes;
+namespace GesFer.Product.Back.UnitTests.TaxTypes;
 
 /// <summary>
 /// Tests del handler legacy CreateTaxTypeCommandHandler (ICommandHandler + CompanyId en comando).

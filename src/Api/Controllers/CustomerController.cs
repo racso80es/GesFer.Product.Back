@@ -1,9 +1,9 @@
-using GesFer.Application.Commands.Customer;
-using GesFer.Application.Common.Interfaces;
-using GesFer.Application.DTOs.Customer;
+using GesFer.Product.Back.Application.Commands.Customer;
+using GesFer.Product.Back.Application.Common.Interfaces;
+using GesFer.Product.Back.Application.DTOs.Customer;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GesFer.Api.Controllers;
+namespace GesFer.Product.Back.Api.Controllers;
 
 /// <summary>
 /// Controlador para gestión de clientes

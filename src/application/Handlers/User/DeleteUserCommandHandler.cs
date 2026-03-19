@@ -1,9 +1,9 @@
-using GesFer.Application.Commands.User;
-using GesFer.Application.Common.Interfaces;
-using GesFer.Infrastructure.Data;
+using GesFer.Product.Back.Application.Commands.User;
+using GesFer.Product.Back.Application.Common.Interfaces;
+using GesFer.Product.Back.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace GesFer.Application.Handlers.User;
+namespace GesFer.Product.Back.Application.Handlers.User;
 
 public class DeleteUserCommandHandler : ICommandHandler<DeleteUserCommand>
 {

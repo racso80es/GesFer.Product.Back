@@ -1,4 +1,4 @@
-namespace GesFer.Application.DTOs.ArticleFamilies;
+namespace GesFer.Product.Back.Application.DTOs.ArticleFamilies;
 
 public class ArticleFamilyDto
 {

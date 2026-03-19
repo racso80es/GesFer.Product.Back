@@ -1,10 +1,10 @@
-using GesFer.Application.Commands.City;
-using GesFer.Application.Common.Interfaces;
-using GesFer.Application.DTOs.City;
-using GesFer.Infrastructure.Data;
+using GesFer.Product.Back.Application.Commands.City;
+using GesFer.Product.Back.Application.Common.Interfaces;
+using GesFer.Product.Back.Application.DTOs.City;
+using GesFer.Product.Back.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace GesFer.Application.Handlers.City;
+namespace GesFer.Product.Back.Application.Handlers.City;
 
 public class GetCityByIdCommandHandler : ICommandHandler<GetCityByIdCommand, CityDto?>
 {

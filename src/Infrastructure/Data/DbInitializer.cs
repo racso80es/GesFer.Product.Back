@@ -1,15 +1,15 @@
-using GesFer.Infrastructure.Data;
-using GesFer.Infrastructure.Services;
+using GesFer.Product.Back.Infrastructure.Data;
+using GesFer.Product.Back.Infrastructure.Services;
 using GesFer.Product.Back.Infrastructure.Services;
 using GesFer.Product.Back.Domain.Entities;
-using GesFer.Domain.ValueObjects;
-using GesFer.Domain.Services;
+using GesFer.Product.Back.Domain.ValueObjects;
+using GesFer.Product.Back.Domain.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace GesFer.Infrastructure.Data;
+namespace GesFer.Product.Back.Infrastructure.Data;
 
 /// <summary>
 /// Inicializador de base de datos que aplica migraciones y carga datos iniciales desde archivos JSON.

@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace GesFer.Application.DTOs.Admin.Auth;
+namespace GesFer.Product.Back.Application.DTOs.Admin.Auth;
 
 /// <summary>
 /// Respuesta del login administrativo (identidad global).

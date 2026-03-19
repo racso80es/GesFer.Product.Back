@@ -1,7 +1,7 @@
-using GesFer.Domain.Common;
+using GesFer.Product.Back.Domain.Common;
 using System.Linq.Expressions;
 
-namespace GesFer.Infrastructure.Repositories;
+namespace GesFer.Product.Back.Infrastructure.Repositories;
 
 /// <summary>
 /// Interfaz genérica para repositorios

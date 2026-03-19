@@ -1,4 +1,4 @@
-namespace GesFer.Application.DTOs.PostalCode;
+namespace GesFer.Product.Back.Application.DTOs.PostalCode;
 
 /// <summary>
 /// DTO para respuesta de código postal

@@ -1,5 +1,5 @@
-using GesFer.Application.Common.Interfaces;
+using GesFer.Product.Back.Application.Common.Interfaces;
 
-namespace GesFer.Application.Commands.ArticleFamilies;
+namespace GesFer.Product.Back.Application.Commands.ArticleFamilies;
 
 public record DeleteArticleFamilyCommand(Guid Id) : ICommand;

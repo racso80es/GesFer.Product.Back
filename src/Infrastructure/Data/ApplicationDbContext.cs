@@ -1,8 +1,8 @@
 using GesFer.Product.Back.Domain.Entities;
-using GesFer.Infrastructure.Persistence;
+using GesFer.Product.Back.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
-namespace GesFer.Infrastructure.Data;
+namespace GesFer.Product.Back.Infrastructure.Data;
 
 /// <summary>
 /// DbContext principal de la aplicación con soporte para Soft Delete
@@ -48,7 +48,7 @@ public class ApplicationDbContext : DbContext
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
 
         // Configurar Shared Entities (Sequential GUIDs + Soft Delete)
-        modelBuilder.ConfigureSharedEntities();
+        modelBuilder.ConfigureCommonEntities();
 
         // Configurar UTF8 para MySQL
         ConfigureUtf8(modelBuilder);
@@ -91,13 +91,13 @@ public class ApplicationDbContext : DbContext
 
     public override int SaveChanges()
     {
-        ChangeTracker.UpdateSharedAuditFields();
+        ChangeTracker.UpdateCommonAuditFields();
         return base.SaveChanges();
     }
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        ChangeTracker.UpdateSharedAuditFields();
+        ChangeTracker.UpdateCommonAuditFields();
         return base.SaveChangesAsync(cancellationToken);
     }
 }

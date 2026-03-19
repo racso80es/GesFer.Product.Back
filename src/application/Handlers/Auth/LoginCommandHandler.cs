@@ -1,9 +1,9 @@
-using GesFer.Application.Commands.Auth;
-using GesFer.Application.Common.Interfaces;
-using GesFer.Application.DTOs.Auth;
-using GesFer.Infrastructure.Services;
+using GesFer.Product.Back.Application.Commands.Auth;
+using GesFer.Product.Back.Application.Common.Interfaces;
+using GesFer.Product.Back.Application.DTOs.Auth;
+using GesFer.Product.Back.Infrastructure.Services;
 
-namespace GesFer.Application.Handlers.Auth;
+namespace GesFer.Product.Back.Application.Handlers.Auth;
 
 /// <summary>
 /// Handler para el comando de login

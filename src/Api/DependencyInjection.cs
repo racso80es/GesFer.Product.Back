@@ -1,20 +1,20 @@
-using GesFer.Api.Services;
-using GesFer.Application.Common.Interfaces;
-using GesFer.Application.Handlers.Auth;
-using GesFer.Application.Handlers.PurchaseDeliveryNote;
-using GesFer.Application.Handlers.SalesDeliveryNote;
+using GesFer.Product.Back.Api.Services;
+using GesFer.Product.Back.Application.Common.Interfaces;
+using GesFer.Product.Back.Application.Handlers.Auth;
+using GesFer.Product.Back.Application.Handlers.PurchaseDeliveryNote;
+using GesFer.Product.Back.Application.Handlers.SalesDeliveryNote;
 using GesFer.Product.Back.Domain.Services;
-using GesFer.Infrastructure.Data;
-using GesFer.Domain.Services;
-using GesFer.Infrastructure.Repositories;
-using GesFer.Infrastructure.Services;
+using GesFer.Product.Back.Infrastructure.Data;
+using GesFer.Product.Back.Domain.Services;
+using GesFer.Product.Back.Infrastructure.Repositories;
 using GesFer.Product.Back.Infrastructure.Services;
-using GesFer.Infrastructure.Logging;
+using GesFer.Product.Back.Infrastructure.Services;
+using GesFer.Product.Back.Infrastructure.Logging;
 using Microsoft.EntityFrameworkCore;
 using Pomelo.EntityFrameworkCore.MySql;
 using System.Reflection;
 
-namespace GesFer.Api;
+namespace GesFer.Product.Back.Api;
 
 /// <summary>
 /// Configuración de inyección de dependencias

@@ -1,9 +1,9 @@
-using GesFer.Application.Commands.State;
-using GesFer.Application.Common.Interfaces;
-using GesFer.Application.DTOs.State;
+using GesFer.Product.Back.Application.Commands.State;
+using GesFer.Product.Back.Application.Common.Interfaces;
+using GesFer.Product.Back.Application.DTOs.State;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GesFer.Api.Controllers;
+namespace GesFer.Product.Back.Api.Controllers;
 
 /// <summary>
 /// Controlador para gestión de provincias/estados

@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Http;
 using Microsoft.Extensions.Logging;
 
-namespace GesFer.Infrastructure.Logging;
+namespace GesFer.Product.Back.Infrastructure.Logging;
 
 /// <summary>
 /// Servicio para publicar logs de forma asíncrona a la API de Admin
@@ -36,7 +36,7 @@ public class AsyncLogPublisher : IAsyncLogPublisher
 
     private void AddAuthorizationHeader(HttpClient client)
     {
-        var secret = _configuration["SharedSecret"];
+        var secret = _configuration["InternalSecret"];
         if (!string.IsNullOrEmpty(secret))
         {
             if (client.DefaultRequestHeaders.Contains("X-Internal-Secret"))

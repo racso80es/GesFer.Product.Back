@@ -1,10 +1,10 @@
 using GesFer.Product.Back.Domain.Entities;
 using GesFer.Product.Back.Infrastructure.Services;
-using GesFer.Infrastructure.Data;
+using GesFer.Product.Back.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using BCrypt.Net;
 
-namespace GesFer.Infrastructure.Services;
+namespace GesFer.Product.Back.Infrastructure.Services;
 
 /// <summary>
 /// Servicio de autenticación y autorización

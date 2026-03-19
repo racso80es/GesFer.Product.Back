@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
-namespace GesFer.Infrastructure.Services;
+namespace GesFer.Product.Back.Infrastructure.Services;
 
 /// <summary>
 /// Servicio para generar y validar tokens JWT

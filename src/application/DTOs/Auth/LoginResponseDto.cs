@@ -1,4 +1,4 @@
-namespace GesFer.Application.DTOs.Auth;
+namespace GesFer.Product.Back.Application.DTOs.Auth;
 
 /// <summary>
 /// DTO de respuesta del login
