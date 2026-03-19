@@ -1,11 +1,11 @@
-using GesFer.Application.Commands.PurchaseDeliveryNote;
-using GesFer.Application.Common.Interfaces;
+using GesFer.Product.Back.Application.Commands.PurchaseDeliveryNote;
+using GesFer.Product.Back.Application.Common.Interfaces;
 using GesFer.Product.Back.Domain.Entities;
 using GesFer.Product.Back.Domain.Services;
-using GesFer.Infrastructure.Data;
+using GesFer.Product.Back.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace GesFer.Application.Handlers.PurchaseDeliveryNote;
+namespace GesFer.Product.Back.Application.Handlers.PurchaseDeliveryNote;
 
 /// <summary>
 /// Handler para crear un albarán de compra

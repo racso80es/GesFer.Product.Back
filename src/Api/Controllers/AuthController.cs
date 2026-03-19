@@ -1,9 +1,9 @@
-using GesFer.Application.Commands.Auth;
-using GesFer.Application.Common.Interfaces;
-using GesFer.Application.DTOs.Auth;
+using GesFer.Product.Back.Application.Commands.Auth;
+using GesFer.Product.Back.Application.Common.Interfaces;
+using GesFer.Product.Back.Application.DTOs.Auth;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GesFer.Api.Controllers;
+namespace GesFer.Product.Back.Api.Controllers;
 
 /// <summary>
 /// Controlador para autenticación

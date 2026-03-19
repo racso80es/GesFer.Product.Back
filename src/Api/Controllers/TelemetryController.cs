@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using GesFer.Infrastructure.Logging;
+using GesFer.Product.Back.Infrastructure.Logging;
 using System.Text.Json;
 
-namespace GesFer.Api.Controllers;
+namespace GesFer.Product.Back.Api.Controllers;
 
 /// <summary>
 /// Controlador para recibir logs del frontend (telemetría)

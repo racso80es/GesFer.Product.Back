@@ -1,9 +1,9 @@
 using GesFer.Product.Back.Domain.Entities;
-using GesFer.Domain.ValueObjects;
+using GesFer.Product.Back.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace GesFer.Infrastructure.Data.Configurations;
+namespace GesFer.Product.Back.Infrastructure.Data.Configurations;
 
 public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
 {

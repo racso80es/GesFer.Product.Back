@@ -1,6 +1,6 @@
-using GesFer.Application.Common.Interfaces;
+using GesFer.Product.Back.Application.Common.Interfaces;
 
-namespace GesFer.Application.Commands.Customer;
+namespace GesFer.Product.Back.Application.Commands.Customer;
 
 public record DeleteCustomerCommand(Guid Id) : ICommand;
 

@@ -4,7 +4,7 @@ using GesFer.Product.Back.Infrastructure.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GesFer.Api.Controllers;
+namespace GesFer.Product.Back.Api.Controllers;
 
 /// <summary>
 /// Controlador para que el usuario gestione SU propia empresa (Proxy a Admin)

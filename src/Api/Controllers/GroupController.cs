@@ -1,9 +1,9 @@
-using GesFer.Application.Commands.Group;
-using GesFer.Application.Common.Interfaces;
-using GesFer.Application.DTOs.Group;
+using GesFer.Product.Back.Application.Commands.Group;
+using GesFer.Product.Back.Application.Common.Interfaces;
+using GesFer.Product.Back.Application.DTOs.Group;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GesFer.Api.Controllers;
+namespace GesFer.Product.Back.Api.Controllers;
 
 /// <summary>
 /// Controlador para gestión de grupos

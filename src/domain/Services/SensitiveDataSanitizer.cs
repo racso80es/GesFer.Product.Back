@@ -1,7 +1,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace GesFer.Domain.Services;
+namespace GesFer.Product.Back.Domain.Services;
 
 public class SensitiveDataSanitizer : ISensitiveDataSanitizer
 {

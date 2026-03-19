@@ -3,7 +3,7 @@ using Serilog.Events;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace GesFer.Infrastructure.Logging;
+namespace GesFer.Product.Back.Infrastructure.Logging;
 
 /// <summary>
 /// Sink personalizado de Serilog que envía logs a la API de Admin mediante AsyncLogPublisher

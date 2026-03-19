@@ -1,13 +1,13 @@
 using GesFer.Product.Back.Domain.Entities;
-using GesFer.Infrastructure.Data;
-using GesFer.Domain.Services;
-using GesFer.Infrastructure.Services;
+using GesFer.Product.Back.Infrastructure.Data;
+using GesFer.Product.Back.Domain.Services;
+using GesFer.Product.Back.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Text;
 using BCrypt.Net;
 
-namespace GesFer.Api.Services;
+namespace GesFer.Product.Back.Api.Services;
 
 /// <summary>
 /// Servicio para inicializar el entorno completo
@@ -150,9 +150,9 @@ public class SetupService : ISetupService
                     // Paso 8: Insertar datos maestros de España (geográficos)
                     result.Steps.Add("8. Insertando datos maestros de España (geográficos)...");
                     _logger.LogInformation("Insertando datos maestros de España...");
-                    var masterDataSeeder = new GesFer.Infrastructure.Services.MasterDataSeeder(
+                    var masterDataSeeder = new GesFer.Product.Back.Infrastructure.Services.MasterDataSeeder(
                         scope.ServiceProvider.GetRequiredService<ApplicationDbContext>(),
-                        scope.ServiceProvider.GetRequiredService<ILogger<GesFer.Infrastructure.Services.MasterDataSeeder>>(),
+                        scope.ServiceProvider.GetRequiredService<ILogger<GesFer.Product.Back.Infrastructure.Services.MasterDataSeeder>>(),
                         scope.ServiceProvider.GetRequiredService<ISequentialGuidGenerator>());
                     await masterDataSeeder.SeedSpainDataAsync();
                 }

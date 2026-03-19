@@ -1,10 +1,10 @@
-using GesFer.Application.Commands.ArticleFamilies;
-using GesFer.Application.Common.Interfaces;
-using GesFer.Application.DTOs.ArticleFamilies;
-using GesFer.Infrastructure.Data;
+using GesFer.Product.Back.Application.Commands.ArticleFamilies;
+using GesFer.Product.Back.Application.Common.Interfaces;
+using GesFer.Product.Back.Application.DTOs.ArticleFamilies;
+using GesFer.Product.Back.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace GesFer.Application.Handlers.ArticleFamilies;
+namespace GesFer.Product.Back.Application.Handlers.ArticleFamilies;
 
 public class UpdateArticleFamilyCommandHandler : ICommandHandler<UpdateArticleFamilyCommand, ArticleFamilyDto>
 {

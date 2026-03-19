@@ -1,4 +1,4 @@
-namespace GesFer.Api.Services;
+namespace GesFer.Product.Back.Api.Services;
 
 /// <summary>
 /// Servicio para inicializar el entorno completo (Docker, base de datos, datos iniciales)

@@ -1,15 +1,15 @@
 using FluentAssertions;
-using GesFer.Application.DTOs.Country;
-using GesFer.Application.DTOs.State;
+using GesFer.Product.Back.Application.DTOs.Country;
+using GesFer.Product.Back.Application.DTOs.State;
 using GesFer.Product.Back.Domain.Entities;
-using GesFer.Infrastructure.Data;
+using GesFer.Product.Back.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net;
 using System.Net.Http.Json;
 using Xunit;
 
-namespace GesFer.IntegrationTests.Controllers;
+namespace GesFer.Product.Back.IntegrationTests.Controllers;
 
 [Collection("DatabaseStep")]
 public class StateControllerTests

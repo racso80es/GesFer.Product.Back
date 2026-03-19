@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace GesFer.IntegrationTests;
+namespace GesFer.Product.Back.IntegrationTests;
 
 /// <summary>
 /// Colección de tests que se ejecutan de forma secuencial para evitar interferencias
@@ -10,7 +10,7 @@ namespace GesFer.IntegrationTests;
 /// se ejecuten uno tras otro, eliminando problemas de concurrencia en la BD compartida.
 /// </summary>
 [CollectionDefinition("SequentialTests", DisableParallelization = true)]
-public class SharedTestCollection
+public class IntegrationTestCollection
 {
     // Esta clase solo sirve como marcador para la colección de tests.
     // No necesita implementar ningún método.

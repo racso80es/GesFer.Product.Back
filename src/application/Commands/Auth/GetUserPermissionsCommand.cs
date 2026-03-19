@@ -1,6 +1,6 @@
-using GesFer.Application.Common.Interfaces;
+using GesFer.Product.Back.Application.Common.Interfaces;
 
-namespace GesFer.Application.Commands.Auth;
+namespace GesFer.Product.Back.Application.Commands.Auth;
 
 /// <summary>
 /// Comando para obtener los permisos de un usuario

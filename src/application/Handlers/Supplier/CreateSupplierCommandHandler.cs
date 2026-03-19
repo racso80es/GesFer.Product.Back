@@ -1,11 +1,11 @@
-using GesFer.Application.Commands.Supplier;
-using GesFer.Application.Common.Interfaces;
-using GesFer.Application.DTOs.Supplier;
-using GesFer.Infrastructure.Data;
+using GesFer.Product.Back.Application.Commands.Supplier;
+using GesFer.Product.Back.Application.Common.Interfaces;
+using GesFer.Product.Back.Application.DTOs.Supplier;
+using GesFer.Product.Back.Infrastructure.Data;
 using GesFer.Product.Back.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 
-namespace GesFer.Application.Handlers.Supplier;
+namespace GesFer.Product.Back.Application.Handlers.Supplier;
 
 public class CreateSupplierCommandHandler : ICommandHandler<CreateSupplierCommand, SupplierDto>
 {

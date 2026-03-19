@@ -8,8 +8,8 @@ WORKDIR /src
 
 # Copiar archivos de proyecto
 COPY ["src/Api/GesFer.Api.csproj", "src/Api/"]
-COPY ["src/Application/GesFer.Application.csproj", "src/Application/"]
-COPY ["src/Domain/GesFer.Domain.csproj", "src/Domain/"]
+COPY ["src/application/GesFer.Application.csproj", "src/application/"]
+COPY ["src/domain/GesFer.Domain.csproj", "src/domain/"]
 COPY ["src/Infrastructure/GesFer.Infrastructure.csproj", "src/Infrastructure/"]
 
 # Restaurar dependencias

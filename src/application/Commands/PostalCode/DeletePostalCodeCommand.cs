@@ -1,6 +1,6 @@
-using GesFer.Application.Common.Interfaces;
+using GesFer.Product.Back.Application.Common.Interfaces;
 
-namespace GesFer.Application.Commands.PostalCode;
+namespace GesFer.Product.Back.Application.Commands.PostalCode;
 
 public record DeletePostalCodeCommand(Guid Id) : ICommand;
 

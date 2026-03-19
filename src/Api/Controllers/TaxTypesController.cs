@@ -1,11 +1,11 @@
 using System.Security.Claims;
-using GesFer.Application.Commands.TaxTypes;
-using GesFer.Application.Common.Interfaces;
+using GesFer.Product.Back.Application.Commands.TaxTypes;
+using GesFer.Product.Back.Application.Common.Interfaces;
 using GesFer.Product.Application.DTOs.TaxTypes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GesFer.Api.Controllers;
+namespace GesFer.Product.Back.Api.Controllers;
 
 [Route("api/tax-types")]
 [ApiController]

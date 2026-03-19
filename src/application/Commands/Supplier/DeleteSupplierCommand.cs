@@ -1,6 +1,6 @@
-using GesFer.Application.Common.Interfaces;
+using GesFer.Product.Back.Application.Common.Interfaces;
 
-namespace GesFer.Application.Commands.Supplier;
+namespace GesFer.Product.Back.Application.Commands.Supplier;
 
 public record DeleteSupplierCommand(Guid Id) : ICommand;
 

@@ -3,7 +3,7 @@ using System.Linq;
 using GesFer.Product.Back.Infrastructure.DTOs;
 using GesFer.Product.Back.Infrastructure.Services;
 
-namespace GesFer.IntegrationTests.Helpers;
+namespace GesFer.Product.Back.IntegrationTests.Helpers;
 
 /// <summary>
 /// Mock de IAdminApiClient para tests de integración (MyCompanyController).

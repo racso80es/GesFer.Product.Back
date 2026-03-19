@@ -1,9 +1,9 @@
-using GesFer.Application.Commands.User;
-using GesFer.Application.Common.Interfaces;
-using GesFer.Application.DTOs.User;
+using GesFer.Product.Back.Application.Commands.User;
+using GesFer.Product.Back.Application.Common.Interfaces;
+using GesFer.Product.Back.Application.DTOs.User;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GesFer.Api.Controllers;
+namespace GesFer.Product.Back.Api.Controllers;
 
 /// <summary>
 /// Controlador para gestión de usuarios

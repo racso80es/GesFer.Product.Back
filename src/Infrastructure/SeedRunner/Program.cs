@@ -1,6 +1,6 @@
-using GesFer.Infrastructure.Data;
-using GesFer.Infrastructure.Extensions;
-using GesFer.Infrastructure.Services;
+using GesFer.Product.Back.Infrastructure.Data;
+using GesFer.Product.Back.Infrastructure.Extensions;
+using GesFer.Product.Back.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
 
-namespace GesFer.Infrastructure.SeedRunner;
+namespace GesFer.Product.Back.Infrastructure.SeedRunner;
 
 class Program
 {

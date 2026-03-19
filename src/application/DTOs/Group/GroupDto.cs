@@ -1,4 +1,4 @@
-namespace GesFer.Application.DTOs.Group;
+namespace GesFer.Product.Back.Application.DTOs.Group;
 
 /// <summary>
 /// DTO para respuesta de grupo

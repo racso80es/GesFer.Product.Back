@@ -1,9 +1,9 @@
-using GesFer.Application.Commands.PostalCode;
-using GesFer.Application.Common.Interfaces;
-using GesFer.Application.DTOs.PostalCode;
+using GesFer.Product.Back.Application.Commands.PostalCode;
+using GesFer.Product.Back.Application.Common.Interfaces;
+using GesFer.Product.Back.Application.DTOs.PostalCode;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GesFer.Api.Controllers;
+namespace GesFer.Product.Back.Api.Controllers;
 
 /// <summary>
 /// Controlador para gestión de códigos postales

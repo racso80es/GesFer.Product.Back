@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Configuration;
 
-namespace GesFer.Infrastructure.Configuration;
+namespace GesFer.Product.Back.Infrastructure.Configuration;
 
 /// <summary>
 /// Configuración estática de seeds. CompanyId viene de config (Product no consulta Admin para seeds).

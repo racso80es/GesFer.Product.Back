@@ -1,5 +1,5 @@
-using GesFer.Domain.Common;
-using GesFer.Domain.ValueObjects;
+using GesFer.Product.Back.Domain.Common;
+using GesFer.Product.Back.Domain.ValueObjects;
 
 namespace GesFer.Product.Back.Domain.Entities;
 

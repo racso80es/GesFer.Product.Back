@@ -1,6 +1,6 @@
-using GesFer.Application.Common.Interfaces;
+using GesFer.Product.Back.Application.Common.Interfaces;
 
-namespace GesFer.Application.Commands.State;
+namespace GesFer.Product.Back.Application.Commands.State;
 
 public record DeleteStateCommand(Guid Id) : ICommand;
 

@@ -1,7 +1,7 @@
 // Archivo para hacer Program accesible para tests de integración
 // Los top-level statements generan una clase Program interna automáticamente
 // Esta declaración parcial la hace pública para los tests
-namespace GesFer.Api;
+namespace GesFer.Product.Back.Api;
 
 /// <summary>
 /// Clase Program para tests de integración

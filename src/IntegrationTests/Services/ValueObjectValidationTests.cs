@@ -1,11 +1,11 @@
 using FluentAssertions;
-using GesFer.Domain.ValueObjects;
-using GesFer.Infrastructure.Data;
+using GesFer.Product.Back.Domain.ValueObjects;
+using GesFer.Product.Back.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
-namespace GesFer.IntegrationTests.Services;
+namespace GesFer.Product.Back.IntegrationTests.Services;
 
 /// <summary>
 /// Tests de integración para validar que los Value Objects (Email, TaxId) rechazan datos inválidos

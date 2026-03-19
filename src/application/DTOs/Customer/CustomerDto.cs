@@ -1,4 +1,4 @@
-namespace GesFer.Application.DTOs.Customer;
+namespace GesFer.Product.Back.Application.DTOs.Customer;
 
 /// <summary>
 /// DTO para respuesta de cliente

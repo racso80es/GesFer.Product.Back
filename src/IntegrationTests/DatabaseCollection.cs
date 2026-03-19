@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace GesFer.IntegrationTests;
+namespace GesFer.Product.Back.IntegrationTests;
 
 /// <summary>
 /// Colección de tests que comparten el mismo contenedor MySQL mediante Collection Fixture.

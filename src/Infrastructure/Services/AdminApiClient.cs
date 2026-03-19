@@ -17,7 +17,7 @@ public class AdminApiClient : IAdminApiClient
         _logger = logger;
         _configuration = configuration;
 
-        var secret = _configuration["SharedSecret"];
+        var secret = _configuration["InternalSecret"];
         if (!string.IsNullOrEmpty(secret))
         {
             _httpClient.DefaultRequestHeaders.Add("X-Internal-Secret", secret);

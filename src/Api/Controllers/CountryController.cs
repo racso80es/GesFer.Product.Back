@@ -1,9 +1,9 @@
-using GesFer.Application.Commands.Country;
-using GesFer.Application.Common.Interfaces;
-using GesFer.Application.DTOs.Country;
+using GesFer.Product.Back.Application.Commands.Country;
+using GesFer.Product.Back.Application.Common.Interfaces;
+using GesFer.Product.Back.Application.DTOs.Country;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GesFer.Api.Controllers;
+namespace GesFer.Product.Back.Api.Controllers;
 
 /// <summary>
 /// Controlador para gestión de países

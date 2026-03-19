@@ -1,6 +1,6 @@
 using System.Net;
 using System.Text.Json;
-using GesFer.Infrastructure.Logging;
+using GesFer.Product.Back.Infrastructure.Logging;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Moq;
@@ -8,7 +8,7 @@ using Moq.Protected;
 using FluentAssertions;
 using Xunit;
 
-namespace GesFer.Product.UnitTests.Infrastructure.Logging;
+namespace GesFer.Product.Back.UnitTests.Infrastructure.Logging;
 
 public class AsyncLogPublisherTests
 {
@@ -38,11 +38,11 @@ public class AsyncLogPublisherTests
     }
 
     [Fact]
-    public async Task PublishLogAsync_WithSharedSecret_ShouldAddHeader()
+    public async Task PublishLogAsync_WithInternalSecret_ShouldAddHeader()
     {
         // Arrange
         var secret = "test-secret";
-        _configurationMock.Setup(x => x["SharedSecret"]).Returns(secret);
+        _configurationMock.Setup(x => x["InternalSecret"]).Returns(secret);
 
         _httpMessageHandlerMock
             .Protected()
@@ -77,10 +77,10 @@ public class AsyncLogPublisherTests
     }
 
     [Fact]
-    public async Task PublishLogAsync_WithoutSharedSecret_ShouldNotAddHeader()
+    public async Task PublishLogAsync_WithoutInternalSecret_ShouldNotAddHeader()
     {
         // Arrange
-        _configurationMock.Setup(x => x["SharedSecret"]).Returns((string?)null);
+        _configurationMock.Setup(x => x["InternalSecret"]).Returns((string?)null);
 
         _httpMessageHandlerMock
             .Protected()
@@ -112,11 +112,11 @@ public class AsyncLogPublisherTests
     }
 
     [Fact]
-    public async Task PublishAuditLog_WithSharedSecret_ShouldAddHeader()
+    public async Task PublishAuditLog_WithInternalSecret_ShouldAddHeader()
     {
         // Arrange
         var secret = "audit-secret";
-        _configurationMock.Setup(x => x["SharedSecret"]).Returns(secret);
+        _configurationMock.Setup(x => x["InternalSecret"]).Returns(secret);
 
         _httpMessageHandlerMock
             .Protected()

@@ -1,4 +1,4 @@
-namespace GesFer.Application.DTOs.State;
+namespace GesFer.Product.Back.Application.DTOs.State;
 
 /// <summary>
 /// DTO para respuesta de provincia/estado

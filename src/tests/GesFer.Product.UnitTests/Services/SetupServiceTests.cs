@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using GesFer.Api.Services;
-using GesFer.Infrastructure.Data;
-using GesFer.Infrastructure.Services;
+using GesFer.Product.Back.Api.Services;
+using GesFer.Product.Back.Infrastructure.Data;
+using GesFer.Product.Back.Infrastructure.Services;
 using GesFer.Product.Back.Domain.Entities;
-using GesFer.Domain.Services;
+using GesFer.Product.Back.Domain.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,7 +15,7 @@ using Moq;
 using Xunit;
 using FluentAssertions;
 
-namespace GesFer.Product.UnitTests.Services;
+namespace GesFer.Product.Back.UnitTests.Services;
 
 public class SetupServiceTests
 {

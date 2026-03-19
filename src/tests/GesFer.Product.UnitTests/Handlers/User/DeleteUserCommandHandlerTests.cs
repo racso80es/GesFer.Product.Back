@@ -1,12 +1,12 @@
 using FluentAssertions;
-using GesFer.Application.Commands.User;
-using GesFer.Application.Handlers.User;
-using GesFer.Infrastructure.Data;
+using GesFer.Product.Back.Application.Commands.User;
+using GesFer.Product.Back.Application.Handlers.User;
+using GesFer.Product.Back.Infrastructure.Data;
 using GesFer.Product.Back.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 
-namespace GesFer.Product.UnitTests.Handlers.User;
+namespace GesFer.Product.Back.UnitTests.Handlers.User;
 
 public class DeleteUserCommandHandlerTests
 {

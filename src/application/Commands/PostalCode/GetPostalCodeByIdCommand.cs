@@ -1,7 +1,7 @@
-using GesFer.Application.Common.Interfaces;
-using GesFer.Application.DTOs.PostalCode;
+using GesFer.Product.Back.Application.Common.Interfaces;
+using GesFer.Product.Back.Application.DTOs.PostalCode;
 
-namespace GesFer.Application.Commands.PostalCode;
+namespace GesFer.Product.Back.Application.Commands.PostalCode;
 
 public record GetPostalCodeByIdCommand(Guid Id) : ICommand<PostalCodeDto?>;
 

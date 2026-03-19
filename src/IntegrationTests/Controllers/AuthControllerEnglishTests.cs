@@ -1,6 +1,6 @@
 using FluentAssertions;
-using GesFer.Application.DTOs.Auth;
-using GesFer.Infrastructure.Data;
+using GesFer.Product.Back.Application.DTOs.Auth;
+using GesFer.Product.Back.Infrastructure.Data;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net;
 using System.Net.Http;
@@ -8,7 +8,7 @@ using System.Net.Http.Json;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace GesFer.IntegrationTests.Controllers;
+namespace GesFer.Product.Back.IntegrationTests.Controllers;
 
 [Collection("DatabaseStep")]
 public class AuthControllerEnglishTests

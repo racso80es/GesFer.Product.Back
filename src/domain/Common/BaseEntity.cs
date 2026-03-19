@@ -1,4 +1,4 @@
-namespace GesFer.Domain.Common;
+namespace GesFer.Product.Back.Domain.Common;
 
 /// <summary>
 /// Clase base para todas las entidades del dominio.

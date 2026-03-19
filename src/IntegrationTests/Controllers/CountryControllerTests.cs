@@ -1,10 +1,10 @@
 using FluentAssertions;
-using GesFer.Application.DTOs.Country;
+using GesFer.Product.Back.Application.DTOs.Country;
 using System.Net;
 using System.Net.Http.Json;
 using Xunit;
 
-namespace GesFer.IntegrationTests.Controllers;
+namespace GesFer.Product.Back.IntegrationTests.Controllers;
 
 [Collection("DatabaseStep")]
 public class CountryControllerTests

@@ -1,7 +1,7 @@
 using GesFer.Product.Back.Infrastructure.DTOs;
 using GesFer.Product.Back.Infrastructure.Services;
 
-namespace GesFer.Api.Services;
+namespace GesFer.Product.Back.Api.Services;
 
 public class MockAdminApiClient : IAdminApiClient
 {

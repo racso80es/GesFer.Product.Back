@@ -1,4 +1,4 @@
-namespace GesFer.Infrastructure.Logging;
+namespace GesFer.Product.Back.Infrastructure.Logging;
 
 /// <summary>
 /// Interfaz para publicar logs de forma asíncrona a la API de Admin

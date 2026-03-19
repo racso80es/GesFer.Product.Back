@@ -1,13 +1,13 @@
 using FluentAssertions;
-using GesFer.Application.DTOs.ArticleFamilies;
-using GesFer.Application.DTOs.Auth;
+using GesFer.Product.Back.Application.DTOs.ArticleFamilies;
+using GesFer.Product.Back.Application.DTOs.Auth;
 using GesFer.Product.Application.DTOs.TaxTypes;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using Xunit;
 
-namespace GesFer.IntegrationTests.Controllers;
+namespace GesFer.Product.Back.IntegrationTests.Controllers;
 
 /// <summary>
 /// Tests de integración para ArticleFamiliesController (CRUD con auth).

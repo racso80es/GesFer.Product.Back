@@ -1,10 +1,10 @@
-using GesFer.Infrastructure.Data;
-using GesFer.Infrastructure.Services;
+using GesFer.Product.Back.Infrastructure.Data;
+using GesFer.Product.Back.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace GesFer.IntegrationTests.Helpers;
+namespace GesFer.Product.Back.IntegrationTests.Helpers;
 
 /// <summary>
 /// Clase helper para insertar datos de prueba en la base de datos
@@ -39,7 +39,7 @@ public static class TestDataSeeder
         // Usar JsonDataSeeder para cargar datos de prueba desde test-data.json
         var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
         var logger = loggerFactory.CreateLogger<JsonDataSeeder>();
-        var sanitizer = new GesFer.Domain.Services.SensitiveDataSanitizer();
+        var sanitizer = new GesFer.Product.Back.Domain.Services.SensitiveDataSanitizer();
         var config = configuration ?? new ConfigurationBuilder()
             .AddInMemoryCollection(new Dictionary<string, string?> { ["Seed:CompanyId"] = "11111111-1111-1111-1111-111111111115" })
             .Build();

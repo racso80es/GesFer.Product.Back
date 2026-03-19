@@ -1,7 +1,7 @@
-using GesFer.Api.Services;
+using GesFer.Product.Back.Api.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GesFer.Api.Controllers;
+namespace GesFer.Product.Back.Api.Controllers;
 
 /// <summary>
 /// Controlador para inicialización y configuración del entorno

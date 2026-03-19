@@ -1,6 +1,6 @@
 using FluentAssertions;
-using GesFer.Application.DTOs.Auth;
-using GesFer.Infrastructure.Data;
+using GesFer.Product.Back.Application.DTOs.Auth;
+using GesFer.Product.Back.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using Xunit;
 using BCrypt.Net;
 
-namespace GesFer.IntegrationTests.Controllers;
+namespace GesFer.Product.Back.IntegrationTests.Controllers;
 
 /// <summary>
 /// Tests de integración para AuthController

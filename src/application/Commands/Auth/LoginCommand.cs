@@ -1,7 +1,7 @@
-using GesFer.Application.Common.Interfaces;
-using GesFer.Application.DTOs.Auth;
+using GesFer.Product.Back.Application.Common.Interfaces;
+using GesFer.Product.Back.Application.DTOs.Auth;
 
-namespace GesFer.Application.Commands.Auth;
+namespace GesFer.Product.Back.Application.Commands.Auth;
 
 /// <summary>
 /// Comando para realizar el login de un usuario

@@ -1,10 +1,10 @@
 using GesFer.Product.Back.Domain.Entities;
-using GesFer.Infrastructure.Data;
-using GesFer.Domain.Services;
+using GesFer.Product.Back.Infrastructure.Data;
+using GesFer.Product.Back.Domain.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace GesFer.Infrastructure.Services;
+namespace GesFer.Product.Back.Infrastructure.Services;
 
 /// <summary>
 /// Servicio para cargar datos maestros (países, provincias, ciudades, códigos postales)

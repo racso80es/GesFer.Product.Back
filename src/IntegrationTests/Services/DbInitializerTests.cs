@@ -1,8 +1,8 @@
-using GesFer.Infrastructure.Data;
-using GesFer.Infrastructure.Services;
+using GesFer.Product.Back.Infrastructure.Data;
+using GesFer.Product.Back.Infrastructure.Services;
 using GesFer.Product.Back.Domain.Entities;
-using GesFer.Domain.ValueObjects;
-using GesFer.Domain.Services;
+using GesFer.Product.Back.Domain.ValueObjects;
+using GesFer.Product.Back.Domain.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,7 +12,7 @@ using FluentAssertions;
 using Moq;
 using Xunit;
 
-namespace GesFer.IntegrationTests.Services;
+namespace GesFer.Product.Back.IntegrationTests.Services;
 
 public class DbInitializerTests
 {

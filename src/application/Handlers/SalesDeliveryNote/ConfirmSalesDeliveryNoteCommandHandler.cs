@@ -1,9 +1,9 @@
-using GesFer.Application.Commands.SalesDeliveryNote;
-using GesFer.Application.Common.Interfaces;
-using GesFer.Infrastructure.Data;
+using GesFer.Product.Back.Application.Commands.SalesDeliveryNote;
+using GesFer.Product.Back.Application.Common.Interfaces;
+using GesFer.Product.Back.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace GesFer.Application.Handlers.SalesDeliveryNote;
+namespace GesFer.Product.Back.Application.Handlers.SalesDeliveryNote;
 
 /// <summary>
 /// Handler para confirmar un albarán de venta

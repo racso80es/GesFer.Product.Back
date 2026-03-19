@@ -1,4 +1,4 @@
-namespace GesFer.Application.DTOs.Country;
+namespace GesFer.Product.Back.Application.DTOs.Country;
 
 /// <summary>
 /// DTO para respuesta de país

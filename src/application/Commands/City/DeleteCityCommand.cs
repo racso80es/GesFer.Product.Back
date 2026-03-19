@@ -1,6 +1,6 @@
-using GesFer.Application.Common.Interfaces;
+using GesFer.Product.Back.Application.Common.Interfaces;
 
-namespace GesFer.Application.Commands.City;
+namespace GesFer.Product.Back.Application.Commands.City;
 
 public record DeleteCityCommand(Guid Id) : ICommand;
 
