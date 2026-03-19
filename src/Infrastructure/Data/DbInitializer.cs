@@ -1,6 +1,5 @@
 using GesFer.Product.Back.Infrastructure.Data;
 using GesFer.Product.Back.Infrastructure.Services;
-using GesFer.Product.Back.Infrastructure.Services;
 using GesFer.Product.Back.Domain.Entities;
 using GesFer.Product.Back.Domain.ValueObjects;
 using GesFer.Product.Back.Domain.Services;

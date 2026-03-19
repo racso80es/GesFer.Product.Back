@@ -1,5 +1,4 @@
 using GesFer.Product.Back.Domain.Entities;
-using GesFer.Product.Back.Domain.Entities;
 using GesFer.Product.Back.Infrastructure.Data;
 using GesFer.Product.Back.Domain.Services;
 using Microsoft.EntityFrameworkCore;

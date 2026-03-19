@@ -12,7 +12,7 @@ namespace GesFer.IntegrationTests;
 /// </summary>
 public class DatabaseFixture : IAsyncLifetime
 {
-    public IntegrationTestWebAppFactory<GesFer.Api.Program> Factory { get; private set; } = null!;
+    public IntegrationTestWebAppFactory<GesFer.Product.Back.Api.Program> Factory { get; private set; } = null!;
 
     /// <summary>
     /// Acceso a los servicios del contenedor de inyección de dependencias.
@@ -26,7 +26,7 @@ public class DatabaseFixture : IAsyncLifetime
     /// </summary>
     public async Task InitializeAsync()
     {
-        Factory = new IntegrationTestWebAppFactory<GesFer.Api.Program>();
+        Factory = new IntegrationTestWebAppFactory<GesFer.Product.Back.Api.Program>();
         await Factory.InitializeAsync();
     }
 

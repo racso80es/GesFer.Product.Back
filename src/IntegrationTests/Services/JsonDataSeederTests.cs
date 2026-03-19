@@ -1,6 +1,5 @@
 using FluentAssertions;
 using GesFer.Product.Back.Domain.Entities;
-using GesFer.Product.Back.Domain.Entities;
 using GesFer.Product.Back.Infrastructure.Data;
 using GesFer.Product.Back.Domain.Services;
 using GesFer.Product.Back.Infrastructure.Services;
@@ -10,9 +9,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.Text.Json;
 using Xunit;
-using SeedResult = GesFer.Infrastructure.Services.SeedResult;
+using SeedResult = GesFer.Product.Back.Infrastructure.Services.SeedResult;
 
-namespace GesFer.IntegrationTests.Services;
+namespace GesFer.Product.Back.IntegrationTests.Services;
 
 /// <summary>
 /// Tests para validar que JsonDataSeeder puede encontrar los archivos JSON de seeds

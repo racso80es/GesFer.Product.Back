@@ -40,7 +40,7 @@ try
             .ReadFrom.Configuration(context.Configuration) // <--- CARGA EL SINK DESDE EL JSON
             .ReadFrom.Services(services) // <--- PERMITE INYECTAR DEPENDENCIAS EN EL SINK
             .Enrich.FromLogContext()
-            .Enrich.WithProperty("Application", "GesFer.Api")
+            .Enrich.WithProperty("Application", "GesFer.Product.Back.Api")
             .Enrich.WithProperty("Environment", context.HostingEnvironment.EnvironmentName);
 
         if (isDevelopment || context.HostingEnvironment.EnvironmentName == "Testing")
@@ -79,7 +79,7 @@ try
         });
     
     // Configurar para mostrar valores por defecto desde el atributo [DefaultValue]
-    c.SchemaFilter<GesFer.Api.Swagger.DefaultValueSchemaFilter>();
+    c.SchemaFilter<GesFer.Product.Back.Api.Swagger.DefaultValueSchemaFilter>();
     c.UseInlineDefinitionsForEnums();
 });
 
@@ -172,7 +172,7 @@ var app = builder.Build();
             .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
             .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
             .Enrich.FromLogContext()
-            .Enrich.WithProperty("Application", "GesFer.Api")
+            .Enrich.WithProperty("Application", "GesFer.Product.Back.Api")
             .Enrich.WithProperty("Environment", app.Environment.EnvironmentName)
             .WriteTo.Console()
             .WriteTo.Sink(adminApiSink, restrictedToMinimumLevel: minimumLevel)
