@@ -5,7 +5,6 @@
   "contract_ref": "SddIA/tools/tools-contract.json",
   "components": {
     "launcher_bat": "Postman-Mcp-Validation.bat",
-    "launcher_ps1": "Postman-Mcp-Validation.ps1",
     "config": "postman-mcp-validation-config.json",
     "doc": "postman-mcp-validation.md",
     "bin": "postman_mcp_validation.exe"

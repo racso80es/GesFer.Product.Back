@@ -5,7 +5,6 @@
   "contract_ref": "SddIA/skills/skills-contract.json",
   "components": {
     "launcher_bat": "Invoke-Command.bat",
-    "launcher_ps1": "Invoke-Command.ps1",
     "doc": "invoke-command.md",
     "bin": "bin/invoke_command.exe"
   },

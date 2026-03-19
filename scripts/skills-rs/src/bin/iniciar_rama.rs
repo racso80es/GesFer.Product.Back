@@ -78,7 +78,9 @@ fn main() {
     }
 
     let full_branch = format!("{}/{}", branch_type, slug);
-    let main = main_branch.as_deref().unwrap_or("master");
+    let main = main_branch
+        .as_deref()
+        .unwrap_or_else(|| detect_main_branch(&mut feedback));
 
     feedback.push(FeedbackEntry::info(
         "params",
@@ -127,6 +129,29 @@ fn load_input(args: &Args, feedback: &mut Vec<FeedbackEntry>) -> Result<(String,
     let bt = args.branch_type.clone().ok_or(("--branch-type requerido (o --input-path)".to_string(), 1))?;
     let bn = args.branch_name.clone().ok_or(("--branch-name requerido (o --input-path)".to_string(), 1))?;
     Ok((bt, bn, args.main_branch.clone(), args.skip_pull))
+}
+
+fn detect_main_branch(feedback: &mut Vec<FeedbackEntry>) -> &'static str {
+    for candidate in ["main", "master"] {
+        let out = Command::new("git")
+            .args(["rev-parse", "--verify", candidate])
+            .output();
+        if let Ok(o) = out {
+            if o.status.success() {
+                feedback.push(FeedbackEntry::info(
+                    "detect-main",
+                    &format!("Troncal detectada: {}", candidate),
+                ));
+                return candidate;
+            }
+        }
+    }
+    feedback.push(FeedbackEntry::warning(
+        "detect-main",
+        "No se detectó main ni master; usando main por defecto",
+        None,
+    ));
+    "main"
 }
 
 fn normalize_slug(name: &str) -> String {

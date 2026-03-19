@@ -1,6 +1,6 @@
 @echo off
 setlocal
-REM Postman-Mcp-Validation.bat - Valida endpoints con colección Postman (Newman). Contrato tools.
+REM Postman-Mcp-Validation.bat - Valida endpoints con colección Postman (Newman). Contrato tools. Rust .exe.
 REM Capsula: scripts/tools/postman-mcp-validation/
 
 set "SCRIPT_DIR=%~dp0"
@@ -15,11 +15,6 @@ if exist "%RUST_EXE%" (
     exit /b %ERRORLEVEL%
 )
 
-set "PS_SCRIPT=%SCRIPT_DIR%Postman-Mcp-Validation.ps1"
-where pwsh >nul 2>&1
-if %ERRORLEVEL% equ 0 (
-    pwsh -NoProfile -ExecutionPolicy Bypass -File "%PS_SCRIPT%" %*
-) else (
-    powershell -NoProfile -ExecutionPolicy Bypass -File "%PS_SCRIPT%" %*
-)
+echo ERROR: No se encontro postman_mcp_validation.exe. Ejecute scripts/tools-rs/install.ps1
 endlocal
+exit /b 1

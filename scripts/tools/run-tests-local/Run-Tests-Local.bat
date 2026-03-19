@@ -1,6 +1,6 @@
 @echo off
 setlocal
-REM Run-Tests-Local.bat - Ejecuta tests en condiciones locales (contrato tools, Rust .exe en capsula si existe)
+REM Run-Tests-Local.bat - Ejecuta tests en condiciones locales (contrato tools, Rust .exe)
 REM Capsula: scripts/tools/run-tests-local/
 
 set "SCRIPT_DIR=%~dp0"
@@ -15,11 +15,6 @@ if exist "%RUST_EXE%" (
     exit /b %ERRORLEVEL%
 )
 
-set "PS_SCRIPT=%SCRIPT_DIR%Run-Tests-Local.ps1"
-where pwsh >nul 2>&1
-if %ERRORLEVEL% equ 0 (
-    pwsh -NoProfile -ExecutionPolicy Bypass -File "%PS_SCRIPT%" %*
-) else (
-    powershell -NoProfile -ExecutionPolicy Bypass -File "%PS_SCRIPT%" %*
-)
+echo ERROR: No se encontro run_tests_local.exe. Ejecute scripts/tools-rs/install.ps1
 endlocal
+exit /b 1

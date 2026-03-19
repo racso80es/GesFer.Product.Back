@@ -40,7 +40,9 @@ $releaseDir = Join-Path $scriptDir "target\release"
 $capsules = @(
     @{ exe = "prepare_full_env"; capsule = "prepare-full-env" },
     @{ exe = "invoke_mysql_seeds"; capsule = "invoke-mysql-seeds" },
-    @{ exe = "start_api"; capsule = "start-api" }
+    @{ exe = "start_api"; capsule = "start-api" },
+    @{ exe = "run_tests_local"; capsule = "run-tests-local" },
+    @{ exe = "postman_mcp_validation"; capsule = "postman-mcp-validation" }
 )
 foreach ($cap in $capsules) {
     $src = Join-Path $releaseDir "$($cap.exe).exe"
@@ -53,3 +55,5 @@ Write-Host "OK. Ejecutables en capsulas (misma carpeta que el .bat):" -Foregroun
 Write-Host "  - prepare-full-env/prepare_full_env.exe" -ForegroundColor White
 Write-Host "  - invoke-mysql-seeds/invoke_mysql_seeds.exe" -ForegroundColor White
 Write-Host "  - start-api/start_api.exe" -ForegroundColor White
+Write-Host "  - run-tests-local/run_tests_local.exe" -ForegroundColor White
+Write-Host "  - postman-mcp-validation/postman_mcp_validation.exe" -ForegroundColor White
