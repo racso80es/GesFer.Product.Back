@@ -1,5 +1,4 @@
 using GesFer.Product.Back.Domain.Entities;
-using GesFer.Product.Back.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

@@ -1,6 +1,5 @@
 using FluentAssertions;
 using GesFer.Product.Back.Domain.Entities;
-using GesFer.Product.Back.Domain.Entities;
 using GesFer.Infrastructure.Data;
 using GesFer.Domain.Services;
 using GesFer.Infrastructure.Services;
