@@ -2,7 +2,7 @@
 setlocal
 REM Merge-To-Master-Cleanup.bat - Skill finalizar-git fase post_pr (Rust en bin/ si existe)
 REM Capsula: paths.skillCapsules.finalizar-git (scripts/skills/finalizar-git/)
-REM Uso: Merge-To-Master-Cleanup.bat  o  Merge-To-Master-Cleanup.ps1 -BranchName "feat/xxx" -DeleteRemote
+REM Uso: Merge-To-Master-Cleanup.bat --branch-name "feat/xxx" --delete-remote
 
 set "SCRIPT_DIR=%~dp0"
 set "REPO_ROOT=%SCRIPT_DIR%..\..\..\"
