@@ -1,4 +1,3 @@
-using System.Security.Claims;
 using GesFer.Product.Back.Infrastructure.DTOs;
 using GesFer.Product.Back.Infrastructure.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -23,19 +22,6 @@ public class MyCompanyController : ControllerBase
         _logger = logger;
     }
 
-    private Guid GetCompanyId()
-    {
-        // Asumiendo que el CompanyId está en los claims (ajustar según implementación real de token)
-        var companyIdClaim = User.FindFirst("company_id")?.Value
-                             ?? User.FindFirst("CompanyId")?.Value;
-
-        if (string.IsNullOrEmpty(companyIdClaim) || !Guid.TryParse(companyIdClaim, out var companyId))
-        {
-            throw new UnauthorizedAccessException("No se encontró el ID de empresa en el token del usuario.");
-        }
-        return companyId;
-    }
-
     /// <summary>
     /// Obtiene los datos de la empresa del usuario actual
     /// </summary>
@@ -46,7 +32,7 @@ public class MyCompanyController : ControllerBase
     {
         try
         {
-            var companyId = GetCompanyId();
+            var companyId = this.GetCompanyId();
             var result = await _adminClient.GetCompanyAsync(companyId);
 
             if (result == null)
@@ -75,7 +61,7 @@ public class MyCompanyController : ControllerBase
     {
         try
         {
-            var companyId = GetCompanyId();
+            var companyId = this.GetCompanyId();
 
             // Seguridad: El usuario no puede reactivar/desactivar su empresa, eso es de Admin
             // Forzamos el estado actual o ignoramos el campo en el DTO de entrada si la API de Admin lo permite

@@ -1,6 +1,7 @@
 using GesFer.Product.Back.Application.Commands.Customer;
 using GesFer.Product.Back.Application.Common.Interfaces;
 using GesFer.Product.Back.Application.DTOs.Customer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GesFer.Product.Back.Api.Controllers;
@@ -10,6 +11,7 @@ namespace GesFer.Product.Back.Api.Controllers;
 /// </summary>
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class CustomerController : ControllerBase
 {
     private readonly ICommandHandler<CreateCustomerCommand, CustomerDto> _createHandler;
@@ -36,14 +38,15 @@ public class CustomerController : ControllerBase
     }
 
     /// <summary>
-    /// Obtiene todos los clientes (opcionalmente filtrados por empresa)
+    /// Obtiene todos los clientes de la empresa del usuario autenticado
     /// </summary>
     [HttpGet]
     [ProducesResponseType(typeof(List<CustomerDto>), StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetAll([FromQuery] Guid? companyId = null)
+    public async Task<IActionResult> GetAll()
     {
         try
         {
+            var companyId = this.GetCompanyId();
             var command = new GetAllCustomersCommand(companyId);
             var result = await _getAllHandler.HandleAsync(command);
             return Ok(result);
@@ -90,6 +93,7 @@ public class CustomerController : ControllerBase
     {
         try
         {
+            dto.CompanyId = this.GetCompanyId();
             var command = new CreateCustomerCommand(dto);
             var result = await _createHandler.HandleAsync(command);
             return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);

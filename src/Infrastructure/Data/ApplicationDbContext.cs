@@ -13,8 +13,7 @@ public class ApplicationDbContext : DbContext
     {
     }
 
-    // DbSets - Solo entidades del dominio Product
-    public DbSet<GesFer.Product.Back.Domain.Entities.Company> Companies => Set<GesFer.Product.Back.Domain.Entities.Company>();
+    // DbSets - Solo entidades del dominio Product (Company: SSOT en Admin; Product usa CompanyId como dato referencial)
     public DbSet<User> Users => Set<User>();
     public DbSet<Group> Groups => Set<Group>();
     public DbSet<Permission> Permissions => Set<Permission>();

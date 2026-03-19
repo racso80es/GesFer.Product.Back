@@ -1,6 +1,8 @@
 using FluentAssertions;
+using GesFer.Product.Back.Application.DTOs.Auth;
 using GesFer.Product.Back.Application.DTOs.Supplier;
 using System.Net;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using Xunit;
 
@@ -19,22 +21,36 @@ public class SupplierControllerTests
         _client = fixture.Factory.CreateClient();
     }
 
-    [Fact]
-    public async Task GetAll_ShouldReturnListOfSuppliers()
+    private async Task SetAuthTokenAsync()
     {
-        // Act
+        var loginRequest = new LoginRequestDto
+        {
+            Empresa = "Empresa Demo",
+            Usuario = "admin",
+            Contraseña = "admin123"
+        };
+        var response = await _client.PostAsJsonAsync("/api/auth/login", loginRequest);
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+        var loginResponse = await response.Content.ReadFromJsonAsync<LoginResponseDto>();
+        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", loginResponse!.Token);
+    }
+
+    [Fact]
+    public async Task GetAll_WithValidToken_ShouldReturnListOfSuppliers()
+    {
+        await SetAuthTokenAsync();
+
         var response = await _client.GetAsync("/api/supplier");
 
-        // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         var suppliers = await response.Content.ReadFromJsonAsync<List<SupplierDto>>();
         suppliers.Should().NotBeNull();
     }
 
     [Fact]
-    public async Task GetAll_WithCompanyIdFilter_ShouldReturnFilteredSuppliers()
+    public async Task GetAll_WithValidToken_ShouldReturnFilteredSuppliers()
     {
-        // Arrange - Crear un proveedor
+        await SetAuthTokenAsync();
         var createDto = new CreateSupplierDto
         {
             CompanyId = _companyId,
@@ -43,10 +59,8 @@ public class SupplierControllerTests
         };
         await _client.PostAsJsonAsync("/api/supplier", createDto);
 
-        // Act
-        var response = await _client.GetAsync($"/api/supplier?companyId={_companyId}");
+        var response = await _client.GetAsync("/api/supplier");
 
-        // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         var suppliers = await response.Content.ReadFromJsonAsync<List<SupplierDto>>();
         suppliers.Should().NotBeNull();
@@ -57,7 +71,7 @@ public class SupplierControllerTests
     [Fact]
     public async Task GetById_WithValidId_ShouldReturnSupplier()
     {
-        // Arrange - Crear un proveedor
+        await SetAuthTokenAsync();
         var createDto = new CreateSupplierDto
         {
             CompanyId = _companyId,
@@ -82,7 +96,7 @@ public class SupplierControllerTests
     [Fact]
     public async Task GetById_WithInvalidId_ShouldReturnNotFound()
     {
-        // Arrange
+        await SetAuthTokenAsync();
         var invalidId = Guid.NewGuid();
 
         // Act
@@ -95,7 +109,7 @@ public class SupplierControllerTests
     [Fact]
     public async Task Create_WithValidData_ShouldReturnCreated()
     {
-        // Arrange
+        await SetAuthTokenAsync();
         var createDto = new CreateSupplierDto
         {
             CompanyId = _companyId,
@@ -117,28 +131,12 @@ public class SupplierControllerTests
         supplier.CompanyId.Should().Be(_companyId);
     }
 
-    [Fact]
-    public async Task Create_WithInvalidCompanyId_ShouldReturnBadRequest()
-    {
-        // Arrange
-        var createDto = new CreateSupplierDto
-        {
-            CompanyId = Guid.NewGuid(), // Empresa inexistente
-            Name = "Proveedor Test",
-            TaxId = "B44444446"
-        };
-
-        // Act
-        var response = await _client.PostAsJsonAsync("/api/supplier", createDto);
-
-        // Assert
-        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
-    }
+    // Create_WithInvalidCompanyId: ya no aplica; CompanyId viene del claim
 
     [Fact]
     public async Task Create_WithDuplicateName_ShouldReturnBadRequest()
     {
-        // Arrange
+        await SetAuthTokenAsync();
         var createDto = new CreateSupplierDto
         {
             CompanyId = _companyId,
@@ -157,7 +155,7 @@ public class SupplierControllerTests
     [Fact]
     public async Task Update_WithValidData_ShouldReturnOk()
     {
-        // Arrange - Crear un proveedor
+        await SetAuthTokenAsync();
         var createDto = new CreateSupplierDto
         {
             CompanyId = _companyId,
@@ -192,7 +190,7 @@ public class SupplierControllerTests
     [Fact]
     public async Task Update_WithInvalidId_ShouldReturnNotFound()
     {
-        // Arrange
+        await SetAuthTokenAsync();
         var invalidId = Guid.NewGuid();
         var updateDto = new UpdateSupplierDto
         {
@@ -210,7 +208,7 @@ public class SupplierControllerTests
     [Fact]
     public async Task Delete_WithValidId_ShouldReturnNoContent()
     {
-        // Arrange - Crear un proveedor para eliminar
+        await SetAuthTokenAsync();
         var createDto = new CreateSupplierDto
         {
             CompanyId = _companyId,
@@ -235,7 +233,7 @@ public class SupplierControllerTests
     [Fact]
     public async Task Delete_WithInvalidId_ShouldReturnNotFound()
     {
-        // Arrange
+        await SetAuthTokenAsync();
         var invalidId = Guid.NewGuid();
 
         // Act

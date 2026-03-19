@@ -1,4 +1,3 @@
-using System.Security.Claims;
 using GesFer.Product.Back.Application.Commands.TaxTypes;
 using GesFer.Product.Back.Application.Common.Interfaces;
 using GesFer.Product.Application.DTOs.TaxTypes;
@@ -32,21 +31,13 @@ public class TaxTypesController : ControllerBase
         _deleteHandler = deleteHandler;
     }
 
-    private Guid GetCompanyId()
-    {
-        var companyIdClaim = User.FindFirst("company_id")?.Value ?? User.FindFirst("CompanyId")?.Value;
-        if (string.IsNullOrEmpty(companyIdClaim) || !Guid.TryParse(companyIdClaim, out var companyId))
-            throw new UnauthorizedAccessException("No se encontró el ID de empresa en el token del usuario.");
-        return companyId;
-    }
-
     [HttpGet]
     [ProducesResponseType(typeof(List<TaxTypeDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetTaxTypes(CancellationToken cancellationToken)
     {
         try
         {
-            var companyId = GetCompanyId();
+            var companyId = this.GetCompanyId();
             var command = new GetAllTaxTypesCommand(companyId);
             var result = await _getAllHandler.HandleAsync(command, cancellationToken);
             return Ok(result);
@@ -64,7 +55,7 @@ public class TaxTypesController : ControllerBase
     {
         try
         {
-            var companyId = GetCompanyId();
+            var companyId = this.GetCompanyId();
             var command = new GetTaxTypeByIdCommand(id, companyId);
             var result = await _getByIdHandler.HandleAsync(command, cancellationToken);
             if (result == null)
@@ -84,7 +75,7 @@ public class TaxTypesController : ControllerBase
     {
         try
         {
-            var companyId = GetCompanyId();
+            var companyId = this.GetCompanyId();
             var command = new CreateTaxTypeCommand(request, companyId);
             var id = await _createHandler.HandleAsync(command, cancellationToken);
             return CreatedAtAction(nameof(GetTaxTypeById), new { id }, id);
@@ -110,7 +101,7 @@ public class TaxTypesController : ControllerBase
 
         try
         {
-            var companyId = GetCompanyId();
+            var companyId = this.GetCompanyId();
             var command = new UpdateTaxTypeCommand(request, companyId);
             await _updateHandler.HandleAsync(command, cancellationToken);
             return NoContent();
@@ -134,7 +125,7 @@ public class TaxTypesController : ControllerBase
     {
         try
         {
-            var companyId = GetCompanyId();
+            var companyId = this.GetCompanyId();
             var command = new DeleteTaxTypeCommand(id, companyId);
             await _deleteHandler.HandleAsync(command, cancellationToken);
             return NoContent();

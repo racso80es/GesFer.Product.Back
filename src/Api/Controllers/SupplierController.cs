@@ -1,6 +1,7 @@
 using GesFer.Product.Back.Application.Commands.Supplier;
 using GesFer.Product.Back.Application.Common.Interfaces;
 using GesFer.Product.Back.Application.DTOs.Supplier;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GesFer.Product.Back.Api.Controllers;
@@ -10,6 +11,7 @@ namespace GesFer.Product.Back.Api.Controllers;
 /// </summary>
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class SupplierController : ControllerBase
 {
     private readonly ICommandHandler<CreateSupplierCommand, SupplierDto> _createHandler;
@@ -36,14 +38,15 @@ public class SupplierController : ControllerBase
     }
 
     /// <summary>
-    /// Obtiene todos los proveedores (opcionalmente filtrados por empresa)
+    /// Obtiene todos los proveedores de la empresa del usuario autenticado
     /// </summary>
     [HttpGet]
     [ProducesResponseType(typeof(List<SupplierDto>), StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetAll([FromQuery] Guid? companyId = null)
+    public async Task<IActionResult> GetAll()
     {
         try
         {
+            var companyId = this.GetCompanyId();
             var command = new GetAllSuppliersCommand(companyId);
             var result = await _getAllHandler.HandleAsync(command);
             return Ok(result);
@@ -90,6 +93,7 @@ public class SupplierController : ControllerBase
     {
         try
         {
+            dto.CompanyId = this.GetCompanyId();
             var command = new CreateSupplierCommand(dto);
             var result = await _createHandler.HandleAsync(command);
             return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);

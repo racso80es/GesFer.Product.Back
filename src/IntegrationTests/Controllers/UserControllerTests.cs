@@ -1,6 +1,8 @@
 using FluentAssertions;
+using GesFer.Product.Back.Application.DTOs.Auth;
 using GesFer.Product.Back.Application.DTOs.User;
 using System.Net;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using Xunit;
 
@@ -19,26 +21,27 @@ public class UserControllerTests
         _client = fixture.Factory.CreateClient();
     }
 
-    [Fact]
-    public async Task GetAll_ShouldReturnListOfUsers()
+    private async Task SetAuthTokenAsync()
     {
-        // Act
-        var response = await _client.GetAsync("/api/user");
-
-        // Assert
+        var loginRequest = new LoginRequestDto
+        {
+            Empresa = "Empresa Demo",
+            Usuario = "admin",
+            Contraseña = "admin123"
+        };
+        var response = await _client.PostAsJsonAsync("/api/auth/login", loginRequest);
         response.StatusCode.Should().Be(HttpStatusCode.OK);
-        var users = await response.Content.ReadFromJsonAsync<List<UserDto>>();
-        users.Should().NotBeNull();
-        users!.Should().NotBeEmpty();
+        var loginResponse = await response.Content.ReadFromJsonAsync<LoginResponseDto>();
+        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", loginResponse!.Token);
     }
 
     [Fact]
-    public async Task GetAll_WithCompanyIdFilter_ShouldReturnFilteredUsers()
+    public async Task GetAll_WithValidToken_ShouldReturnListOfUsers()
     {
-        // Act
-        var response = await _client.GetAsync($"/api/user?companyId={_testCompanyId}");
+        await SetAuthTokenAsync();
 
-        // Assert
+        var response = await _client.GetAsync("/api/user");
+
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         var users = await response.Content.ReadFromJsonAsync<List<UserDto>>();
         users.Should().NotBeNull();
@@ -47,12 +50,19 @@ public class UserControllerTests
     }
 
     [Fact]
+    public async Task GetAll_WithoutToken_ShouldReturn401()
+    {
+        _client.DefaultRequestHeaders.Authorization = null;
+        var response = await _client.GetAsync("/api/user");
+        response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+    }
+
+    [Fact]
     public async Task GetById_WithValidId_ShouldReturnUser()
     {
-        // Arrange
+        await SetAuthTokenAsync();
         var userId = Guid.Parse("99999999-9999-9999-9999-999999999999");
 
-        // Act
         var response = await _client.GetAsync($"/api/user/{userId}");
 
         // Assert
@@ -66,10 +76,9 @@ public class UserControllerTests
     [Fact]
     public async Task GetById_WithInvalidId_ShouldReturnNotFound()
     {
-        // Arrange
+        await SetAuthTokenAsync();
         var invalidId = Guid.NewGuid();
 
-        // Act
         var response = await _client.GetAsync($"/api/user/{invalidId}");
 
         // Assert
@@ -79,10 +88,10 @@ public class UserControllerTests
     [Fact]
     public async Task Create_WithValidData_ShouldReturnCreated()
     {
-        // Arrange
+        await SetAuthTokenAsync();
         var createDto = new CreateUserDto
         {
-            CompanyId = _testCompanyId,
+            CompanyId = _testCompanyId, // Será ignorado; controller usa claim
             Username = "nuevo_usuario",
             Password = "password123",
             FirstName = "Nuevo",
@@ -106,7 +115,7 @@ public class UserControllerTests
     [Fact]
     public async Task Create_WithDuplicateUsername_ShouldReturnBadRequest()
     {
-        // Arrange
+        await SetAuthTokenAsync();
         var createDto = new CreateUserDto
         {
             CompanyId = _testCompanyId,
@@ -123,30 +132,12 @@ public class UserControllerTests
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
     }
 
-    [Fact]
-    public async Task Create_WithInvalidCompanyId_ShouldReturnBadRequest()
-    {
-        // Arrange
-        var createDto = new CreateUserDto
-        {
-            CompanyId = Guid.NewGuid(), // Empresa inexistente
-            Username = "test_user",
-            Password = "password123",
-            FirstName = "Test",
-            LastName = "User"
-        };
-
-        // Act
-        var response = await _client.PostAsJsonAsync("/api/user", createDto);
-
-        // Assert
-        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
-    }
+    // Create_WithInvalidCompanyId: ya no aplica; CompanyId viene del claim, no del body
 
     [Fact]
     public async Task Update_WithValidData_ShouldReturnOk()
     {
-        // Arrange - Crear un usuario primero para actualizarlo
+        await SetAuthTokenAsync();
         var createDto = new CreateUserDto
         {
             CompanyId = _testCompanyId,
@@ -191,7 +182,7 @@ public class UserControllerTests
     [Fact]
     public async Task Update_WithPassword_ShouldUpdatePassword()
     {
-        // Arrange - Crear un usuario primero para actualizarlo
+        await SetAuthTokenAsync();
         var createDto = new CreateUserDto
         {
             CompanyId = _testCompanyId,
@@ -233,7 +224,7 @@ public class UserControllerTests
     [Fact]
     public async Task Update_WithInvalidId_ShouldReturnNotFound()
     {
-        // Arrange
+        await SetAuthTokenAsync();
         var invalidId = Guid.NewGuid();
         var updateDto = new UpdateUserDto
         {
@@ -253,7 +244,7 @@ public class UserControllerTests
     [Fact]
     public async Task Delete_WithValidId_ShouldReturnNoContent()
     {
-        // Arrange - Crear un usuario para eliminar
+        await SetAuthTokenAsync();
         var createDto = new CreateUserDto
         {
             CompanyId = _testCompanyId,
@@ -280,7 +271,7 @@ public class UserControllerTests
     [Fact]
     public async Task Delete_WithInvalidId_ShouldReturnNotFound()
     {
-        // Arrange
+        await SetAuthTokenAsync();
         var invalidId = Guid.NewGuid();
 
         // Act
@@ -293,7 +284,7 @@ public class UserControllerTests
     [Fact]
     public async Task Test2P2_CreateUser_WithAllProperties_ShouldValidateAllFields()
     {
-        // Arrange - Crear usuario con todas las propiedades
+        await SetAuthTokenAsync();
         var languageId = Guid.Parse("10000000-0000-0000-0000-000000000001");
         var createDto = new CreateUserDto
         {
@@ -320,8 +311,8 @@ public class UserControllerTests
         var user = await response.Content.ReadFromJsonAsync<UserDto>();
         user.Should().NotBeNull();
         
-        // Validar todas las propiedades
-        user!.CompanyId.Should().Be(createDto.CompanyId);
+        // Validar todas las propiedades (CompanyId viene del claim)
+        user!.CompanyId.Should().Be(_testCompanyId);
         user.Username.Should().Be(createDto.Username);
         user.FirstName.Should().Be(createDto.FirstName);
         user.LastName.Should().Be(createDto.LastName);
@@ -342,7 +333,7 @@ public class UserControllerTests
     [Fact]
     public async Task Test2P2_UpdateUser_WithAllProperties_ShouldValidateAllFields()
     {
-        // Arrange - Primero crear un usuario
+        await SetAuthTokenAsync();
         var createDto = new CreateUserDto
         {
             CompanyId = _testCompanyId,

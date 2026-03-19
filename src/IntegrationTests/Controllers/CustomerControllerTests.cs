@@ -1,6 +1,8 @@
 using FluentAssertions;
+using GesFer.Product.Back.Application.DTOs.Auth;
 using GesFer.Product.Back.Application.DTOs.Customer;
 using System.Net;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using Xunit;
 
@@ -19,22 +21,36 @@ public class CustomerControllerTests
         _client = fixture.Factory.CreateClient();
     }
 
-    [Fact]
-    public async Task GetAll_ShouldReturnListOfCustomers()
+    private async Task SetAuthTokenAsync()
     {
-        // Act
+        var loginRequest = new LoginRequestDto
+        {
+            Empresa = "Empresa Demo",
+            Usuario = "admin",
+            Contraseña = "admin123"
+        };
+        var response = await _client.PostAsJsonAsync("/api/auth/login", loginRequest);
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+        var loginResponse = await response.Content.ReadFromJsonAsync<LoginResponseDto>();
+        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", loginResponse!.Token);
+    }
+
+    [Fact]
+    public async Task GetAll_WithValidToken_ShouldReturnListOfCustomers()
+    {
+        await SetAuthTokenAsync();
+
         var response = await _client.GetAsync("/api/customer");
 
-        // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         var customers = await response.Content.ReadFromJsonAsync<List<CustomerDto>>();
         customers.Should().NotBeNull();
     }
 
     [Fact]
-    public async Task GetAll_WithCompanyIdFilter_ShouldReturnFilteredCustomers()
+    public async Task GetAll_WithValidToken_ShouldReturnFilteredCustomers()
     {
-        // Arrange - Crear un cliente
+        await SetAuthTokenAsync();
         var createDto = new CreateCustomerDto
         {
             CompanyId = _companyId,
@@ -43,10 +59,8 @@ public class CustomerControllerTests
         };
         await _client.PostAsJsonAsync("/api/customer", createDto);
 
-        // Act
-        var response = await _client.GetAsync($"/api/customer?companyId={_companyId}");
+        var response = await _client.GetAsync("/api/customer");
 
-        // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         var customers = await response.Content.ReadFromJsonAsync<List<CustomerDto>>();
         customers.Should().NotBeNull();
@@ -57,7 +71,7 @@ public class CustomerControllerTests
     [Fact]
     public async Task GetById_WithValidId_ShouldReturnCustomer()
     {
-        // Arrange - Crear un cliente
+        await SetAuthTokenAsync();
         var createDto = new CreateCustomerDto
         {
             CompanyId = _companyId,
@@ -82,7 +96,7 @@ public class CustomerControllerTests
     [Fact]
     public async Task GetById_WithInvalidId_ShouldReturnNotFound()
     {
-        // Arrange
+        await SetAuthTokenAsync();
         var invalidId = Guid.NewGuid();
 
         // Act
@@ -95,7 +109,7 @@ public class CustomerControllerTests
     [Fact]
     public async Task Create_WithValidData_ShouldReturnCreated()
     {
-        // Arrange
+        await SetAuthTokenAsync();
         var createDto = new CreateCustomerDto
         {
             CompanyId = _companyId,
@@ -118,28 +132,12 @@ public class CustomerControllerTests
         customer.CompanyId.Should().Be(_companyId);
     }
 
-    [Fact]
-    public async Task Create_WithInvalidCompanyId_ShouldReturnBadRequest()
-    {
-        // Arrange
-        var createDto = new CreateCustomerDto
-        {
-            CompanyId = Guid.NewGuid(), // Empresa inexistente
-            Name = "Cliente Test",
-            TaxId = "B44444446"
-        };
-
-        // Act
-        var response = await _client.PostAsJsonAsync("/api/customer", createDto);
-
-        // Assert
-        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
-    }
+    // Create_WithInvalidCompanyId: ya no aplica; CompanyId viene del claim
 
     [Fact]
     public async Task Create_WithDuplicateName_ShouldReturnBadRequest()
     {
-        // Arrange
+        await SetAuthTokenAsync();
         var createDto = new CreateCustomerDto
         {
             CompanyId = _companyId,
@@ -158,7 +156,7 @@ public class CustomerControllerTests
     [Fact]
     public async Task Update_WithValidData_ShouldReturnOk()
     {
-        // Arrange - Crear un cliente
+        await SetAuthTokenAsync();
         var createDto = new CreateCustomerDto
         {
             CompanyId = _companyId,
@@ -193,7 +191,7 @@ public class CustomerControllerTests
     [Fact]
     public async Task Update_WithInvalidId_ShouldReturnNotFound()
     {
-        // Arrange
+        await SetAuthTokenAsync();
         var invalidId = Guid.NewGuid();
         var updateDto = new UpdateCustomerDto
         {
@@ -211,7 +209,7 @@ public class CustomerControllerTests
     [Fact]
     public async Task Delete_WithValidId_ShouldReturnNoContent()
     {
-        // Arrange - Crear un cliente para eliminar
+        await SetAuthTokenAsync();
         var createDto = new CreateCustomerDto
         {
             CompanyId = _companyId,
@@ -236,7 +234,7 @@ public class CustomerControllerTests
     [Fact]
     public async Task Delete_WithInvalidId_ShouldReturnNotFound()
     {
-        // Arrange
+        await SetAuthTokenAsync();
         var invalidId = Guid.NewGuid();
 
         // Act

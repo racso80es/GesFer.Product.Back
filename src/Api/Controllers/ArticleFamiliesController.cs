@@ -1,4 +1,3 @@
-using System.Security.Claims;
 using GesFer.Product.Back.Application.Commands.ArticleFamilies;
 using GesFer.Product.Back.Application.Common.Interfaces;
 using GesFer.Product.Back.Application.DTOs.ArticleFamilies;
@@ -35,21 +34,13 @@ public class ArticleFamiliesController : ControllerBase
         _logger = logger;
     }
 
-    private Guid GetCompanyId()
-    {
-        var companyIdClaim = User.FindFirst("company_id")?.Value ?? User.FindFirst("CompanyId")?.Value;
-        if (string.IsNullOrEmpty(companyIdClaim) || !Guid.TryParse(companyIdClaim, out var companyId))
-            throw new UnauthorizedAccessException("No se encontró el ID de empresa en el token del usuario.");
-        return companyId;
-    }
-
     [HttpGet]
     [ProducesResponseType(typeof(List<ArticleFamilyDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAll()
     {
         try
         {
-            var companyId = GetCompanyId();
+            var companyId = this.GetCompanyId();
             var command = new GetAllArticleFamiliesCommand(companyId);
             var result = await _getAllHandler.HandleAsync(command);
             return Ok(result);
@@ -72,7 +63,7 @@ public class ArticleFamiliesController : ControllerBase
     {
         try
         {
-            var companyId = GetCompanyId();
+            var companyId = this.GetCompanyId();
             var command = new GetArticleFamilyByIdCommand(id, companyId);
             var result = await _getByIdHandler.HandleAsync(command);
             if (result == null)
@@ -97,7 +88,7 @@ public class ArticleFamiliesController : ControllerBase
     {
         try
         {
-            dto.CompanyId = GetCompanyId();
+            dto.CompanyId = this.GetCompanyId();
             var command = new CreateArticleFamilyCommand(dto);
             var result = await _createHandler.HandleAsync(command);
             return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
