@@ -26,7 +26,7 @@ if ($LASTEXITCODE -eq 0) {
     do {
         Start-Sleep -Seconds 2
         $attempt++
-        $mysqlReady = docker exec gesfer_api_db mysqladmin ping -h localhost -u root -prootpassword 2>&1
+        $mysqlReady = docker exec GesFer_product_db mysqladmin ping -h localhost -u root -prootpassword 2>&1
         if ($LASTEXITCODE -eq 0) {
             Write-Host "MySQL está listo!" -ForegroundColor Green
             break
@@ -35,7 +35,7 @@ if ($LASTEXITCODE -eq 0) {
     } while ($attempt -lt $maxAttempts)
     
     if ($attempt -ge $maxAttempts) {
-        Write-Host "ADVERTENCIA: MySQL puede tardar más en iniciarse. Verifica con: docker-compose logs db" -ForegroundColor Yellow
+        Write-Host "ADVERTENCIA: MySQL puede tardar más en iniciarse. Verifica con: docker-compose logs gesfer-db" -ForegroundColor Yellow
     }
     
     Write-Host "`nPara ver los logs: docker-compose logs -f" -ForegroundColor Cyan

@@ -1,10 +1,10 @@
 {
   "version": "1.0.0",
   "description": "Configuración para start-api: directorio de la API, comando y salud.",
-  "apiWorkingDir": "src/GesFer.Admin.Back.Api",
+  "apiWorkingDir": "src/Api",
   "command": "dotnet run",
   "defaultProfile": "Development",
   "defaultPort": 5010,
-  "healthUrl": "http://localhost:5010/health",
+  "healthUrl": "http://127.0.0.1:5010/health",
   "healthCheckTimeoutSeconds": 30
 }

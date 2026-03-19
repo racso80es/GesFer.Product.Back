@@ -1,14 +1,14 @@
 {
   "version": "1.0.0",
-  "description": "Configuracion para Invoke-MySqlSeeds: migraciones EF y seeds Admin (GesFer.Admin.Back).",
-  "efProject": "src/GesFer.Admin.Back.Infrastructure/GesFer.Admin.Back.Infrastructure.csproj",
-  "startupProject": "src/GesFer.Admin.Back.Infrastructure/GesFer.Admin.Back.Infrastructure.csproj",
-  "seedsProject": "src/GesFer.Admin.Back.Api/GesFer.Admin.Back.Api.csproj",
-  "seedsPath": "src/GesFer.Admin.Back.Infrastructure/Data/Seeds",
+  "description": "Configuracion para Invoke-MySqlSeeds: migraciones EF y seeds Product (GesFer.Product.Back).",
+  "efProject": "src/Infrastructure/GesFer.Infrastructure.csproj",
+  "startupProject": "src/Api/GesFer.Api.csproj",
+  "seedsProject": "src/Api/GesFer.Api.csproj",
+  "seedsPath": "src/Infrastructure/Data/Seeds",
   "connectionEnv": "ConnectionStrings__DefaultConnection",
   "runMigrations": true,
   "runSeeds": true,
-  "mysqlContainerName": "gesfer_db",
+  "mysqlContainerName": "GesFer_product_db",
   "healthCheck": {
     "mysqlPingMaxAttempts": 15,
     "mysqlPingRetrySeconds": 2

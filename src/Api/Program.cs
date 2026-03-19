@@ -226,14 +226,14 @@ if (app.Environment.IsDevelopment())
 // Redirección HTTP → HTTPS en todos los entornos (puerto HTTPS en Development: 5001).
 app.UseCors("AllowAll");
 
-// KAIZEN: Skip HTTPS Redirection in Testing to prevent "Failed to determine the https port" warning
-if (!app.Environment.IsEnvironment("Testing"))
+// KAIZEN: Skip HTTPS Redirection in Testing/Development to allow start-api health check and local dev.
+if (!app.Environment.IsEnvironment("Testing") && !app.Environment.IsDevelopment())
 {
     app.UseHttpsRedirection();
 }
 else
 {
-    Log.Information("HTTPS Redirection skipped in Testing environment");
+    Log.Information("HTTPS Redirection skipped in {Env} environment", app.Environment.EnvironmentName);
 }
 
 // Autenticación y autorización deben ir en este orden

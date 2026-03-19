@@ -94,7 +94,7 @@ dotnet dev-certs https --trust
 docker-compose ps
 
 # 2. Verificar que MySQL responda
-docker exec gesfer_api_db mysqladmin ping -h localhost -u root -prootpassword
+docker exec GesFer_product_db mysqladmin ping -h localhost -u root -prootpassword
 
 # 3. Probar endpoint de health
 curl http://localhost:5000/api/health

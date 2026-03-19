@@ -15,7 +15,7 @@ Write-Host "   ✓ Docker está corriendo" -ForegroundColor Green
 
 # Verificar que MySQL esté disponible
 Write-Host "2. Verificando MySQL..." -ForegroundColor Yellow
-docker exec gesfer_api_db mysqladmin ping -h localhost -u root -prootpassword 2>&1 | Out-Null
+docker exec GesFer_product_db mysqladmin ping -h localhost -u root -prootpassword 2>&1 | Out-Null
 if ($LASTEXITCODE -ne 0) {
     Write-Host "ERROR: MySQL no está disponible." -ForegroundColor Red
     exit 1
@@ -31,7 +31,7 @@ if (-not (Test-Path $scriptPath)) {
     exit 1
 }
 
-$result = Get-Content $scriptPath | docker exec -i gesfer_api_db mysql -u scrapuser -pscrappassword ScrapDb 2>&1
+$result = Get-Content $scriptPath | docker exec -i GesFer_product_db mysql -u product -pGesFerProduct@pthrjkl GesFer_Product 2>&1
 
 if ($LASTEXITCODE -eq 0) {
     Write-Host "   ✓ Hash de contraseña corregido correctamente" -ForegroundColor Green

@@ -7,7 +7,7 @@ Herramienta que comprueba MySQL, aplica migraciones EF Core y ejecuta los seeds 
 - **Windows 11** con **PowerShell 7+**.
 - **Docker** con el contenedor MySQL (p. ej. tras `Prepare-FullEnv`).
 - **.NET SDK 8**.
-- Base de datos MySQL accesible (por defecto vía contenedor `gesfer_db`).
+- Base de datos MySQL accesible (por defecto vía contenedor `GesFer_product_db`).
 
 ## Uso
 
@@ -61,7 +61,7 @@ Ubicación: en esta cápsula, `mysql-seeds-config.json`. Ruta canónica (Cúmulo
 
 ## Flujo
 
-1. **MySQL:** Comprueba que el contenedor `gesfer_db` responda a `mysqladmin ping`.
+1. **MySQL:** Comprueba que el contenedor `GesFer_product_db` responda a `mysqladmin ping`.
 2. **Migraciones:** Ejecuta `dotnet ef database update --project ... --startup-project ...`.
 3. **Seeds:** Ejecuta la API con `RUN_SEEDS_ONLY=1`; la API aplica migraciones y ejecuta `SeedCompaniesAsync` y `SeedAdminUsersAsync`, luego sale.
 

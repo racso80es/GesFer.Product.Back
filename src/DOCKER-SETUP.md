@@ -1,27 +1,28 @@
-# Configuración de Docker para GesFer API
+# Configuración de Docker para GesFer Product Back
 
 ## ✅ Configuración Verificada
 
 El archivo `docker-compose.yml` está correctamente configurado con:
 
+**Proyecto Docker:** `GesFer_Product_Back` (name explícito para evitar conflictos con otros proyectos GesFer)
+
 ### Servicios Configurados
 
-1. **MySQL 8.0** (`gesfer_api_db`)
+1. **MySQL 8.0** (`GesFer_product_db`)
    - Puerto: `3306`
-   - Base de datos: `ScrapDb`
-   - Usuario: `scrapuser`
-   - Contraseña: `scrappassword`
+   - Base de datos: `GesFer_Product`
+   - Usuario: `product`
+   - Contraseña: `GesFerProduct@pthrjkl`
    - Root password: `rootpassword`
    - Charset: `utf8mb4_unicode_ci`
    - Healthcheck configurado
-   - Persistencia en `./docker_data/mysql`
 
-2. **Memcached** (`gesfer_api_cache`)
+2. **Memcached** (`gesfer_product_cache`)
    - Puerto: `11211`
    - Memoria: 128MB
    - Healthcheck configurado
 
-3. **Adminer** (`gesfer_api_adminer`)
+3. **Adminer** (`gesfer_product_adminer`)
    - Puerto: `8080`
    - Interfaz web para gestión de MySQL
    - Espera a que MySQL esté saludable antes de iniciar
@@ -57,7 +58,7 @@ docker-compose ps
 docker-compose logs -f
 
 # Solo MySQL
-docker-compose logs -f db
+docker-compose logs -f gesfer-db
 
 # Solo Memcached
 docker-compose logs -f cache
@@ -88,24 +89,24 @@ docker-compose down -v
 ### Desde PowerShell
 
 ```powershell
-docker exec -it gesfer_api_db mysql -u scrapuser -pscrappassword ScrapDb -e "SELECT 1;"
+docker exec -it GesFer_product_db mysql -u product -pGesFerProduct@pthrjkl GesFer_Product -e "SELECT 1;"
 ```
 
 ### Desde Adminer
 
 1. Abrir navegador en: `http://localhost:8080`
 2. Sistema: `MySQL`
-3. Servidor: `db`
-4. Usuario: `scrapuser`
-5. Contraseña: `scrappassword`
-6. Base de datos: `ScrapDb`
+3. Servidor: `gesfer-db`
+4. Usuario: `product`
+5. Contraseña: `GesFerProduct@pthrjkl`
+6. Base de datos: `GesFer_Product`
 
 ## 📝 Cadena de Conexión
 
-La cadena de conexión configurada en `appsettings.json` es:
+La cadena de conexión configurada en `appsettings.Development.json` es:
 
 ```
-Server=localhost;Port=3306;Database=ScrapDb;User=scrapuser;Password=scrappassword;CharSet=utf8mb4;AllowUserVariables=True;AllowLoadLocalInfile=True;
+Server=localhost;Port=3306;Database=GesFer_Product;User=product;Password=GesFerProduct@pthrjkl;CharSet=utf8mb4;AllowUserVariables=True;AllowLoadLocalInfile=True;
 ```
 
 ## ⚙️ Configuración de EF Core
@@ -120,14 +121,14 @@ El `ApplicationDbContext` está configurado con:
 
 ### MySQL no inicia
 
-1. Verificar logs: `docker-compose logs db`
+1. Verificar logs: `docker-compose logs gesfer-db`
 2. Verificar que el puerto 3306 no esté en uso
 3. Eliminar volúmenes y reiniciar: `docker-compose down -v && docker-compose up -d`
 
 ### Error de conexión desde la API
 
 1. Verificar que MySQL esté corriendo: `docker-compose ps`
-2. Verificar que el healthcheck esté OK: `docker inspect gesfer_api_db | grep -A 10 Health`
+2. Verificar que el healthcheck esté OK: `docker inspect GesFer_product_db | grep -A 10 Health`
 3. Probar conexión manual con Adminer
 4. Verificar que la cadena de conexión en `appsettings.json` sea correcta
 
@@ -153,23 +154,23 @@ Y actualizar `appsettings.json`:
 docker stats
 
 # Entrar al contenedor MySQL
-docker exec -it gesfer_api_db bash
+docker exec -it GesFer_product_db bash
 
 # Backup de la base de datos
-docker exec gesfer_api_db mysqldump -u scrapuser -pscrappassword ScrapDb > backup.sql
+docker exec GesFer_product_db mysqldump -u product -pGesFerProduct@pthrjkl GesFer_Product > backup.sql
 
 # Restaurar base de datos
-docker exec -i gesfer_api_db mysql -u scrapuser -pscrappassword ScrapDb < backup.sql
+docker exec -i GesFer_product_db mysql -u product -pGesFerProduct@pthrjkl GesFer_Product < backup.sql
 
 # Ver variables de entorno
-docker exec gesfer_api_db env
+docker exec GesFer_product_db env
 ```
 
 ## ✅ Checklist de Verificación
 
 - [ ] Docker Desktop está corriendo
 - [ ] `docker-compose up -d` ejecutado sin errores
-- [ ] MySQL healthcheck está OK: `docker inspect gesfer_api_db | grep -A 5 Health`
+- [ ] MySQL healthcheck está OK: `docker inspect GesFer_product_db | grep -A 5 Health`
 - [ ] Puedo conectar desde Adminer: `http://localhost:8080`
 - [ ] La API puede conectarse (verificar logs de la aplicación)
 - [ ] Las migraciones se aplican correctamente

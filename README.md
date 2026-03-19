@@ -49,7 +49,7 @@ docker-compose up -d
 ```
 
 Esto iniciará:
-- MySQL en el puerto 3306 (BD `GesFer_Admin` u otra definida en compose)
+- MySQL en el puerto 3306 (BD `GesFer_Product` u otra definida en compose)
 - Memcached en el puerto 11211
 - Adminer (opcional) en el puerto 8080 para gestión visual de BD
 

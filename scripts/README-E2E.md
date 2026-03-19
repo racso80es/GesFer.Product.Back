@@ -27,7 +27,7 @@ Para **validar el correcto funcionamiento del proyecto** en local con infra y da
 
 Si los 6 tests E2E pasan, el proyecto está validado en este entorno (API + BD con seeds + SharedSecret de Development).
 
-Si en el paso 1 no arranca Docker o fallan los seeds, resuelva primero la infra (Docker Desktop, MySQL en 3306, BD GesFer_Admin). La API del paso 2 debe usar la misma configuración que `appsettings.Development.json` (SharedSecret y ConnectionString).
+Si en el paso 1 no arranca Docker o fallan los seeds, resuelva primero la infra (Docker Desktop, MySQL en 3306, BD GesFer_Product). La API del paso 2 debe usar la misma configuración que `appsettings.Development.json` (SharedSecret y ConnectionString).
 
 ## Requisitos
 

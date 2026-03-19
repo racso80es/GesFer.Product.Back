@@ -54,7 +54,7 @@ MYSQL_READY=false
 while [ $ATTEMPT -lt $MAX_ATTEMPTS ]; do
     sleep 2
     ATTEMPT=$((ATTEMPT + 1))
-    docker exec gesfer_api_db mysqladmin ping -h localhost -u root -prootpassword > /dev/null 2>&1
+    docker exec GesFer_product_db mysqladmin ping -h localhost -u root -prootpassword > /dev/null 2>&1
     if [ $? -eq 0 ]; then
         MYSQL_READY=true
         break

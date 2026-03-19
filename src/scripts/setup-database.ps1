@@ -16,7 +16,7 @@ Write-Host "   ✓ Docker está corriendo" -ForegroundColor Green
 
 # Verificar que MySQL esté disponible
 Write-Host "2. Verificando MySQL..." -ForegroundColor Yellow
-docker exec gesfer_api_db mysqladmin ping -h localhost -u root -prootpassword 2>&1 | Out-Null
+docker exec GesFer_product_db mysqladmin ping -h localhost -u root -prootpassword 2>&1 | Out-Null
 if ($LASTEXITCODE -ne 0) {
     Write-Host "ERROR: MySQL no está disponible." -ForegroundColor Red
     exit 1
@@ -25,7 +25,7 @@ Write-Host "   ✓ MySQL está disponible" -ForegroundColor Green
 
 # Verificar si las tablas existen
 Write-Host "3. Verificando si las tablas existen..." -ForegroundColor Yellow
-$tableResult = docker exec gesfer_api_db mysql -u scrapuser -pscrappassword ScrapDb -e "SHOW TABLES;" 2>&1
+$tableResult = docker exec GesFer_product_db mysql -u product -pGesFerProduct@pthrjkl GesFer_Product -e "SHOW TABLES;" 2>&1
 $hasTables = $tableResult -match "Companies"
 
 if (-not $hasTables) {

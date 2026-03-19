@@ -19,7 +19,7 @@ $mysqlReady = $false
 do {
     Start-Sleep -Seconds 2
     $attempt++
-    $result = docker exec gesfer_api_db mysqladmin ping -h localhost -u root -prootpassword 2>&1
+    $result = docker exec GesFer_product_db mysqladmin ping -h localhost -u root -prootpassword 2>&1
     if ($LASTEXITCODE -eq 0) {
         Write-Host "   MySQL esta listo" -ForegroundColor Green
         $mysqlReady = $true
@@ -38,7 +38,7 @@ Start-Sleep -Seconds 5
 
 # Conectar a MySQL y verificar la base de datos
 Write-Host "3. Verificando base de datos..." -ForegroundColor Yellow
-$dbExists = docker exec gesfer_api_db mysql -u scrapuser -pscrappassword -e "SHOW DATABASES LIKE 'ScrapDb';" 2>&1
+$dbExists = docker exec GesFer_product_db mysql -u product -pGesFerProduct@pthrjkl -e "SHOW DATABASES LIKE 'GesFer_Product';" 2>&1
 if ($LASTEXITCODE -ne 0 -or $dbExists -notmatch "ScrapDb") {
     Write-Host "   La base de datos no existe, se creara automaticamente con migraciones" -ForegroundColor Yellow
 } else {

@@ -19,7 +19,7 @@ $mysqlReady = $false
 do {
     Start-Sleep -Seconds 2
     $attempt++
-    docker exec gesfer_api_db mysqladmin ping -h localhost -u root -prootpassword 2>&1 | Out-Null
+    docker exec GesFer_product_db mysqladmin ping -h localhost -u root -prootpassword 2>&1 | Out-Null
     if ($LASTEXITCODE -eq 0) {
         $mysqlReady = $true
         break

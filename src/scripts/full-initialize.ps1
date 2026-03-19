@@ -33,7 +33,7 @@ $mysqlReady = $false
 do {
     Start-Sleep -Seconds 2
     $attempt++
-    $result = docker exec gesfer_api_db mysqladmin ping -h localhost -u root -prootpassword 2>&1
+    $result = docker exec GesFer_product_db mysqladmin ping -h localhost -u root -prootpassword 2>&1
     if ($LASTEXITCODE -eq 0) {
         $mysqlReady = $true
         break

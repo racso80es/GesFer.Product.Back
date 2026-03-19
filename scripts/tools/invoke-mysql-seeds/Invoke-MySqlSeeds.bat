@@ -24,7 +24,7 @@ echo   - Windows 11
 echo   - PowerShell 7+ (o PowerShell integrado)
 echo   - Docker con contenedor MySQL (p. ej. tras Prepare-FullEnv)
 echo   - .NET SDK 8
-echo   - Base de datos MySQL accesible (contenedor gesfer_db)
+echo   - Base de datos MySQL accesible (contenedor GesFer_product_db)
 echo.
 echo ACCIONES:
 echo   - Comprueba que MySQL responda (mysqladmin ping)
@@ -41,7 +41,7 @@ echo.
 echo Invoke-MySqlSeeds - Migraciones EF y seeds de Admin sobre MySQL
 echo.
 echo REQUISITOS:
-echo   - Docker con MySQL (gesfer_db) en ejecucion
+echo   - Docker con MySQL (GesFer_product_db) en ejecucion
 echo   - .NET SDK 8
 echo   - Ejecutar desde la raiz del repositorio
 echo.

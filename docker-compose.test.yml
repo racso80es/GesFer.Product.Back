@@ -39,3 +39,4 @@ networks:
     driver: bridge
   gesfer_network:
     external: true
+    name: gesfer_product_back_gesfer_network

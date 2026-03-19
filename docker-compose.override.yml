@@ -3,8 +3,6 @@ services:
   # Al poner 'profiles: [pro]', solo se levantarán si lo pides explícitamente
   gesfer-product-api:
     profiles: [pro]
-  gesfer-admin-api:
-    profiles: [pro]
   gesfer-product-front:
     profiles: [pro]
   gesfer-admin-front:

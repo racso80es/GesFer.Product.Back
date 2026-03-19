@@ -1,8 +1,10 @@
+name: GesFer_Product_Back
+
 services:
-  # Base de datos MySQL Compartida
+  # Base de datos MySQL Product
   gesfer-db:
     image: mysql:8.0
-    container_name: gesfer_db
+    container_name: GesFer_product_db
     restart: unless-stopped
     command:
       - --default-authentication-plugin=mysql_native_password
@@ -11,9 +13,9 @@ services:
       - --max_allowed_packet=256M
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: GesFer_Admin
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: GesFerAdmin@pthrjkl
+      MYSQL_DATABASE: GesFer_Product
+      MYSQL_USER: product
+      MYSQL_PASSWORD: GesFerProduct@pthrjkl
       TZ: UTC
     ports:
       - "3306:3306"
@@ -26,12 +28,12 @@ services:
     networks:
       - gesfer_network
 
-  # Admin API
-  gesfer-admin-api:
+  # Product API
+  gesfer-product-api:
     build:
       context: .
       dockerfile: src/Dockerfile
-    container_name: gesfer_admin_api
+    container_name: gesfer_product_api
     restart: unless-stopped
     ports:
       - "5010:5010"
@@ -39,7 +41,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:5010
-      - ConnectionStrings__DefaultConnection=Server=gesfer-db;Port=3306;Database=GesFer_Admin;User=admin;Password=GesFerAdmin@pthrjkl;CharSet=utf8mb4;AllowUserVariables=True;AllowLoadLocalInfile=True;
+      - ConnectionStrings__DefaultConnection=Server=gesfer-db;Port=3306;Database=GesFer_Product;User=product;Password=GesFerProduct@pthrjkl;CharSet=utf8mb4;AllowUserVariables=True;AllowLoadLocalInfile=True;
     depends_on:
       gesfer-db:
         condition: service_healthy
@@ -49,7 +51,7 @@ services:
   # Caché Memcached
   cache:
     image: memcached:alpine
-    container_name: gesfer_api_cache
+    container_name: gesfer_product_cache
     restart: unless-stopped
     ports:
       - "11211:11211"
@@ -65,7 +67,7 @@ services:
   # Adminer
   adminer:
     image: adminer:latest
-    container_name: gesfer_api_adminer
+    container_name: gesfer_product_adminer
     restart: unless-stopped
     ports:
       - "8080:8080"
