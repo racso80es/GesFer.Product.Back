@@ -41,9 +41,9 @@ items_applied:
   - id: 7.2
     status: applied
   - id: 7.3
-    status: pending
+    status: applied
   - id: 7.4
-    status: pending
+    status: applied
 ---
 
 # Execution: Kaizen skills/tools Rust + JSON
@@ -89,9 +89,9 @@ items_applied:
 - **6.2** Validada salida JSON: invoke_command y run_tests_local emiten skillId/toolId, exitCode, success, message, feedback[], timestamp. Ver validacion.md.
 
 ### Fase 7: Finalizar
-- **7.1–7.2** Push y PR creado (skill finalizar-git Push-And-CreatePR).
-- **7.3** Pendiente: Merge del PR → ejecutar Merge-To-Master-Cleanup.bat -BranchName feat/kaizen-skills-tools-rust-json-contract -DeleteRemote
-- **7.4** Pendiente: Actualizar Evolution Logs tras merge.
+- **7.1–7.2** Push y PR creado (skill finalizar-git). PR #6: feat(kaizen): skills/tools Rust + JSON según contratos SddIA.
+- **7.3** Merge-To-Master-Cleanup ejecutado: `--branch-name feat/kaizen-skills-tools-rust-json-contract --delete-remote`
+- **7.4** Evolution Log actualizado a "Completado".
 
 ## Paso 1 y 2 realizados (2026-03-19)
 

@@ -2,7 +2,7 @@
 setlocal
 REM Push-And-CreatePR.bat - Skill finalizar-git fase pre_pr (Rust en bin/)
 REM Capsula: paths.skillCapsules.finalizar-git (scripts/skills/finalizar-git/)
-REM Uso: Push-And-CreatePR.bat -Persist "docs/features/<nombre_feature>/" [-BranchName "feat/xxx"] [-Title "titulo"]
+REM Uso: Push-And-CreatePR.bat --persist "docs/features/<nombre_feature>/" [--branch-name "feat/xxx"] [--title "titulo"]
 
 set "SCRIPT_DIR=%~dp0"
 set "REPO_ROOT=%SCRIPT_DIR%..\..\..\"
