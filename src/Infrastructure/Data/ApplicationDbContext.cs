@@ -46,7 +46,7 @@ public class ApplicationDbContext : DbContext
         // Aplicar configuraciones de entidades
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
 
-        // Configurar Shared Entities (Sequential GUIDs + Soft Delete)
+        // Configurar Common Entities (Sequential GUIDs + Soft Delete)
         modelBuilder.ConfigureCommonEntities();
 
         // Configurar UTF8 para MySQL

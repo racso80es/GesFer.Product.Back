@@ -33,11 +33,11 @@ function Test-KebabCase {
     return $s -match '^[a-z0-9]+(-[a-z0-9]+)*$'
 }
 
-# Rama: feat/<kebab> | fix/<kebab> | feat/refactorization-<kebab>
+# Rama: feat/<kebab> | feature/<kebab> | fix/<kebab> | feat/refactorization-<kebab>
 function Test-BranchName {
     param([string]$b)
     if ($b -eq "main" -or $b -eq "master") { return $true }
-    if ($b -match '^feat/(.+)$') { $suffix = $Matches[1]; return (Test-KebabCase $suffix) -or ($suffix -match '^refactorization-[a-z0-9]+(-[a-z0-9]+)*$') }
+    if ($b -match '^(feat|feature)/(.+)$') { $suffix = $Matches[2]; return (Test-KebabCase $suffix) -or ($suffix -match '^refactorization-[a-z0-9]+(-[a-z0-9]+)*$') }
     if ($b -match '^fix/(.+)$') { return Test-KebabCase $Matches[1] }
     return $false
 }

@@ -1,4 +1,4 @@
-namespace GesFer.Product.Application.DTOs.TaxTypes;
+namespace GesFer.Product.Back.Application.DTOs.TaxTypes;
 
 public record TaxTypeDto
 {

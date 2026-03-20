@@ -1,5 +1,5 @@
 using FluentAssertions;
-using GesFer.Product.Application.DTOs.TaxTypes;
+using GesFer.Product.Back.Application.DTOs.TaxTypes;
 using GesFer.Product.Back.IntegrationTests.Abstractions;
 using System.Net;
 using System.Net.Http.Json;

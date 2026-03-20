@@ -32,12 +32,12 @@ public class DashboardController : ControllerBase
 
     /// <summary>
     /// Obtiene estadísticas del sistema para el Dashboard de Admin
-    /// Protegido por Shared Secret (System) o Rol Admin
+    /// Protegido por Internal Secret (System) o Rol Admin
     /// </summary>
     [HttpGet("stats")]
     public async Task<IActionResult> GetStats()
     {
-        // Validación manual de Shared Secret (o usar atributo si se mueve a Shared)
+        // Validación manual de Internal Secret (o usar atributo si se mueve a Common)
         // Por ahora, validamos header manualmente para no depender de Admin
         var secretHeader = Request.Headers["X-Internal-Secret"].FirstOrDefault();
         var configSecret = _configuration["InternalSecret"];

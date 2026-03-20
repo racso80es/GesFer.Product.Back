@@ -9,7 +9,7 @@ using Xunit;
 namespace GesFer.Product.Back.IntegrationTests.Controllers;
 
 [Collection("DatabaseStep")]
-public class UserControllerTests
+public class UserControllerTests : IAsyncLifetime
 {
     private readonly HttpClient _client;
     private readonly DatabaseFixture _fixture;
@@ -19,6 +19,16 @@ public class UserControllerTests
     {
         _fixture = fixture;
         _client = fixture.Factory.CreateClient();
+    }
+
+    public async Task InitializeAsync()
+    {
+        await SetAuthTokenAsync();
+    }
+
+    public Task DisposeAsync()
+    {
+        return Task.CompletedTask;
     }
 
     private async Task SetAuthTokenAsync()
