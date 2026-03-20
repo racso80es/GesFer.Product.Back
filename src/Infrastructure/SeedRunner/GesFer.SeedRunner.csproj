@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\domain\GesFer.Domain.csproj" />
     <ProjectReference Include="..\GesFer.Infrastructure.csproj" />
   </ItemGroup>
 

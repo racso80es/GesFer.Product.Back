@@ -3,7 +3,7 @@
   "description": "Configuracion para Invoke-MySqlSeeds: migraciones EF y seeds Product (GesFer.Product.Back).",
   "efProject": "src/Infrastructure/GesFer.Infrastructure.csproj",
   "startupProject": "src/Api/GesFer.Api.csproj",
-  "seedsProject": "src/Api/GesFer.Api.csproj",
+  "seedsProject": "src/Infrastructure/SeedRunner/GesFer.SeedRunner.csproj",
   "seedsPath": "src/Infrastructure/Data/Seeds",
   "connectionEnv": "ConnectionStrings__DefaultConnection",
   "runMigrations": true,

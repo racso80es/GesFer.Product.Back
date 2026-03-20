@@ -43,7 +43,8 @@ public class JsonDataSeeder
         _configuration = configuration;
 
         // Obtener la ruta de los archivos de seed
-        // Ubicación canónica: src/Product/Back/Infrastructure/Data/Seeds/
+        // Layout GesFer.Product.Back: src/Infrastructure/Data/Seeds/
+        // Legacy: src/Product/Back/Infrastructure/Data/Seeds/ junto a GesFer.sln en raíz
         var basePath = AppContext.BaseDirectory;
         string? foundPath = null;
 
@@ -55,33 +56,48 @@ public class JsonDataSeeder
         }
         else
         {
-            // 2. Buscar en Source (Development)
-            // Buscar GesFer.sln para encontrar la raíz del repo
-            var currentDir = new DirectoryInfo(basePath);
-            DirectoryInfo? solutionDir = null;
-            var maxDepth = 10;
-            var depth = 0;
+            // 2. Subir directorios desde el bin del ejecutable hasta encontrar carpeta con JSON de seed
+            foundPath = FindSeedsDirectoryWalkingUp(basePath);
+        }
 
-            while (currentDir != null && solutionDir == null && depth < maxDepth)
+        if (foundPath == null)
+        {
+            // 3. Buscar .sln (GesFer.sln, GesFer.Product.sln, etc.) y rutas conocidas
+            var currentDir = new DirectoryInfo(basePath);
+            DirectoryInfo? slnDir = null;
+            for (var depth = 0; currentDir != null && slnDir == null && depth < 12; depth++)
             {
-                if (File.Exists(Path.Combine(currentDir.FullName, "GesFer.sln")))
+                if (Directory.GetFiles(currentDir.FullName, "*.sln").Length > 0)
                 {
-                    solutionDir = currentDir;
+                    slnDir = currentDir;
+                    break;
+                }
+                currentDir = currentDir.Parent;
+            }
+
+            if (slnDir != null)
+            {
+                var productBack = Path.Combine(slnDir.FullName, "Infrastructure", "Data", "Seeds");
+                var legacyMonorepo = Path.Combine(slnDir.FullName, "src", "Product", "Back", "Infrastructure", "Data", "Seeds");
+                if (Directory.Exists(productBack) && HasAnySeedJson(productBack))
+                {
+                    foundPath = productBack;
+                }
+                else if (Directory.Exists(legacyMonorepo) && HasAnySeedJson(legacyMonorepo))
+                {
+                    foundPath = legacyMonorepo;
                 }
                 else
                 {
-                    currentDir = currentDir.Parent;
-                    depth++;
-                }
-            }
-
-            if (solutionDir != null)
-            {
-                // Ruta canónica desde la raíz de la solución
-                var canonicalPath = Path.Combine(solutionDir.FullName, "src", "Product", "Back", "Infrastructure", "Data", "Seeds");
-                if (Directory.Exists(canonicalPath))
-                {
-                    foundPath = canonicalPath;
+                    var slnParent = slnDir.Parent?.FullName;
+                    if (!string.IsNullOrEmpty(slnParent))
+                    {
+                        var fromRepoRoot = Path.Combine(slnParent, "src", "Infrastructure", "Data", "Seeds");
+                        if (Directory.Exists(fromRepoRoot) && HasAnySeedJson(fromRepoRoot))
+                        {
+                            foundPath = fromRepoRoot;
+                        }
+                    }
                 }
             }
         }
@@ -96,6 +112,35 @@ public class JsonDataSeeder
         {
             _logger.LogInformation("Carpeta de seeds encontrada: {Path}", _seedsPath);
         }
+    }
+
+    /// <summary>
+    /// Sube desde el directorio de ejecución y prueba rutas típicas donde viven los JSON de seed.
+    /// </summary>
+    private static string? FindSeedsDirectoryWalkingUp(string startPath)
+    {
+        var dir = new DirectoryInfo(startPath);
+        for (var i = 0; i < 14 && dir != null; i++)
+        {
+            var candidates = new[]
+            {
+                Path.Combine(dir.FullName, "Data", "Seeds"),
+                Path.Combine(dir.FullName, "src", "Infrastructure", "Data", "Seeds"),
+                Path.Combine(dir.FullName, "Infrastructure", "Data", "Seeds"),
+                Path.Combine(dir.FullName, "src", "Product", "Back", "Infrastructure", "Data", "Seeds"),
+            };
+            foreach (var c in candidates)
+            {
+                if (Directory.Exists(c) && HasAnySeedJson(c))
+                {
+                    return c;
+                }
+            }
+
+            dir = dir.Parent;
+        }
+
+        return null;
     }
 
     private static bool HasAnySeedJson(string directoryPath)

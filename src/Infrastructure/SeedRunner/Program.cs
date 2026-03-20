@@ -1,3 +1,4 @@
+using GesFer.Product.Back.Domain.Services;
 using GesFer.Product.Back.Infrastructure.Data;
 using GesFer.Product.Back.Infrastructure.Extensions;
 using GesFer.Product.Back.Infrastructure.Services;
@@ -37,10 +38,12 @@ class Program
             .SetBasePath(apiPath)
             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
             .AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true)
+            .AddJsonFile("appsettings.Seed.json", optional: true, reloadOnChange: false)
             .AddEnvironmentVariables()
             .Build();
 
         var services = new ServiceCollection();
+        services.AddSingleton<IConfiguration>(configuration);
         
         // Configurar logging
         services.AddLogging(builder =>
@@ -67,7 +70,8 @@ class Program
                 });
         });
 
-        // Registrar servicios
+        // Registrar servicios (alineado con DependencyInjection de Api para JsonDataSeeder)
+        services.AddSingleton<ISensitiveDataSanitizer, SensitiveDataSanitizer>();
         services.AddScoped<JsonDataSeeder>();
 
         var serviceProvider = services.BuildServiceProvider();
