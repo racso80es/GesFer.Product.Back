@@ -27,4 +27,3 @@ Este repositorio corresponde al **backend (API)** de Producto del ecosistema Ges
 ---
 
 *Este documento se actualizará cuando cambien los objetivos o el alcance del proyecto.*
-- **TODO:** Resolver dependencias compartidas rotas en código C# si existieran para que el proyecto compile de forma verdaderamente independiente y aislada, asegurando no usar 'Shared' en nombres de directorios.
