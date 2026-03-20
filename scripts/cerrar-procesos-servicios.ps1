@@ -10,7 +10,7 @@
 $ErrorActionPreference = "Continue"
 
 # Puertos usados por GesFer (API Product, API Admin, Frontend)
-$ports = @(5000, 5001, 5010, 5011, 3000, 3001)
+$ports = @(5000, 5001, 5020, 5021, 3000, 3001)
 
 Write-Host "[1/2] Cerrando procesos en puertos $($ports -join ', ')..."
 foreach ($port in $ports) {

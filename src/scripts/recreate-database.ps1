@@ -55,13 +55,11 @@ if ($LASTEXITCODE -ne 0) {
 }
 Write-Host "   Estructura de base de datos recreada" -ForegroundColor Green
 
-# Nota: Los datos iniciales ahora se cargan desde archivos JSON mediante DbInitializer
-# No es necesario ejecutar scripts SQL manualmente. Los datos se cargan automáticamente
-# cuando se ejecuta la aplicación o la consola con la opción 1 (Inicialización completa)
+# Nota: Los datos iniciales se cargan desde archivos JSON mediante DbInitializer (consola opción 1, SeedRunner, etc.)
+# La API no ejecuta migraciones ni seeds al arrancar.
 Write-Host "4. Datos iniciales..." -ForegroundColor Yellow
-Write-Host "   NOTA: Los datos iniciales ahora se cargan desde archivos JSON" -ForegroundColor Cyan
-Write-Host "   ubicados en src/Product/Back/Infrastructure/Data/Seeds/" -ForegroundColor Cyan
-Write-Host "   Se cargan automáticamente mediante DbInitializer al iniciar la aplicación" -ForegroundColor Cyan
+Write-Host "   NOTA: Los datos iniciales se cargan desde archivos JSON" -ForegroundColor Cyan
+Write-Host "   (consola opción 1, SeedRunner). La API no aplica seeds al iniciar." -ForegroundColor Cyan
 
 Write-Host ""
 Write-Host "=== Recreacion completada ===" -ForegroundColor Green

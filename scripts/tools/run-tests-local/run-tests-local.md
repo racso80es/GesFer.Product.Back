@@ -16,7 +16,7 @@ Parámetros (vía .ps1 o cuando se invoque la cápsula):
 - **SkipSeeds** — No invocar invoke-mysql-seeds.
 - **TestScope** — `unit`, `integration`, `e2e`, `all` (por defecto `all`).
 - **OnlyTests** — Solo ejecutar tests (no prepare ni seeds).
-- **E2EBaseUrl** — URL base de la API para E2E (por defecto http://localhost:5010).
+- **E2EBaseUrl** — URL base de la API para E2E (por defecto http://localhost:5020).
 - **OutputPath** — Fichero donde escribir el resultado JSON.
 - **OutputJson** — Emitir resultado JSON por stdout.
 

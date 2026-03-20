@@ -19,7 +19,7 @@ $logsDir = Join-Path $projectRoot "logs\services"
 
 $endpoints = @(
     @{ Service = "ProductApi";   Url = "http://localhost:5000/health" },
-    @{ Service = "AdminApi";    Url = "http://localhost:5010/health" },
+    @{ Service = "AdminApi";    Url = "http://localhost:5020/health" },
     @{ Service = "ProductFront"; Url = "http://localhost:3000" }
 )
 

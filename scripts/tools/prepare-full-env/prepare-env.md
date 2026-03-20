@@ -74,7 +74,7 @@ Si el fichero no existe, se usan valores por defecto (solo Docker: db, cache, ad
 ## Estructura esperada
 
 - **Raíz del repo:** contiene `docker-compose.yml` y la carpeta `src/`.
-- **API:** proyecto en `src/Api` con `dotnet run` (puerto según `launchSettings.json`, típicamente 5010 para Admin).
+- **API:** proyecto en `src/Api` con `dotnet run` (puerto según `launchSettings.json`, típicamente 5020 para Admin).
 - **Logs:** si se usa `run-service-with-log.ps1`, los logs se escriben en `logs/services/<ServiceName>.log`.
 
 ## Troubleshooting

@@ -13,7 +13,7 @@
 .PARAMETER OnlyTests
     Solo ejecutar tests (SkipPrepare + SkipSeeds implícito para la parte de infra).
 .PARAMETER E2EBaseUrl
-    URL base API para E2E (por defecto http://localhost:5010).
+    URL base API para E2E (por defecto http://localhost:5020).
 .PARAMETER OutputPath
     Fichero donde escribir el resultado JSON.
 .PARAMETER OutputJson
@@ -26,7 +26,7 @@ param(
     [ValidateSet("unit", "integration", "e2e", "all")]
     [string] $TestScope = "all",
     [switch] $OnlyTests,
-    [string] $E2EBaseUrl = "http://localhost:5010",
+    [string] $E2EBaseUrl = "http://localhost:5020",
     [string] $OutputPath,
     [switch] $OutputJson
 )

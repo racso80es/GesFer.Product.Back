@@ -7,7 +7,7 @@
 .PARAMETER CollectionPath
     Ruta al JSON de la colección (relativa al repo). Por defecto desde config.
 .PARAMETER BaseUrl
-    URL base de la API (por defecto http://localhost:5010).
+    URL base de la API (por defecto http://localhost:5020).
 .PARAMETER InternalSecret
     Secreto para X-Internal-Secret. Por defecto desde config o env POSTMAN_INTERNAL_SECRET.
 .PARAMETER EnvironmentPath
@@ -70,7 +70,7 @@ function Write-Result {
 
 # Cargar config
 $configPath = Join-Path $scriptDir "postman-mcp-validation-config.json"
-$config = @{ collectionPath = "docs/postman/GesFer.Admin.Back.API.postman_collection.json"; baseUrl = "http://localhost:5010"; internalSecret = "" }
+$config = @{ collectionPath = "docs/postman/GesFer.Admin.Back.API.postman_collection.json"; baseUrl = "http://localhost:5020"; internalSecret = "" }
 if (Test-Path $configPath) {
     try {
         $loaded = Get-Content $configPath -Raw -Encoding UTF8 | ConvertFrom-Json

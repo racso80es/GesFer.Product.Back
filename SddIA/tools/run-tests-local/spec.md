@@ -10,7 +10,7 @@ env:
 - .NET SDK 8
 implementation_path_ref: paths.toolCapsules.run-tests-local
 inputs:
-  E2EBaseUrl: string (opcional). URL base API para E2E; por defecto http://localhost:5010.
+  E2EBaseUrl: string (opcional). URL base API para E2E; por defecto http://localhost:5020.
   OnlyTests: boolean (opcional). Solo ejecutar tests (no prepare, no seeds).
   OutputJson: boolean (opcional). Emitir resultado JSON por stdout.
   OutputPath: string (opcional). Fichero donde escribir el resultado JSON.
@@ -50,7 +50,7 @@ Ejecutar tests (unitarios, integración, E2E) en condiciones de validación loca
 | SkipSeeds | switch | No invocar invoke-mysql-seeds. |
 | TestScope | string | unit, integration, e2e, all (por defecto all). |
 | OnlyTests | switch | Solo ejecutar tests (no prepare, no seeds). |
-| E2EBaseUrl | string | URL base API para E2E (por defecto http://localhost:5010). |
+| E2EBaseUrl | string | URL base API para E2E (por defecto http://localhost:5020). |
 | OutputPath | string | Fichero donde escribir el resultado JSON. |
 | OutputJson | switch | Emitir resultado JSON por stdout. |
 

@@ -27,7 +27,7 @@ O con PowerShell:
 | Parámetro | Tipo | Descripción |
 |-----------|------|-------------|
 | **CollectionPath** | string | Ruta al JSON de la colección (por defecto: docs/postman/GesFer.Admin.Back.API.postman_collection.json). |
-| **BaseUrl** | string | URL base de la API (por defecto: http://localhost:5010). |
+| **BaseUrl** | string | URL base de la API (por defecto: http://localhost:5020). |
 | **InternalSecret** | string | Secreto para X-Internal-Secret (por defecto desde config o env POSTMAN_INTERNAL_SECRET). |
 | **EnvironmentPath** | string | (Opcional) Ruta a fichero de entorno Postman .json. |
 | **OutputPath** | string | Fichero donde escribir el resultado JSON. |

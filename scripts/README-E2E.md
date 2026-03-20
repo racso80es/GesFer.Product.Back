@@ -17,7 +17,7 @@ Para **validar el correcto funcionamiento del proyecto** en local con infra y da
    cd c:\Proyectos\GesFer.Admin.Back
    dotnet run --project src\GesFer.Admin.Back.Api\GesFer.Admin.Back.Api.csproj
    ```
-   (Esperar a que muestre "Now listening on: http://localhost:5010".)
+   (Esperar a que muestre "Now listening on: http://localhost:5020".)
 
 3. **En otra terminal**, ejecutar solo los E2E (el script fija `E2E_BASE_URL` y `E2E_INTERNAL_SECRET`):
    ```powershell
@@ -49,7 +49,7 @@ El script hace en orden:
 1. **Prepare-FullEnv** (tool) — levanta Docker (MySQL, cache, Adminer) y espera a MySQL.
 2. **Invoke-MySqlSeeds** (tool) — aplica migraciones EF y ejecuta seeds.
 3. **Compila** la solución (Api + E2ETests).
-4. **Comprueba** si la API responde en `http://localhost:5010/health`. Si no, intenta arrancarla en background (puerto 5012); si falla, indica que la arranque manualmente.
+4. **Comprueba** si la API responde en `http://localhost:5020/health`. Si no, intenta arrancarla en background (puerto 5012); si falla, indica que la arranque manualmente.
 5. **Ejecuta** `dotnet test --filter Category=E2E` con `E2E_BASE_URL` y `E2E_INTERNAL_SECRET` (valor de appsettings.Development).
 
 ### Parámetros
@@ -59,13 +59,13 @@ El script hace en orden:
 | `-SkipPrepare`   | No ejecutar prepare-full-env (Docker/MySQL ya levantados). |
 | `-SkipSeeds`     | No ejecutar invoke-mysql-seeds (BD ya migrada y con seeds). |
 | `-SkipApiStart`  | No arrancar la API; falla si /health no responde. |
-| `-E2EBaseUrl`    | URL base de la API (por defecto `http://localhost:5010`). |
+| `-E2EBaseUrl`    | URL base de la API (por defecto `http://localhost:5020`). |
 | `-OnlyTests`     | Solo ejecutar los tests E2E (entorno ya listo). |
 
 Ejemplos:
 
 ```powershell
-# Entorno ya listo (API corriendo en 5010)
+# Entorno ya listo (API corriendo en 5020)
 .\scripts\Run-E2ELocal.ps1 -OnlyTests
 
 # Sin levantar Docker; solo seeds y tests (MySQL ya up)
@@ -80,13 +80,13 @@ Ejemplos:
 Si ya tienes la API en marcha y la BD preparada:
 
 ```powershell
-$env:E2E_BASE_URL = "http://localhost:5010"
+$env:E2E_BASE_URL = "http://localhost:5020"
 dotnet test src\GesFer.Admin.Back.E2ETests\GesFer.Admin.Back.E2ETests.csproj --filter "Category=E2E"
 ```
 
 Variables de entorno opcionales para los tests:
 
-- `E2E_BASE_URL` — URL base de la API (por defecto `http://localhost:5010`).
+- `E2E_BASE_URL` — URL base de la API (por defecto `http://localhost:5020`).
 - `E2E_INTERNAL_SECRET` — Debe coincidir con `SharedSecret` de la API (p. ej. el de `appsettings.Development.json`: `dev-internal-secret-change-in-production`).
 - `E2E_ADMIN_USER` / `E2E_ADMIN_PASSWORD` — Credenciales admin; por defecto `admin` / `admin123` (las mismas que deja el seed).
 

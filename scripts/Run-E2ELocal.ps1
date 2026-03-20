@@ -12,7 +12,7 @@
 .PARAMETER SkipApiStart
     No intentar arrancar la API; falla si /health no responde.
 .PARAMETER E2EBaseUrl
-    URL base de la API (por defecto http://localhost:5010). Se pasa como E2E_BASE_URL a los tests.
+    URL base de la API (por defecto http://localhost:5020). Se pasa como E2E_BASE_URL a los tests.
     Si el script arranca la API, usa 5012 para no chocar con otra instancia.
 .PARAMETER OnlyTests
     Solo ejecutar los tests E2E (sin prepare, seeds ni API). Útil si el entorno ya está listo.
@@ -22,7 +22,7 @@ param(
     [switch] $SkipPrepare,
     [switch] $SkipSeeds,
     [switch] $SkipApiStart,
-    [string] $E2EBaseUrl = "http://localhost:5010",
+    [string] $E2EBaseUrl = "http://localhost:5020",
     [switch] $OnlyTests
 )
 

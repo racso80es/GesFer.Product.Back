@@ -32,18 +32,16 @@ src/Product/Back/Infrastructure/Data/Seeds/
    - Datos con IDs fijos para tests determinísticos
    - Diseñado para ser fácilmente limpiable
 
-## Carga Automática
+## Carga de datos (fuera del arranque de la API)
 
-Los datos se cargan automáticamente mediante:
+La API **no** aplica migraciones ni ejecuta seeds al iniciar. Usa uno de estos medios:
 
-1. **API (Development)**: Al iniciar la API en modo Development, `DbInitializer` aplica migraciones y carga datos desde JSON.
-
-2. **Consola (Opción 1)**: La opción "Inicialización completa" de la consola ejecuta `DbInitializer` que:
+1. **Consola (Opción 1)**: La opción "Inicialización completa" de la consola ejecuta `DbInitializer` que:
    - Aplica todas las migraciones pendientes
    - Carga datos desde `master-data.json`
    - Carga datos desde `demo-data.json`
 
-3. **Consola (Opción 6)**: Menú de seeds que permite ejecutar:
+2. **Consola (Opción 6)**: Menú de seeds que permite ejecutar:
    - Solo datos maestros
    - Solo datos de muestra
    - Solo datos de prueba
@@ -53,8 +51,7 @@ Los datos se cargan automáticamente mediante:
 
 ✅ **Idempotente**: Puede ejecutarse múltiples veces sin duplicar datos
 ✅ **Mantenible**: Fácil de editar y versionar
-✅ **Consistente**: Mismo sistema para API, Consola y Tests
-✅ **Automático**: Se carga automáticamente en Development
+✅ **Consistente**: Mismo sistema para Consola, SeedRunner y Tests (vía `DbInitializer` donde aplique)
 
 ## Cómo Añadir Nuevos Datos
 

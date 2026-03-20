@@ -80,7 +80,7 @@ dotnet build src/GesFer.Product.sln
 dotnet run --project src/Api/GesFer.Api.csproj
 ```
 
-Por defecto la API escucha en los puertos definidos (ej. HTTP: `http://localhost:5010` o HTTPS: `https://localhost:5011`).
+Por defecto la API escucha en los puertos definidos (ej. HTTP: `http://localhost:5020` o HTTPS: `https://localhost:5021`).
 Swagger estará disponible en `/swagger`.
 
 ---

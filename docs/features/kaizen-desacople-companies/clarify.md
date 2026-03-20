@@ -63,7 +63,7 @@ purpose: Clarificaciones y decisiones preliminares
 | Archivo | AdminApi | Autenticación |
 |---------|----------|---------------|
 | `appsettings.json` | BaseUrl: `http://localhost:5001`; LogsEndpoint, AuditLogsEndpoint | — |
-| `appsettings.Development.json` | BaseUrl: `http://localhost:5010` | InternalSecret: `dev-internal-secret-change-in-production` |
+| `appsettings.Development.json` | BaseUrl: `http://localhost:5020` | InternalSecret: `dev-internal-secret-change-in-production` |
 
 ### Implementación
 

@@ -8,7 +8,7 @@ env:
 - Node.js/npm (Newman) donde se ejecute la cápsula
 implementation_path_ref: paths.toolCapsules.postman-mcp-validation
 inputs:
-  BaseUrl: string (opcional). URL base API; por defecto http://localhost:5010.
+  BaseUrl: string (opcional). URL base API; por defecto http://localhost:5020.
   CollectionPath: string (opcional). Ruta al JSON de la colección. Por defecto docs/postman/GesFer.Admin.Back.API.postman_collection.json.
   EnvironmentPath: string (opcional). Ruta a fichero de entorno Postman .json.
   InternalSecret: string (opcional). Secreto para X-Internal-Secret; por defecto desde config o variable.
@@ -50,7 +50,7 @@ Herramienta de **seguridad externa** que realiza **validaciones sobre los endpoi
 | Parámetro | Tipo | Descripción |
 |-----------|------|-------------|
 | CollectionPath | string | Ruta al JSON de la colección Postman. Por defecto: docs/postman/GesFer.Admin.Back.API.postman_collection.json (relativa al repo). |
-| BaseUrl | string | URL base de la API (p. ej. http://localhost:5010). Sustituye la variable {{baseUrl}} de la colección. |
+| BaseUrl | string | URL base de la API (p. ej. http://localhost:5020). Sustituye la variable {{baseUrl}} de la colección. |
 | InternalSecret | string | Secreto interno para endpoints que usan X-Internal-Secret. Sustituye {{internalSecret}}. |
 | EnvironmentPath | string | (Opcional) Ruta a fichero de entorno Postman (.json). Si no se indica, se usan variables inline. |
 | OutputPath | string | (Opcional) Fichero donde escribir el resultado JSON. |

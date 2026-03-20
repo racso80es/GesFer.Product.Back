@@ -1,13 +1,10 @@
 using GesFer.Product.Back.Api;
-using GesFer.Product.Back.Infrastructure.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Serilog.Events;
 using Serilog.Debugging;
-using GesFer.Product.Back.Infrastructure.Extensions;
 using GesFer.Product.Back.Infrastructure.Logging;
 using System.Text;
 
@@ -179,37 +176,6 @@ var app = builder.Build();
             .WriteTo.Sink(adminApiSink, restrictedToMinimumLevel: minimumLevel)
             .CreateLogger();
     }
-
-// Inicializar base de datos (migraciones y seeding) según configuración
-// Este proceso es idempotente y seguro de ejecutar múltiples veces
-var shouldInitialize = false;
-var isTesting = app.Environment.EnvironmentName == "Testing";
-
-// En Testing siempre ejecutar (necesario para tests E2E)
-if (isTesting)
-{
-    shouldInitialize = true;
-}
-// En Development, verificar la configuración AutoRunMigrations
-else if (isDevelopment)
-{
-    var autoRunMigrations = app.Configuration.GetRequiredBool("Database:AutoRunMigrations");
-    shouldInitialize = autoRunMigrations;
-    
-    if (autoRunMigrations)
-    {
-        Log.Information("AutoRunMigrations está habilitado. Las migraciones se ejecutarán automáticamente al iniciar.");
-    }
-    else
-    {
-        Log.Information("AutoRunMigrations está deshabilitado. Las migraciones no se ejecutarán automáticamente.");
-    }
-}
-
-if (shouldInitialize)
-{
-    await DbInitializer.InitializeAsync(app.Services, isDevelopment);
-}
 
 // Configurar el pipeline HTTP
 if (app.Environment.IsDevelopment())
