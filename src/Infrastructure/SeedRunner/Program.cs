@@ -50,8 +50,7 @@ class Program
         });
 
         // Configurar DbContext
-        var connectionString = configuration.GetConnectionString("DefaultConnection")
-            ?? "Server=localhost;Port=3306;Database=ScrapDb;User=scrapuser;Password=scrappassword;CharSet=utf8mb4;AllowUserVariables=True;AllowLoadLocalInfile=True;";
+        var connectionString = configuration.GetRequiredConnectionString("DefaultConnection");
 
         services.AddDbContext<ApplicationDbContext>(options =>
         {

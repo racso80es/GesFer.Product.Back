@@ -1,4 +1,4 @@
-USE ScrapDb;
+USE GesFer_Product;
 
 -- Actualizar el hash de contraseña del usuario admin
 -- Contraseña: admin123

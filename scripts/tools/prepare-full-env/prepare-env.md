@@ -80,7 +80,7 @@ Si el fichero no existe, se usan valores por defecto (solo Docker: db, cache, ad
 ## Troubleshooting
 
 - **Docker no está corriendo:** iniciar Docker Desktop y volver a ejecutar el script.
-- **Puerto 3306 en uso:** detener el proceso que lo use o cambiar el mapeo en `docker-compose.yml`.
+- **Puerto 3307 en uso:** detener el proceso que lo use o cambiar el mapeo en `docker-compose.yml` (p. ej. `3308:3306`).
 - **MySQL tarda en estar listo:** el script espera hasta `mysqlMaxAttempts * mysqlRetrySeconds` segundos; si no basta, revisar `docker-compose logs gesfer-db`.
 - **La API no arranca:** comprobar que la DB está accesible y que `startApi.workingDir` apunta a `src/Api` (o la ruta correcta del proyecto).
 

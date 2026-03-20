@@ -1,6 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using GesFer.Product.Back.Infrastructure.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
@@ -40,7 +41,7 @@ public class JwtService : IJwtService
             ?? throw new InvalidOperationException("JwtSettings:Issuer no está configurado");
         _audience = _configuration["JwtSettings:Audience"]
             ?? throw new InvalidOperationException("JwtSettings:Audience no está configurado");
-        _expirationMinutes = int.Parse(_configuration["JwtSettings:ExpirationMinutes"] ?? "60");
+        _expirationMinutes = _configuration.GetRequiredPositiveInt("JwtSettings:ExpirationMinutes");
     }
 
     /// <summary>

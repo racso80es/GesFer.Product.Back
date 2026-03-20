@@ -15,9 +15,9 @@ docker-compose up -d
 if ($LASTEXITCODE -eq 0) {
     Write-Host "`nServicios iniciados correctamente!" -ForegroundColor Green
     Write-Host "`nServicios disponibles:" -ForegroundColor Cyan
-    Write-Host "  - MySQL: localhost:3306" -ForegroundColor White
-    Write-Host "  - Memcached: localhost:11211" -ForegroundColor White
-    Write-Host "  - Adminer: http://localhost:8080" -ForegroundColor White
+    Write-Host "  - MySQL: localhost:3307" -ForegroundColor White
+    Write-Host "  - Memcached: localhost:11212" -ForegroundColor White
+    Write-Host "  - Adminer: http://localhost:8081" -ForegroundColor White
     Write-Host "`nEsperando a que MySQL esté listo..." -ForegroundColor Yellow
     
     # Esperar a que MySQL esté listo

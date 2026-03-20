@@ -336,8 +336,8 @@ public class SetupService : ISetupService
                 // Intentar eliminar la base de datos manualmente como fallback
                 try
                 {
-                    await context.Database.ExecuteSqlRawAsync("DROP DATABASE IF EXISTS ScrapDb;");
-                    await context.Database.ExecuteSqlRawAsync("CREATE DATABASE ScrapDb CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;");
+                    await context.Database.ExecuteSqlRawAsync("DROP DATABASE IF EXISTS GesFer_Product;");
+                    await context.Database.ExecuteSqlRawAsync("CREATE DATABASE GesFer_Product CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;");
                     logger.LogInformation("Base de datos recreada manualmente");
                 }
                 catch (Exception fallbackEx)

@@ -39,7 +39,7 @@ Start-Sleep -Seconds 5
 # Conectar a MySQL y verificar la base de datos
 Write-Host "3. Verificando base de datos..." -ForegroundColor Yellow
 $dbExists = docker exec GesFer_product_db mysql -u product -pGesFerProduct@pthrjkl -e "SHOW DATABASES LIKE 'GesFer_Product';" 2>&1
-if ($LASTEXITCODE -ne 0 -or $dbExists -notmatch "ScrapDb") {
+if ($LASTEXITCODE -ne 0 -or $dbExists -notmatch "GesFer_Product") {
     Write-Host "   La base de datos no existe, se creara automaticamente con migraciones" -ForegroundColor Yellow
 } else {
     Write-Host "   Base de datos existe" -ForegroundColor Green

@@ -11,8 +11,8 @@ services:
   # La DB y la Caché se quedan para que tu Local las use
   gesfer-db:
     ports:
-      - "3306:3306"
+      - "3307:3306"
 
   cache:
     ports:
-      - "11211:11211"
+      - "11212:11211"

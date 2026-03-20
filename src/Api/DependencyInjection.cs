@@ -5,6 +5,7 @@ using GesFer.Product.Back.Application.Handlers.PurchaseDeliveryNote;
 using GesFer.Product.Back.Application.Handlers.SalesDeliveryNote;
 using GesFer.Product.Back.Domain.Services;
 using GesFer.Product.Back.Infrastructure.Data;
+using GesFer.Product.Back.Infrastructure.Extensions;
 using GesFer.Product.Back.Infrastructure.Repositories;
 using GesFer.Product.Back.Infrastructure.Services;
 using GesFer.Product.Back.Infrastructure.Logging;
@@ -25,9 +26,6 @@ public static class DependencyInjection
     public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment? environment = null)
     {
         // Configurar DbContext
-        var connectionString = configuration.GetConnectionString("DefaultConnection") 
-            ?? "Server=localhost;Port=3306;Database=ScrapDb;User=scrapuser;Password=scrappassword;CharSet=utf8mb4;AllowUserVariables=True;AllowLoadLocalInfile=True;";
-
         var isDevelopment = environment?.IsDevelopment() ?? false;
 
         services.AddDbContext<ApplicationDbContext>((serviceProvider, options) =>
@@ -38,6 +36,7 @@ public static class DependencyInjection
             }
             else
             {
+                var connectionString = configuration.GetRequiredConnectionString("DefaultConnection");
                 options.UseMySql(
                     connectionString,
                     new MySqlServerVersion(new Version(8, 0, 0)),
@@ -82,7 +81,7 @@ public static class DependencyInjection
         }
         else
         {
-            var adminApiBaseUrl = configuration["AdminApi:BaseUrl"] ?? "http://localhost:5010";
+            var adminApiBaseUrl = configuration.GetRequired("AdminApi:BaseUrl");
             services.AddHttpClient<IAdminApiClient, GesFer.Product.Back.Infrastructure.Services.AdminApiClient>(client =>
             {
                 client.BaseAddress = new Uri(adminApiBaseUrl);

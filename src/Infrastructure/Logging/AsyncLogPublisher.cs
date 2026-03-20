@@ -1,6 +1,7 @@
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using GesFer.Product.Back.Infrastructure.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Http;
 using Microsoft.Extensions.Logging;
@@ -29,9 +30,9 @@ public class AsyncLogPublisher : IAsyncLogPublisher
         _logger = logger;
 
         // Obtener configuración de Admin API
-        _adminApiBaseUrl = _configuration["AdminApi:BaseUrl"] ?? "http://localhost:5001";
-        _logsEndpoint = _configuration["AdminApi:LogsEndpoint"] ?? "/api/admin/logs";
-        _auditLogsEndpoint = _configuration["AdminApi:AuditLogsEndpoint"] ?? "/api/admin/audit-logs";
+        _adminApiBaseUrl = _configuration.GetRequired("AdminApi:BaseUrl");
+        _logsEndpoint = _configuration.GetRequired("AdminApi:LogsEndpoint");
+        _auditLogsEndpoint = _configuration.GetRequired("AdminApi:AuditLogsEndpoint");
     }
 
     private void AddAuthorizationHeader(HttpClient client)

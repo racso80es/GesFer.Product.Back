@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Serilog.Events;
 using Serilog.Debugging;
+using GesFer.Product.Back.Infrastructure.Extensions;
 using GesFer.Product.Back.Infrastructure.Logging;
 using System.Text;
 
@@ -192,8 +193,7 @@ if (isTesting)
 // En Development, verificar la configuración AutoRunMigrations
 else if (isDevelopment)
 {
-    // Leer configuración, por defecto false si no está configurado
-    var autoRunMigrations = app.Configuration.GetValue<bool>("Database:AutoRunMigrations", false);
+    var autoRunMigrations = app.Configuration.GetRequiredBool("Database:AutoRunMigrations");
     shouldInitialize = autoRunMigrations;
     
     if (autoRunMigrations)

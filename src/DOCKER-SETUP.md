@@ -9,7 +9,7 @@ El archivo `docker-compose.yml` está correctamente configurado con:
 ### Servicios Configurados
 
 1. **MySQL 8.0** (`GesFer_product_db`)
-   - Puerto: `3306`
+   - Puerto en el host: `3307` (mapeado al `3306` interno del contenedor)
    - Base de datos: `GesFer_Product`
    - Usuario: `product`
    - Contraseña: `GesFerProduct@pthrjkl`
@@ -18,12 +18,12 @@ El archivo `docker-compose.yml` está correctamente configurado con:
    - Healthcheck configurado
 
 2. **Memcached** (`gesfer_product_cache`)
-   - Puerto: `11211`
+   - Puerto en el host: `11212` (mapeado al `11211` interno del contenedor)
    - Memoria: 128MB
    - Healthcheck configurado
 
 3. **Adminer** (`gesfer_product_adminer`)
-   - Puerto: `8080`
+   - Puerto en el host: `8081` (mapeado al `8080` interno del contenedor)
    - Interfaz web para gestión de MySQL
    - Espera a que MySQL esté saludable antes de iniciar
 
@@ -94,7 +94,7 @@ docker exec -it GesFer_product_db mysql -u product -pGesFerProduct@pthrjkl GesFe
 
 ### Desde Adminer
 
-1. Abrir navegador en: `http://localhost:8080`
+1. Abrir navegador en: `http://localhost:8081`
 2. Sistema: `MySQL`
 3. Servidor: `gesfer-db`
 4. Usuario: `product`
@@ -106,7 +106,7 @@ docker exec -it GesFer_product_db mysql -u product -pGesFerProduct@pthrjkl GesFe
 La cadena de conexión configurada en `appsettings.Development.json` es:
 
 ```
-Server=localhost;Port=3306;Database=GesFer_Product;User=product;Password=GesFerProduct@pthrjkl;CharSet=utf8mb4;AllowUserVariables=True;AllowLoadLocalInfile=True;
+Server=localhost;Port=3307;Database=GesFer_Product;User=product;Password=GesFerProduct@pthrjkl;CharSet=utf8mb4;AllowUserVariables=True;AllowLoadLocalInfile=True;
 ```
 
 ## ⚙️ Configuración de EF Core
@@ -122,7 +122,7 @@ El `ApplicationDbContext` está configurado con:
 ### MySQL no inicia
 
 1. Verificar logs: `docker-compose logs gesfer-db`
-2. Verificar que el puerto 3306 no esté en uso
+2. Verificar que el puerto 3307 del host no esté en uso
 3. Eliminar volúmenes y reiniciar: `docker-compose down -v && docker-compose up -d`
 
 ### Error de conexión desde la API
@@ -134,18 +134,14 @@ El `ApplicationDbContext` está configurado con:
 
 ### Puerto ya en uso
 
-Si el puerto 3306 está ocupado, cambiar en `docker-compose.yml`:
+Si el puerto **3307** del host está ocupado, cambiar en `docker-compose.yml` (y en `docker-compose.override.yml` si aplica):
 
 ```yaml
 ports:
-  - "3307:3306"  # Usar 3307 externamente
+  - "3308:3306"  # u otro puerto libre en el host
 ```
 
-Y actualizar `appsettings.json`:
-
-```json
-"DefaultConnection": "Server=localhost;Port=3307;..."
-```
+Y actualizar la cadena de conexión local (`appsettings.Development.json` / `appsettings.json`) con el mismo puerto en `Server=localhost;Port=...`.
 
 ## 📊 Comandos Útiles
 
@@ -171,7 +167,7 @@ docker exec GesFer_product_db env
 - [ ] Docker Desktop está corriendo
 - [ ] `docker-compose up -d` ejecutado sin errores
 - [ ] MySQL healthcheck está OK: `docker inspect GesFer_product_db | grep -A 5 Health`
-- [ ] Puedo conectar desde Adminer: `http://localhost:8080`
+- [ ] Puedo conectar desde Adminer: `http://localhost:8081`
 - [ ] La API puede conectarse (verificar logs de la aplicación)
 - [ ] Las migraciones se aplican correctamente
 

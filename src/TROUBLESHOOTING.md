@@ -108,7 +108,7 @@ curl http://localhost:5000/api/health
 - **Swagger UI:** `http://localhost:5000` o `https://localhost:5001`
 - **Health Check:** `http://localhost:5000/api/health`
 - **Login:** `POST http://localhost:5000/api/auth/login`
-- **Adminer (MySQL):** `http://localhost:8080`
+- **Adminer (MySQL):** `http://localhost:8081`
 
 ### Logs Importantes a Revisar
 
@@ -119,7 +119,7 @@ curl http://localhost:5000/api/health
 
 2. **Errores comunes:**
    - "Unable to connect to any of the specified MySQL hosts"
-   - "Database 'ScrapDb' does not exist"
+   - "Database 'GesFer_Product' does not exist"
    - "Access denied for user"
 
 ### Si Nada Funciona

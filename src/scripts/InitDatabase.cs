@@ -1,4 +1,5 @@
 using GesFer.Product.Back.Infrastructure.Data;
+using GesFer.Product.Back.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,11 +35,16 @@ services.AddLogging(builder =>
     builder.AddFilter("InitDatabase.Program", LogLevel.Information); // Permitir mensajes de información del programa
 });
 
-var connectionString = configuration.GetConnectionString("DefaultConnection");
-if (string.IsNullOrEmpty(connectionString))
+string connectionString;
+try
 {
-    Console.WriteLine("ERROR: No se encontró la cadena de conexión");
+    connectionString = configuration.GetRequiredConnectionString("DefaultConnection");
+}
+catch (InvalidOperationException ex)
+{
+    Console.WriteLine("ERROR: " + ex.Message);
     Environment.Exit(1);
+    return;
 }
 
 services.AddDbContext<ApplicationDbContext>(options =>

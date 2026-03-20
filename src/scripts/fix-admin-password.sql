@@ -1,10 +1,10 @@
 -- Script para corregir el hash de la contraseña del usuario admin
--- Ejecutar desde Adminer (http://localhost:8080) o desde línea de comandos
+-- Ejecutar desde Adminer (http://localhost:8081) o desde línea de comandos
 -- 
 -- Este script actualiza el hash de la contraseña del usuario admin
 -- para que coincida con el hash correcto de "admin123"
 
-USE ScrapDb;
+USE GesFer_Product;
 
 -- Hash BCrypt correcto para "admin123" (verificado)
 -- Este hash debe coincidir con el usado en SetupService.cs y master-data.json
