@@ -26,10 +26,7 @@ public class User : BaseEntity
     public Guid? LanguageId { get; set; }
 
     // Navegación (CompanyId FK a Companies en Admin; datos de empresa vía Admin API)
-    public PostalCode? PostalCode { get; set; }
-    public City? City { get; set; }
-    public State? State { get; set; }
-    public Country? Country { get; set; }
+    // Ids geo (CountryId, StateId, CityId, PostalCodeId): referencias blandas a Admin — sin navegación local.
     public Language? Language { get; set; }
     public ICollection<UserGroup> UserGroups { get; set; } = new List<UserGroup>();
     public ICollection<UserPermission> UserPermissions { get; set; } = new List<UserPermission>();

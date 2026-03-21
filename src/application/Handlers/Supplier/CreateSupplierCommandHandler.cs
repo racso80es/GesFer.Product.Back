@@ -11,11 +11,16 @@ public class CreateSupplierCommandHandler : ICommandHandler<CreateSupplierComman
 {
     private readonly ApplicationDbContext _context;
     private readonly IAdminApiClient _adminApiClient;
+    private readonly IAdminGeolocationValidationService _geoValidation;
 
-    public CreateSupplierCommandHandler(ApplicationDbContext context, IAdminApiClient adminApiClient)
+    public CreateSupplierCommandHandler(
+        ApplicationDbContext context,
+        IAdminApiClient adminApiClient,
+        IAdminGeolocationValidationService geoValidation)
     {
         _context = context;
         _adminApiClient = adminApiClient;
+        _geoValidation = geoValidation;
     }
 
     public async Task<SupplierDto> HandleAsync(CreateSupplierCommand command, CancellationToken cancellationToken = default)
@@ -40,38 +45,12 @@ public class CreateSupplierCommandHandler : ICommandHandler<CreateSupplierComman
                 throw new InvalidOperationException($"No se encontró la tarifa de compra con ID {command.Dto.BuyTariffId.Value}");
         }
 
-        // Validar IDs de dirección si se proporcionan
-        if (command.Dto.PostalCodeId.HasValue)
-        {
-            var postalCodeExists = await _context.PostalCodes
-                .AnyAsync(pc => pc.Id == command.Dto.PostalCodeId.Value && pc.DeletedAt == null, cancellationToken);
-            if (!postalCodeExists)
-                throw new InvalidOperationException($"No se encontró el código postal con ID {command.Dto.PostalCodeId.Value}");
-        }
-
-        if (command.Dto.CityId.HasValue)
-        {
-            var cityExists = await _context.Cities
-                .AnyAsync(c => c.Id == command.Dto.CityId.Value && c.DeletedAt == null, cancellationToken);
-            if (!cityExists)
-                throw new InvalidOperationException($"No se encontró la ciudad con ID {command.Dto.CityId.Value}");
-        }
-
-        if (command.Dto.StateId.HasValue)
-        {
-            var stateExists = await _context.States
-                .AnyAsync(s => s.Id == command.Dto.StateId.Value && s.DeletedAt == null, cancellationToken);
-            if (!stateExists)
-                throw new InvalidOperationException($"No se encontró la provincia con ID {command.Dto.StateId.Value}");
-        }
-
-        if (command.Dto.CountryId.HasValue)
-        {
-            var countryExists = await _context.Countries
-                .AnyAsync(c => c.Id == command.Dto.CountryId.Value && c.DeletedAt == null, cancellationToken);
-            if (!countryExists)
-                throw new InvalidOperationException($"No se encontró el país con ID {command.Dto.CountryId.Value}");
-        }
+        await _geoValidation.ValidateGeoHierarchyAsync(
+            command.Dto.CountryId,
+            command.Dto.StateId,
+            command.Dto.CityId,
+            command.Dto.PostalCodeId,
+            cancellationToken);
 
         var supplier = new Product.Back.Domain.Entities.Supplier
         {

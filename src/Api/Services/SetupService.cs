@@ -1,4 +1,3 @@
-using GesFer.Product.Back.Domain.Entities;
 using GesFer.Product.Back.Infrastructure.Data;
 using GesFer.Product.Back.Domain.Services;
 using GesFer.Product.Back.Infrastructure.Services;
@@ -147,16 +146,14 @@ public class SetupService : ISetupService
                     await jsonDataSeeder.SeedMasterDataAsync();
                     result.Steps.Add("   ✓ Datos maestros insertados desde JSON");
 
-                    // Paso 8: Insertar datos maestros de España (geográficos)
-                    result.Steps.Add("8. Insertando datos maestros de España (geográficos)...");
-                    _logger.LogInformation("Insertando datos maestros de España...");
+                    // Paso 8: Catálogo geo en Admin (SSOT); Product no inserta tablas locales de geo
+                    result.Steps.Add("8. Verificando política geo (SSOT Admin)...");
                     var masterDataSeeder = new GesFer.Product.Back.Infrastructure.Services.MasterDataSeeder(
                         scope.ServiceProvider.GetRequiredService<ApplicationDbContext>(),
-                        scope.ServiceProvider.GetRequiredService<ILogger<GesFer.Product.Back.Infrastructure.Services.MasterDataSeeder>>(),
-                        scope.ServiceProvider.GetRequiredService<ISequentialGuidGenerator>());
+                        scope.ServiceProvider.GetRequiredService<ILogger<GesFer.Product.Back.Infrastructure.Services.MasterDataSeeder>>());
                     await masterDataSeeder.SeedSpainDataAsync();
                 }
-                result.Steps.Add("   ✓ Datos maestros de España insertados");
+                result.Steps.Add("   ✓ Política geo (sin tablas locales) aplicada");
             }
             catch (Exception ex)
             {
@@ -396,182 +393,6 @@ public class SetupService : ISetupService
         {
             _logger.LogError(ex, "Excepción al insertar datos iniciales desde JSON");
             return (false, $"Error al insertar datos desde JSON: {ex.Message}");
-        }
-    }
-
-    /// <summary>
-    /// Crea proveedores de prueba con direcciones completas
-    /// </summary>
-    private async Task SeedTestSuppliersAsync(ApplicationDbContext context, Guid companyId, Country? spain, ILogger logger)
-    {
-        try
-        {
-            if (spain == null)
-            {
-                logger.LogWarning("No se encontró España. Los proveedores se crearán sin información de dirección completa.");
-            }
-
-            // Buscar datos maestros de diferentes ciudades
-            var barcelonaState = spain != null ? await context.States.FirstOrDefaultAsync(s => s.Code == "B" && s.CountryId == spain.Id) : null;
-            var barcelonaCity = barcelonaState != null ? await context.Cities.FirstOrDefaultAsync(c => c.Name == "Barcelona" && c.StateId == barcelonaState.Id) : null;
-            var barcelonaPostalCode = barcelonaCity != null ? await context.PostalCodes.FirstOrDefaultAsync(pc => pc.Code == "08001" && pc.CityId == barcelonaCity.Id) : null;
-
-            var valenciaState = spain != null ? await context.States.FirstOrDefaultAsync(s => s.Code == "V" && s.CountryId == spain.Id) : null;
-            var valenciaCity = valenciaState != null ? await context.Cities.FirstOrDefaultAsync(c => c.Name == "Valencia" && c.StateId == valenciaState.Id) : null;
-            var valenciaPostalCode = valenciaCity != null ? await context.PostalCodes.FirstOrDefaultAsync(pc => pc.Code == "46001" && pc.CityId == valenciaCity.Id) : null;
-
-            var sevillaState = spain != null ? await context.States.FirstOrDefaultAsync(s => s.Code == "SE" && s.CountryId == spain.Id) : null;
-            var sevillaCity = sevillaState != null ? await context.Cities.FirstOrDefaultAsync(c => c.Name == "Sevilla" && c.StateId == sevillaState.Id) : null;
-            var sevillaPostalCode = sevillaCity != null ? await context.PostalCodes.FirstOrDefaultAsync(pc => pc.Code == "41001" && pc.CityId == sevillaCity.Id) : null;
-
-            var suppliers = new List<GesFer.Product.Back.Domain.Entities.Supplier>
-            {
-                new GesFer.Product.Back.Domain.Entities.Supplier
-                {
-                    Id = Guid.Parse("aaaaaaaa-1111-1111-1111-111111111111"),
-                    CompanyId = companyId,
-                    Name = "Proveedor Barcelona S.L.",
-                    TaxId = "B12345678",
-                    Address = "Paseo de Gracia, 92",
-                    Phone = "932123456",
-                    Email = "contacto@proveedorbarcelona.es",
-                    CountryId = spain?.Id,
-                    StateId = barcelonaState?.Id,
-                    CityId = barcelonaCity?.Id,
-                    PostalCodeId = barcelonaPostalCode?.Id,
-                    CreatedAt = DateTime.UtcNow,
-                    IsActive = true
-                },
-                new GesFer.Product.Back.Domain.Entities.Supplier
-                {
-                    Id = Guid.Parse("bbbbbbbb-2222-2222-2222-222222222222"),
-                    CompanyId = companyId,
-                    Name = "Suministros Valencia S.A.",
-                    TaxId = "A87654321",
-                    Address = "Calle Colón, 15",
-                    Phone = "961234567",
-                    Email = "info@suministrosvalencia.es",
-                    CountryId = spain?.Id,
-                    StateId = valenciaState?.Id,
-                    CityId = valenciaCity?.Id,
-                    PostalCodeId = valenciaPostalCode?.Id,
-                    CreatedAt = DateTime.UtcNow,
-                    IsActive = true
-                },
-                new GesFer.Product.Back.Domain.Entities.Supplier
-                {
-                    Id = Guid.Parse("cccccccc-3333-3333-3333-333333333333"),
-                    CompanyId = companyId,
-                    Name = "Distribuidora Sevilla",
-                    TaxId = "B98765432",
-                    Address = "Avenida de la Constitución, 1",
-                    Phone = "954123456",
-                    Email = "ventas@distribuidorasevilla.es",
-                    CountryId = spain?.Id,
-                    StateId = sevillaState?.Id,
-                    CityId = sevillaCity?.Id,
-                    PostalCodeId = sevillaPostalCode?.Id,
-                    CreatedAt = DateTime.UtcNow,
-                    IsActive = true
-                }
-            };
-
-            context.Suppliers.AddRange(suppliers);
-            await context.SaveChangesAsync();
-            logger.LogInformation("Proveedores de prueba creados: {Count} proveedores", suppliers.Count);
-        }
-        catch (Exception ex)
-        {
-            logger.LogWarning(ex, "Error al crear proveedores de prueba: {ErrorMessage}", ex.Message);
-            // No lanzar excepción, continuar con el proceso
-        }
-    }
-
-    /// <summary>
-    /// Crea clientes de prueba con direcciones completas
-    /// </summary>
-    private async Task SeedTestCustomersAsync(ApplicationDbContext context, Guid companyId, Country? spain, ILogger logger)
-    {
-        try
-        {
-            if (spain == null)
-            {
-                logger.LogWarning("No se encontró España. Los clientes se crearán sin información de dirección completa.");
-            }
-
-            // Buscar datos maestros de diferentes ciudades
-            var madridState = spain != null ? await context.States.FirstOrDefaultAsync(s => s.Code == "M" && s.CountryId == spain.Id) : null;
-            var madridCity = madridState != null ? await context.Cities.FirstOrDefaultAsync(c => c.Name == "Madrid" && c.StateId == madridState.Id) : null;
-            var madridPostalCode = madridCity != null ? await context.PostalCodes.FirstOrDefaultAsync(pc => pc.Code == "28001" && pc.CityId == madridCity.Id) : null;
-
-            var bilbaoState = spain != null ? await context.States.FirstOrDefaultAsync(s => s.Code == "BI" && s.CountryId == spain.Id) : null;
-            var bilbaoCity = bilbaoState != null ? await context.Cities.FirstOrDefaultAsync(c => c.Name == "Bilbao" && c.StateId == bilbaoState.Id) : null;
-            var bilbaoPostalCode = bilbaoCity != null ? await context.PostalCodes.FirstOrDefaultAsync(pc => pc.Code == "48001" && pc.CityId == bilbaoCity.Id) : null;
-
-            var malagaState = spain != null ? await context.States.FirstOrDefaultAsync(s => s.Code == "MA" && s.CountryId == spain.Id) : null;
-            var malagaCity = malagaState != null ? await context.Cities.FirstOrDefaultAsync(c => c.Name == "Málaga" && c.StateId == malagaState.Id) : null;
-            var malagaPostalCode = malagaCity != null ? await context.PostalCodes.FirstOrDefaultAsync(pc => pc.Code == "29001" && pc.CityId == malagaCity.Id) : null;
-
-            var customers = new List<GesFer.Product.Back.Domain.Entities.Customer>
-            {
-                new GesFer.Product.Back.Domain.Entities.Customer
-                {
-                    Id = Guid.Parse("dddddddd-1111-1111-1111-111111111111"),
-                    CompanyId = companyId,
-                    Name = "Cliente Madrid S.L.",
-                    TaxId = "B11111111",
-                    Address = "Calle Alcalá, 45",
-                    Phone = "915555555",
-                    Email = "contacto@clientemadrid.es",
-                    CountryId = spain?.Id,
-                    StateId = madridState?.Id,
-                    CityId = madridCity?.Id,
-                    PostalCodeId = madridPostalCode?.Id,
-                    CreatedAt = DateTime.UtcNow,
-                    IsActive = true
-                },
-                new GesFer.Product.Back.Domain.Entities.Customer
-                {
-                    Id = Guid.Parse("eeeeeeee-2222-2222-2222-222222222222"),
-                    CompanyId = companyId,
-                    Name = "Comercial Bilbao",
-                    TaxId = "A22222222",
-                    Address = "Gran Vía, 8",
-                    Phone = "944123456",
-                    Email = "info@comercialbilbao.es",
-                    CountryId = spain?.Id,
-                    StateId = bilbaoState?.Id,
-                    CityId = bilbaoCity?.Id,
-                    PostalCodeId = bilbaoPostalCode?.Id,
-                    CreatedAt = DateTime.UtcNow,
-                    IsActive = true
-                },
-                new GesFer.Product.Back.Domain.Entities.Customer
-                {
-                    Id = Guid.Parse("ffffffff-3333-3333-3333-333333333333"),
-                    CompanyId = companyId,
-                    Name = "Negocios Málaga S.A.",
-                    TaxId = "B33333333",
-                    Address = "Calle Larios, 5",
-                    Phone = "952123456",
-                    Email = "ventas@negociosmalaga.es",
-                    CountryId = spain?.Id,
-                    StateId = malagaState?.Id,
-                    CityId = malagaCity?.Id,
-                    PostalCodeId = malagaPostalCode?.Id,
-                    CreatedAt = DateTime.UtcNow,
-                    IsActive = true
-                }
-            };
-
-            context.Customers.AddRange(customers);
-            await context.SaveChangesAsync();
-            logger.LogInformation("Clientes de prueba creados: {Count} clientes", customers.Count);
-        }
-        catch (Exception ex)
-        {
-            logger.LogWarning(ex, "Error al crear clientes de prueba: {ErrorMessage}", ex.Message);
-            // No lanzar excepción, continuar con el proceso
         }
     }
 

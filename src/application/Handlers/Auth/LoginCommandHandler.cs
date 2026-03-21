@@ -38,7 +38,9 @@ public class LoginCommandHandler : ICommandHandler<LoginCommand, LoginResponseDt
             return null;
 
         var permissions = await _authService.GetUserPermissionsAsync(user.Id);
-        var resolvedLanguageId = user.LanguageId ?? user.Country?.LanguageId;
+        // TODO-default-lang-ES: idioma maestro español por defecto (D3/D4); alinear con MasterDataSeeder LanguageId es.
+        var defaultSpanishLanguageId = Guid.Parse("10000000-0000-0000-0000-000000000001");
+        var resolvedLanguageId = user.LanguageId ?? defaultSpanishLanguageId;
 
         // Cursor ID es el UserId convertido a string
         var cursorId = user.Id.ToString();
@@ -62,7 +64,7 @@ public class LoginCommandHandler : ICommandHandler<LoginCommand, LoginResponseDt
             CompanyName = command.Empresa,
             UserLanguageId = user.LanguageId,
             CompanyLanguageId = null,
-            CountryLanguageId = user.Country?.LanguageId,
+            CountryLanguageId = defaultSpanishLanguageId,
             EffectiveLanguageId = resolvedLanguageId,
             Permissions = permissions.ToList(),
             Token = token,

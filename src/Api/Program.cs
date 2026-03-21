@@ -94,7 +94,7 @@ builder.Services.AddCors(options =>
 
 // Seguridad: HTTPS en todos los entornos. Redirección HTTP → HTTPS.
 if (isDevelopment)
-    builder.Services.Configure<HttpsRedirectionOptions>(options => { options.HttpsPort = 5001; });
+    builder.Services.Configure<HttpsRedirectionOptions>(options => { options.HttpsPort = 5021; });
 
 // Configurar inyección de dependencias
 builder.Services.AddApplicationServices(builder.Configuration, builder.Environment);
@@ -189,7 +189,7 @@ if (app.Environment.IsDevelopment())
 }
 
 // CORS debe ir ANTES de UseHttpsRedirection para que las peticiones preflight funcionen.
-// Redirección HTTP → HTTPS en todos los entornos (puerto HTTPS en Development: 5001).
+// Redirección HTTP → HTTPS en no-Development (HTTP 5020 → HTTPS 5021, alineado con launchSettings).
 app.UseCors("AllowAll");
 
 // KAIZEN: Skip HTTPS Redirection in Testing/Development to allow start-api health check and local dev.

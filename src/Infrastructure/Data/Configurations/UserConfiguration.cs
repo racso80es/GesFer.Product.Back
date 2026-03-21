@@ -49,30 +49,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .HasMaxLength(500);
 
         // CompanyId: FK a tabla Companies (Admin); sin navegación en Product
-        // Relaciones de dirección (opcionales)
-        builder.HasOne(u => u.PostalCode)
-            .WithMany()
-            .HasForeignKey(u => u.PostalCodeId)
-            .IsRequired(false)
-            .OnDelete(DeleteBehavior.Restrict);
-
-        builder.HasOne(u => u.City)
-            .WithMany()
-            .HasForeignKey(u => u.CityId)
-            .IsRequired(false)
-            .OnDelete(DeleteBehavior.Restrict);
-
-        builder.HasOne(u => u.State)
-            .WithMany()
-            .HasForeignKey(u => u.StateId)
-            .IsRequired(false)
-            .OnDelete(DeleteBehavior.Restrict);
-
-        builder.HasOne(u => u.Country)
-            .WithMany()
-            .HasForeignKey(u => u.CountryId)
-            .IsRequired(false)
-            .OnDelete(DeleteBehavior.Restrict);
+        // Columnas geo: sin FK local (SSOT Admin)
 
         builder.HasOne(u => u.Language)
             .WithMany()

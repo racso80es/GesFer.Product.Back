@@ -43,9 +43,8 @@ public class AuthService : IAuthService
         if (company == null || !company.IsActive)
             return null;
 
+        // TODO-i18n-context: idioma efectivo vía claims/Admin; hoy solo LanguageId local (D3/D4).
         var user = await _context.Users
-            .Include(u => u.Country)
-                .ThenInclude(c => c!.Language)
             .Include(u => u.Language)
             .Where(u => u.Username == normalizedUsername
                 && u.CompanyId == company.Id

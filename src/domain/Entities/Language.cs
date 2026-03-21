@@ -11,7 +11,4 @@ public class Language : BaseEntity
     public string Code { get; set; } = string.Empty; // abreviatura ISO (es, en, ca)
     public string? Description { get; set; }
 
-    // Navegación inversa opcional
-    // Nota: Las referencias a Company y User se manejan en Product mediante navegación inversa
-    public ICollection<Country> Countries { get; set; } = new List<Country>();
 }

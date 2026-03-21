@@ -1,6 +1,7 @@
 using System.Collections.Concurrent;
 using System.Linq;
 using GesFer.Product.Back.Infrastructure.DTOs;
+using GesFer.Product.Back.Infrastructure.DTOs.Geo;
 using GesFer.Product.Back.Infrastructure.Services;
 
 namespace GesFer.Product.Back.IntegrationTests.Helpers;
@@ -11,6 +12,11 @@ namespace GesFer.Product.Back.IntegrationTests.Helpers;
 /// </summary>
 public class MockAdminApiClient : IAdminApiClient
 {
+    private static readonly Guid MockCountryId = Guid.Parse("10000000-0000-0000-0000-000000000101");
+    private static readonly Guid MockStateId = Guid.Parse("10000000-0000-0000-0000-000000000102");
+    private static readonly Guid MockCityId = Guid.Parse("10000000-0000-0000-0000-000000000103");
+    private static readonly Guid MockPostalCodeId = Guid.Parse("10000000-0000-0000-0000-000000000104");
+
     private static readonly ConcurrentDictionary<Guid, AdminCompanyDto> Store = new();
 
     static MockAdminApiClient()
@@ -68,5 +74,54 @@ public class MockAdminApiClient : IAdminApiClient
         };
         Store[id] = updated;
         return Task.FromResult(updated);
+    }
+
+    public Task<IReadOnlyList<CountryGeoReadDto>> GetGeolocationCountriesAsync(CancellationToken cancellationToken = default)
+    {
+        IReadOnlyList<CountryGeoReadDto> list = new[]
+        {
+            new CountryGeoReadDto { Id = MockCountryId, Name = "España (mock)", Code = "ES" }
+        };
+        return Task.FromResult(list);
+    }
+
+    public Task<CountryGeoReadDto?> GetGeolocationCountryByIdAsync(Guid countryId, CancellationToken cancellationToken = default)
+    {
+        if (countryId != MockCountryId)
+            return Task.FromResult<CountryGeoReadDto?>(null);
+        return Task.FromResult<CountryGeoReadDto?>(new CountryGeoReadDto { Id = MockCountryId, Name = "España (mock)", Code = "ES" });
+    }
+
+    public Task<IReadOnlyList<StateGeoReadDto>> GetGeolocationStatesByCountryAsync(Guid countryId, CancellationToken cancellationToken = default)
+    {
+        if (countryId != MockCountryId)
+            return Task.FromResult<IReadOnlyList<StateGeoReadDto>>(Array.Empty<StateGeoReadDto>());
+        IReadOnlyList<StateGeoReadDto> list = new[]
+        {
+            new StateGeoReadDto { Id = MockStateId, CountryId = MockCountryId, Name = "Provincia mock", Code = "M" }
+        };
+        return Task.FromResult(list);
+    }
+
+    public Task<IReadOnlyList<CityGeoReadDto>> GetGeolocationCitiesByStateAsync(Guid stateId, CancellationToken cancellationToken = default)
+    {
+        if (stateId != MockStateId)
+            return Task.FromResult<IReadOnlyList<CityGeoReadDto>>(Array.Empty<CityGeoReadDto>());
+        IReadOnlyList<CityGeoReadDto> list = new[]
+        {
+            new CityGeoReadDto { Id = MockCityId, StateId = MockStateId, Name = "Ciudad mock" }
+        };
+        return Task.FromResult(list);
+    }
+
+    public Task<IReadOnlyList<PostalCodeGeoReadDto>> GetGeolocationPostalCodesByCityAsync(Guid cityId, CancellationToken cancellationToken = default)
+    {
+        if (cityId != MockCityId)
+            return Task.FromResult<IReadOnlyList<PostalCodeGeoReadDto>>(Array.Empty<PostalCodeGeoReadDto>());
+        IReadOnlyList<PostalCodeGeoReadDto> list = new[]
+        {
+            new PostalCodeGeoReadDto { Id = MockPostalCodeId, CityId = MockCityId, Code = "28001" }
+        };
+        return Task.FromResult(list);
     }
 }

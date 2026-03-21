@@ -350,40 +350,9 @@ public class JsonDataSeeder
             _logger.LogInformation("Languages sembrados: {Count}", data.Languages.Count);
         }
 
-        // 2. Countries (depende de Languages) - DEBE ejecutarse después de Languages
-        if (data.Countries != null && data.Countries.Any())
-        {
-            // Validar que todos los LanguageId referenciados existen
-            var countryLanguageIds = data.Countries.Select(c => Guid.Parse(c.LanguageId)).Distinct().ToList();
-            var existingCountryLanguages = await _context.Languages
-                .IgnoreQueryFilters()
-                .Where(l => countryLanguageIds.Contains(l.Id))
-                .Select(l => l.Id)
-                .ToListAsync();
+        // Catálogo geo (país/ciudad): SSOT en Admin; no se insertan Countries/Cities locales.
 
-            var missingCountryLanguages = countryLanguageIds.Except(existingCountryLanguages).ToList();
-            if (missingCountryLanguages.Any())
-            {
-                _logger.LogError("Error de integridad referencial: Los siguientes LanguageId no existen para Countries: {MissingIds}",
-                    string.Join(", ", missingCountryLanguages));
-                throw new InvalidOperationException(
-                    $"No se pueden insertar Countries: Los siguientes LanguageId no existen en la base de datos: {string.Join(", ", missingCountryLanguages)}");
-            }
-
-            await SeedCountriesAsync(data.Countries);
-            await _context.SaveChangesAsync();
-            _logger.LogInformation("Countries sembrados: {Count}", data.Countries.Count);
-        }
-
-        // 3. Cities (depende de Countries/States) - DEBE ejecutarse después de Countries
-        if (data.Cities != null && data.Cities.Any())
-        {
-            await SeedCitiesAsync(data.Cities);
-            await _context.SaveChangesAsync();
-            _logger.LogInformation("Cities sembrados: {Count}", data.Cities.Count);
-        }
-
-        // 4. Companies: SSOT en Admin. Product usa CompanyId desde config (Seed:CompanyId).
+        // 2. Companies: SSOT en Admin. Product usa CompanyId desde config (Seed:CompanyId).
         var validCompanyIds = SeedConfig.GetValidCompanyIds(_configuration);
         if (validCompanyIds.Count == 0)
             _logger.LogWarning("[SEED] Seed:CompanyId no configurado. Configurar en appsettings.Seed.json para test-data.");
@@ -1219,65 +1188,6 @@ public class JsonDataSeeder
         await _context.SaveChangesAsync();
     }
 
-    private async Task SeedCountriesAsync(List<CountrySeed> countries)
-    {
-        foreach (var countryData in countries)
-        {
-            var existing = await _context.Countries
-                .IgnoreQueryFilters()
-                .FirstOrDefaultAsync(c => c.Code == countryData.Code);
-
-            if (existing == null)
-            {
-                var country = new Country
-                {
-                    Id = Guid.Parse(countryData.Id),
-                    Name = countryData.Name,
-                    Code = countryData.Code,
-                    LanguageId = Guid.Parse(countryData.LanguageId),
-                    CreatedAt = DateTime.UtcNow,
-                    IsActive = true
-                };
-                _context.Countries.Add(country);
-            }
-            else if (existing.DeletedAt != null)
-            {
-                existing.DeletedAt = null;
-                existing.IsActive = true;
-            }
-        }
-        await _context.SaveChangesAsync();
-    }
-
-    private async Task SeedCitiesAsync(List<CitySeed> cities)
-    {
-        foreach (var cityData in cities)
-        {
-            var existing = await _context.Cities
-                .IgnoreQueryFilters()
-                .FirstOrDefaultAsync(c => c.Id == Guid.Parse(cityData.Id));
-
-            if (existing == null)
-            {
-                var city = new City
-                {
-                    Id = Guid.Parse(cityData.Id),
-                    StateId = Guid.Parse(cityData.StateId),
-                    Name = cityData.Name,
-                    CreatedAt = DateTime.UtcNow,
-                    IsActive = true
-                };
-                _context.Cities.Add(city);
-            }
-            else if (existing.DeletedAt != null)
-            {
-                existing.DeletedAt = null;
-                existing.IsActive = true;
-            }
-        }
-        await _context.SaveChangesAsync();
-    }
-
     #endregion
 
     #region Seed Data Models
@@ -1306,8 +1216,6 @@ public class JsonDataSeeder
     private class TestDataSeed
     {
         public List<LanguageSeed>? Languages { get; set; }
-        public List<CountrySeed>? Countries { get; set; }
-        public List<CitySeed>? Cities { get; set; }
         public List<CompanySeed>? Companies { get; set; }
         public List<UserSeed>? Users { get; set; }
         public List<GroupSeed>? Groups { get; set; }
@@ -1441,21 +1349,6 @@ public class JsonDataSeeder
         public string? Email { get; set; }
     }
 
-
-    private class CountrySeed
-    {
-        public string Id { get; set; } = string.Empty;
-        public string Name { get; set; } = string.Empty;
-        public string Code { get; set; } = string.Empty;
-        public string LanguageId { get; set; } = string.Empty;
-    }
-
-    private class CitySeed
-    {
-        public string Id { get; set; } = string.Empty;
-        public string StateId { get; set; } = string.Empty;
-        public string Name { get; set; } = string.Empty;
-    }
 
     #endregion
 

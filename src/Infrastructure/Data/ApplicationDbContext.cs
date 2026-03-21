@@ -33,11 +33,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<SalesDeliveryNote> SalesDeliveryNotes => Set<SalesDeliveryNote>();
     public DbSet<SalesDeliveryNoteLine> SalesDeliveryNoteLines => Set<SalesDeliveryNoteLine>();
     public DbSet<SalesInvoice> SalesInvoices => Set<SalesInvoice>();
-    public DbSet<GesFer.Product.Back.Domain.Entities.Country> Countries => Set<GesFer.Product.Back.Domain.Entities.Country>();
     public DbSet<GesFer.Product.Back.Domain.Entities.Language> Languages => Set<GesFer.Product.Back.Domain.Entities.Language>();
-    public DbSet<GesFer.Product.Back.Domain.Entities.State> States => Set<GesFer.Product.Back.Domain.Entities.State>();
-    public DbSet<GesFer.Product.Back.Domain.Entities.City> Cities => Set<GesFer.Product.Back.Domain.Entities.City>();
-    public DbSet<GesFer.Product.Back.Domain.Entities.PostalCode> PostalCodes => Set<GesFer.Product.Back.Domain.Entities.PostalCode>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

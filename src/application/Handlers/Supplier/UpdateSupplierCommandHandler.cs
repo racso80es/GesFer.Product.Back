@@ -2,6 +2,7 @@ using GesFer.Product.Back.Application.Commands.Supplier;
 using GesFer.Product.Back.Application.Common.Interfaces;
 using GesFer.Product.Back.Application.DTOs.Supplier;
 using GesFer.Product.Back.Infrastructure.Data;
+using GesFer.Product.Back.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace GesFer.Product.Back.Application.Handlers.Supplier;
@@ -9,10 +10,12 @@ namespace GesFer.Product.Back.Application.Handlers.Supplier;
 public class UpdateSupplierCommandHandler : ICommandHandler<UpdateSupplierCommand, SupplierDto>
 {
     private readonly ApplicationDbContext _context;
+    private readonly IAdminGeolocationValidationService _geoValidation;
 
-    public UpdateSupplierCommandHandler(ApplicationDbContext context)
+    public UpdateSupplierCommandHandler(ApplicationDbContext context, IAdminGeolocationValidationService geoValidation)
     {
         _context = context;
+        _geoValidation = geoValidation;
     }
 
     public async Task<SupplierDto> HandleAsync(UpdateSupplierCommand command, CancellationToken cancellationToken = default)
@@ -39,38 +42,12 @@ public class UpdateSupplierCommandHandler : ICommandHandler<UpdateSupplierComman
                 throw new InvalidOperationException($"No se encontró la tarifa de compra con ID {command.Dto.BuyTariffId.Value}");
         }
 
-        // Validar IDs de dirección si se proporcionan
-        if (command.Dto.PostalCodeId.HasValue)
-        {
-            var postalCodeExists = await _context.PostalCodes
-                .AnyAsync(pc => pc.Id == command.Dto.PostalCodeId.Value && pc.DeletedAt == null, cancellationToken);
-            if (!postalCodeExists)
-                throw new InvalidOperationException($"No se encontró el código postal con ID {command.Dto.PostalCodeId.Value}");
-        }
-
-        if (command.Dto.CityId.HasValue)
-        {
-            var cityExists = await _context.Cities
-                .AnyAsync(c => c.Id == command.Dto.CityId.Value && c.DeletedAt == null, cancellationToken);
-            if (!cityExists)
-                throw new InvalidOperationException($"No se encontró la ciudad con ID {command.Dto.CityId.Value}");
-        }
-
-        if (command.Dto.StateId.HasValue)
-        {
-            var stateExists = await _context.States
-                .AnyAsync(s => s.Id == command.Dto.StateId.Value && s.DeletedAt == null, cancellationToken);
-            if (!stateExists)
-                throw new InvalidOperationException($"No se encontró la provincia con ID {command.Dto.StateId.Value}");
-        }
-
-        if (command.Dto.CountryId.HasValue)
-        {
-            var countryExists = await _context.Countries
-                .AnyAsync(c => c.Id == command.Dto.CountryId.Value && c.DeletedAt == null, cancellationToken);
-            if (!countryExists)
-                throw new InvalidOperationException($"No se encontró el país con ID {command.Dto.CountryId.Value}");
-        }
+        await _geoValidation.ValidateGeoHierarchyAsync(
+            command.Dto.CountryId,
+            command.Dto.StateId,
+            command.Dto.CityId,
+            command.Dto.PostalCodeId,
+            cancellationToken);
 
         supplier.Name = command.Dto.Name;
         supplier.TaxId = command.Dto.TaxId;

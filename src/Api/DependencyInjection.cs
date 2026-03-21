@@ -72,6 +72,7 @@ public static class DependencyInjection
         services.AddScoped<IJwtService, JwtService>();
         services.AddScoped<IStockService, StockService>();
         services.AddScoped<JsonDataSeeder>();
+        services.AddScoped<IAdminGeolocationValidationService, AdminGeolocationValidationService>();
 
         // HttpClient para comunicación con Admin API
         if (environment?.IsEnvironment("Testing") == true)

@@ -14,6 +14,7 @@ public class CreateUserCommandHandlerTests
 {
     private readonly ApplicationDbContext _context;
     private readonly Mock<IAdminApiClient> _adminApiMock;
+    private readonly Mock<IAdminGeolocationValidationService> _geoMock;
 
     public CreateUserCommandHandlerTests()
     {
@@ -23,6 +24,10 @@ public class CreateUserCommandHandlerTests
 
         _context = new ApplicationDbContext(options);
         _adminApiMock = new Mock<IAdminApiClient>();
+        _geoMock = new Mock<IAdminGeolocationValidationService>();
+        _geoMock
+            .Setup(x => x.ValidateGeoHierarchyAsync(It.IsAny<Guid?>(), It.IsAny<Guid?>(), It.IsAny<Guid?>(), It.IsAny<Guid?>(), It.IsAny<CancellationToken>()))
+            .Returns(Task.CompletedTask);
     }
 
     [Fact]
@@ -33,7 +38,7 @@ public class CreateUserCommandHandlerTests
             .Setup(x => x.GetCompanyAsync(companyId))
             .ReturnsAsync(new AdminCompanyDto { Id = companyId, Name = "Test Company" });
 
-        var handler = new CreateUserCommandHandler(_context, _adminApiMock.Object);
+        var handler = new CreateUserCommandHandler(_context, _adminApiMock.Object, _geoMock.Object);
 
         var command = new CreateUserCommand(new CreateUserDto
         {
@@ -64,7 +69,7 @@ public class CreateUserCommandHandlerTests
     {
         _adminApiMock.Setup(x => x.GetCompanyAsync(It.IsAny<Guid>())).ReturnsAsync((AdminCompanyDto?)null);
 
-        var handler = new CreateUserCommandHandler(_context, _adminApiMock.Object);
+        var handler = new CreateUserCommandHandler(_context, _adminApiMock.Object, _geoMock.Object);
 
         var command = new CreateUserCommand(new CreateUserDto
         {

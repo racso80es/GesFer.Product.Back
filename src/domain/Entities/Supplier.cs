@@ -24,10 +24,6 @@ public class Supplier : BaseEntity
 
     // Navegación (CompanyId FK a Admin)
     public Tariff? BuyTariff { get; set; }
-    public PostalCode? PostalCode { get; set; }
-    public City? City { get; set; }
-    public State? State { get; set; }
-    public Country? Country { get; set; }
     public ICollection<PurchaseDeliveryNote> PurchaseDeliveryNotes { get; set; } = new List<PurchaseDeliveryNote>();
 }
 

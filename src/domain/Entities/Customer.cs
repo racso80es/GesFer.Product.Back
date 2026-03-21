@@ -25,10 +25,6 @@ public class Customer : BaseEntity
 
     // Navegación (CompanyId FK a Admin)
     public Tariff? SellTariff { get; set; }
-    public PostalCode? PostalCode { get; set; }
-    public City? City { get; set; }
-    public State? State { get; set; }
-    public Country? Country { get; set; }
     public ICollection<SalesDeliveryNote> SalesDeliveryNotes { get; set; } = new List<SalesDeliveryNote>();
 }
 
