@@ -26,7 +26,7 @@ phases:
 - description: Acción validate; validacion.md (frontmatter YAML + Markdown).
   id: '7'
   name: Validar
-- description: Acción finalize; Evolution Logs, PR.
+- description: Acción finalize; commits pendientes (invoke-commit), Evolution Logs, push y PR (finalizar-git pre_pr), merge en remoto, limpieza (finalizar-git post_pr).
   id: '8'
   name: Finalizar
 principles_ref: paths.principlesPath
@@ -41,6 +41,7 @@ related_actions:
 - finalize
 related_skills:
 - iniciar-rama
+- invoke-commit
 - finalizar-git
 spec_version: 1.0.0
 ---
@@ -71,7 +72,7 @@ Ruta de la tarea: Cúmulo (paths.featurePath/<nombre_feature>).
 | **5** | Implementación | Generar documento de implementación. Entrada: carpeta de la tarea (Cúmulo)/objectives.md, spec.md, clarify.md; salida: carpeta de la tarea (Cúmulo)/implementation.md (frontmatter YAML + Markdown). |
 | **6** | Ejecución | Aplicar el plan al código (Tekton Developer). Entrada: carpeta de la tarea (Cúmulo)/implementation.md; salida: carpeta de la tarea (Cúmulo)/execution.md (frontmatter YAML + Markdown). |
 | **7** | Validar | Ejecutar validación pre-PR. Entrada: carpeta de la tarea (Cúmulo); salida: carpeta de la tarea (Cúmulo)/validacion.md (frontmatter YAML + Markdown). |
-| **8** | Finalizar | Cierre y PR. Especificación técnica: paths.actionsPath/finalize/. Entrada: carpeta de la tarea (Cúmulo); salida: Evolution Logs y Pull Request. |
+| **8** | Finalizar | Acción **finalize** (paths.actionsPath/finalize/spec.md): **(1)** commits pendientes vía skill **invoke-commit**; **(2)** Evolution Logs; **(3)** push y apertura de PR vía **finalizar-git** (pre_pr), script `Invoke-Finalize.ps1`; **(4)** merge del PR en el remoto; **(5)** unificación en master local y eliminación de rama de trabajo vía **finalizar-git** (post_pr). Entrada: carpeta de la tarea (Cúmulo). Salida: rama en origin, PR, repo limpio en master tras cierre. |
 
 ## Implementación
 

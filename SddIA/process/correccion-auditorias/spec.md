@@ -27,7 +27,7 @@ phases:
 - description: Acción validate; validacion.md (frontmatter YAML + Markdown).
   id: '7'
   name: Validar
-- description: Acción finalize; Evolution Logs, PR.
+- description: Acción finalize; invoke-commit, finalizar-git (pre_pr/post_pr). Ver paths.actionsPath/finalize/spec.md.
   id: '8'
   name: Finalizar
 principles_ref: paths.principlesPath
@@ -42,6 +42,7 @@ related_actions:
 - finalize
 related_skills:
 - iniciar-rama
+- invoke-commit
 - finalizar-git
 - documentation
 - security-audit

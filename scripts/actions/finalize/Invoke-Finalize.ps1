@@ -1,10 +1,11 @@
 <#
 .SYNOPSIS
-    Ejecuta la acción finalize: comprueba precondiciones e invoca la skill finalizar-proceso (FinalizarProceso, Push-And-CreatePR).
+    Ejecuta la acción finalize: comprueba precondiciones e invoca la skill finalizar-git (Push-And-CreatePR / push_and_create_pr.exe).
 .DESCRIPTION
     Orquestador de la acción finalize (SddIA/actions/finalize). Comprueba rama, objectives.md y validacion.json;
-    opcionalmente ejecuta verify-pr-protocol; luego invoca la skill finalizar-proceso (Push-And-CreatePR.ps1)
-    para push y creación del PR. La skill es la única que ejecuta comandos git (Ley COMANDOS).
+    opcionalmente ejecuta verify-pr-protocol; luego invoca la skill finalizar-git (paths.skillCapsules.finalizar-git)
+    para push y creación del PR. Los commits previos deben resolverse con la skill invoke-commit (no mezclado aquí).
+    Tras merge del PR en remoto, la fase post_pr usa Merge-To-Master-Cleanup (misma skill). Ley COMANDOS: no git directo.
 .PARAMETER Persist
     Ruta de la carpeta de la feature (Cúmulo), ej. docs/features/create-tool-postman-mcp-validation/
 .PARAMETER BranchName

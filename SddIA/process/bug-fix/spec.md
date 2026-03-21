@@ -20,6 +20,8 @@ related_actions:
 - finalize
 related_skills:
 - iniciar-rama
+- invoke-commit
+- finalizar-git
 skills:
 - documentation
 - filesystem-ops
@@ -46,7 +48,7 @@ El proceso **bug-fix** orquesta el ciclo de vida del bug: triaje, documentación
 
 - **Rama:** fix/<nombre_fix> (nunca master).
 - **Documentación:** Carpeta paths.fixPath/<nombre_fix>/ con objectives.md, spec.md, clarify.md si aplica, implementation.md, validacion.md (todos con frontmatter YAML + Markdown). Sin .json separados.
-- **Skills:** iniciar-rama, documentation, filesystem-ops, dotnet-development.
+- **Skills:** iniciar-rama, documentation, filesystem-ops, dotnet-development; en el cierre (**finalize**): invoke-commit (commits pendientes), finalizar-git (push, PR, limpieza post-merge). Detalle: paths.actionsPath/finalize/spec.md.
 - **Restricciones:** Alcance mínimo (solo causa raíz); no refactorizar ni ampliar funcionalidad en la misma rama.
 
 ## Integración

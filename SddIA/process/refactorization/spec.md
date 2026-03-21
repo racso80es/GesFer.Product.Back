@@ -26,7 +26,7 @@ phases:
 - description: Acción validate.
   id: '7'
   name: Validar
-- description: Acción finalize.
+- description: Acción finalize; commits (invoke-commit), PR y limpieza (finalizar-git). Ver paths.actionsPath/finalize/spec.md.
   id: '8'
   name: Finalizar
 process_id: refactorization
@@ -40,6 +40,7 @@ related_actions:
 - finalize
 related_skills:
 - iniciar-rama
+- invoke-commit
 - finalizar-git
 spec_version: 1.0.0
 ---
@@ -70,7 +71,7 @@ Ruta de la tarea: Cúmulo (paths.featurePath/refactorization-<nombre_refactor>).
 | **5** | Implementación (doc) | Acción implementation. Salida: implementation.md, implementation.json. |
 | **6** | Ejecución | Acción execution. Salida: execution.json. |
 | **7** | Validar | Acción validate. Salida: validacion.json. |
-| **8** | Finalizar | Acción finalize. Evolution Logs y PR. |
+| **8** | Finalizar | Igual que proceso feature: finalize con invoke-commit + finalizar-git (pre_pr y post_pr). Evolution Logs y PR. |
 
 ## Contenido mínimo de la carpeta de la tarea (Cúmulo)
 

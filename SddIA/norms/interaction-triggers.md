@@ -57,7 +57,7 @@
 | implementation | Implementación (doc): indicar touchpoints en código y documento de implementación; no modifica código. |
 | execution | Ejecución: aplicar al código los cambios del documento de implementación. |
 | validate | Validación: comprobar calidad antes del PR (git diff, build, tests, docs); generar validacion.md. |
-| finalize | Finalizar: cierre del ciclo (commits, Evolution Logs, push, PR a master). Usa skill finalizar-git. |
+| finalize | Finalizar: cierre del ciclo (commits pendientes con **invoke-commit**, Evolution Logs, push y PR con **finalizar-git** pre_pr, merge del PR en remoto, limpieza con **finalizar-git** post_pr). Spec: paths.actionsPath/finalize/spec.md. |
 | sddia-difusion | Difusión de SddIA: mantener .cursor/rules, .github y otros gestores IA alineados con AGENTS y SddIA/norms. |
 
 ---
