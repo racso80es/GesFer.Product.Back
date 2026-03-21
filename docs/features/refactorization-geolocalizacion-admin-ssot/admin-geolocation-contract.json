@@ -1,0 +1,171 @@
+{
+  "exportVersion": "1.0.0",
+  "generatedFrom": "src/GesFer.Admin.Back.Application/DTOs/Geo/GeoDtos.cs + GeolocationController.cs",
+  "description": "Contrato de lectura geográfica (país → estado → ciudad → código postal). Solo registros activos en lectura.",
+  "api": {
+    "basePath": "/api/geolocation",
+    "authorization": "AuthorizeSystemOrAdmin — mismo mecanismo que otros catálogos protegidos (p. ej. cabeceras según entorno).",
+    "contentType": "application/json; charset=utf-8"
+  },
+  "endpoints": [
+    {
+      "method": "GET",
+      "path": "/api/geolocation/countries",
+      "responseDto": "CountryGeoReadDto[]",
+      "statusCodes": [200, 500]
+    },
+    {
+      "method": "GET",
+      "path": "/api/geolocation/countries/{countryId}",
+      "pathParameters": { "countryId": "uuid (Guid)" },
+      "responseDto": "CountryGeoReadDto",
+      "statusCodes": [200, 404, 500],
+      "errorBody404": { "message": "string" }
+    },
+    {
+      "method": "GET",
+      "path": "/api/geolocation/countries/{countryId}/states",
+      "pathParameters": { "countryId": "uuid (Guid)" },
+      "responseDto": "StateGeoReadDto[]",
+      "statusCodes": [200, 500]
+    },
+    {
+      "method": "GET",
+      "path": "/api/geolocation/states/{stateId}/cities",
+      "pathParameters": { "stateId": "uuid (Guid)" },
+      "responseDto": "CityGeoReadDto[]",
+      "statusCodes": [200, 500]
+    },
+    {
+      "method": "GET",
+      "path": "/api/geolocation/cities/{cityId}/postal-codes",
+      "pathParameters": { "cityId": "uuid (Guid)" },
+      "responseDto": "PostalCodeGeoReadDto[]",
+      "statusCodes": [200, 500]
+    }
+  ],
+  "dtos": {
+    "CountryGeoReadDto": {
+      "namespace": "GesFer.Admin.Back.Application.DTOs.Geo",
+      "properties": {
+        "id": { "type": "string", "format": "uuid", "required": true },
+        "name": { "type": "string", "required": true },
+        "code": { "type": "string", "required": true }
+      },
+      "jsonPropertyNames": {
+        "id": "id",
+        "name": "name",
+        "code": "code"
+      }
+    },
+    "StateGeoReadDto": {
+      "namespace": "GesFer.Admin.Back.Application.DTOs.Geo",
+      "properties": {
+        "id": { "type": "string", "format": "uuid", "required": true },
+        "countryId": { "type": "string", "format": "uuid", "required": true },
+        "name": { "type": "string", "required": true },
+        "code": { "type": ["string", "null"], "required": false }
+      },
+      "jsonPropertyNames": {
+        "id": "id",
+        "countryId": "countryId",
+        "name": "name",
+        "code": "code"
+      }
+    },
+    "CityGeoReadDto": {
+      "namespace": "GesFer.Admin.Back.Application.DTOs.Geo",
+      "properties": {
+        "id": { "type": "string", "format": "uuid", "required": true },
+        "stateId": { "type": "string", "format": "uuid", "required": true },
+        "name": { "type": "string", "required": true }
+      },
+      "jsonPropertyNames": {
+        "id": "id",
+        "stateId": "stateId",
+        "name": "name"
+      }
+    },
+    "PostalCodeGeoReadDto": {
+      "namespace": "GesFer.Admin.Back.Application.DTOs.Geo",
+      "properties": {
+        "id": { "type": "string", "format": "uuid", "required": true },
+        "cityId": { "type": "string", "format": "uuid", "required": true },
+        "code": { "type": "string", "required": true }
+      },
+      "jsonPropertyNames": {
+        "id": "id",
+        "cityId": "cityId",
+        "code": "code"
+      }
+    }
+  },
+  "jsonSchema": {
+    "$defs": {
+      "CountryGeoReadDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "name", "code"],
+        "properties": {
+          "id": { "type": "string", "format": "uuid" },
+          "name": { "type": "string" },
+          "code": { "type": "string" }
+        }
+      },
+      "StateGeoReadDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "countryId", "name"],
+        "properties": {
+          "id": { "type": "string", "format": "uuid" },
+          "countryId": { "type": "string", "format": "uuid" },
+          "name": { "type": "string" },
+          "code": { "type": ["string", "null"] }
+        }
+      },
+      "CityGeoReadDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "stateId", "name"],
+        "properties": {
+          "id": { "type": "string", "format": "uuid" },
+          "stateId": { "type": "string", "format": "uuid" },
+          "name": { "type": "string" }
+        }
+      },
+      "PostalCodeGeoReadDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "cityId", "code"],
+        "properties": {
+          "id": { "type": "string", "format": "uuid" },
+          "cityId": { "type": "string", "format": "uuid" },
+          "code": { "type": "string" }
+        }
+      }
+    }
+  },
+  "examples": {
+    "CountryGeoReadDto": {
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "name": "España",
+      "code": "ES"
+    },
+    "StateGeoReadDto": {
+      "id": "4fa85f64-5717-4562-b3fc-2c963f66afa7",
+      "countryId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "name": "Madrid",
+      "code": "MD"
+    },
+    "CityGeoReadDto": {
+      "id": "5fa85f64-5717-4562-b3fc-2c963f66afa8",
+      "stateId": "4fa85f64-5717-4562-b3fc-2c963f66afa7",
+      "name": "Madrid"
+    },
+    "PostalCodeGeoReadDto": {
+      "id": "6fa85f64-5717-4562-b3fc-2c963f66afa9",
+      "cityId": "5fa85f64-5717-4562-b3fc-2c963f66afa8",
+      "code": "28001"
+    }
+  }
+}
