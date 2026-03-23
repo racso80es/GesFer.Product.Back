@@ -9,7 +9,7 @@ using Xunit;
 namespace GesFer.Product.Back.IntegrationTests.Controllers;
 
 [Collection("DatabaseStep")]
-public class CustomerControllerTests
+public class CustomerControllerTests : IAsyncLifetime
 {
     private readonly HttpClient _client;
     private readonly DatabaseFixture _fixture;
@@ -19,6 +19,16 @@ public class CustomerControllerTests
     {
         _fixture = fixture;
         _client = fixture.Factory.CreateClient();
+    }
+
+    public async Task InitializeAsync()
+    {
+        await SetAuthTokenAsync();
+    }
+
+    public Task DisposeAsync()
+    {
+        return Task.CompletedTask;
     }
 
     private async Task SetAuthTokenAsync()
@@ -38,8 +48,6 @@ public class CustomerControllerTests
     [Fact]
     public async Task GetAll_WithValidToken_ShouldReturnListOfCustomers()
     {
-        await SetAuthTokenAsync();
-
         var response = await _client.GetAsync("/api/customer");
 
         response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -50,7 +58,6 @@ public class CustomerControllerTests
     [Fact]
     public async Task GetAll_WithValidToken_ShouldReturnFilteredCustomers()
     {
-        await SetAuthTokenAsync();
         var createDto = new CreateCustomerDto
         {
             CompanyId = _companyId,
@@ -71,7 +78,6 @@ public class CustomerControllerTests
     [Fact]
     public async Task GetById_WithValidId_ShouldReturnCustomer()
     {
-        await SetAuthTokenAsync();
         var createDto = new CreateCustomerDto
         {
             CompanyId = _companyId,
@@ -96,7 +102,6 @@ public class CustomerControllerTests
     [Fact]
     public async Task GetById_WithInvalidId_ShouldReturnNotFound()
     {
-        await SetAuthTokenAsync();
         var invalidId = Guid.NewGuid();
 
         // Act
@@ -109,7 +114,6 @@ public class CustomerControllerTests
     [Fact]
     public async Task Create_WithValidData_ShouldReturnCreated()
     {
-        await SetAuthTokenAsync();
         var createDto = new CreateCustomerDto
         {
             CompanyId = _companyId,
@@ -137,7 +141,6 @@ public class CustomerControllerTests
     [Fact]
     public async Task Create_WithDuplicateName_ShouldReturnBadRequest()
     {
-        await SetAuthTokenAsync();
         var createDto = new CreateCustomerDto
         {
             CompanyId = _companyId,
@@ -156,7 +159,6 @@ public class CustomerControllerTests
     [Fact]
     public async Task Update_WithValidData_ShouldReturnOk()
     {
-        await SetAuthTokenAsync();
         var createDto = new CreateCustomerDto
         {
             CompanyId = _companyId,
@@ -191,7 +193,6 @@ public class CustomerControllerTests
     [Fact]
     public async Task Update_WithInvalidId_ShouldReturnNotFound()
     {
-        await SetAuthTokenAsync();
         var invalidId = Guid.NewGuid();
         var updateDto = new UpdateCustomerDto
         {
@@ -209,7 +210,6 @@ public class CustomerControllerTests
     [Fact]
     public async Task Delete_WithValidId_ShouldReturnNoContent()
     {
-        await SetAuthTokenAsync();
         var createDto = new CreateCustomerDto
         {
             CompanyId = _companyId,
@@ -234,7 +234,6 @@ public class CustomerControllerTests
     [Fact]
     public async Task Delete_WithInvalidId_ShouldReturnNotFound()
     {
-        await SetAuthTokenAsync();
         var invalidId = Guid.NewGuid();
 
         // Act
