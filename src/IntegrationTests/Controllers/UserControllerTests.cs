@@ -48,8 +48,6 @@ public class UserControllerTests : IAsyncLifetime
     [Fact]
     public async Task GetAll_WithValidToken_ShouldReturnListOfUsers()
     {
-        await SetAuthTokenAsync();
-
         var response = await _client.GetAsync("/api/user");
 
         response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -70,7 +68,6 @@ public class UserControllerTests : IAsyncLifetime
     [Fact]
     public async Task GetById_WithValidId_ShouldReturnUser()
     {
-        await SetAuthTokenAsync();
         var userId = Guid.Parse("99999999-9999-9999-9999-999999999999");
 
         var response = await _client.GetAsync($"/api/user/{userId}");
@@ -86,7 +83,6 @@ public class UserControllerTests : IAsyncLifetime
     [Fact]
     public async Task GetById_WithInvalidId_ShouldReturnNotFound()
     {
-        await SetAuthTokenAsync();
         var invalidId = Guid.NewGuid();
 
         var response = await _client.GetAsync($"/api/user/{invalidId}");
@@ -98,7 +94,6 @@ public class UserControllerTests : IAsyncLifetime
     [Fact]
     public async Task Create_WithValidData_ShouldReturnCreated()
     {
-        await SetAuthTokenAsync();
         var createDto = new CreateUserDto
         {
             CompanyId = _testCompanyId, // Será ignorado; controller usa claim
@@ -125,7 +120,6 @@ public class UserControllerTests : IAsyncLifetime
     [Fact]
     public async Task Create_WithDuplicateUsername_ShouldReturnBadRequest()
     {
-        await SetAuthTokenAsync();
         var createDto = new CreateUserDto
         {
             CompanyId = _testCompanyId,
@@ -147,7 +141,6 @@ public class UserControllerTests : IAsyncLifetime
     [Fact]
     public async Task Update_WithValidData_ShouldReturnOk()
     {
-        await SetAuthTokenAsync();
         var createDto = new CreateUserDto
         {
             CompanyId = _testCompanyId,
@@ -192,7 +185,6 @@ public class UserControllerTests : IAsyncLifetime
     [Fact]
     public async Task Update_WithPassword_ShouldUpdatePassword()
     {
-        await SetAuthTokenAsync();
         var createDto = new CreateUserDto
         {
             CompanyId = _testCompanyId,
@@ -234,7 +226,6 @@ public class UserControllerTests : IAsyncLifetime
     [Fact]
     public async Task Update_WithInvalidId_ShouldReturnNotFound()
     {
-        await SetAuthTokenAsync();
         var invalidId = Guid.NewGuid();
         var updateDto = new UpdateUserDto
         {
@@ -254,7 +245,6 @@ public class UserControllerTests : IAsyncLifetime
     [Fact]
     public async Task Delete_WithValidId_ShouldReturnNoContent()
     {
-        await SetAuthTokenAsync();
         var createDto = new CreateUserDto
         {
             CompanyId = _testCompanyId,
@@ -281,7 +271,6 @@ public class UserControllerTests : IAsyncLifetime
     [Fact]
     public async Task Delete_WithInvalidId_ShouldReturnNotFound()
     {
-        await SetAuthTokenAsync();
         var invalidId = Guid.NewGuid();
 
         // Act
@@ -294,7 +283,6 @@ public class UserControllerTests : IAsyncLifetime
     [Fact]
     public async Task Test2P2_CreateUser_WithAllProperties_ShouldValidateAllFields()
     {
-        await SetAuthTokenAsync();
         var languageId = Guid.Parse("10000000-0000-0000-0000-000000000001");
         var createDto = new CreateUserDto
         {
@@ -343,7 +331,6 @@ public class UserControllerTests : IAsyncLifetime
     [Fact]
     public async Task Test2P2_UpdateUser_WithAllProperties_ShouldValidateAllFields()
     {
-        await SetAuthTokenAsync();
         var createDto = new CreateUserDto
         {
             CompanyId = _testCompanyId,

@@ -48,8 +48,6 @@ public class SupplierControllerTests : IAsyncLifetime
     [Fact]
     public async Task GetAll_WithValidToken_ShouldReturnListOfSuppliers()
     {
-        await SetAuthTokenAsync();
-
         var response = await _client.GetAsync("/api/supplier");
 
         response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -60,7 +58,6 @@ public class SupplierControllerTests : IAsyncLifetime
     [Fact]
     public async Task GetAll_WithValidToken_ShouldReturnFilteredSuppliers()
     {
-        await SetAuthTokenAsync();
         var createDto = new CreateSupplierDto
         {
             CompanyId = _companyId,
@@ -81,7 +78,6 @@ public class SupplierControllerTests : IAsyncLifetime
     [Fact]
     public async Task GetById_WithValidId_ShouldReturnSupplier()
     {
-        await SetAuthTokenAsync();
         var createDto = new CreateSupplierDto
         {
             CompanyId = _companyId,
@@ -106,7 +102,6 @@ public class SupplierControllerTests : IAsyncLifetime
     [Fact]
     public async Task GetById_WithInvalidId_ShouldReturnNotFound()
     {
-        await SetAuthTokenAsync();
         var invalidId = Guid.NewGuid();
 
         // Act
@@ -119,7 +114,6 @@ public class SupplierControllerTests : IAsyncLifetime
     [Fact]
     public async Task Create_WithValidData_ShouldReturnCreated()
     {
-        await SetAuthTokenAsync();
         var createDto = new CreateSupplierDto
         {
             CompanyId = _companyId,
@@ -146,7 +140,6 @@ public class SupplierControllerTests : IAsyncLifetime
     [Fact]
     public async Task Create_WithDuplicateName_ShouldReturnBadRequest()
     {
-        await SetAuthTokenAsync();
         var createDto = new CreateSupplierDto
         {
             CompanyId = _companyId,
@@ -165,7 +158,6 @@ public class SupplierControllerTests : IAsyncLifetime
     [Fact]
     public async Task Update_WithValidData_ShouldReturnOk()
     {
-        await SetAuthTokenAsync();
         var createDto = new CreateSupplierDto
         {
             CompanyId = _companyId,
@@ -200,7 +192,6 @@ public class SupplierControllerTests : IAsyncLifetime
     [Fact]
     public async Task Update_WithInvalidId_ShouldReturnNotFound()
     {
-        await SetAuthTokenAsync();
         var invalidId = Guid.NewGuid();
         var updateDto = new UpdateSupplierDto
         {
@@ -218,7 +209,6 @@ public class SupplierControllerTests : IAsyncLifetime
     [Fact]
     public async Task Delete_WithValidId_ShouldReturnNoContent()
     {
-        await SetAuthTokenAsync();
         var createDto = new CreateSupplierDto
         {
             CompanyId = _companyId,
@@ -243,7 +233,6 @@ public class SupplierControllerTests : IAsyncLifetime
     [Fact]
     public async Task Delete_WithInvalidId_ShouldReturnNotFound()
     {
-        await SetAuthTokenAsync();
         var invalidId = Guid.NewGuid();
 
         // Act
