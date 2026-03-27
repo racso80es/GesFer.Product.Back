@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using GesFer.Product.Back.Infrastructure.Logging;
 using System.Text.Json;
@@ -8,6 +9,7 @@ namespace GesFer.Product.Back.Api.Controllers;
 /// Controlador para recibir logs del frontend (telemetría)
 /// Los logs se envían a Admin API mediante AsyncLogPublisher
 /// </summary>
+[Authorize]
 [ApiController]
 [Route("api/telemetry")]
 public class TelemetryController : ControllerBase

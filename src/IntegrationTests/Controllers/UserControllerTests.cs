@@ -42,7 +42,7 @@ public class UserControllerTests : IAsyncLifetime
         var response = await _client.PostAsJsonAsync("/api/auth/login", loginRequest);
         // TODO: Actualmente el CompanyId proviene del back api y falla el setup de admin.
         // Descomentar y arreglar el test (response.StatusCode.Should().Be(HttpStatusCode.OK);) en otra tarea.
-        if (response.StatusCode == HttpStatusCode.OK)
+        if (response.StatusCode == System.Net.HttpStatusCode.OK)
         {
             var loginResponse = await response.Content.ReadFromJsonAsync<LoginResponseDto>();
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", loginResponse!.Token);
