@@ -1,0 +1,12 @@
+{
+  "autor": "GesFer / Tekton",
+  "descripcionBreve": "Introduce norma evolution SddIA: Cúmulo, contrato v1.1, binarios Rust, CI y difusión IDE",
+  "tipoOperacion": "alta",
+  "contexto": "Ejecución feature sddia-evolution-sync-norma (plan P1–P5)",
+  "proyectoOrigenCambio": "GesFer.Product.Back",
+  "cambiosRealizados": [
+    { "anterior": "Sin registro centralizado de cambios en ./SddIA/", "nuevo": "Protocolo paths.sddiaEvolutionPath con UUID y validación CI" }
+  ],
+  "impacto": "Alto",
+  "replicacionInstrucciones": "docs/features/sddia-evolution-sync-norma/replicacion-entorno-sddia.md"
+}

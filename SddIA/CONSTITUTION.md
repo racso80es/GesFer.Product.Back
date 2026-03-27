@@ -75,3 +75,7 @@ La mejora continua (Kaizen) no es opcional; es estructural.
 
 *   **Simplicidad en la DI**: La Inyección de Dependencias debe ser clara y explícita, evitando la "magia" excesiva. Los contratos (interfaces) deben ser simples para facilitar la auditoría.
 *   **Desacoplamiento Histórico**: El proyecto aprende de GesFer ("Paciente 0"), pero no hereda su deuda técnica. La arquitectura es nueva y limpia.
+
+## 6. Trazabilidad del protocolo SddIA (evolution)
+
+Los cambios normativos o estructurales bajo `./SddIA/` deben quedar **auditables** según la norma **SddIA/norms/sddia-evolution-sync.md**: registro con **UUID v4**, índice en `paths.sddiaEvolutionLogFile` y detalle en `paths.sddiaEvolutionPath`, contrato en `paths.sddiaEvolutionContractFile`. Las rutas se resuelven **solo** vía Cúmulo (`SddIA/agents/cumulo.json` → `pathsContract`). Esta trazabilidad es independiente de la evolución de producto en `paths.evolutionPath` / `docs/evolution/`.

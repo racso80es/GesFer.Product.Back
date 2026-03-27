@@ -1,0 +1,16 @@
+---
+description: Refuerzo IDE — protocolo evolution SddIA (registro obligatorio bajo ./SddIA/).
+globs:
+  - SddIA/**/*
+alwaysApply: false
+---
+
+# SddIA evolution (IDE)
+
+- **Norma canónica:** `SddIA/norms/sddia-evolution-sync.md`
+- **Contrato:** `SddIA/evolution/evolution_contract.md` (rutas vía Cúmulo: `paths.sddiaEvolutionPath`, `paths.sddiaEvolutionContractFile`)
+- **Rutas:** solo `paths.*` en `SddIA/agents/cumulo.paths.json` — ver `SddIA/norms/paths-via-cumulo.md`
+
+**Checklist mínimo** al cambiar artefactos bajo `./SddIA/`: detalle `{uuid}.md` (UUID v4) + fila en `Evolution_log.md`; `tipo_operacion` alta | baja | modificación; registro vía binario Rust de la cápsula `paths.skillCapsules.sddia-evolution-register`, no `.ps1` como entrega principal.
+
+Si una regla del IDE contradice **SddIA** o **AGENTS.md**, prevalece SddIA. El cumplimiento fuerte está en CI y revisión humana.
