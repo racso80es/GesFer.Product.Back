@@ -329,7 +329,6 @@ public class UserControllerTests : IAsyncLifetime
         user.IsActive.Should().BeTrue(); // Por defecto debe ser activo
         user.Id.Should().NotBeEmpty();
         user.CreatedAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(5));
-        user.CompanyName.Should().NotBeNullOrEmpty();
     }
 
     [Fact]

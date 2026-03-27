@@ -30,7 +30,6 @@ public class GetUserByIdCommandHandler : ICommandHandler<GetUserByIdCommand, Use
         {
             Id = user.Id,
             CompanyId = user.CompanyId,
-            CompanyName = company?.Name ?? string.Empty,
             Username = user.Username,
             FirstName = user.FirstName,
             LastName = user.LastName,
