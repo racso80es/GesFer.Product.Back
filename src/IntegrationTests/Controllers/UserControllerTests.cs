@@ -1,3 +1,4 @@
+using GesFer.Product.Back.IntegrationTests.Helpers;
 using FluentAssertions;
 using GesFer.Product.Back.Application.DTOs.Auth;
 using GesFer.Product.Back.Application.DTOs.User;
@@ -23,7 +24,7 @@ public class UserControllerTests : IAsyncLifetime
 
     public async Task InitializeAsync()
     {
-        await SetAuthTokenAsync();
+        var token = await GetAuthTokenAsync();
     }
 
     public Task DisposeAsync()
@@ -31,7 +32,7 @@ public class UserControllerTests : IAsyncLifetime
         return Task.CompletedTask;
     }
 
-    private async Task SetAuthTokenAsync()
+    private async Task<string> GetAuthTokenAsync()
     {
         var loginRequest = new LoginRequestDto
         {
@@ -42,15 +43,15 @@ public class UserControllerTests : IAsyncLifetime
         var response = await _client.PostAsJsonAsync("/api/auth/login", loginRequest);
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         var loginResponse = await response.Content.ReadFromJsonAsync<LoginResponseDto>();
-        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", loginResponse!.Token);
+        return loginResponse!.Token;
     }
 
     [Fact]
     public async Task GetAll_WithValidToken_ShouldReturnListOfUsers()
     {
-        await SetAuthTokenAsync();
+        var token = await GetAuthTokenAsync();
 
-        var response = await _client.GetAsync("/api/user");
+        var response = await _client.GetWithAuthAsync("/api/user", token);
 
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         var users = await response.Content.ReadFromJsonAsync<List<UserDto>>();
@@ -70,10 +71,10 @@ public class UserControllerTests : IAsyncLifetime
     [Fact]
     public async Task GetById_WithValidId_ShouldReturnUser()
     {
-        await SetAuthTokenAsync();
+        var token = await GetAuthTokenAsync();
         var userId = Guid.Parse("99999999-9999-9999-9999-999999999999");
 
-        var response = await _client.GetAsync($"/api/user/{userId}");
+        var response = await _client.GetWithAuthAsync($"/api/user/{userId}", token);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -86,10 +87,10 @@ public class UserControllerTests : IAsyncLifetime
     [Fact]
     public async Task GetById_WithInvalidId_ShouldReturnNotFound()
     {
-        await SetAuthTokenAsync();
+        var token = await GetAuthTokenAsync();
         var invalidId = Guid.NewGuid();
 
-        var response = await _client.GetAsync($"/api/user/{invalidId}");
+        var response = await _client.GetWithAuthAsync($"/api/user/{invalidId}", token);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.NotFound);
@@ -98,7 +99,7 @@ public class UserControllerTests : IAsyncLifetime
     [Fact]
     public async Task Create_WithValidData_ShouldReturnCreated()
     {
-        await SetAuthTokenAsync();
+        var token = await GetAuthTokenAsync();
         var createDto = new CreateUserDto
         {
             CompanyId = _testCompanyId, // Será ignorado; controller usa claim
@@ -111,7 +112,7 @@ public class UserControllerTests : IAsyncLifetime
         };
 
         // Act
-        var response = await _client.PostAsJsonAsync("/api/user", createDto);
+        var response = await _client.PostAsJsonWithAuthAsync("/api/user", createDto, token);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.Created);
@@ -125,7 +126,7 @@ public class UserControllerTests : IAsyncLifetime
     [Fact]
     public async Task Create_WithDuplicateUsername_ShouldReturnBadRequest()
     {
-        await SetAuthTokenAsync();
+        var token = await GetAuthTokenAsync();
         var createDto = new CreateUserDto
         {
             CompanyId = _testCompanyId,
@@ -136,7 +137,7 @@ public class UserControllerTests : IAsyncLifetime
         };
 
         // Act
-        var response = await _client.PostAsJsonAsync("/api/user", createDto);
+        var response = await _client.PostAsJsonWithAuthAsync("/api/user", createDto, token);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
@@ -147,7 +148,7 @@ public class UserControllerTests : IAsyncLifetime
     [Fact]
     public async Task Update_WithValidData_ShouldReturnOk()
     {
-        await SetAuthTokenAsync();
+        var token = await GetAuthTokenAsync();
         var createDto = new CreateUserDto
         {
             CompanyId = _testCompanyId,
@@ -158,7 +159,7 @@ public class UserControllerTests : IAsyncLifetime
             Email = $"testupdate_{Guid.NewGuid():N}@empresa.com",
             Phone = "911111111"
         };
-        var createResponse = await _client.PostAsJsonAsync("/api/user", createDto);
+        var createResponse = await _client.PostAsJsonWithAuthAsync("/api/user", createDto, token);
         createResponse.StatusCode.Should().Be(HttpStatusCode.Created, 
             "El usuario de test debería crearse correctamente");
         var createdUser = await createResponse.Content.ReadFromJsonAsync<UserDto>();
@@ -176,7 +177,7 @@ public class UserControllerTests : IAsyncLifetime
         };
 
         // Act
-        var response = await _client.PutAsJsonAsync($"/api/user/{userId}", updateDto);
+        var response = await _client.PutAsJsonWithAuthAsync($"/api/user/{userId}", updateDto, token);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK, 
@@ -192,7 +193,7 @@ public class UserControllerTests : IAsyncLifetime
     [Fact]
     public async Task Update_WithPassword_ShouldUpdatePassword()
     {
-        await SetAuthTokenAsync();
+        var token = await GetAuthTokenAsync();
         var createDto = new CreateUserDto
         {
             CompanyId = _testCompanyId,
@@ -203,7 +204,7 @@ public class UserControllerTests : IAsyncLifetime
             Email = $"testpassword_{Guid.NewGuid():N}@empresa.com",
             Phone = "922222222"
         };
-        var createResponse = await _client.PostAsJsonAsync("/api/user", createDto);
+        var createResponse = await _client.PostAsJsonWithAuthAsync("/api/user", createDto, token);
         createResponse.StatusCode.Should().Be(HttpStatusCode.Created, 
             "El usuario de test debería crearse correctamente");
         var createdUser = await createResponse.Content.ReadFromJsonAsync<UserDto>();
@@ -220,7 +221,7 @@ public class UserControllerTests : IAsyncLifetime
         };
 
         // Act
-        var response = await _client.PutAsJsonAsync($"/api/user/{userId}", updateDto);
+        var response = await _client.PutAsJsonWithAuthAsync($"/api/user/{userId}", updateDto, token);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK, 
@@ -234,7 +235,7 @@ public class UserControllerTests : IAsyncLifetime
     [Fact]
     public async Task Update_WithInvalidId_ShouldReturnNotFound()
     {
-        await SetAuthTokenAsync();
+        var token = await GetAuthTokenAsync();
         var invalidId = Guid.NewGuid();
         var updateDto = new UpdateUserDto
         {
@@ -245,7 +246,7 @@ public class UserControllerTests : IAsyncLifetime
         };
 
         // Act
-        var response = await _client.PutAsJsonAsync($"/api/user/{invalidId}", updateDto);
+        var response = await _client.PutAsJsonWithAuthAsync($"/api/user/{invalidId}", updateDto, token);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.NotFound);
@@ -254,7 +255,7 @@ public class UserControllerTests : IAsyncLifetime
     [Fact]
     public async Task Delete_WithValidId_ShouldReturnNoContent()
     {
-        await SetAuthTokenAsync();
+        var token = await GetAuthTokenAsync();
         var createDto = new CreateUserDto
         {
             CompanyId = _testCompanyId,
@@ -263,29 +264,29 @@ public class UserControllerTests : IAsyncLifetime
             FirstName = "Eliminar",
             LastName = "Usuario"
         };
-        var createResponse = await _client.PostAsJsonAsync("/api/user", createDto);
+        var createResponse = await _client.PostAsJsonWithAuthAsync("/api/user", createDto, token);
         var createdUser = await createResponse.Content.ReadFromJsonAsync<UserDto>();
         var userId = createdUser!.Id;
 
         // Act
-        var response = await _client.DeleteAsync($"/api/user/{userId}");
+        var response = await _client.DeleteWithAuthAsync($"/api/user/{userId}", token);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.NoContent);
 
         // Verificar que el usuario ya no se puede obtener
-        var getResponse = await _client.GetAsync($"/api/user/{userId}");
+        var getResponse = await _client.GetWithAuthAsync($"/api/user/{userId}", token);
         getResponse.StatusCode.Should().Be(HttpStatusCode.NotFound);
     }
 
     [Fact]
     public async Task Delete_WithInvalidId_ShouldReturnNotFound()
     {
-        await SetAuthTokenAsync();
+        var token = await GetAuthTokenAsync();
         var invalidId = Guid.NewGuid();
 
         // Act
-        var response = await _client.DeleteAsync($"/api/user/{invalidId}");
+        var response = await _client.DeleteWithAuthAsync($"/api/user/{invalidId}", token);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.NotFound);
@@ -294,7 +295,7 @@ public class UserControllerTests : IAsyncLifetime
     [Fact]
     public async Task Test2P2_CreateUser_WithAllProperties_ShouldValidateAllFields()
     {
-        await SetAuthTokenAsync();
+        var token = await GetAuthTokenAsync();
         var languageId = Guid.Parse("10000000-0000-0000-0000-000000000001");
         var createDto = new CreateUserDto
         {
@@ -314,7 +315,7 @@ public class UserControllerTests : IAsyncLifetime
         };
 
         // Act
-        var response = await _client.PostAsJsonAsync("/api/user", createDto);
+        var response = await _client.PostAsJsonWithAuthAsync("/api/user", createDto, token);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.Created);
@@ -343,7 +344,7 @@ public class UserControllerTests : IAsyncLifetime
     [Fact]
     public async Task Test2P2_UpdateUser_WithAllProperties_ShouldValidateAllFields()
     {
-        await SetAuthTokenAsync();
+        var token = await GetAuthTokenAsync();
         var createDto = new CreateUserDto
         {
             CompanyId = _testCompanyId,
@@ -354,7 +355,7 @@ public class UserControllerTests : IAsyncLifetime
             Email = "original2p2@empresa.com",
             Phone = "911111111"
         };
-        var createResponse = await _client.PostAsJsonAsync("/api/user", createDto);
+        var createResponse = await _client.PostAsJsonWithAuthAsync("/api/user", createDto, token);
         var createdUser = await createResponse.Content.ReadFromJsonAsync<UserDto>();
         var userId = createdUser!.Id;
 
@@ -378,7 +379,7 @@ public class UserControllerTests : IAsyncLifetime
         };
 
         // Act
-        var response = await _client.PutAsJsonAsync($"/api/user/{userId}", updateDto);
+        var response = await _client.PutAsJsonWithAuthAsync($"/api/user/{userId}", updateDto, token);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);

@@ -1,3 +1,4 @@
+using GesFer.Product.Back.IntegrationTests.Helpers;
 using FluentAssertions;
 using GesFer.Product.Back.Application.DTOs.ArticleFamilies;
 using GesFer.Product.Back.Application.DTOs.Auth;
@@ -43,7 +44,7 @@ public class ArticleFamiliesControllerTests
 
     private async Task<Guid> CreateTaxTypeForCompanyAsync(string token)
     {
-        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
         var suffix = Guid.NewGuid().ToString("N")[..6]; // Code max 10 chars
         var createTax = new CreateTaxTypeDto
         {
@@ -52,7 +53,7 @@ public class ArticleFamiliesControllerTests
             Description = "Para tests",
             Value = 21m
         };
-        var taxResponse = await _client.PostAsJsonAsync("/api/tax-types", createTax);
+        var taxResponse = await _client.PostAsJsonWithAuthAsync("/api/tax-types", createTax, token);
         if (taxResponse.StatusCode != HttpStatusCode.Created)
         {
             var body = await taxResponse.Content.ReadAsStringAsync();
@@ -75,9 +76,9 @@ public class ArticleFamiliesControllerTests
     public async Task GetAll_WithToken_ShouldReturn200AndList()
     {
         var token = await GetAuthTokenAsync();
-        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-        var response = await _client.GetAsync("/api/article-families");
+
+        var response = await _client.GetWithAuthAsync("/api/article-families", token);
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         var list = await response.Content.ReadFromJsonAsync<List<ArticleFamilyDto>>();
         list.Should().NotBeNull();
@@ -96,7 +97,7 @@ public class ArticleFamiliesControllerTests
             Description = "Descripción test",
             TaxTypeId = taxTypeId
         };
-        var createResponse = await _client.PostAsJsonAsync("/api/article-families", createDto);
+        var createResponse = await _client.PostAsJsonWithAuthAsync("/api/article-families", createDto, token);
         createResponse.StatusCode.Should().Be(HttpStatusCode.Created);
         var created = await createResponse.Content.ReadFromJsonAsync<ArticleFamilyDto>();
         created.Should().NotBeNull();
@@ -104,7 +105,7 @@ public class ArticleFamiliesControllerTests
         created.Name.Should().Be("Familia Test");
         created.TaxTypeId.Should().Be(taxTypeId);
 
-        var getResponse = await _client.GetAsync($"/api/article-families/{created.Id}");
+        var getResponse = await _client.GetWithAuthAsync($"/api/article-families/{created.Id}", token);
         getResponse.StatusCode.Should().Be(HttpStatusCode.OK);
         var fetched = await getResponse.Content.ReadFromJsonAsync<ArticleFamilyDto>();
         fetched!.Id.Should().Be(created.Id);
@@ -123,7 +124,7 @@ public class ArticleFamiliesControllerTests
             Name = "Familia Para Actualizar",
             TaxTypeId = taxTypeId
         };
-        var createResponse = await _client.PostAsJsonAsync("/api/article-families", createDto);
+        var createResponse = await _client.PostAsJsonWithAuthAsync("/api/article-families", createDto, token);
         createResponse.StatusCode.Should().Be(HttpStatusCode.Created);
         var created = await createResponse.Content.ReadFromJsonAsync<ArticleFamilyDto>();
         created.Should().NotBeNull();
@@ -136,7 +137,7 @@ public class ArticleFamiliesControllerTests
             Description = "Nueva descripción",
             TaxTypeId = taxTypeId
         };
-        var updateResponse = await _client.PutAsJsonAsync($"/api/article-families/{created.Id}", updateDto);
+        var updateResponse = await _client.PutAsJsonWithAuthAsync($"/api/article-families/{created.Id}", updateDto, token);
         updateResponse.StatusCode.Should().Be(HttpStatusCode.OK);
         var updated = await updateResponse.Content.ReadFromJsonAsync<ArticleFamilyDto>();
         updated!.Name.Should().Be("Familia Actualizada");
@@ -155,12 +156,12 @@ public class ArticleFamiliesControllerTests
             Name = "Familia Para Borrar",
             TaxTypeId = taxTypeId
         };
-        var createResponse = await _client.PostAsJsonAsync("/api/article-families", createDto);
+        var createResponse = await _client.PostAsJsonWithAuthAsync("/api/article-families", createDto, token);
         createResponse.StatusCode.Should().Be(HttpStatusCode.Created);
         var created = await createResponse.Content.ReadFromJsonAsync<ArticleFamilyDto>();
         created.Should().NotBeNull();
 
-        var deleteResponse = await _client.DeleteAsync($"/api/article-families/{created!.Id}");
+        var deleteResponse = await _client.DeleteWithAuthAsync($"/api/article-families/{created!.Id}", token);
         deleteResponse.StatusCode.Should().Be(HttpStatusCode.NoContent);
     }
 }

@@ -1,3 +1,4 @@
+using GesFer.Product.Back.IntegrationTests.Helpers;
 using FluentAssertions;
 using GesFer.Product.Back.Application.DTOs.Auth;
 using GesFer.Product.Back.Application.DTOs.Supplier;
@@ -23,7 +24,7 @@ public class SupplierControllerTests : IAsyncLifetime
 
     public async Task InitializeAsync()
     {
-        await SetAuthTokenAsync();
+        var token = await GetAuthTokenAsync();
     }
 
     public Task DisposeAsync()
@@ -31,7 +32,7 @@ public class SupplierControllerTests : IAsyncLifetime
         return Task.CompletedTask;
     }
 
-    private async Task SetAuthTokenAsync()
+    private async Task<string> GetAuthTokenAsync()
     {
         var loginRequest = new LoginRequestDto
         {
@@ -42,15 +43,15 @@ public class SupplierControllerTests : IAsyncLifetime
         var response = await _client.PostAsJsonAsync("/api/auth/login", loginRequest);
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         var loginResponse = await response.Content.ReadFromJsonAsync<LoginResponseDto>();
-        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", loginResponse!.Token);
+        return loginResponse!.Token;
     }
 
     [Fact]
     public async Task GetAll_WithValidToken_ShouldReturnListOfSuppliers()
     {
-        await SetAuthTokenAsync();
+        var token = await GetAuthTokenAsync();
 
-        var response = await _client.GetAsync("/api/supplier");
+        var response = await _client.GetWithAuthAsync("/api/supplier", token);
 
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         var suppliers = await response.Content.ReadFromJsonAsync<List<SupplierDto>>();
@@ -60,16 +61,16 @@ public class SupplierControllerTests : IAsyncLifetime
     [Fact]
     public async Task GetAll_WithValidToken_ShouldReturnFilteredSuppliers()
     {
-        await SetAuthTokenAsync();
+        var token = await GetAuthTokenAsync();
         var createDto = new CreateSupplierDto
         {
             CompanyId = _companyId,
             Name = "Proveedor Test",
             TaxId = "B11111119"
         };
-        await _client.PostAsJsonAsync("/api/supplier", createDto);
+        await _client.PostAsJsonWithAuthAsync("/api/supplier", createDto, token);
 
-        var response = await _client.GetAsync("/api/supplier");
+        var response = await _client.GetWithAuthAsync("/api/supplier", token);
 
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         var suppliers = await response.Content.ReadFromJsonAsync<List<SupplierDto>>();
@@ -81,19 +82,19 @@ public class SupplierControllerTests : IAsyncLifetime
     [Fact]
     public async Task GetById_WithValidId_ShouldReturnSupplier()
     {
-        await SetAuthTokenAsync();
+        var token = await GetAuthTokenAsync();
         var createDto = new CreateSupplierDto
         {
             CompanyId = _companyId,
             Name = "Proveedor Test GetById",
             TaxId = "B22222228"
         };
-        var createResponse = await _client.PostAsJsonAsync("/api/supplier", createDto);
+        var createResponse = await _client.PostAsJsonWithAuthAsync("/api/supplier", createDto, token);
         var createdSupplier = await createResponse.Content.ReadFromJsonAsync<SupplierDto>();
         var supplierId = createdSupplier!.Id;
 
         // Act
-        var response = await _client.GetAsync($"/api/supplier/{supplierId}");
+        var response = await _client.GetWithAuthAsync($"/api/supplier/{supplierId}", token);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -106,11 +107,11 @@ public class SupplierControllerTests : IAsyncLifetime
     [Fact]
     public async Task GetById_WithInvalidId_ShouldReturnNotFound()
     {
-        await SetAuthTokenAsync();
+        var token = await GetAuthTokenAsync();
         var invalidId = Guid.NewGuid();
 
         // Act
-        var response = await _client.GetAsync($"/api/supplier/{invalidId}");
+        var response = await _client.GetWithAuthAsync($"/api/supplier/{invalidId}", token);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.NotFound);
@@ -119,7 +120,7 @@ public class SupplierControllerTests : IAsyncLifetime
     [Fact]
     public async Task Create_WithValidData_ShouldReturnCreated()
     {
-        await SetAuthTokenAsync();
+        var token = await GetAuthTokenAsync();
         var createDto = new CreateSupplierDto
         {
             CompanyId = _companyId,
@@ -131,7 +132,7 @@ public class SupplierControllerTests : IAsyncLifetime
         };
 
         // Act
-        var response = await _client.PostAsJsonAsync("/api/supplier", createDto);
+        var response = await _client.PostAsJsonWithAuthAsync("/api/supplier", createDto, token);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.Created);
@@ -146,17 +147,17 @@ public class SupplierControllerTests : IAsyncLifetime
     [Fact]
     public async Task Create_WithDuplicateName_ShouldReturnBadRequest()
     {
-        await SetAuthTokenAsync();
+        var token = await GetAuthTokenAsync();
         var createDto = new CreateSupplierDto
         {
             CompanyId = _companyId,
             Name = "Proveedor Duplicado",
             TaxId = "B55555551"
         };
-        await _client.PostAsJsonAsync("/api/supplier", createDto);
+        await _client.PostAsJsonWithAuthAsync("/api/supplier", createDto, token);
 
         // Act - Intentar crear otro con el mismo nombre
-        var response = await _client.PostAsJsonAsync("/api/supplier", createDto);
+        var response = await _client.PostAsJsonWithAuthAsync("/api/supplier", createDto, token);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
@@ -165,14 +166,14 @@ public class SupplierControllerTests : IAsyncLifetime
     [Fact]
     public async Task Update_WithValidData_ShouldReturnOk()
     {
-        await SetAuthTokenAsync();
+        var token = await GetAuthTokenAsync();
         var createDto = new CreateSupplierDto
         {
             CompanyId = _companyId,
             Name = "Proveedor Para Actualizar",
             TaxId = "B66666660"
         };
-        var createResponse = await _client.PostAsJsonAsync("/api/supplier", createDto);
+        var createResponse = await _client.PostAsJsonWithAuthAsync("/api/supplier", createDto, token);
         var createdSupplier = await createResponse.Content.ReadFromJsonAsync<SupplierDto>();
         var supplierId = createdSupplier!.Id;
 
@@ -187,7 +188,7 @@ public class SupplierControllerTests : IAsyncLifetime
         };
 
         // Act
-        var response = await _client.PutAsJsonAsync($"/api/supplier/{supplierId}", updateDto);
+        var response = await _client.PutAsJsonWithAuthAsync($"/api/supplier/{supplierId}", updateDto, token);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -200,7 +201,7 @@ public class SupplierControllerTests : IAsyncLifetime
     [Fact]
     public async Task Update_WithInvalidId_ShouldReturnNotFound()
     {
-        await SetAuthTokenAsync();
+        var token = await GetAuthTokenAsync();
         var invalidId = Guid.NewGuid();
         var updateDto = new UpdateSupplierDto
         {
@@ -209,7 +210,7 @@ public class SupplierControllerTests : IAsyncLifetime
         };
 
         // Act
-        var response = await _client.PutAsJsonAsync($"/api/supplier/{invalidId}", updateDto);
+        var response = await _client.PutAsJsonWithAuthAsync($"/api/supplier/{invalidId}", updateDto, token);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.NotFound);
@@ -218,36 +219,36 @@ public class SupplierControllerTests : IAsyncLifetime
     [Fact]
     public async Task Delete_WithValidId_ShouldReturnNoContent()
     {
-        await SetAuthTokenAsync();
+        var token = await GetAuthTokenAsync();
         var createDto = new CreateSupplierDto
         {
             CompanyId = _companyId,
             Name = "Proveedor Para Eliminar",
             TaxId = "B77777779"
         };
-        var createResponse = await _client.PostAsJsonAsync("/api/supplier", createDto);
+        var createResponse = await _client.PostAsJsonWithAuthAsync("/api/supplier", createDto, token);
         var createdSupplier = await createResponse.Content.ReadFromJsonAsync<SupplierDto>();
         var supplierId = createdSupplier!.Id;
 
         // Act
-        var response = await _client.DeleteAsync($"/api/supplier/{supplierId}");
+        var response = await _client.DeleteWithAuthAsync($"/api/supplier/{supplierId}", token);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.NoContent);
 
         // Verificar que el proveedor ya no se puede obtener
-        var getResponse = await _client.GetAsync($"/api/supplier/{supplierId}");
+        var getResponse = await _client.GetWithAuthAsync($"/api/supplier/{supplierId}", token);
         getResponse.StatusCode.Should().Be(HttpStatusCode.NotFound);
     }
 
     [Fact]
     public async Task Delete_WithInvalidId_ShouldReturnNotFound()
     {
-        await SetAuthTokenAsync();
+        var token = await GetAuthTokenAsync();
         var invalidId = Guid.NewGuid();
 
         // Act
-        var response = await _client.DeleteAsync($"/api/supplier/{invalidId}");
+        var response = await _client.DeleteWithAuthAsync($"/api/supplier/{invalidId}", token);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.NotFound);
