@@ -1,5 +1,5 @@
 ---
-feature_name: actualizacion_readme
+feature_name: actualizacion-readme
 version: 1.0.0
 status: done
 ---
