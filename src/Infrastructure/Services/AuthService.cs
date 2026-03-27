@@ -49,8 +49,7 @@ public class AuthService : IAuthService
             .Include(u => u.Language)
             .Where(u => u.Username == normalizedUsername
                 && u.CompanyId == company.Id
-                && u.IsActive
-                && u.DeletedAt == null)
+                && u.IsActive)
             .FirstOrDefaultAsync();
 
         if (user == null)

@@ -1,5 +1,4 @@
 using FluentAssertions;
-using GesFer.Product.Back.Application.DTOs.Auth;
 using GesFer.Product.Back.Application.DTOs.Customer;
 using System.Net;
 using System.Net.Http.Headers;
