@@ -12,6 +12,7 @@ namespace GesFer.Product.Back.Api.Controllers;
 /// Controlador para el dashboard administrativo en Product API
 /// Expone métricas para que sean consumidas por Admin API
 /// </summary>
+[Authorize]
 [ApiController]
 [Route("api/dashboard")]
 public class DashboardController : ControllerBase

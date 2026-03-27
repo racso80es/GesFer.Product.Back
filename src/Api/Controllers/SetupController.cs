@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using GesFer.Product.Back.Api.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,6 +7,7 @@ namespace GesFer.Product.Back.Api.Controllers;
 /// <summary>
 /// Controlador para inicialización y configuración del entorno
 /// </summary>
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class SetupController : ControllerBase
