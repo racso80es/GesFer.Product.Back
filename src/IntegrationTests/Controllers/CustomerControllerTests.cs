@@ -1,4 +1,3 @@
-using GesFer.Product.Back.IntegrationTests.Helpers;
 using FluentAssertions;
 using GesFer.Product.Back.Application.DTOs.Auth;
 using GesFer.Product.Back.Application.DTOs.Customer;
@@ -20,28 +19,13 @@ public class CustomerControllerTests
     {
         _fixture = fixture;
         _client = fixture.Factory.CreateClient();
-    }
-
-    private async Task<string> GetAuthTokenAsync()
-    {
-        var loginRequest = new LoginRequestDto
-        {
-            Empresa = "Empresa Demo",
-            Usuario = "admin",
-            Contraseña = "admin123"
-        };
-        var response = await _client.PostAsJsonAsync("/api/auth/login", loginRequest);
-        response.StatusCode.Should().Be(HttpStatusCode.OK);
-        var loginResponse = await response.Content.ReadFromJsonAsync<LoginResponseDto>();
-        return loginResponse!.Token;
+        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _fixture.AdminToken);
     }
 
     [Fact]
     public async Task GetAll_WithValidToken_ShouldReturnListOfCustomers()
     {
-        var token = await GetAuthTokenAsync();
-
-        var response = await _client.GetWithAuthAsync("/api/customer", token);
+        var response = await _client.GetAsync("/api/customer");
 
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         var customers = await response.Content.ReadFromJsonAsync<List<CustomerDto>>();
@@ -51,16 +35,15 @@ public class CustomerControllerTests
     [Fact]
     public async Task GetAll_WithValidToken_ShouldReturnFilteredCustomers()
     {
-        var token = await GetAuthTokenAsync();
         var createDto = new CreateCustomerDto
         {
             CompanyId = _companyId,
             Name = "Cliente Test",
             TaxId = "B11111119"
         };
-        await _client.PostAsJsonWithAuthAsync("/api/customer", createDto, token);
+        await _client.PostAsJsonAsync("/api/customer", createDto);
 
-        var response = await _client.GetWithAuthAsync("/api/customer", token);
+        var response = await _client.GetAsync("/api/customer");
 
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         var customers = await response.Content.ReadFromJsonAsync<List<CustomerDto>>();
@@ -72,19 +55,18 @@ public class CustomerControllerTests
     [Fact]
     public async Task GetById_WithValidId_ShouldReturnCustomer()
     {
-        var token = await GetAuthTokenAsync();
         var createDto = new CreateCustomerDto
         {
             CompanyId = _companyId,
             Name = "Cliente Test GetById",
             TaxId = "B22222228"
         };
-        var createResponse = await _client.PostAsJsonWithAuthAsync("/api/customer", createDto, token);
+        var createResponse = await _client.PostAsJsonAsync("/api/customer", createDto);
         var createdCustomer = await createResponse.Content.ReadFromJsonAsync<CustomerDto>();
         var customerId = createdCustomer!.Id;
 
         // Act
-        var response = await _client.GetWithAuthAsync($"/api/customer/{customerId}", token);
+        var response = await _client.GetAsync($"/api/customer/{customerId}");
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -97,11 +79,10 @@ public class CustomerControllerTests
     [Fact]
     public async Task GetById_WithInvalidId_ShouldReturnNotFound()
     {
-        var token = await GetAuthTokenAsync();
         var invalidId = Guid.NewGuid();
 
         // Act
-        var response = await _client.GetWithAuthAsync($"/api/customer/{invalidId}", token);
+        var response = await _client.GetAsync($"/api/customer/{invalidId}");
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.NotFound);
@@ -110,7 +91,6 @@ public class CustomerControllerTests
     [Fact]
     public async Task Create_WithValidData_ShouldReturnCreated()
     {
-        var token = await GetAuthTokenAsync();
         var createDto = new CreateCustomerDto
         {
             CompanyId = _companyId,
@@ -122,7 +102,7 @@ public class CustomerControllerTests
         };
 
         // Act
-        var response = await _client.PostAsJsonWithAuthAsync("/api/customer", createDto, token);
+        var response = await _client.PostAsJsonAsync("/api/customer", createDto);
 
         // Assert
         var content = await response.Content.ReadAsStringAsync();
@@ -138,17 +118,16 @@ public class CustomerControllerTests
     [Fact]
     public async Task Create_WithDuplicateName_ShouldReturnBadRequest()
     {
-        var token = await GetAuthTokenAsync();
         var createDto = new CreateCustomerDto
         {
             CompanyId = _companyId,
             Name = "Cliente Duplicado",
             TaxId = "B55555551"
         };
-        await _client.PostAsJsonWithAuthAsync("/api/customer", createDto, token);
+        await _client.PostAsJsonAsync("/api/customer", createDto);
 
         // Act - Intentar crear otro con el mismo nombre
-        var response = await _client.PostAsJsonWithAuthAsync("/api/customer", createDto, token);
+        var response = await _client.PostAsJsonAsync("/api/customer", createDto);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
@@ -157,14 +136,13 @@ public class CustomerControllerTests
     [Fact]
     public async Task Update_WithValidData_ShouldReturnOk()
     {
-        var token = await GetAuthTokenAsync();
         var createDto = new CreateCustomerDto
         {
             CompanyId = _companyId,
             Name = "Cliente Para Actualizar",
             TaxId = "B66666660"
         };
-        var createResponse = await _client.PostAsJsonWithAuthAsync("/api/customer", createDto, token);
+        var createResponse = await _client.PostAsJsonAsync("/api/customer", createDto);
         var createdCustomer = await createResponse.Content.ReadFromJsonAsync<CustomerDto>();
         var customerId = createdCustomer!.Id;
 
@@ -179,7 +157,7 @@ public class CustomerControllerTests
         };
 
         // Act
-        var response = await _client.PutAsJsonWithAuthAsync($"/api/customer/{customerId}", updateDto, token);
+        var response = await _client.PutAsJsonAsync($"/api/customer/{customerId}", updateDto);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -192,7 +170,6 @@ public class CustomerControllerTests
     [Fact]
     public async Task Update_WithInvalidId_ShouldReturnNotFound()
     {
-        var token = await GetAuthTokenAsync();
         var invalidId = Guid.NewGuid();
         var updateDto = new UpdateCustomerDto
         {
@@ -201,7 +178,7 @@ public class CustomerControllerTests
         };
 
         // Act
-        var response = await _client.PutAsJsonWithAuthAsync($"/api/customer/{invalidId}", updateDto, token);
+        var response = await _client.PutAsJsonAsync($"/api/customer/{invalidId}", updateDto);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.NotFound);
@@ -210,36 +187,34 @@ public class CustomerControllerTests
     [Fact]
     public async Task Delete_WithValidId_ShouldReturnNoContent()
     {
-        var token = await GetAuthTokenAsync();
         var createDto = new CreateCustomerDto
         {
             CompanyId = _companyId,
             Name = "Cliente Para Eliminar",
             TaxId = "B77777779"
         };
-        var createResponse = await _client.PostAsJsonWithAuthAsync("/api/customer", createDto, token);
+        var createResponse = await _client.PostAsJsonAsync("/api/customer", createDto);
         var createdCustomer = await createResponse.Content.ReadFromJsonAsync<CustomerDto>();
         var customerId = createdCustomer!.Id;
 
         // Act
-        var response = await _client.DeleteWithAuthAsync($"/api/customer/{customerId}", token);
+        var response = await _client.DeleteAsync($"/api/customer/{customerId}");
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.NoContent);
 
         // Verificar que el cliente ya no se puede obtener
-        var getResponse = await _client.GetWithAuthAsync($"/api/customer/{customerId}", token);
+        var getResponse = await _client.GetAsync($"/api/customer/{customerId}");
         getResponse.StatusCode.Should().Be(HttpStatusCode.NotFound);
     }
 
     [Fact]
     public async Task Delete_WithInvalidId_ShouldReturnNotFound()
     {
-        var token = await GetAuthTokenAsync();
         var invalidId = Guid.NewGuid();
 
         // Act
-        var response = await _client.DeleteWithAuthAsync($"/api/customer/{invalidId}", token);
+        var response = await _client.DeleteAsync($"/api/customer/{invalidId}");
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.NotFound);

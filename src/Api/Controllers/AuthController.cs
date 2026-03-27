@@ -70,7 +70,7 @@ public class AuthController : ControllerBase
             var empresa = request.Company ?? request.Empresa ?? string.Empty;
             var usuario = request.Username ?? request.Usuario ?? string.Empty;
 
-            _logger.LogError(ex, "Error al realizar login para empresa: {Empresa}, usuario: {Usuario}. Error: {Message}", 
+            _logger.LogError(ex, "Error al realizar login para empresa: {Empresa}, usuario: {Usuario}. Error: {Message}",
                 empresa, usuario, ex.Message);
             _logger.LogError(ex, "Stack trace: {StackTrace}", ex.StackTrace);
             return StatusCode(500, new { message = "Error interno del servidor", error = ex.Message });

@@ -24,32 +24,13 @@ public class MyCompanyControllerTests
     {
         _fixture = fixture;
         _client = fixture.Factory.CreateClient();
-    }
-
-    private async Task<string> GetAuthTokenAsync()
-    {
-        var loginRequest = new LoginRequestDto
-        {
-            Empresa = "Empresa Demo",
-            Usuario = "admin",
-            Contraseña = "admin123"
-        };
-        var response = await _client.PostAsJsonAsync("/api/auth/login", loginRequest);
-        response.StatusCode.Should().Be(HttpStatusCode.OK, "Login debe funcionar para obtener token con company_id");
-        var loginResponse = await response.Content.ReadFromJsonAsync<LoginResponseDto>();
-        loginResponse.Should().NotBeNull();
-        loginResponse!.Token.Should().NotBeNullOrEmpty();
-        loginResponse.CompanyId.Should().Be(DemoCompanyId);
-        return loginResponse.Token;
+        _client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _fixture.AdminToken);
     }
 
     [Fact]
     public async Task GetMyCompany_WithValidToken_ShouldReturnCompany()
     {
-        var token = await GetAuthTokenAsync();
-
-
-        var response = await _client.GetWithAuthAsync("/api/MyCompany", token);
+        var response = await _client.GetAsync("/api/MyCompany");
 
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         var company = await response.Content.ReadFromJsonAsync<AdminCompanyDto>();
@@ -61,6 +42,7 @@ public class MyCompanyControllerTests
     [Fact]
     public async Task GetMyCompany_WithoutToken_ShouldReturn401()
     {
+        _client.DefaultRequestHeaders.Authorization = null;
         var response = await _client.GetAsync("/api/MyCompany");
         response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
     }
@@ -68,11 +50,9 @@ public class MyCompanyControllerTests
     [Fact]
     public async Task UpdateMyCompany_WithValidToken_ShouldReturn200()
     {
-        var token = await GetAuthTokenAsync();
-
         var updateDto = new AdminUpdateCompanyDto
         {
-            Name = "Empresa Demo",
+            Name = "Empresa Demo Actualizada",
             TaxId = "B87654323",
             Address = "Calle Gran Vía, 2",
             Phone = "912345679",
@@ -80,18 +60,19 @@ public class MyCompanyControllerTests
             IsActive = true
         };
 
-        var response = await _client.PutAsJsonWithAuthAsync("/api/MyCompany", updateDto, token);
+        var response = await _client.PutAsJsonAsync("/api/MyCompany", updateDto);
 
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         var company = await response.Content.ReadFromJsonAsync<AdminCompanyDto>();
         company.Should().NotBeNull();
-        company!.Name.Should().Be("Empresa Demo");
+        company!.Name.Should().Be("Empresa Demo Actualizada");
         company.Address.Should().Be("Calle Gran Vía, 2");
     }
 
     [Fact]
     public async Task UpdateMyCompany_WithoutToken_ShouldReturn401()
     {
+        _client.DefaultRequestHeaders.Authorization = null;
         var updateDto = new AdminUpdateCompanyDto
         {
             Name = "Test",

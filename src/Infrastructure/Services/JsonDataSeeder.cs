@@ -769,7 +769,11 @@ public class JsonDataSeeder
                 }
                 else
                 {
-                    // CASCADA RESILIENTE: Agregar ID a lista blanca si ya existe y está activa
+                    // Usuario ya activo: si el seed define contraseña explícita, alinear hash (demo/test reproducibles)
+                    if (!string.IsNullOrEmpty(userData.Password))
+                    {
+                        existing.PasswordHash = passwordHash;
+                    }
                     validUserIds.Add(existing.Id);
                 }
             }

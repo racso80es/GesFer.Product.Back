@@ -75,86 +75,86 @@ try
             Version = "v1",
             Description = "API RESTful para gestión de compra/venta de chatarra"
         });
-    
-    // Configurar para mostrar valores por defecto desde el atributo [DefaultValue]
-    c.SchemaFilter<GesFer.Product.Back.Api.Swagger.DefaultValueSchemaFilter>();
-    c.UseInlineDefinitionsForEnums();
-});
 
-// Configurar CORS
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAll", policy =>
-    {
-        policy.AllowAnyOrigin()
-              .AllowAnyMethod()
-              .AllowAnyHeader();
+        // Configurar para mostrar valores por defecto desde el atributo [DefaultValue]
+        c.SchemaFilter<GesFer.Product.Back.Api.Swagger.DefaultValueSchemaFilter>();
+        c.UseInlineDefinitionsForEnums();
     });
-});
 
-// Seguridad: HTTPS en todos los entornos. Redirección HTTP → HTTPS.
-if (isDevelopment)
-    builder.Services.Configure<HttpsRedirectionOptions>(options => { options.HttpsPort = 5001; });
-
-// Configurar inyección de dependencias
-builder.Services.AddApplicationServices(builder.Configuration, builder.Environment);
-
-// Healthchecks
-builder.Services.AddHealthChecks();
-
-// Configurar autenticación JWT
-var jwtSecretKey = builder.Configuration["JwtSettings:SecretKey"] 
-    ?? throw new InvalidOperationException("JwtSettings:SecretKey no está configurado");
-
-// Validar que la clave tenga al menos 32 caracteres (256 bits) para SHA-256 (HS256)
-if (jwtSecretKey.Length < 32)
-{
-    throw new InvalidOperationException(
-        $"JwtSettings:SecretKey debe tener al menos 32 caracteres (256 bits) para cumplir con el algoritmo SHA-256 (HS256). " +
-        $"Longitud actual: {jwtSecretKey.Length} caracteres.");
-}
-
-var jwtIssuer = builder.Configuration["JwtSettings:Issuer"] 
-    ?? throw new InvalidOperationException("JwtSettings:Issuer no está configurado");
-var jwtAudience = builder.Configuration["JwtSettings:Audience"] 
-    ?? throw new InvalidOperationException("JwtSettings:Audience no está configurado");
-
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-})
-.AddJwtBearer(options =>
-{
-    options.TokenValidationParameters = new TokenValidationParameters
+    // Configurar CORS
+    builder.Services.AddCors(options =>
     {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        ValidIssuer = jwtIssuer,
-        ValidAudience = jwtAudience,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecretKey)),
-        ClockSkew = TimeSpan.Zero, // Eliminar el tiempo de gracia por defecto
-        // Configurar el tipo de claim para roles
-        // ASP.NET Core busca roles en el claim especificado por RoleClaimType
-        // Por defecto usa "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
-        // que es el valor de ClaimTypes.Role
-        RoleClaimType = System.Security.Claims.ClaimTypes.Role
-    };
-});
-
-builder.Services.AddAuthorization(options =>
-{
-    // Política de autorización que exige el claim role: Admin
-    options.AddPolicy("AdminOnly", policy =>
-    {
-        policy.RequireAuthenticatedUser();
-        policy.RequireRole("Admin");
+        options.AddPolicy("AllowAll", policy =>
+        {
+            policy.AllowAnyOrigin()
+                  .AllowAnyMethod()
+                  .AllowAnyHeader();
+        });
     });
-});
 
-var app = builder.Build();
+    // Seguridad: HTTPS en todos los entornos. Redirección HTTP → HTTPS.
+    if (isDevelopment)
+        builder.Services.Configure<HttpsRedirectionOptions>(options => { options.HttpsPort = 5001; });
+
+    // Configurar inyección de dependencias
+    builder.Services.AddApplicationServices(builder.Configuration, builder.Environment);
+
+    // Healthchecks
+    builder.Services.AddHealthChecks();
+
+    // Configurar autenticación JWT
+    var jwtSecretKey = builder.Configuration["JwtSettings:SecretKey"]
+        ?? throw new InvalidOperationException("JwtSettings:SecretKey no está configurado");
+
+    // Validar que la clave tenga al menos 32 caracteres (256 bits) para SHA-256 (HS256)
+    if (jwtSecretKey.Length < 32)
+    {
+        throw new InvalidOperationException(
+            $"JwtSettings:SecretKey debe tener al menos 32 caracteres (256 bits) para cumplir con el algoritmo SHA-256 (HS256). " +
+            $"Longitud actual: {jwtSecretKey.Length} caracteres.");
+    }
+
+    var jwtIssuer = builder.Configuration["JwtSettings:Issuer"]
+        ?? throw new InvalidOperationException("JwtSettings:Issuer no está configurado");
+    var jwtAudience = builder.Configuration["JwtSettings:Audience"]
+        ?? throw new InvalidOperationException("JwtSettings:Audience no está configurado");
+
+    builder.Services.AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = jwtIssuer,
+            ValidAudience = jwtAudience,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecretKey)),
+            ClockSkew = TimeSpan.Zero, // Eliminar el tiempo de gracia por defecto
+                                       // Configurar el tipo de claim para roles
+                                       // ASP.NET Core busca roles en el claim especificado por RoleClaimType
+                                       // Por defecto usa "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
+                                       // que es el valor de ClaimTypes.Role
+            RoleClaimType = System.Security.Claims.ClaimTypes.Role
+        };
+    });
+
+    builder.Services.AddAuthorization(options =>
+    {
+        // Política de autorización que exige el claim role: Admin
+        options.AddPolicy("AdminOnly", policy =>
+        {
+            policy.RequireAuthenticatedUser();
+            policy.RequireRole("Admin");
+        });
+    });
+
+    var app = builder.Build();
 
     // Agregar sink de Admin API después de que los servicios estén disponibles
     // Esto permite que los logs se envíen a Admin API mediante AsyncLogPublisher
@@ -163,7 +163,7 @@ var app = builder.Build();
     {
         var adminApiSink = new AdminApiLogSink(app.Services);
         var minimumLevel = isDevelopment ? LogEventLevel.Verbose : LogEventLevel.Information;
-        
+
         // Reconfigurar Serilog para incluir el sink de Admin API
         Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Is(isDevelopment ? LogEventLevel.Verbose : LogEventLevel.Information)
@@ -177,34 +177,34 @@ var app = builder.Build();
             .CreateLogger();
     }
 
-// Configurar el pipeline HTTP
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
+    // Configurar el pipeline HTTP
+    if (app.Environment.IsDevelopment())
     {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "GesFer API v1");
-        c.RoutePrefix = string.Empty; // Swagger en la raíz
-    });
-}
+        app.UseSwagger();
+        app.UseSwaggerUI(c =>
+        {
+            c.SwaggerEndpoint("/swagger/v1/swagger.json", "GesFer API v1");
+            c.RoutePrefix = string.Empty; // Swagger en la raíz
+        });
+    }
 
-// CORS debe ir ANTES de UseHttpsRedirection para que las peticiones preflight funcionen.
-// Redirección HTTP → HTTPS en todos los entornos (puerto HTTPS en Development: 5001).
-app.UseCors("AllowAll");
+    // CORS debe ir ANTES de UseHttpsRedirection para que las peticiones preflight funcionen.
+    // Redirección HTTP → HTTPS en todos los entornos (puerto HTTPS en Development: 5001).
+    app.UseCors("AllowAll");
 
-// KAIZEN: Skip HTTPS Redirection in Testing/Development to allow start-api health check and local dev.
-if (!app.Environment.IsEnvironment("Testing") && !app.Environment.IsDevelopment())
-{
-    app.UseHttpsRedirection();
-}
-else
-{
-    Log.Information("HTTPS Redirection skipped in {Env} environment", app.Environment.EnvironmentName);
-}
+    // KAIZEN: Skip HTTPS Redirection in Testing/Development to allow start-api health check and local dev.
+    if (!app.Environment.IsEnvironment("Testing") && !app.Environment.IsDevelopment())
+    {
+        app.UseHttpsRedirection();
+    }
+    else
+    {
+        Log.Information("HTTPS Redirection skipped in {Env} environment", app.Environment.EnvironmentName);
+    }
 
-// Autenticación y autorización deben ir en este orden
-app.UseAuthentication();
-app.UseAuthorization();
+    // Autenticación y autorización deben ir en este orden
+    app.UseAuthentication();
+    app.UseAuthorization();
 
     app.MapHealthChecks("/health");
     app.MapControllers();

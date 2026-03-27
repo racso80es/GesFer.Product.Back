@@ -31,7 +31,7 @@ public class JsonDataSeederTests
     {
         // Arrange
         var services = new ServiceCollection();
-        
+
         // Configurar DbContext en memoria para el test
         services.AddDbContext<ApplicationDbContext>(options =>
         {
@@ -57,14 +57,14 @@ public class JsonDataSeederTests
 
         var serviceProvider = services.BuildServiceProvider();
         using var scope = serviceProvider.CreateScope();
-        
+
         var seeder = scope.ServiceProvider.GetRequiredService<JsonDataSeeder>();
         var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
         // Act
         // Intentar cargar datos maestros (debe encontrar el archivo)
         var masterDataResult = await seeder.SeedMasterDataAsync();
-        
+
         // Intentar cargar datos de demostración (debe encontrar el archivo)
         var demoDataResult = await seeder.SeedDemoDataAsync();
 
@@ -75,7 +75,7 @@ public class JsonDataSeederTests
             $"master-data.json DEBE ser encontrado. " +
             $"Esto valida que JsonDataSeeder puede encontrar los archivos desde el contexto de ejecución actual. " +
             $"Si falla, significa que la lógica de búsqueda de archivos necesita ser corregida.");
-        
+
         demoDataResult.Loaded.Should().BeTrue(
             $"demo-data.json DEBE ser encontrado. " +
             $"Esto valida que JsonDataSeeder puede encontrar los archivos desde el contexto de ejecución actual. " +
@@ -92,7 +92,7 @@ public class JsonDataSeederTests
     {
         // Arrange
         var services = new ServiceCollection();
-        
+
         // Configurar DbContext en memoria
         services.AddDbContext<ApplicationDbContext>(options =>
         {
@@ -116,7 +116,7 @@ public class JsonDataSeederTests
 
         var serviceProvider = services.BuildServiceProvider();
         using var scope = serviceProvider.CreateScope();
-        
+
         var seeder = scope.ServiceProvider.GetRequiredService<JsonDataSeeder>();
         var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
@@ -140,7 +140,7 @@ public class JsonDataSeederTests
     {
         // Arrange
         var services = new ServiceCollection();
-        
+
         // Configurar DbContext en memoria
         services.AddDbContext<ApplicationDbContext>(options =>
         {
@@ -164,7 +164,7 @@ public class JsonDataSeederTests
 
         var serviceProvider = services.BuildServiceProvider();
         using var scope = serviceProvider.CreateScope();
-        
+
         var seeder = scope.ServiceProvider.GetRequiredService<JsonDataSeeder>();
         var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
@@ -185,7 +185,7 @@ public class JsonDataSeederTests
         // Crear JSON temporal con 1 Empresa Inválida y 1 Usuario vinculado
         var invalidCompanyId = Guid.Parse("99999999-9999-9999-9999-999999999999");
         var orphanUserId = Guid.Parse("88888888-8888-8888-8888-888888888888");
-        
+
         var testData = new
         {
             languages = new[]
@@ -236,7 +236,7 @@ public class JsonDataSeederTests
             Directory.CreateDirectory(seedsPath);
         }
         var expectedFilePath = Path.Combine(seedsPath, "test-data.json");
-        
+
         // Guardar el archivo original si existe
         string? originalContent = null;
         var originalExists = File.Exists(expectedFilePath);
@@ -244,7 +244,7 @@ public class JsonDataSeederTests
         {
             originalContent = await File.ReadAllTextAsync(expectedFilePath);
         }
-        
+
         try
         {
             // Escribir el archivo de test
@@ -263,7 +263,7 @@ public class JsonDataSeederTests
             var userCount = await context.Users
                 .IgnoreQueryFilters()
                 .CountAsync();
-            
+
             userCount.Should().Be(0, "No debe haber usuarios insertados porque la empresa padre fue rechazada");
         }
         finally

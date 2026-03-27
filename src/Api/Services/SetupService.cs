@@ -27,19 +27,19 @@ public class SetupService : ISetupService
         _logger = logger;
         _configuration = configuration;
         _serviceProvider = serviceProvider;
-        
+
         // Obtener la ruta raíz del proyecto (donde está docker-compose.yml)
         // Desde src/Api/bin/Debug/net8.0/ necesitamos subir 5 niveles
         var apiPath = AppContext.BaseDirectory;
         var currentDir = new DirectoryInfo(apiPath);
-        
+
         // Buscar la carpeta raíz que contiene docker-compose.yml
         var rootDir = currentDir;
         while (rootDir != null && !File.Exists(Path.Combine(rootDir.FullName, "docker-compose.yml")))
         {
             rootDir = rootDir.Parent;
         }
-        
+
         _projectRoot = rootDir?.FullName ?? Path.GetFullPath(Path.Combine(apiPath, "..", "..", "..", "..", ".."));
     }
 
@@ -52,7 +52,7 @@ public class SetupService : ISetupService
             // Paso 1: Detener y eliminar contenedores
             result.Steps.Add("1. Deteniendo y eliminando contenedores Docker...");
             _logger.LogInformation("Deteniendo contenedores Docker...");
-            
+
             var stopResult = await ExecuteDockerCommandAsync("docker-compose down -v");
             if (!stopResult.Success)
             {
@@ -67,7 +67,7 @@ public class SetupService : ISetupService
             // Paso 2: Eliminar volúmenes (opcional, para empezar desde cero)
             result.Steps.Add("2. Limpiando volúmenes Docker...");
             _logger.LogInformation("Limpiando volúmenes...");
-            
+
             var volumeResult = await ExecuteDockerCommandAsync("docker volume prune -f");
             if (volumeResult.Success)
             {
@@ -77,7 +77,7 @@ public class SetupService : ISetupService
             // Paso 3: Eliminar directorio de datos de MySQL (bind mount)
             result.Steps.Add("3. Eliminando datos persistentes de MySQL...");
             _logger.LogInformation("Eliminando directorio docker_data/mysql...");
-            
+
             var mysqlDataPath = Path.Combine(_projectRoot, "docker_data", "mysql");
             if (Directory.Exists(mysqlDataPath))
             {
@@ -103,7 +103,7 @@ public class SetupService : ISetupService
             // Paso 4: Recrear contenedores
             result.Steps.Add("4. Creando contenedores Docker...");
             _logger.LogInformation("Creando contenedores Docker...");
-            
+
             var upResult = await ExecuteDockerCommandAsync("docker-compose up -d");
             if (!upResult.Success)
             {
@@ -117,7 +117,7 @@ public class SetupService : ISetupService
             // Paso 5: Esperar a que MySQL esté listo
             result.Steps.Add("5. Esperando a que MySQL esté listo...");
             _logger.LogInformation("Esperando a que MySQL esté listo...");
-            
+
             var mysqlReady = await WaitForMySqlReadyAsync(TimeSpan.FromMinutes(2), "gesfer_product_db");
             if (!mysqlReady)
             {
@@ -131,14 +131,14 @@ public class SetupService : ISetupService
             // Paso 6: Crear base de datos
             result.Steps.Add("6. Creando base de datos...");
             _logger.LogInformation("Creando base de datos...");
-            
+
             await CreateDatabaseAsync();
             result.Steps.Add("   ✓ Base de datos creada");
 
             // Paso 7: Insertar datos maestros desde JSON (idiomas, permisos, grupos)
             result.Steps.Add("7. Insertando datos maestros desde JSON...");
             _logger.LogInformation("Insertando datos maestros desde JSON...");
-            
+
             try
             {
                 using (var scope = _serviceProvider.CreateScope())
@@ -168,7 +168,7 @@ public class SetupService : ISetupService
             // Paso 9: Insertar datos iniciales (incluyendo usuarios) desde JSON
             result.Steps.Add("9. Insertando datos iniciales desde JSON (empresa, grupos, permisos, usuarios, proveedores, clientes)...");
             _logger.LogInformation("Insertando datos iniciales desde JSON...");
-            
+
             var seedResult = await SeedInitialDataAsync();
             if (!seedResult.Success)
             {
@@ -184,7 +184,7 @@ public class SetupService : ISetupService
             // Paso 10: Verificar que los usuarios se insertaron correctamente
             result.Steps.Add("10. Verificando usuarios insertados...");
             _logger.LogInformation("Verificando usuarios insertados...");
-            
+
             var verifyResult = await VerifyUsersInsertedAsync();
             if (verifyResult.Success)
             {
@@ -225,7 +225,7 @@ public class SetupService : ISetupService
         {
             // Escapar la ruta para PowerShell
             var escapedPath = _projectRoot.Replace("'", "''");
-            
+
             var processInfo = new ProcessStartInfo
             {
                 FileName = "powershell.exe",
@@ -285,7 +285,7 @@ public class SetupService : ISetupService
             {
                 var result = await ExecuteDockerCommandAsync(
                     $"docker exec {containerName} mysqladmin ping -h localhost -u root -prootpassword");
-                
+
                 if (result.Success)
                 {
                     return true;
