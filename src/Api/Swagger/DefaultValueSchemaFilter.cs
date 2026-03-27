@@ -18,7 +18,7 @@ public class DefaultValueSchemaFilter : ISchemaFilter
             return;
 
         var properties = context.Type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-        
+
         foreach (var property in properties)
         {
             var defaultValueAttribute = property.GetCustomAttribute<DefaultValueAttribute>();
@@ -26,7 +26,7 @@ public class DefaultValueSchemaFilter : ISchemaFilter
             {
                 // Swagger usa camelCase para los nombres de propiedades en JSON
                 var propertyName = char.ToLowerInvariant(property.Name[0]) + property.Name.Substring(1);
-                
+
                 // Buscar la propiedad tanto en camelCase como en PascalCase
                 string? foundKey = null;
                 if (schema.Properties != null)
@@ -42,11 +42,11 @@ public class DefaultValueSchemaFilter : ISchemaFilter
                         foundKey = property.Name;
                     }
                 }
-                
+
                 if (foundKey != null && schema.Properties != null)
                 {
                     var propertySchema = schema.Properties[foundKey];
-                    
+
                     // Crear el valor OpenAPI apropiado según el tipo
                     var openApiValue = CreateOpenApiValue(defaultValueAttribute.Value, property.PropertyType);
                     if (openApiValue != null)

@@ -51,6 +51,12 @@
       "rule": "Domain Entities (SddIA Ecosystem)",
       "description": "Entities that integrate the Token contract (paths.tokensPath) are domain entities. They must respect structure: Markdown with Frontmatter YAML (single .md per entity). Exception: tokens may be JSON-only per tokens-contract. Norm: SddIA/norms/entidades-dominio-ecosistema-sddia.md.",
       "severity": "HIGH"
+    },
+    {
+      "id": "L8_SDDIA_EVOLUTION",
+      "rule": "SddIA protocol traceability",
+      "description": "Any material change under ./SddIA/ must be recorded under paths.sddiaEvolutionPath with UUID v4 detail file and index update, per SddIA/norms/sddia-evolution-sync.md and evolution_contract.md. Registration via Rust skills capsule; not optional for agents.",
+      "severity": "CRITICAL"
     }
   ],
   "configuration": {

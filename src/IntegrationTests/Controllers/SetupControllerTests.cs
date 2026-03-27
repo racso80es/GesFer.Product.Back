@@ -6,6 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Net.Http.Json;
+using System.Net.Http.Headers;
+using GesFer.Product.Back.Application.DTOs.Auth;
 using Xunit;
 
 namespace GesFer.Product.Back.IntegrationTests.Controllers;
@@ -23,7 +26,9 @@ public class SetupControllerTests
     {
         _fixture = fixture;
         _client = fixture.Factory.CreateClient();
+        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _fixture.AdminToken);
     }
+
 
     [Fact]
     public async Task Initialize_EndpointShouldExist()
@@ -52,7 +57,7 @@ public class SetupControllerTests
 
         users.Should().NotBeEmpty("Debería haber al menos un usuario insertado");
         users.Should().Contain(u => u.Username == "admin", "Debería existir el usuario 'admin'");
-        
+
         var adminUser = users.First(u => u.Username == "admin");
         adminUser.FirstName.Should().Be("Administrador");
         adminUser.LastName.Should().Be("Sistema");
@@ -62,18 +67,18 @@ public class SetupControllerTests
 
         adminUser.CompanyId.Should().NotBeEmpty();
         adminUser.PasswordHash.Should().NotBeNullOrEmpty("El usuario debería tener un hash de contraseña");
-        
+
         // Verificar que el usuario tiene grupo asignado
         var userGroups = await context.UserGroups
             .Where(ug => ug.UserId == adminUser.Id && ug.DeletedAt == null)
             .ToListAsync();
         userGroups.Should().NotBeEmpty("El usuario debería tener al menos un grupo asignado");
-        
+
         // Verificar que el usuario tiene permisos
         var userPermissions = await context.UserPermissions
             .Where(up => up.UserId == adminUser.Id && up.DeletedAt == null)
             .ToListAsync();
-        
+
         userPermissions.Should().NotBeEmpty("El usuario debería tener al menos un permiso directo");
     }
 
@@ -85,7 +90,7 @@ public class SetupControllerTests
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
-        
+
         var content = await response.Content.ReadAsStringAsync();
         content.Should().Contain("endpoint");
     }

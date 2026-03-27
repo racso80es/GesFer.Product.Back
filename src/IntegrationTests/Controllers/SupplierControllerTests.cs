@@ -1,5 +1,4 @@
 using FluentAssertions;
-using GesFer.Product.Back.Application.DTOs.Auth;
 using GesFer.Product.Back.Application.DTOs.Supplier;
 using System.Net;
 using System.Net.Http.Headers;
@@ -9,7 +8,7 @@ using Xunit;
 namespace GesFer.Product.Back.IntegrationTests.Controllers;
 
 [Collection("DatabaseStep")]
-public class SupplierControllerTests : IAsyncLifetime
+public class SupplierControllerTests
 {
     private readonly HttpClient _client;
     private readonly DatabaseFixture _fixture;
@@ -19,35 +18,7 @@ public class SupplierControllerTests : IAsyncLifetime
     {
         _fixture = fixture;
         _client = fixture.Factory.CreateClient();
-    }
-
-    public async Task InitializeAsync()
-    {
-        await SetAuthTokenAsync();
-    }
-
-    public Task DisposeAsync()
-    {
-        return Task.CompletedTask;
-    }
-
-    private async Task SetAuthTokenAsync()
-    {
-        var loginRequest = new LoginRequestDto
-        {
-            Empresa = "Empresa Demo",
-            Usuario = "admin",
-            Contraseña = "admin123"
-        };
-        var response = await _client.PostAsJsonAsync("/api/auth/login", loginRequest);
-        // TODO: Actualmente el CompanyId proviene del back api y falla el setup de admin.
-        // Descomentar y arreglar el test (response.StatusCode.Should().Be(HttpStatusCode.OK);) en otra tarea.
-        response.StatusCode.Should().Be(HttpStatusCode.OK);
-        if (response.StatusCode == HttpStatusCode.OK)
-        {
-            var loginResponse = await response.Content.ReadFromJsonAsync<LoginResponseDto>();
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", loginResponse!.Token);
-        }
+        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _fixture.AdminToken);
     }
 
     [Fact]

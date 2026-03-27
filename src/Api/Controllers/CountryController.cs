@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using GesFer.Product.Back.Application.Commands.Country;
 using GesFer.Product.Back.Application.Common.Interfaces;
 using GesFer.Product.Back.Application.DTOs.Country;
@@ -8,6 +9,7 @@ namespace GesFer.Product.Back.Api.Controllers;
 /// <summary>
 /// Controlador para gestión de países
 /// </summary>
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class CountryController : ControllerBase

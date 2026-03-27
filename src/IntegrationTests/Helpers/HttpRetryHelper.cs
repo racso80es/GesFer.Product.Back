@@ -33,7 +33,7 @@ public static class HttpRetryHelper
             try
             {
                 response = await requestFunc(httpClient);
-                
+
                 // Si no es 404, retornar inmediatamente (éxito o error definitivo)
                 if (response.StatusCode != HttpStatusCode.NotFound)
                 {

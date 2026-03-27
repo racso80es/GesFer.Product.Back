@@ -25,7 +25,7 @@ public static class TestDataSeeder
         var existingGroupPermissions = await context.GroupPermissions.IgnoreQueryFilters().ToListAsync();
         var existingSuppliers = await context.Suppliers.IgnoreQueryFilters().ToListAsync();
         var existingCustomers = await context.Customers.IgnoreQueryFilters().ToListAsync();
-        
+
         context.Users.RemoveRange(existingUsers);
         context.Groups.RemoveRange(existingGroups);
         context.Permissions.RemoveRange(existingPermissions);

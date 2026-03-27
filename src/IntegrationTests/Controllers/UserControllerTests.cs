@@ -1,5 +1,4 @@
 using FluentAssertions;
-using GesFer.Product.Back.Application.DTOs.Auth;
 using GesFer.Product.Back.Application.DTOs.User;
 using System.Net;
 using System.Net.Http.Headers;
@@ -9,7 +8,7 @@ using Xunit;
 namespace GesFer.Product.Back.IntegrationTests.Controllers;
 
 [Collection("DatabaseStep")]
-public class UserControllerTests : IAsyncLifetime
+public class UserControllerTests
 {
     private readonly HttpClient _client;
     private readonly DatabaseFixture _fixture;
@@ -19,35 +18,7 @@ public class UserControllerTests : IAsyncLifetime
     {
         _fixture = fixture;
         _client = fixture.Factory.CreateClient();
-    }
-
-    public async Task InitializeAsync()
-    {
-        await SetAuthTokenAsync();
-    }
-
-    public Task DisposeAsync()
-    {
-        return Task.CompletedTask;
-    }
-
-    private async Task SetAuthTokenAsync()
-    {
-        var loginRequest = new LoginRequestDto
-        {
-            Empresa = "Empresa Demo",
-            Usuario = "admin",
-            Contraseña = "admin123"
-        };
-        var response = await _client.PostAsJsonAsync("/api/auth/login", loginRequest);
-        // TODO: Actualmente el CompanyId proviene del back api y falla el setup de admin.
-        // Descomentar y arreglar el test (response.StatusCode.Should().Be(HttpStatusCode.OK);) en otra tarea.
-        response.StatusCode.Should().Be(HttpStatusCode.OK);
-        if (response.StatusCode == HttpStatusCode.OK)
-        {
-            var loginResponse = await response.Content.ReadFromJsonAsync<LoginResponseDto>();
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", loginResponse!.Token);
-        }
+        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _fixture.AdminToken);
     }
 
     [Fact]
@@ -157,12 +128,12 @@ public class UserControllerTests : IAsyncLifetime
             Phone = "911111111"
         };
         var createResponse = await _client.PostAsJsonAsync("/api/user", createDto);
-        createResponse.StatusCode.Should().Be(HttpStatusCode.Created, 
+        createResponse.StatusCode.Should().Be(HttpStatusCode.Created,
             "El usuario de test debería crearse correctamente");
         var createdUser = await createResponse.Content.ReadFromJsonAsync<UserDto>();
         createdUser.Should().NotBeNull();
         var userId = createdUser!.Id;
-        
+
         var updateDto = new UpdateUserDto
         {
             Username = "usuario_test_update_actualizado",
@@ -177,7 +148,7 @@ public class UserControllerTests : IAsyncLifetime
         var response = await _client.PutAsJsonAsync($"/api/user/{userId}", updateDto);
 
         // Assert
-        response.StatusCode.Should().Be(HttpStatusCode.OK, 
+        response.StatusCode.Should().Be(HttpStatusCode.OK,
             $"La actualización debería devolver OK, pero devolvió {response.StatusCode}. " +
             $"Respuesta: {await response.Content.ReadAsStringAsync()}");
         var user = await response.Content.ReadFromJsonAsync<UserDto>();
@@ -201,12 +172,12 @@ public class UserControllerTests : IAsyncLifetime
             Phone = "922222222"
         };
         var createResponse = await _client.PostAsJsonAsync("/api/user", createDto);
-        createResponse.StatusCode.Should().Be(HttpStatusCode.Created, 
+        createResponse.StatusCode.Should().Be(HttpStatusCode.Created,
             "El usuario de test debería crearse correctamente");
         var createdUser = await createResponse.Content.ReadFromJsonAsync<UserDto>();
         createdUser.Should().NotBeNull();
         var userId = createdUser!.Id;
-        
+
         var updateDto = new UpdateUserDto
         {
             Username = createdUser.Username, // Mantener el mismo username
@@ -220,7 +191,7 @@ public class UserControllerTests : IAsyncLifetime
         var response = await _client.PutAsJsonAsync($"/api/user/{userId}", updateDto);
 
         // Assert
-        response.StatusCode.Should().Be(HttpStatusCode.OK, 
+        response.StatusCode.Should().Be(HttpStatusCode.OK,
             $"La actualización debería devolver OK, pero devolvió {response.StatusCode}. " +
             $"Respuesta: {await response.Content.ReadAsStringAsync()}");
         var user = await response.Content.ReadFromJsonAsync<UserDto>();
@@ -313,7 +284,7 @@ public class UserControllerTests : IAsyncLifetime
         response.StatusCode.Should().Be(HttpStatusCode.Created);
         var user = await response.Content.ReadFromJsonAsync<UserDto>();
         user.Should().NotBeNull();
-        
+
         // Validar todas las propiedades (CompanyId viene del claim)
         user!.CompanyId.Should().Be(_testCompanyId);
         user.Username.Should().Be(createDto.Username);
@@ -376,7 +347,7 @@ public class UserControllerTests : IAsyncLifetime
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         var user = await response.Content.ReadFromJsonAsync<UserDto>();
         user.Should().NotBeNull();
-        
+
         // Validar todas las propiedades
         user!.Id.Should().Be(userId);
         user.Username.Should().Be(updateDto.Username);

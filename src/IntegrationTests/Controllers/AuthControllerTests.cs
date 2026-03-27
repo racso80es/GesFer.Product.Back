@@ -42,10 +42,10 @@ public class AuthControllerTests
         var response = await _client.PostAsJsonAsync("/api/auth/login", request);
 
         // Assert
-        response.StatusCode.Should().Be(HttpStatusCode.OK, 
+        response.StatusCode.Should().Be(HttpStatusCode.OK,
             $"El endpoint debería devolver 200 OK, pero devolvió {response.StatusCode}. " +
             $"Respuesta: {await response.Content.ReadAsStringAsync()}");
-        
+
         var loginResponse = await response.Content.ReadFromJsonAsync<LoginResponseDto>();
         loginResponse.Should().NotBeNull("La respuesta no debería ser null");
         loginResponse!.Username.Should().Be("admin");
@@ -82,9 +82,9 @@ public class AuthControllerTests
             $"Respuesta: {responseContent}");
 
         // Verificar que no haya mensajes de error de base de datos
-        responseContent.Should().NotContain("doesn't exist", 
+        responseContent.Should().NotContain("doesn't exist",
             "No debería haber errores de tablas faltantes en la base de datos");
-        responseContent.Should().NotContain("Table", 
+        responseContent.Should().NotContain("Table",
             "No debería haber errores relacionados con tablas de base de datos");
 
         // Si no es 500, debería ser 200 OK
@@ -118,7 +118,7 @@ public class AuthControllerTests
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
-        
+
         var content = await response.Content.ReadAsStringAsync();
         content.Should().Contain("Credenciales inválidas");
     }
@@ -188,7 +188,7 @@ public class AuthControllerTests
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
-        
+
         var permissions = await response.Content.ReadFromJsonAsync<List<string>>();
         permissions.Should().NotBeNull();
         permissions!.Should().NotBeEmpty();
@@ -208,7 +208,7 @@ public class AuthControllerTests
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
-        
+
         var permissions = await response.Content.ReadFromJsonAsync<List<string>>();
         permissions.Should().NotBeNull();
         permissions!.Should().BeEmpty();
@@ -247,17 +247,17 @@ public class AuthControllerTests
         // Verificar primero que el hash en la base de datos sea el correcto
         using var scope = _fixture.Services.CreateScope();
         var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-        
+
         var demoCompanyId = Guid.Parse("11111111-1111-1111-1111-111111111115");
         var userFromDb = await context.Users
             .FirstOrDefaultAsync(u => u.Username == knownUsername && u.CompanyId == demoCompanyId);
-        
+
         userFromDb.Should().NotBeNull(
             $"El usuario '{knownUsername}' de la empresa '{knownCompany}' debe existir en la base de datos de prueba");
-        
+
         userFromDb!.IsActive.Should().BeTrue(
             $"El usuario '{knownUsername}' debe estar activo");
-        
+
         // KAIZEN FIX: No comparar el string del hash directamente, ya que BCrypt genera salts aleatorios
         // y el hash puede cambiar incluso para la misma contraseña si se regenera el seed.
         // En su lugar, verificar funcionalmente que la contraseña coincide con el hash almacenado.
