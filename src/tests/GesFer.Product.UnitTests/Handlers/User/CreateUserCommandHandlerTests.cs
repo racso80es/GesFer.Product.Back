@@ -51,7 +51,6 @@ public class CreateUserCommandHandlerTests
         result.Should().NotBeNull();
         result.Username.Should().Be("testuser");
         result.CompanyId.Should().Be(companyId);
-        result.CompanyName.Should().Be("Test Company");
         result.Email.Should().Be("test@example.com");
 
         var userInDb = await _context.Users.FirstOrDefaultAsync(u => u.Username == "testuser");

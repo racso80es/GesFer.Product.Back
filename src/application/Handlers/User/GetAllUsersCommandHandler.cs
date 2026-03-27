@@ -11,13 +11,11 @@ namespace GesFer.Product.Back.Application.Handlers.User;
 public class GetAllUsersCommandHandler : ICommandHandler<GetAllUsersCommand, List<UserDto>>
 {
     private readonly ApplicationDbContext _context;
-    private readonly IAdminApiClient _adminApiClient;
     private readonly ILogger<GetAllUsersCommandHandler> _logger;
 
-    public GetAllUsersCommandHandler(ApplicationDbContext context, IAdminApiClient adminApiClient, ILogger<GetAllUsersCommandHandler> logger)
+    public GetAllUsersCommandHandler(ApplicationDbContext context, ILogger<GetAllUsersCommandHandler> logger)
     {
         _context = context;
-        _adminApiClient = adminApiClient;
         _logger = logger;
     }
 
@@ -33,19 +31,10 @@ public class GetAllUsersCommandHandler : ICommandHandler<GetAllUsersCommand, Lis
                 .Select(u => new { u.Id, u.CompanyId, u.Username, u.FirstName, u.LastName, u.Email, u.Phone, u.Address, u.PostalCodeId, u.CityId, u.StateId, u.CountryId, u.LanguageId, u.IsActive, u.CreatedAt, u.UpdatedAt })
                 .ToListAsync(cancellationToken);
 
-            var companyIds = list.Select(u => u.CompanyId).Distinct().ToList();
-            var companyNames = new Dictionary<Guid, string>();
-            foreach (var id in companyIds)
-            {
-                var c = await _adminApiClient.GetCompanyAsync(id);
-                if (c != null) companyNames[id] = c.Name;
-            }
-
             return list.Select(u => new UserDto
             {
                 Id = u.Id,
                 CompanyId = u.CompanyId,
-                CompanyName = companyNames.GetValueOrDefault(u.CompanyId, string.Empty),
                 Username = u.Username,
                 FirstName = u.FirstName,
                 LastName = u.LastName,

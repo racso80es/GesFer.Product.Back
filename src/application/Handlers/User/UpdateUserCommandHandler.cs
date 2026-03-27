@@ -113,7 +113,6 @@ public class UpdateUserCommandHandler : ICommandHandler<UpdateUserCommand, UserD
         {
             Id = user.Id,
             CompanyId = user.CompanyId,
-            CompanyName = company?.Name ?? string.Empty,
             Username = user.Username,
             FirstName = user.FirstName,
             LastName = user.LastName,
