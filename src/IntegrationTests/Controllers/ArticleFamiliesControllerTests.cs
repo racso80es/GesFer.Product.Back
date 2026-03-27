@@ -23,27 +23,11 @@ public class ArticleFamiliesControllerTests
     {
         _fixture = fixture;
         _client = fixture.Factory.CreateClient();
+        _client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _fixture.AdminToken);
     }
 
-    private async Task<string> GetAuthTokenAsync()
+    private async Task<Guid> CreateTaxTypeForCompanyAsync()
     {
-        var loginRequest = new LoginRequestDto
-        {
-            Empresa = "Empresa Demo",
-            Usuario = "admin",
-            Contraseña = "admin123"
-        };
-        var response = await _client.PostAsJsonAsync("/api/auth/login", loginRequest);
-        response.StatusCode.Should().Be(HttpStatusCode.OK, "Login debe funcionar para obtener token con company_id");
-        var loginResponse = await response.Content.ReadFromJsonAsync<LoginResponseDto>();
-        loginResponse.Should().NotBeNull();
-        loginResponse!.Token.Should().NotBeNullOrEmpty();
-        return loginResponse.Token;
-    }
-
-    private async Task<Guid> CreateTaxTypeForCompanyAsync(string token)
-    {
-        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
         var suffix = Guid.NewGuid().ToString("N")[..6]; // Code max 10 chars
         var createTax = new CreateTaxTypeDto
         {
@@ -74,8 +58,6 @@ public class ArticleFamiliesControllerTests
     [Fact]
     public async Task GetAll_WithToken_ShouldReturn200AndList()
     {
-        var token = await GetAuthTokenAsync();
-        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
         var response = await _client.GetAsync("/api/article-families");
         response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -86,8 +68,7 @@ public class ArticleFamiliesControllerTests
     [Fact]
     public async Task Create_WithValidData_ShouldReturn201AndGetById_ShouldReturnSame()
     {
-        var token = await GetAuthTokenAsync();
-        var taxTypeId = await CreateTaxTypeForCompanyAsync(token);
+        var taxTypeId = await CreateTaxTypeForCompanyAsync();
 
         var createDto = new CreateArticleFamilyDto
         {
@@ -114,8 +95,7 @@ public class ArticleFamiliesControllerTests
     [Fact]
     public async Task Update_WithValidData_ShouldReturn200()
     {
-        var token = await GetAuthTokenAsync();
-        var taxTypeId = await CreateTaxTypeForCompanyAsync(token);
+        var taxTypeId = await CreateTaxTypeForCompanyAsync();
 
         var createDto = new CreateArticleFamilyDto
         {
@@ -146,8 +126,7 @@ public class ArticleFamiliesControllerTests
     [Fact]
     public async Task Delete_WithValidId_ShouldReturn204()
     {
-        var token = await GetAuthTokenAsync();
-        var taxTypeId = await CreateTaxTypeForCompanyAsync(token);
+        var taxTypeId = await CreateTaxTypeForCompanyAsync();
 
         var createDto = new CreateArticleFamilyDto
         {

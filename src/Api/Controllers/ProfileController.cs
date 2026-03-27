@@ -33,7 +33,7 @@ public class ProfileController : ControllerBase
         {
             // Extraer el Cursor ID del Claim NameIdentifier
             var cursorId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            
+
             if (string.IsNullOrEmpty(cursorId))
             {
                 return Unauthorized(new { message = "Cursor ID no encontrado en el token" });

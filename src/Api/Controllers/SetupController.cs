@@ -46,7 +46,7 @@ public class SetupController : ControllerBase
         try
         {
             _logger.LogWarning("Iniciando inicialización completa del entorno...");
-            
+
             var result = await _setupService.InitializeEnvironmentAsync();
 
             if (result.Success)
