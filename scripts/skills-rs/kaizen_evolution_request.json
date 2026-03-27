@@ -1,0 +1,1 @@
+{"autor": "Jules", "descripcionBreve": "Improve seeding performance by batching SaveChangesAsync in MasterDataSeeder", "tipoOperacion": "Refactor", "contexto": "Kaizen", "proyectoOrigenCambio": "GesFer.Product.Back", "impacto": "Bajo", "cambiosRealizados": []}
