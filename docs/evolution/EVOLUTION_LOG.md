@@ -19,3 +19,9 @@ Registro de cambios arquitectónicos y features del proyecto.
 **Resumen:** Resolución de conflictos con main, refactor de namespaces eliminando dependencias de Shared, estandarización a `GesFer.Product.Back.*`. Incluye namespaces IntegrationTests y actualización de Dockerfile.
 
 **Documentación:** [docs/features/fix-namespaces-remove-shared/](docs/features/fix-namespaces-remove-shared/)
+
+## [2024-05-23] fix/integration-tests-auth-fix
+**Feature:** Refactor authentication in integration tests
+**Description:** Refactored integration tests to use a single authentication request (`AdminToken`) via `DatabaseFixture`, significantly improving test suite performance, test isolation, and eliminating 58 failures due to `401 Unauthorized` responses. The authentication header is now injected globally instead of executing `POST /api/auth/login` in the setup step of every individual test class instance.
+**Reference:** [docs/TASKS/DONE/Kaizen_2024_05_23.md]
+**Status:** DONE

@@ -50,8 +50,8 @@ public class IntegrationTestWebAppFactory<TProgram> : WebApplicationFactory<TPro
                     string connectionString;
                     lock (_connectionStringLock)
                     {
-                         if (_connectionString == null)
-                         {
+                        if (_connectionString == null)
+                        {
                             // This should not happen if InitializeAsync works correctly,
                             // but if it does, it means we are in a broken state.
                             // Fallback to InMemory or throw?
@@ -59,8 +59,8 @@ public class IntegrationTestWebAppFactory<TProgram> : WebApplicationFactory<TPro
                             // if services were already built, but here we are defining the service.
                             // However, let's assume if connection string is null, something went wrong.
                             throw new InvalidOperationException("Connection string not available for MySql, but _useInMemory is false.");
-                         }
-                         connectionString = _connectionString;
+                        }
+                        connectionString = _connectionString;
                     }
                     options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 0)));
                 }

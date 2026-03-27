@@ -4,6 +4,8 @@ using GesFer.Product.Back.Application.DTOs.Country;
 using GesFer.Product.Back.Application.DTOs.State;
 using System.Net;
 using System.Net.Http.Json;
+using System.Net.Http.Headers;
+using GesFer.Product.Back.Application.DTOs.Auth;
 using Xunit;
 
 namespace GesFer.Product.Back.IntegrationTests.Controllers;
@@ -19,7 +21,9 @@ public class CityControllerTests
     {
         _fixture = fixture;
         _client = fixture.Factory.CreateClient();
+        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _fixture.AdminToken);
     }
+
 
     private async Task<Guid> GetOrCreateTestCountryAsync()
     {
@@ -34,7 +38,7 @@ public class CityControllerTests
                 return existingCountry.Id;
             }
         }
-        
+
         // Si no existe, crearlo
         var createCountryDto = new CreateCountryDto
         {
@@ -48,7 +52,7 @@ public class CityControllerTests
             var createdCountry = await createCountryResponse.Content.ReadFromJsonAsync<CountryDto>();
             return createdCountry!.Id;
         }
-        
+
         // Si falla, intentar obtener el primer país disponible
         if (getAllResponse.IsSuccessStatusCode)
         {
@@ -58,7 +62,7 @@ public class CityControllerTests
                 return countries.First().Id;
             }
         }
-        
+
         throw new InvalidOperationException("No se pudo crear ni encontrar un país de prueba");
     }
 
@@ -75,7 +79,7 @@ public class CityControllerTests
                 return existingState.Id;
             }
         }
-        
+
         // Si no existe, crearlo
         var createStateDto = new CreateStateDto
         {
@@ -89,7 +93,7 @@ public class CityControllerTests
             var createdState = await createStateResponse.Content.ReadFromJsonAsync<StateDto>();
             return createdState!.Id;
         }
-        
+
         throw new InvalidOperationException("No se pudo crear ni encontrar un estado de prueba");
     }
 
@@ -111,7 +115,7 @@ public class CityControllerTests
         // Arrange
         var testCountryId = await GetOrCreateTestCountryAsync();
         var testStateId = await GetOrCreateTestStateAsync(testCountryId);
-        
+
         // Act
         var response = await _client.GetAsync($"/api/city?stateId={testStateId}");
 
@@ -127,7 +131,7 @@ public class CityControllerTests
     {
         // Arrange
         var testCountryId = await GetOrCreateTestCountryAsync();
-        
+
         // Act
         var response = await _client.GetAsync($"/api/city?countryId={testCountryId}");
 

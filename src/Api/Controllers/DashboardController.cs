@@ -47,7 +47,7 @@ public class DashboardController : ControllerBase
 
         if (!isAuthenticated && !User.IsInRole("Admin"))
         {
-             return Unauthorized();
+            return Unauthorized();
         }
 
         try
