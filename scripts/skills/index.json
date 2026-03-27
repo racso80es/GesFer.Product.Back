@@ -32,6 +32,13 @@
       "manifest": "invoke-commit/manifest.json",
       "launcher_bat": "invoke-commit/Invoke-Commit.bat",
       "description": "Operaciones de commit con parámetros directos (--message, --files, --all). Sin ficheros .txt."
+    },
+    {
+      "skillId": "sddia-evolution-register",
+      "path": "sddia-evolution/",
+      "manifest": "sddia-evolution/manifest.json",
+      "launcher_bat": "sddia-evolution/Register.bat",
+      "description": "Registro evolution SddIA (UUID, índice, hash); validate y watch en la misma cápsula."
     }
   ]
 }

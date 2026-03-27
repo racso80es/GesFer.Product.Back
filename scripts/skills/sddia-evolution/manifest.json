@@ -1,0 +1,12 @@
+{
+  "skillId": "sddia-evolution-register",
+  "version": "1.0.0",
+  "description": "Registro, validación y watcher del protocolo evolution SddIA (binarios Rust en bin/).",
+  "contract_ref": "SddIA/skills/skills-contract.md",
+  "components": {
+    "register_exe": "bin/sddia_evolution_register.exe",
+    "validate_exe": "bin/sddia_evolution_validate.exe",
+    "watch_exe": "bin/sddia_evolution_watch.exe",
+    "doc": "SddIA/skills/sddia-evolution-register/spec.md"
+  }
+}
