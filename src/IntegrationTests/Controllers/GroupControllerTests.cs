@@ -2,6 +2,8 @@ using FluentAssertions;
 using GesFer.Product.Back.Application.DTOs.Group;
 using System.Net;
 using System.Net.Http.Json;
+using System.Net.Http.Headers;
+using GesFer.Product.Back.Application.DTOs.Auth;
 using Xunit;
 
 namespace GesFer.Product.Back.IntegrationTests.Controllers;
@@ -20,7 +22,9 @@ public class GroupControllerTests
     {
         _fixture = fixture;
         _client = fixture.Factory.CreateClient();
+        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _fixture.AdminToken);
     }
+
 
     [Fact]
     public async Task GetAll_ShouldReturnListOfGroups()

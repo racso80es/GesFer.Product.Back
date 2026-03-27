@@ -1,4 +1,6 @@
 using Xunit;
+using System.Net.Http.Json;
+using GesFer.Product.Back.Application.DTOs.Auth;
 
 namespace GesFer.Product.Back.IntegrationTests;
 
@@ -13,6 +15,7 @@ namespace GesFer.Product.Back.IntegrationTests;
 public class DatabaseFixture : IAsyncLifetime
 {
     public IntegrationTestWebAppFactory<GesFer.Product.Back.Api.Program> Factory { get; private set; } = null!;
+    public string AdminToken { get; private set; } = string.Empty;
 
     /// <summary>
     /// Acceso a los servicios del contenedor de inyección de dependencias.
@@ -28,6 +31,19 @@ public class DatabaseFixture : IAsyncLifetime
     {
         Factory = new IntegrationTestWebAppFactory<GesFer.Product.Back.Api.Program>();
         await Factory.InitializeAsync();
+
+        // Autenticar al usuario admin una sola vez para toda la colección
+        using var client = Factory.CreateClient();
+        var loginRequest = new LoginRequestDto
+        {
+            Empresa = "Empresa Demo",
+            Usuario = "admin",
+            Contraseña = "admin123"
+        };
+        var response = await client.PostAsJsonAsync("/api/auth/login", loginRequest);
+        response.EnsureSuccessStatusCode();
+        var loginResponse = await response.Content.ReadFromJsonAsync<LoginResponseDto>();
+        AdminToken = loginResponse!.Token;
     }
 
     /// <summary>

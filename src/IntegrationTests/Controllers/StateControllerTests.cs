@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net;
 using System.Net.Http.Json;
+using System.Net.Http.Headers;
+using GesFer.Product.Back.Application.DTOs.Auth;
 using Xunit;
 
 namespace GesFer.Product.Back.IntegrationTests.Controllers;
@@ -22,7 +24,9 @@ public class StateControllerTests
     {
         _fixture = fixture;
         _client = fixture.Factory.CreateClient();
+        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _fixture.AdminToken);
     }
+
 
     private async Task<Guid> GetOrCreateTestCountryAsync()
     {
@@ -45,7 +49,7 @@ public class StateControllerTests
                 return existingCountry.Id;
             }
         }
-        
+
         // Si no existe, intentar crearlo usando el API
         var createDto = new CreateCountryDto
         {
@@ -73,13 +77,13 @@ public class StateControllerTests
                 }
             }
         }
-        
+
         // Si falla, intentar obtener el primer país disponible
         if (countries != null && countries.Any())
         {
             return countries.First().Id;
         }
-        
+
         throw new InvalidOperationException("No se pudo crear ni encontrar un país de prueba");
     }
 
@@ -100,7 +104,7 @@ public class StateControllerTests
     {
         // Arrange
         var testCountryId = await GetOrCreateTestCountryAsync();
-        
+
         // Act
         var response = await _client.GetAsync($"/api/state?countryId={testCountryId}");
 
@@ -124,7 +128,7 @@ public class StateControllerTests
             Code = "M"
         };
         var createResponse = await _client.PostAsJsonAsync("/api/state", createDto);
-        createResponse.StatusCode.Should().Be(HttpStatusCode.Created, 
+        createResponse.StatusCode.Should().Be(HttpStatusCode.Created,
             $"La creación del estado debería devolver Created, pero devolvió {createResponse.StatusCode}. " +
             $"Respuesta: {await createResponse.Content.ReadAsStringAsync()}");
         var createdState = await createResponse.Content.ReadFromJsonAsync<StateDto>();
@@ -172,7 +176,7 @@ public class StateControllerTests
         var response = await _client.PostAsJsonAsync("/api/state", createDto);
 
         // Assert
-        response.StatusCode.Should().Be(HttpStatusCode.Created, 
+        response.StatusCode.Should().Be(HttpStatusCode.Created,
             $"La creación del estado debería devolver Created, pero devolvió {response.StatusCode}. " +
             $"Respuesta: {await response.Content.ReadAsStringAsync()}");
         var state = await response.Content.ReadFromJsonAsync<StateDto>();
@@ -212,7 +216,7 @@ public class StateControllerTests
             Code = "V"
         };
         var createResponse = await _client.PostAsJsonAsync("/api/state", createDto);
-        createResponse.StatusCode.Should().Be(HttpStatusCode.Created, 
+        createResponse.StatusCode.Should().Be(HttpStatusCode.Created,
             $"La creación del estado debería devolver Created, pero devolvió {createResponse.StatusCode}. " +
             $"Respuesta: {await createResponse.Content.ReadAsStringAsync()}");
         var createdState = await createResponse.Content.ReadFromJsonAsync<StateDto>();

@@ -92,7 +92,7 @@ public class ValueObjectValidationTests : IClassFixture<DatabaseFixture>
         // Assert: Verificar que NO existe ningún customer con Email inválido
         var invalidEmailCustomerId = Guid.Parse("ffffffff-0000-0000-0000-000000000002");
         var invalidEmailCustomer = allCustomers.FirstOrDefault(c => c.Id == invalidEmailCustomerId);
-        
+
         invalidEmailCustomer.Should().BeNull(
             $"El customer con ID {invalidEmailCustomerId} tiene Email inválido y NO debería estar en la base de datos.");
     }
