@@ -19,6 +19,7 @@ Localiza en `docs/TASKS/` el archivo `.md` con la prioridad más alta, el que el
 - Verifica que cumple con un Análisis suficiente para poder realizar la tarea.
 - Si la tarea no tiene un ID único (ej. T-26-001), asígnale uno basado en la fecha actual en el nombre del fichero o en su contenido.
 - Comprueba que la tarea no está ya en ejecución (no existe en `docs/TASKS/ACTIVE/`).
+- **Acción Alternativa (Kaizen):** Si no hay tareas disponibles en `docs/TASKS/`, analiza el proyecto en busca de posibles acciones de mejora continua (Kaizen). Elige una de estas acciones y regístrala como una nueva tarea en un archivo `.md` dentro del directorio `docs/TASKS/` (por ejemplo, `docs/TASKS/Kaizen_YYYY_MM_DD.md`), procediendo a ejecutarla.
 
 ### 2. Activación y Bloqueo (Activation)
 Transición a estado `ACTIVE` para evitar colisiones con otras IAs (Jules/Cursor).
