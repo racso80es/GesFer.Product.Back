@@ -33,7 +33,7 @@ Si **no** hay ningún `.md` pendiente en la raíz de `paths.tasksPath`, revisa l
 
 **1.3 Nueva Kaizen (solo si 1.1 y 1.2 no ofrecen trabajo)**  
 - Si no hay tareas en la raíz de `paths.tasksPath` **ni** en `paths.tasksPath/KAIZEN/`, analiza el proyecto en busca de acciones de mejora continua (Kaizen), elige una, **regístrala** como nuevo fichero `.md` en `paths.tasksPath/KAIZEN/` (convención de nombre recomendada: `Kaizen_YYYY_MM_DD_<slug>.md`) y procédela igual que en §2–4.
-- Comprueba que el kaicen (fichero u objetivo) no está ya en ejecución (no existe en `paths.tasksPath/ACTIVE/` en ninguna rama activa ni master). 
+- Comprueba que el kaicen (fichero u objetivo) no está ya en ejecución (no existe en `paths.tasksPath/ACTIVE/` en ninguna rama activa ni master).
 
 ### 2. Activación y Bloqueo (Activation)
 Transición a estado `ACTIVE` para evitar colisiones con otras IAs (Jules/Cursor).
