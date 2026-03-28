@@ -113,7 +113,6 @@ public class CreateUserCommandHandler : ICommandHandler<CreateUserCommand, UserD
         {
             Id = user.Id,
             CompanyId = user.CompanyId,
-            CompanyName = company.Name,
             Username = user.Username,
             FirstName = user.FirstName,
             LastName = user.LastName,

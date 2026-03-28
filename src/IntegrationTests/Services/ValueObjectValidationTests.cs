@@ -12,7 +12,7 @@ namespace GesFer.Product.Back.IntegrationTests.Services;
 /// y que estos datos inválidos NUNCA llegan a la base de datos durante el seeding.
 /// </summary>
 [Collection("DatabaseStep")]
-public class ValueObjectValidationTests : IClassFixture<DatabaseFixture>
+public class ValueObjectValidationTests
 {
     private readonly DatabaseFixture _fixture;
 

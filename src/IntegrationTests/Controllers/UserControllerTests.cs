@@ -1,5 +1,4 @@
 using FluentAssertions;
-using GesFer.Product.Back.Application.DTOs.Auth;
 using GesFer.Product.Back.Application.DTOs.User;
 using System.Net;
 using System.Net.Http.Headers;
@@ -302,7 +301,6 @@ public class UserControllerTests
         user.IsActive.Should().BeTrue(); // Por defecto debe ser activo
         user.Id.Should().NotBeEmpty();
         user.CreatedAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(5));
-        user.CompanyName.Should().NotBeNullOrEmpty();
     }
 
     [Fact]

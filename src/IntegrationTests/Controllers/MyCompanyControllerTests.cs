@@ -52,7 +52,7 @@ public class MyCompanyControllerTests
     {
         var updateDto = new AdminUpdateCompanyDto
         {
-            Name = "Empresa Demo Actualizada",
+            Name = "Empresa Demo", // Do not mutate the name, other tests depend on it
             TaxId = "B87654323",
             Address = "Calle Gran Vía, 2",
             Phone = "912345679",
@@ -65,7 +65,7 @@ public class MyCompanyControllerTests
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         var company = await response.Content.ReadFromJsonAsync<AdminCompanyDto>();
         company.Should().NotBeNull();
-        company!.Name.Should().Be("Empresa Demo Actualizada");
+        company!.Name.Should().Be("Empresa Demo");
         company.Address.Should().Be("Calle Gran Vía, 2");
     }
 

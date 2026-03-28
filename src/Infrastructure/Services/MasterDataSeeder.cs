@@ -256,14 +256,12 @@ public class MasterDataSeeder
                             IsActive = true
                         };
                         _context.Cities.Add(city);
-                        await _context.SaveChangesAsync();
                         citiesCreated++;
                     }
                     else
                     {
                         city.DeletedAt = null;
                         city.IsActive = true;
-                        await _context.SaveChangesAsync();
                     }
                 }
                 continue;
@@ -290,14 +288,12 @@ public class MasterDataSeeder
                             IsActive = true
                         };
                         _context.Cities.Add(city);
-                        await _context.SaveChangesAsync();
                         citiesCreated++;
                     }
                     else
                     {
                         city.DeletedAt = null;
                         city.IsActive = true;
-                        await _context.SaveChangesAsync();
                     }
                 }
 
