@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
 
+// Ensure namespace uses the base 'GesFer.Product.Back' prefix as per system norms
 namespace GesFer.Product.Back.UnitTests.Handlers.User;
 
 public class GetAllUsersCommandHandlerPerformanceTests

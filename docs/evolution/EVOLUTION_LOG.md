@@ -4,6 +4,14 @@ Registro de cambios arquitectónicos y features del proyecto.
 
 ---
 
+## [2026-03-28] fix/fix-namespace
+**Feature:** Refactor namespaces GesFer.Product.Back.* unit tests
+**Description:** Fixed namespace infraction in `GetAllUsersCommandHandlerPerformanceTests.cs`.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_03_28_Fix_Namespace.md]
+**Status:** DONE
+
+---
+
 ## 2026-03-19
 
 ### [feat/kaizen-skills-tools-rust-json-contract] Kaizen skills/tools Rust + JSON según contratos SddIA — Completado
