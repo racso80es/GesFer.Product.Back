@@ -1,4 +1,10 @@
 ---
+name: actualizacion-readme
+type: feature
+---
+
+# Objectives
+Unificar readme.md principal con posibles readme en src. Además analizar la solución para adecuar el contenido para que sea un reflejo de este.
 feature_name: actualizacion-readme
 version: 1.0.0
 status: active

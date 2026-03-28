@@ -181,6 +181,29 @@ Para convenciones, leyes universales y sistema multi-agente, ver **[AGENTS.md](.
 
 ---
 
+## Configuración de Docker Detallada
+
+El archivo `docker-compose.yml` está configurado con el proyecto **GesFer_Product_Back** para evitar conflictos.
+
+### Servicios Configurados
+
+1. **MySQL 8.0** (`GesFer_product_db`)
+   - Puerto en host: `3307` (mapeado a `3306`)
+   - BD: `GesFer_Product`, Usuario: `product`, Pass: `GesFerProduct@pthrjkl`, Root: `rootpassword`
+   - Charset: `utf8mb4_unicode_ci` con healthcheck.
+
+2. **Memcached** (`gesfer_product_cache`)
+   - Puerto en host: `11212` (mapeado a `11211`), 128MB.
+
+3. **Adminer** (`gesfer_product_adminer`)
+   - Puerto en host: `8081` (mapeado a `8080`) para gestión visual de MySQL.
+
+### Scripts Útiles (PowerShell / Bash)
+
+- **Iniciar:** `.\src\docker-start.ps1` o `docker-compose up -d`
+- **Detener:** `.\src\docker-stop.ps1` o `docker-compose down`
+- **Verificar:** `docker-compose ps` y `docker-compose logs -f`
+- **Cadena de conexión por defecto:** `Server=localhost;Port=3307;Database=GesFer_Product;User=product;Password=GesFerProduct@pthrjkl;CharSet=utf8mb4;AllowUserVariables=True;AllowLoadLocalInfile=True;`
 ## Configuración y Diagnóstico de Docker
 
 El archivo `docker-compose.yml` está configurado con:
@@ -204,6 +227,20 @@ El `ApplicationDbContext` cuenta con reintentos automáticos (5 intentos, 30s de
 
 ## Solución de Problemas (Troubleshooting)
 
+### La API no inicia o se cuelga
+1. **Verificar procesos:** Ejecuta `Get-Process | Where-Object {$_.ProcessName -like "*GesFer*" -or $_.ProcessName -like "*dotnet*"}` (PowerShell) para comprobar si hay instancias colgadas y destrúyelas (`taskkill /PID <PID> /F`).
+2. **Puertos en uso:** `netstat -ano | findstr :5000` (o 5001, o 5020).
+3. **Migraciones:** Las migraciones ya no bloquean el inicio; revisa los logs en consola o "Output" para ver el error de base de datos.
+
+### MySQL no está disponible
+1. Asegúrate de que Docker esté corriendo: `docker-compose ps`.
+2. Si no arranca, reinicia los contenedores o ejecuta el healthcheck: `docker inspect GesFer_product_db | grep -A 5 Health`.
+3. Para borrar y reiniciar los volúmenes (⚠️ pierde datos): `docker-compose down -v && docker-compose up -d`.
+
+### Swagger no carga o error HTTPS
+1. Accede por HTTP (`http://localhost:5000/swagger` o `5020`).
+2. Confía en el certificado local: `dotnet dev-certs https --trust`.
+3. Endpoint de salud: `http://localhost:5020/api/health` para comprobar que la API responde.
 ### 1. MySQL no inicia o Error de conexión
 - Verifica logs: `docker-compose logs gesfer-db` o `docker-compose logs -f`
 - Verifica si el puerto 3307 está en uso:

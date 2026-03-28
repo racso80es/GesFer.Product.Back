@@ -1,4 +1,10 @@
 ---
+name: actualizacion-readme
+type: clarify
+---
+
+# Clarify
+- No hay clarificaciones adicionales, el objetivo está claro.
 feature_name: actualizacion-readme
 version: 1.0.0
 status: active
