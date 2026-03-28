@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace GesFer.Product.Back.UnitTests.Handlers.User;
+namespace GesFer.Product.Back.UnitTests.Handlers.User; // Updated according to nomenclature audit
 
 public class GetAllUsersCommandHandlerPerformanceTests
 {
