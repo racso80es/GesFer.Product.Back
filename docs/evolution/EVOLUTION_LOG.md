@@ -25,3 +25,9 @@ Registro de cambios arquitectónicos y features del proyecto.
 **Description:** Refactored integration tests to use a single authentication request (`AdminToken`) via `DatabaseFixture`, significantly improving test suite performance, test isolation, and eliminating 58 failures due to `401 Unauthorized` responses. The authentication header is now injected globally instead of executing `POST /api/auth/login` in the setup step of every individual test class instance.
 **Reference:** [docs/TASKS/DONE/Kaizen_2024_05_23.md]
 **Status:** DONE
+
+## [2024-03-28] fix/rust-warnings
+**Feature:** Fix unused skill_id warnings in Rust skills
+**Description:** Removed unused `skill_id` field from the `JsonInput` struct across multiple Rust files in `scripts/skills-rs/src/bin/` (`iniciar_rama.rs`, `invoke_command.rs`, `merge_to_master_cleanup.rs`, `push_and_create_pr.rs`) to eliminate dead code warnings. Build is now completely clean.
+**Reference:** [docs/TASKS/DONE/Kaizen_2024_03_28_fix_rust_warnings.md]
+**Status:** DONE
