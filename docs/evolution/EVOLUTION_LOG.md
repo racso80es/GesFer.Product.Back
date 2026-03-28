@@ -25,3 +25,11 @@ Registro de cambios arquitectónicos y features del proyecto.
 **Description:** Refactored integration tests to use a single authentication request (`AdminToken`) via `DatabaseFixture`, significantly improving test suite performance, test isolation, and eliminating 58 failures due to `401 Unauthorized` responses. The authentication header is now injected globally instead of executing `POST /api/auth/login` in the setup step of every individual test class instance.
 **Reference:** [docs/TASKS/DONE/Kaizen_2024_05_23.md]
 **Status:** DONE
+
+---
+
+## [2026-03-28] feat/kaizen-article-families-xml-docs
+**Feature:** Add XML summaries to ArticleFamiliesController
+**Description:** Added XML summary documentation tags to all public API endpoints in `ArticleFamiliesController.cs` to improve Swagger OpenAPI documentation discoverability.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_03_28_Add_ArticleFamilies_Xml_Docs.md]
+**Status:** DONE
