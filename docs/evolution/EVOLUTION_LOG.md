@@ -25,3 +25,7 @@ Registro de cambios arquitectónicos y features del proyecto.
 **Description:** Refactored integration tests to use a single authentication request (`AdminToken`) via `DatabaseFixture`, significantly improving test suite performance, test isolation, and eliminating 58 failures due to `401 Unauthorized` responses. The authentication header is now injected globally instead of executing `POST /api/auth/login` in the setup step of every individual test class instance.
 **Reference:** [docs/TASKS/DONE/Kaizen_2024_05_23.md]
 **Status:** DONE
+
+## 2026-03-28
+
+- [fix/namespace-performance-test] Fix namespace rule in GetAllUsersCommandHandlerPerformanceTests.cs. [Done].
