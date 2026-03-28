@@ -12,7 +12,9 @@ public class HealthController : ControllerBase
     /// <summary>
     /// Verifica el estado de la API
     /// </summary>
+    /// <returns>Estado actual del servicio</returns>
     [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public IActionResult Get()
     {
         return Ok(new
