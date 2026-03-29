@@ -1,5 +1,6 @@
 ---
-type: specification
+title: Especificación de Corrección de Auditoría
 ---
 # Especificación
-Se aplicó la regla de nomenclatura para eliminar 'Shared'. Se aislaron las instancias de HttpClient en los tests. Queda pendiente el arreglo del Login en Tests.
+
+- Identificar y remover la línea en src/Api/Program.cs que contiene un comentario [PENDING-TASK] oculto: "// pero podemos mantener esto como refuerzo o configurarlo todo en el JSON."

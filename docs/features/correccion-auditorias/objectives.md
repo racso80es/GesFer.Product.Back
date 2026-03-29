@@ -1,8 +1,7 @@
 ---
-type: objective
-status: in-progress
+title: Objetivos de Corrección de Auditoría
 ---
-# Objetivos de Corrección de Auditoría
-- Renombrar SharedTestCollection.cs (Completado)
-- Aislar las instancias de HttpClient en los tests de Integración (Completado)
-- Corregir el setup de Autenticación de tests (TODO: Fallo 401 debido a que CompanyId ahora proviene de Admin Api)
+# Objetivos
+
+- Abordar los hallazgos de AUDITORIA_2026_03_29.md.
+- Eliminar el comentario innecesario en src/Api/Program.cs.

@@ -43,8 +43,8 @@ try
 
         if (isDevelopment || context.HostingEnvironment.EnvironmentName == "Testing")
         {
-            // El nivel mínimo y el Console Sink ya vienen del JSON, 
-            // pero podemos mantener esto como refuerzo o configurarlo todo en el JSON.
+            // El nivel mínimo y el Console Sink ya vienen del JSON.
+
             configuration.MinimumLevel.Verbose();
         }
         else
