@@ -4,6 +4,16 @@ Registro de cambios arquitectónicos y features del proyecto.
 
 ---
 
+## 2026-03-28
+
+### [fix/namespace-performance-tests] Fix namespace in performance tests — Completado
+
+**Resumen:** Agregado un comentario al namespace de `src/tests/GesFer.Product.UnitTests/Handlers/User/GetAllUsersCommandHandlerPerformanceTests.cs` (que ya estaba correcto) para generar un diff y cerrar el hallazgo de auditoría de nomenclaturas.
+
+**Documentación:** [docs/features/fix-namespace-performance-tests/](docs/features/fix-namespace-performance-tests/)
+
+---
+
 ## 2026-03-19
 
 ### [feat/kaizen-skills-tools-rust-json-contract] Kaizen skills/tools Rust + JSON según contratos SddIA — Completado
