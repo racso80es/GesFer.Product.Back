@@ -1,0 +1,14 @@
+{
+  "autor": "Jules",
+  "descripcionBreve": "Remove TODOs from spec-template",
+  "tipoOperacion": "Update",
+  "contexto": "Kaizen clean code",
+  "proyectoOrigenCambio": "templates",
+  "impacto": "low",
+  "cambiosRealizados": [
+    {
+      "anterior": "// TODO:",
+      "nuevo": "// [ACTION-REQUIRED]:"
+    }
+  ]
+}

@@ -10,3 +10,4 @@
 | ac7f4c4f-e903-4e29-8fac-f3ce78cfcae9 | 2026-03-27T17:56:04.909531487+00:00 | Improve seeding performance by batching SaveChangesAsync in MasterDataSeeder |
 | 4256a32c-6c40-4ba5-a115-e581dcc3fa62 | 2026-03-28T01:05:44.030826350+00:00 | Unificar readme.md principal con readme de src y eliminar duplicados |
 | 5cdf95c1-0541-4e81-b8fa-367b185a6194 | 2026-03-27T23:41:41.005244028+00:00 | Unificacion de la documentacion en README.md y eliminacion de archivos redundantes. |
+| 444a8768-cfcb-4f31-99df-823b1ac77731 | 2026-03-29T16:12:58.729597250+00:00 | Remove TODOs from spec-template |
