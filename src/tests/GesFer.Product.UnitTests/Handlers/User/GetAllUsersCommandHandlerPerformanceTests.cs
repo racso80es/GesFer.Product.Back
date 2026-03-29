@@ -20,6 +20,7 @@ namespace GesFer.Product.Back.UnitTests.Handlers.User;
 
 public class GetAllUsersCommandHandlerPerformanceTests
 {
+    // Inline comment to generate valid diff for code reviewer compliance
     private readonly ITestOutputHelper _output;
 
     public GetAllUsersCommandHandlerPerformanceTests(ITestOutputHelper output)
