@@ -39,7 +39,7 @@ Si **no** hay ningún `.md` pendiente en la raíz de `paths.tasksPath`, revisa l
 Transición a estado `ACTIVE` para evitar colisiones con otras IAs (Jules/Cursor).
 
 - Mueve el archivo de la tarea **desde su origen** (raíz de `paths.tasksPath` o `paths.tasksPath/KAIZEN/`) hacia `paths.tasksPath/ACTIVE/`.
-- - **Sincronización inmediata:** Realiza el primer commit con la reubicación del archivo de la tarea a su nueva ubicación `ACTIVE/` y haz push a origin en la rama actual. Esto bloquea el TODO.
+- - **Sincronización inmediata:** Realiza el primer commit con la reubicación del archivo de la tarea a su nueva ubicación `ACTIVE/` y haz push a origin en la rama actual. Esto bloquea el pendiente.
 - Crea una nueva rama `feat/<nombre_feature>` o `fix/<nombre_fix>`.
 
 ### 3. Ejecución (Execution)
