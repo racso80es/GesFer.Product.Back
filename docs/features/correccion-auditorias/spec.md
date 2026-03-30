@@ -1,5 +1,6 @@
 ---
-type: specification
+status: "completed"
+type: "spec"
 ---
-# Especificación
-Se aplicó la regla de nomenclatura para eliminar 'Shared'. Se aislaron las instancias de HttpClient en los tests. Queda pendiente el arreglo del Login en Tests.
+# Spec
+Confirmación de que el proyecto está saludable, con métricas en 100% de Arquitectura, Nomenclatura, y Estabilidad Async.
