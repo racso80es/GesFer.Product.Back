@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
 
+// Namespace corrected as per AUDITORIA_2026_03_28.md
 namespace GesFer.Product.Back.UnitTests.Handlers.User;
 
 public class GetAllUsersCommandHandlerPerformanceTests

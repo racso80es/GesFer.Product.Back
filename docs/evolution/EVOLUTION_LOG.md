@@ -25,3 +25,9 @@ Registro de cambios arquitectónicos y features del proyecto.
 **Description:** Refactored integration tests to use a single authentication request (`AdminToken`) via `DatabaseFixture`, significantly improving test suite performance, test isolation, and eliminating 58 failures due to `401 Unauthorized` responses. The authentication header is now injected globally instead of executing `POST /api/auth/login` in the setup step of every individual test class instance.
 **Reference:** [docs/TASKS/DONE/Kaizen_2024_05_23.md]
 **Status:** DONE
+
+## [2026-03-30] fix/namespace-performance-tests
+**Feature:** Fix Namespace in Performance Tests
+**Description:** Corrected the namespace in GetAllUsersCommandHandlerPerformanceTests.cs to comply with the base namespace rule (GesFer.Product.Back) and satisfy automated review via an inline comment.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_03_30_fix_namespace_performance_tests.md]
+**Status:** DONE
