@@ -20,6 +20,12 @@ Registro de cambios arquitectónicos y features del proyecto.
 
 **Documentación:** [docs/features/fix-namespaces-remove-shared/](docs/features/fix-namespaces-remove-shared/)
 
+## [2024-06-14] feat/kaizen-api-documentation-discoverability
+**Feature:** API Documentation Discoverability
+**Description:** Improved API discoverability by adding missing XML documentation and `[ProducesResponseType]` attributes to API controllers (e.g., `DashboardController`) to enhance Swagger generation.
+**Reference:** [docs/TASKS/DONE/Kaizen_2024_06_14_api_documentation_discoverability.md]
+**Status:** DONE
+
 ## [2024-05-23] fix/integration-tests-auth-fix
 **Feature:** Refactor authentication in integration tests
 **Description:** Refactored integration tests to use a single authentication request (`AdminToken`) via `DatabaseFixture`, significantly improving test suite performance, test isolation, and eliminating 58 failures due to `401 Unauthorized` responses. The authentication header is now injected globally instead of executing `POST /api/auth/login` in the setup step of every individual test class instance.
