@@ -40,6 +40,7 @@ public class CountryController : ControllerBase
     /// <summary>
     /// Obtiene todos los países
     /// </summary>
+    /// <returns>Lista de países</returns>
     [HttpGet]
     [ProducesResponseType(typeof(List<CountryDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAll()
@@ -60,6 +61,8 @@ public class CountryController : ControllerBase
     /// <summary>
     /// Obtiene un país por ID
     /// </summary>
+    /// <param name="id">ID del país</param>
+    /// <returns>El país solicitado</returns>
     [HttpGet("{id}")]
     [ProducesResponseType(typeof(CountryDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -85,6 +88,8 @@ public class CountryController : ControllerBase
     /// <summary>
     /// Crea un nuevo país
     /// </summary>
+    /// <param name="dto">Datos del nuevo país</param>
+    /// <returns>El país creado</returns>
     [HttpPost]
     [ProducesResponseType(typeof(CountryDto), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -110,6 +115,9 @@ public class CountryController : ControllerBase
     /// <summary>
     /// Actualiza un país existente
     /// </summary>
+    /// <param name="id">ID del país a actualizar</param>
+    /// <param name="dto">Nuevos datos del país</param>
+    /// <returns>El país actualizado</returns>
     [HttpPut("{id}")]
     [ProducesResponseType(typeof(CountryDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -138,6 +146,8 @@ public class CountryController : ControllerBase
     /// <summary>
     /// Elimina un país (soft delete)
     /// </summary>
+    /// <param name="id">ID del país a eliminar</param>
+    /// <returns>Respuesta vacía si la eliminación fue exitosa</returns>
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

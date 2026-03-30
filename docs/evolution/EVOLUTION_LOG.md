@@ -25,3 +25,9 @@ Registro de cambios arquitectónicos y features del proyecto.
 **Description:** Refactored integration tests to use a single authentication request (`AdminToken`) via `DatabaseFixture`, significantly improving test suite performance, test isolation, and eliminating 58 failures due to `401 Unauthorized` responses. The authentication header is now injected globally instead of executing `POST /api/auth/login` in the setup step of every individual test class instance.
 **Reference:** [docs/TASKS/DONE/Kaizen_2024_05_23.md]
 **Status:** DONE
+
+## [2026-03-30] feat/kaizen-add-xml-docs-dashboard-country
+**Feature:** Add XML Docs to Dashboard and Country Controllers
+**Description:** Added missing XML documentation comments (`<returns>` and `[ProducesResponseType]`) to endpoints in `DashboardController.cs` and `CountryController.cs` to improve Swagger API discoverability.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_03_30_add_xml_docs_dashboard_country.md]
+**Status:** DONE

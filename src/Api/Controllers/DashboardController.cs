@@ -35,7 +35,9 @@ public class DashboardController : ControllerBase
     /// Obtiene estadísticas del sistema para el Dashboard de Admin
     /// Protegido por Internal Secret (System) o Rol Admin
     /// </summary>
+    /// <returns>Estadísticas del sistema</returns>
     [HttpGet("stats")]
+    [ProducesResponseType(typeof(DashboardSummaryDto), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetStats()
     {
         // Validación manual de Internal Secret (o usar atributo si se mueve a Common)
