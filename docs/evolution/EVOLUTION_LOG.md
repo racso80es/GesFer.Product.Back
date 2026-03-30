@@ -4,6 +4,14 @@ Registro de cambios arquitectónicos y features del proyecto.
 
 ---
 
+## [2024-03-30] feat/kaizen-add-dashboard-xml-docs
+**Feature:** Add XML Docs to Dashboard Controller
+**Description:** Added missing Swagger/OpenAPI XML documentation summaries and `[ProducesResponseType]` attributes to `DashboardController.cs`.
+**Reference:** [docs/TASKS/DONE/Kaizen_2024_03_30_Add_Dashboard_Xml_Docs.md]
+**Status:** DONE
+
+---
+
 ## 2026-03-19
 
 ### [feat/kaizen-skills-tools-rust-json-contract] Kaizen skills/tools Rust + JSON según contratos SddIA — Completado
