@@ -1,0 +1,14 @@
+{
+  "autor": "Jules AI",
+  "descripcionBreve": "Add XML documentation to HealthController for OpenAPI standards",
+  "tipoOperacion": "Refactoring",
+  "contexto": "Kaizen action for better API discoverability",
+  "proyectoOrigenCambio": "GesFer.Product.Back.Api",
+  "impacto": "Bajo",
+  "cambiosRealizados": [
+    {
+      "anterior": "[HttpGet]\\npublic IActionResult Get()",
+      "nuevo": "/// <returns>Estado actual del servicio</returns>\\n[HttpGet]\\n[ProducesResponseType(StatusCodes.Status200OK)]\\npublic IActionResult Get()"
+    }
+  ]
+}
