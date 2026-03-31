@@ -42,6 +42,12 @@ Registro de cambios arquitectónicos y features del proyecto.
 **Reference:** [docs/TASKS/DONE/Kaizen_2024_05_23.md]
 **Status:** DONE
 
+---
+
+## [2026-03-28] feat/kaizen-article-families-xml-docs
+**Feature:** Add XML summaries to ArticleFamiliesController
+**Description:** Added XML summary documentation tags to all public API endpoints in `ArticleFamiliesController.cs` to improve Swagger OpenAPI documentation discoverability.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_03_28_Add_ArticleFamilies_Xml_Docs.md]
 ## 2026-03-28
 
 - [fix/namespace-performance-test] Fix namespace rule in GetAllUsersCommandHandlerPerformanceTests.cs. [Done].
