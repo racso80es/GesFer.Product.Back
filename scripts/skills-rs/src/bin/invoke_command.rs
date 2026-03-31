@@ -37,8 +37,6 @@ struct Args {
 
 #[derive(Debug, Deserialize)]
 struct JsonInput {
-    #[serde(rename = "skillId")]
-    skill_id: Option<String>,
     #[serde(rename = "command")]
     command: Option<String>,
     #[serde(rename = "commandFile")]
