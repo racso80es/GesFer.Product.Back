@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GesFer.Product.Back.Api.Controllers;
 
+/// <summary>
+/// Controlador para la gestión de familias de artículos
+/// </summary>
 [ApiController]
 [Route("api/article-families")]
 [Authorize]
@@ -65,6 +68,8 @@ public class ArticleFamiliesController : ControllerBase
     /// </summary>
     /// <param name="id">El ID de la familia de artículos</param>
     /// <returns>La familia de artículos solicitada</returns>
+    /// Obtiene una familia de artículos por ID
+    /// </summary>
     [HttpGet("{id}")]
     [ProducesResponseType(typeof(ArticleFamilyDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -158,6 +163,8 @@ public class ArticleFamiliesController : ControllerBase
     /// </summary>
     /// <param name="id">El ID de la familia de artículos a eliminar</param>
     /// <returns>Respuesta vacía si se elimina correctamente</returns>
+    /// Elimina una familia de artículos (soft delete)
+    /// </summary>
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
