@@ -1,6 +1,5 @@
 use clap::Parser;
 use serde_json::json;
-use std::path::{Path, PathBuf};
 use std::process::{exit, Command};
 
 #[derive(Parser, Debug)]

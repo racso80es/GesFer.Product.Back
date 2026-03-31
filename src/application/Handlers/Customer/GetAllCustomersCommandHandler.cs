@@ -17,8 +17,7 @@ public class GetAllCustomersCommandHandler : ICommandHandler<GetAllCustomersComm
 
     public async Task<List<CustomerDto>> HandleAsync(GetAllCustomersCommand command, CancellationToken cancellationToken = default)
     {
-        var query = _context.Customers
-            .Where(c => c.DeletedAt == null);
+        var query = _context.Customers.AsQueryable();
 
         if (command.CompanyId.HasValue)
         {
