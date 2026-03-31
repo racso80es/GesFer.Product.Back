@@ -73,3 +73,9 @@ Registro de cambios arquitectónicos y features del proyecto.
 **Description:** Removed redundant `DeletedAt == null` checks from Customer entity handlers (`UpdateCustomerCommandHandler`, `GetCustomerByIdCommandHandler`, `GetAllCustomersCommandHandler`, `CreateCustomerCommandHandler`) as EF Core Global Query Filter already handles logical deletes automatically.
 **Reference:** [docs/TASKS/DONE/Kaizen_2024_03_28_remove_redundant_deletedat_checks_customer.md]
 **Status:** DONE
+
+## [2026-03-31] feat/fix-xunit-warnings
+- **Feature**: Fix xUnit2013 Warning
+- **Description**: Replaced Assert.Equal(0, collection.Count) with Assert.Empty(collection)
+- **Reference**: docs/TASKS/DONE/Kaizen_2026_03_31_fix-xunit-warnings.md
+- **Status**: Completado

@@ -87,6 +87,6 @@ public class GetAllUsersCommandHandlerPerformanceTests
         result.Should().HaveCount(100);
 
         // Verify that 0 external API calls were made due to optimization
-        Assert.Equal(0, mockAdminApiClient.Invocations.Count);
+        Assert.Empty(mockAdminApiClient.Invocations);
     }
 }
