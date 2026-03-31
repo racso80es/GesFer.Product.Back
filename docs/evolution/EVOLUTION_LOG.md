@@ -47,6 +47,10 @@ Registro de cambios arquitectónicos y features del proyecto.
 **Reference:** [docs/TASKS/DONE/Kaizen_2024_05_23.md]
 **Status:** DONE
 
+## [2024-03-29] feat/add-typeof-object-health-controller
+**Feature:** Add typeof(object) to HealthController ProducesResponseType
+**Description:** Enforce standard formatting for HealthController response types by explicitly adding the typeof(object) definition to the ProducesResponseType attribute.
+**Reference:** [docs/TASKS/DONE/Kaizen_2024_03_29_add_typeof_object_health_controller.md]
 ---
 
 ## [2026-03-28] feat/kaizen-article-families-xml-docs
