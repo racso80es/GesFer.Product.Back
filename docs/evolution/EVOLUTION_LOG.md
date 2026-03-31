@@ -36,6 +36,10 @@ Registro de cambios arquitectónicos y features del proyecto.
 **Reference:** [docs/TASKS/DONE/Kaizen_2024_05_23.md]
 **Status:** DONE
 
+## [2024-03-28] fix/rust-warnings
+**Feature:** Fix unused skill_id warnings in Rust skills
+**Description:** Removed unused `skill_id` field from the `JsonInput` struct across multiple Rust files in `scripts/skills-rs/src/bin/` (`iniciar_rama.rs`, `invoke_command.rs`, `merge_to_master_cleanup.rs`, `push_and_create_pr.rs`) to eliminate dead code warnings. Build is now completely clean.
+**Reference:** [docs/TASKS/DONE/Kaizen_2024_03_28_fix_rust_warnings.md]
 ## [2024-03-28] feat/refactorization-customer-deletedat
 **Feature:** Remove redundant DeletedAt checks in Customer handlers
 **Description:** Removed redundant `DeletedAt == null` checks from Customer entity handlers (`UpdateCustomerCommandHandler`, `GetCustomerByIdCommandHandler`, `GetAllCustomersCommandHandler`, `CreateCustomerCommandHandler`) as EF Core Global Query Filter already handles logical deletes automatically.
