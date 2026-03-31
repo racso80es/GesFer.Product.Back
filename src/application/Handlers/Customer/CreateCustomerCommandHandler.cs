@@ -27,7 +27,7 @@ public class CreateCustomerCommandHandler : ICommandHandler<CreateCustomerComman
 
         // Validar que no exista un cliente con el mismo nombre en la misma empresa
         var existingCustomer = await _context.Customers
-            .FirstOrDefaultAsync(c => c.CompanyId == command.Dto.CompanyId && c.Name == command.Dto.Name && c.DeletedAt == null, cancellationToken);
+            .FirstOrDefaultAsync(c => c.CompanyId == command.Dto.CompanyId && c.Name == command.Dto.Name, cancellationToken);
 
         if (existingCustomer != null)
             throw new InvalidOperationException($"Ya existe un cliente con el nombre '{command.Dto.Name}' en esta empresa");
@@ -36,7 +36,7 @@ public class CreateCustomerCommandHandler : ICommandHandler<CreateCustomerComman
         if (command.Dto.SellTariffId.HasValue)
         {
             var tariffExists = await _context.Tariffs
-                .AnyAsync(t => t.Id == command.Dto.SellTariffId.Value && t.CompanyId == command.Dto.CompanyId && t.DeletedAt == null, cancellationToken);
+                .AnyAsync(t => t.Id == command.Dto.SellTariffId.Value && t.CompanyId == command.Dto.CompanyId, cancellationToken);
             if (!tariffExists)
                 throw new InvalidOperationException($"No se encontró la tarifa de venta con ID {command.Dto.SellTariffId.Value}");
         }
@@ -45,7 +45,7 @@ public class CreateCustomerCommandHandler : ICommandHandler<CreateCustomerComman
         if (command.Dto.PostalCodeId.HasValue)
         {
             var postalCodeExists = await _context.PostalCodes
-                .AnyAsync(pc => pc.Id == command.Dto.PostalCodeId.Value && pc.DeletedAt == null, cancellationToken);
+                .AnyAsync(pc => pc.Id == command.Dto.PostalCodeId.Value, cancellationToken);
             if (!postalCodeExists)
                 throw new InvalidOperationException($"No se encontró el código postal con ID {command.Dto.PostalCodeId.Value}");
         }
@@ -53,7 +53,7 @@ public class CreateCustomerCommandHandler : ICommandHandler<CreateCustomerComman
         if (command.Dto.CityId.HasValue)
         {
             var cityExists = await _context.Cities
-                .AnyAsync(c => c.Id == command.Dto.CityId.Value && c.DeletedAt == null, cancellationToken);
+                .AnyAsync(c => c.Id == command.Dto.CityId.Value, cancellationToken);
             if (!cityExists)
                 throw new InvalidOperationException($"No se encontró la ciudad con ID {command.Dto.CityId.Value}");
         }
@@ -61,7 +61,7 @@ public class CreateCustomerCommandHandler : ICommandHandler<CreateCustomerComman
         if (command.Dto.StateId.HasValue)
         {
             var stateExists = await _context.States
-                .AnyAsync(s => s.Id == command.Dto.StateId.Value && s.DeletedAt == null, cancellationToken);
+                .AnyAsync(s => s.Id == command.Dto.StateId.Value, cancellationToken);
             if (!stateExists)
                 throw new InvalidOperationException($"No se encontró la provincia con ID {command.Dto.StateId.Value}");
         }
@@ -69,7 +69,7 @@ public class CreateCustomerCommandHandler : ICommandHandler<CreateCustomerComman
         if (command.Dto.CountryId.HasValue)
         {
             var countryExists = await _context.Countries
-                .AnyAsync(c => c.Id == command.Dto.CountryId.Value && c.DeletedAt == null, cancellationToken);
+                .AnyAsync(c => c.Id == command.Dto.CountryId.Value, cancellationToken);
             if (!countryExists)
                 throw new InvalidOperationException($"No se encontró el país con ID {command.Dto.CountryId.Value}");
         }

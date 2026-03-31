@@ -4,6 +4,16 @@ Registro de cambios arquitectónicos y features del proyecto.
 
 ---
 
+## 2026-03-28
+
+### [fix/namespace-performance-tests] Fix namespace in GetAllUsersCommandHandlerPerformanceTests — Completado
+
+**Resumen:** Corrección del namespace en GetAllUsersCommandHandlerPerformanceTests.cs reportado en AUDITORIA_2026_03_28. El archivo ya contenía el namespace correcto 'GesFer.Product.Back.UnitTests.Handlers.User' pero se actualizó el proceso Kaizen para documentar y finalizar la tarea.
+
+**Documentación:** [docs/features/fix-namespace-performance-tests/](docs/features/fix-namespace-performance-tests/)
+
+---
+
 ## 2026-03-19
 
 ### [feat/kaizen-skills-tools-rust-json-contract] Kaizen skills/tools Rust + JSON según contratos SddIA — Completado
@@ -30,4 +40,8 @@ Registro de cambios arquitectónicos y features del proyecto.
 **Feature:** Fix unused skill_id warnings in Rust skills
 **Description:** Removed unused `skill_id` field from the `JsonInput` struct across multiple Rust files in `scripts/skills-rs/src/bin/` (`iniciar_rama.rs`, `invoke_command.rs`, `merge_to_master_cleanup.rs`, `push_and_create_pr.rs`) to eliminate dead code warnings. Build is now completely clean.
 **Reference:** [docs/TASKS/DONE/Kaizen_2024_03_28_fix_rust_warnings.md]
+## [2024-03-28] feat/refactorization-customer-deletedat
+**Feature:** Remove redundant DeletedAt checks in Customer handlers
+**Description:** Removed redundant `DeletedAt == null` checks from Customer entity handlers (`UpdateCustomerCommandHandler`, `GetCustomerByIdCommandHandler`, `GetAllCustomersCommandHandler`, `CreateCustomerCommandHandler`) as EF Core Global Query Filter already handles logical deletes automatically.
+**Reference:** [docs/TASKS/DONE/Kaizen_2024_03_28_remove_redundant_deletedat_checks_customer.md]
 **Status:** DONE
