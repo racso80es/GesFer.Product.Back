@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GesFer.Product.Back.Api.Controllers;
 
+/// <summary>
+/// Controlador para la gestión de familias de artículos
+/// </summary>
 [ApiController]
 [Route("api/article-families")]
 [Authorize]
@@ -34,6 +37,9 @@ public class ArticleFamiliesController : ControllerBase
         _logger = logger;
     }
 
+    /// <summary>
+    /// Obtiene todas las familias de artículos de la empresa del usuario autenticado
+    /// </summary>
     [HttpGet]
     [ProducesResponseType(typeof(List<ArticleFamilyDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAll()
@@ -56,6 +62,9 @@ public class ArticleFamiliesController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Obtiene una familia de artículos por ID
+    /// </summary>
     [HttpGet("{id}")]
     [ProducesResponseType(typeof(ArticleFamilyDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -81,6 +90,9 @@ public class ArticleFamiliesController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Crea una nueva familia de artículos
+    /// </summary>
     [HttpPost]
     [ProducesResponseType(typeof(ArticleFamilyDto), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -108,6 +120,9 @@ public class ArticleFamiliesController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Actualiza una familia de artículos existente
+    /// </summary>
     [HttpPut("{id}")]
     [ProducesResponseType(typeof(ArticleFamilyDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -133,6 +148,9 @@ public class ArticleFamiliesController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Elimina una familia de artículos (soft delete)
+    /// </summary>
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

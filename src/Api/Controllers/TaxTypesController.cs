@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GesFer.Product.Back.Api.Controllers;
 
+/// <summary>
+/// Controlador para la gestión de tipos de impuestos (Tax Types)
+/// </summary>
 [Route("api/tax-types")]
 [ApiController]
 [Authorize]
@@ -31,6 +34,9 @@ public class TaxTypesController : ControllerBase
         _deleteHandler = deleteHandler;
     }
 
+    /// <summary>
+    /// Obtiene todos los tipos de impuestos de la empresa del usuario autenticado
+    /// </summary>
     [HttpGet]
     [ProducesResponseType(typeof(List<TaxTypeDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetTaxTypes(CancellationToken cancellationToken)
@@ -48,6 +54,9 @@ public class TaxTypesController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Obtiene un tipo de impuesto por ID
+    /// </summary>
     [HttpGet("{id}")]
     [ProducesResponseType(typeof(TaxTypeDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -68,6 +77,9 @@ public class TaxTypesController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Crea un nuevo tipo de impuesto
+    /// </summary>
     [HttpPost]
     [ProducesResponseType(typeof(Guid), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -90,6 +102,9 @@ public class TaxTypesController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Actualiza un tipo de impuesto existente
+    /// </summary>
     [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -118,6 +133,9 @@ public class TaxTypesController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Elimina un tipo de impuesto (soft delete)
+    /// </summary>
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
