@@ -62,15 +62,39 @@ Esto iniciará:
 
 ### 2. Crear la base de datos y migraciones
 
-Desde el directorio del proyecto de la API:
+El proyecto unifica las migraciones en una sola (**InitialCreate**) que refleja el modelo actual del `ApplicationDbContext`.
+
+Para aplicar la migración o actualizar la base de datos, desde el directorio de la API:
 
 ```bash
 cd src/Api
-dotnet ef migrations add InitialCreate --project ../Infrastructure/GesFer.Infrastructure.csproj
-dotnet ef database update --project ../Infrastructure/GesFer.Infrastructure.csproj
+dotnet ef database update --project ../Infrastructure/GesFer.Infrastructure.csproj --context ApplicationDbContext
 ```
 
-*(Si se dispone de herramientas de seed como `invoke-mysql-seeds` (Cúmulo), utilízalas en su lugar)*
+Si necesitas añadir una nueva migración (tras modificar el modelo):
+```bash
+dotnet ef migrations add NombreMigracion --project ../Infrastructure/GesFer.Infrastructure.csproj --context ApplicationDbContext
+```
+
+> **Nota para bases de datos existentes:**
+> - En desarrollo, lo ideal es eliminar la BD y recrearla.
+> - Para conservar datos, asegúrate de que el esquema coincide e inserta manualmente la fila de la migración (`20260213141112_InitialCreate` o la que corresponda) en la tabla `__EFMigrationsHistory`.
+
+### 2.1 Datos Iniciales (Seeds)
+
+Los datos iniciales se cargan automáticamente al iniciar la aplicación (en entorno **Development**) a partir de archivos JSON en `src/Infrastructure/Data/Seeds/`. El proceso es **idempotente** (no duplica ni pisa datos ya existentes).
+
+- `master-data.json`: Datos maestros compartidos por todas las empresas (Idiomas, Permisos del sistema, Grupos de usuarios).
+- `demo-data.json`: Datos de prueba para desarrollo (Empresas, Usuarios, Familias, Artículos, Proveedores, Clientes).
+- `test-data.json`: Datos específicos para tests de integración.
+
+Para añadir datos de prueba, edita directamente estos JSON (usando GUIDs únicos y hashes bcrypt en el campo `password`) y reinicia la aplicación. No se deben añadir datos en el código C#.
+
+**Credenciales de prueba por defecto (según demo-data):**
+| Empresa         | Usuario   | Contraseña |
+|-----------------|-----------|------------|
+| Empresa Admin   | admin     | admin123   |
+| Empresa Cliente | user_test | admin123   |
 
 ### 3. Ejecutar la API localmente
 
