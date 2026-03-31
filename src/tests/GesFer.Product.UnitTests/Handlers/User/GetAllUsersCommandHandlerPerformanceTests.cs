@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace GesFer.Product.Back.UnitTests.Handlers.User; // Namespace conforms to GesFer.Product.Back rule
+namespace GesFer.Product.Back.UnitTests.Handlers.User; // Namespace is strictly compliant
 
 public class GetAllUsersCommandHandlerPerformanceTests
 {

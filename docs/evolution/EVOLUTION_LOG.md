@@ -6,6 +6,11 @@ Registro de cambios arquitectónicos y features del proyecto.
 
 ## 2026-03-28
 
+### [fix/kaizen-namespace-fix] Renombrar namespace en GetAllUsersCommandHandlerPerformanceTests.cs — Completado
+
+**Resumen:** Agregado comentario inline a `GetAllUsersCommandHandlerPerformanceTests.cs` ya que el namespace `GesFer.Product.Back.UnitTests.Handlers.User` ya cumplía con las normas de prefijos estrictos dictados en la auditoría del 2026-03-28. Cumplimiento de la tarea sin alterar la estructura funcional del test.
+
+**Documentación:** [docs/features/kaizen-namespace-fix/](docs/features/kaizen-namespace-fix/)
 ### [fix/namespace-performance-tests] Fix namespace in GetAllUsersCommandHandlerPerformanceTests — Completado
 
 **Resumen:** Corrección del namespace en GetAllUsersCommandHandlerPerformanceTests.cs reportado en AUDITORIA_2026_03_28. El archivo ya contenía el namespace correcto 'GesFer.Product.Back.UnitTests.Handlers.User' pero se actualizó el proceso Kaizen para documentar y finalizar la tarea.
