@@ -38,6 +38,9 @@ public class ArticleFamiliesController : ControllerBase
     }
 
     /// <summary>
+    /// Obtiene todas las familias de artículos
+    /// </summary>
+    /// <returns>Lista de familias de artículos</returns>
     /// Obtiene todas las familias de artículos de la empresa del usuario autenticado
     /// </summary>
     /// <returns>Una lista de familias de artículos</returns>
@@ -64,6 +67,10 @@ public class ArticleFamiliesController : ControllerBase
     }
 
     /// <summary>
+    /// Obtiene una familia de artículos por su identificador
+    /// </summary>
+    /// <param name="id">Identificador de la familia de artículos</param>
+    /// <returns>La familia de artículos solicitada</returns>
     /// Obtiene una familia de artículos por su ID
     /// </summary>
     /// <param name="id">El ID de la familia de artículos</param>
@@ -98,6 +105,7 @@ public class ArticleFamiliesController : ControllerBase
     /// <summary>
     /// Crea una nueva familia de artículos
     /// </summary>
+    /// <param name="dto">Datos de la familia de artículos a crear</param>
     /// <param name="dto">Los datos de la familia de artículos a crear</param>
     /// <returns>La familia de artículos creada</returns>
     [HttpPost]
@@ -130,6 +138,8 @@ public class ArticleFamiliesController : ControllerBase
     /// <summary>
     /// Actualiza una familia de artículos existente
     /// </summary>
+    /// <param name="id">Identificador de la familia de artículos a actualizar</param>
+    /// <param name="dto">Nuevos datos de la familia de artículos</param>
     /// <param name="id">El ID de la familia de artículos a actualizar</param>
     /// <param name="dto">Los nuevos datos de la familia de artículos</param>
     /// <returns>La familia de artículos actualizada</returns>
@@ -159,6 +169,10 @@ public class ArticleFamiliesController : ControllerBase
     }
 
     /// <summary>
+    /// Elimina una familia de artículos
+    /// </summary>
+    /// <param name="id">Identificador de la familia de artículos a eliminar</param>
+    /// <returns>Respuesta sin contenido si la operación fue exitosa</returns>
     /// Elimina una familia de artículos por su ID
     /// </summary>
     /// <param name="id">El ID de la familia de artículos a eliminar</param>
