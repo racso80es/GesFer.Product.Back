@@ -27,3 +27,19 @@ El trabajo consiste en:
 3. Crear nuevas secciones (o actualizar las existentes) en el `README.md` raíz.
 4. Ajustar el formato del contenido para que encaje de forma natural en el README.md principal.
 5. Eliminar los archivos `src/Infrastructure/Data/Seeds/README.md` y `src/Infrastructure/Migrations/README.md` tras la migración.
+type: spec
+---
+
+# Spec
+- Leer el contenido de `README.md`.
+- Leer el contenido de `src/DOCKER-SETUP.md` y `src/TROUBLESHOOTING.md`.
+- Unificar la información relevante en `README.md`.
+- Eliminar `src/DOCKER-SETUP.md` y `src/TROUBLESHOOTING.md` para evitar duplicación.
+feature_name: actualizacion-readme
+version: 1.0.0
+status: active
+---
+# Especificaciones
+- Fusionar contenido de `src/DOCKER-SETUP.md` y `src/TROUBLESHOOTING.md` dentro de `README.md`.
+- Asegurar coherencia en las instrucciones de ejecución y diagnóstico.
+- Eliminar los archivos fuente movidos.

@@ -38,9 +38,9 @@ Si **no** hay ningún `.md` pendiente en la raíz de `paths.tasksPath`, revisa l
 ### 2. Activación y Bloqueo (Activation)
 Transición a estado `ACTIVE` para evitar colisiones con otras IAs (Jules/Cursor).
 
-- Crea una nueva rama `feat/<nombre_feature>` o `fix/<nombre_fix>`.
 - Mueve el archivo de la tarea **desde su origen** (raíz de `paths.tasksPath` o `paths.tasksPath/KAIZEN/`) hacia `paths.tasksPath/ACTIVE/`.
-- **Sincronización inmediata:** Realiza el primer commit con la reubicación del archivo de la tarea a su nueva ubicación `ACTIVE/` y haz push a origin en la rama actual. Esto bloquea el TODO.
+- - **Sincronización inmediata:** Realiza el primer commit con la reubicación del archivo de la tarea a su nueva ubicación `ACTIVE/` y haz push a origin en la rama actual. Esto bloquea el TODO.
+- Crea una nueva rama `feat/<nombre_feature>` o `fix/<nombre_fix>`.
 
 ### 3. Ejecución (Execution)
 Inicia y continúa las instrucciones definidas en el proceso correspondiente, por defecto el proceso `feature` (definido en `SddIA/process/feature/spec.md`).
