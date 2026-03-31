@@ -47,6 +47,10 @@ Registro de cambios arquitectónicos y features del proyecto.
 **Reference:** [docs/TASKS/DONE/Kaizen_2024_05_23.md]
 **Status:** DONE
 
+## [2024-03-29] feat/cleanup-unnecessary-using-directives
+**Feature:** Cleanup Unnecessary Using Directives
+**Description:** Reviewed `ProfileController.cs` and confirmed existing using directives were correct. Added a small Kaizen comment to log completion. Executed via `automatic_task` protocol.
+**Reference:** [docs/TASKS/DONE/Kaizen_2024_03_29_cleanup-unnecessary-using-directives.md]
 ## [2024-03-29] feat/add-typeof-object-health-controller
 **Feature:** Add typeof(object) to HealthController ProducesResponseType
 **Description:** Enforce standard formatting for HealthController response types by explicitly adding the typeof(object) definition to the ProducesResponseType attribute.
