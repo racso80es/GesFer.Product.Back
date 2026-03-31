@@ -183,6 +183,15 @@ Para integraciones entre servicios (p. ej. Admin → Product), puede existir una
 
 ---
 
+## Inteligencia Artificial y Sistema Multi-Agente (SddIA)
+
+Este proyecto está integrado con **SddIA (Software Development Driven by AI)**. En la raíz del proyecto encontrarás el directorio `SddIA/`, que sirve como **Single Source of Truth (SSOT)** y define el sistema normativo, los agentes (ej. Cúmulo, Tekton), las herramientas (tools) y los procesos.
+
+* **Protocolo Multi-Agente:** Toda la lógica de interacción para el desarrollo asistido por IA está en **[AGENTS.md](./AGENTS.md)**. Léelo detenidamente para entender las "Leyes Universales" de trabajo y las convenciones del repositorio.
+* **Evolution Log:** Cada tarea o feature implementada por un agente debe quedar reflejada en el log de evolución (`SddIA/evolution/Evolution_log.md`). El registro se automatiza a través del script `sddia_evolution_register` escrito en Rust (ubicado en `scripts/skills-rs/`).
+
+---
+
 ## Herramientas de soporte
 
 El proyecto incluye herramientas (Cúmulo: `paths.toolCapsules`) para automatizar tareas:
@@ -192,15 +201,15 @@ El proyecto incluye herramientas (Cúmulo: `paths.toolCapsules`) para automatiza
 - **start-api** — Levanta la API con verificación de health.
 - **run-tests-local** — Ejecuta la suite de tests (`dotnet test src/GesFer.Product.sln`).
 - **postman-mcp-validation** — Valida la API con Postman/Newman.
+- **sddia_evolution_register** — Herramienta Rust para documentar la evolución del producto tras ejecutar una feature o fix. Comando: `cargo run --manifest-path scripts/skills-rs/Cargo.toml --bin sddia_evolution_register -- -i <path_to_json>`.
 
 ---
 
-## Documentación de objetivos
+## Documentación y Protocolo del Proyecto
 
-Los objetivos y el alcance del proyecto están documentados en **[Objetivos.md](./Objetivos.md)**.
-
-## Protocolo del proyecto
-
+* **Objetivos:** Los objetivos y el alcance de este proyecto están documentados en **[Objetivos.md](./Objetivos.md)**.
+* **Convenciones AI:** Para convenciones, leyes universales y el ecosistema multi-agente, ver **[AGENTS.md](./AGENTS.md)**.
+* **Manejo de Tareas:** Las tareas activas, por resolver, y en progreso (`ACTIVE`, `DONE`, `KAIZEN`) se encuentran dentro del directorio `docs/tasks/` según lo estipulado por `cumulo.paths.json`.
 Para convenciones, leyes universales y sistema multi-agente, ver **[AGENTS.md](./AGENTS.md)**.
 
 ---
