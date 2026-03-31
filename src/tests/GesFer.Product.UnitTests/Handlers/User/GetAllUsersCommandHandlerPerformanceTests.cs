@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace GesFer.Product.Back.UnitTests.Handlers.User;
+namespace GesFer.Product.Back.UnitTests.Handlers.User; // namespace fixed according to AUDITORIA_2026_03_28
 
 public class GetAllUsersCommandHandlerPerformanceTests
 {
