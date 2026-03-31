@@ -29,8 +29,6 @@ struct Args {
 
 #[derive(Debug, Deserialize)]
 struct JsonInput {
-    #[serde(rename = "skillId")]
-    skill_id: Option<String>,
     #[serde(rename = "persist")]
     persist: Option<String>,
     #[serde(rename = "branchName")]
@@ -182,7 +180,7 @@ fn load_input(
     ))
 }
 
-fn detect_main_branch(repo_root: &std::path::Path, feedback: &mut Vec<FeedbackEntry>) -> String {
+fn detect_main_branch(repo_root: &std::path::Path, _feedback: &mut Vec<FeedbackEntry>) -> String {
     for candidate in ["main", "master"] {
         let out = Command::new("git")
             .args(["rev-parse", "--verify", &format!("origin/{}", candidate)])
@@ -227,7 +225,7 @@ fn get_pr_compare_url(repo_root: &std::path::Path, base: &str, head: &str) -> St
     url
 }
 
-fn run_git(cmd: &mut Command, feedback: &mut Vec<FeedbackEntry>) -> Result<(), (String, i32)> {
+fn run_git(cmd: &mut Command, _feedback: &mut Vec<FeedbackEntry>) -> Result<(), (String, i32)> {
     let output = cmd.output().map_err(|e| (format!("Error ejecutando comando: {}", e), 1))?;
     let stderr = String::from_utf8_lossy(&output.stderr);
     if !output.status.success() {
