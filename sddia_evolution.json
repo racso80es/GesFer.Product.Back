@@ -1,0 +1,14 @@
+{
+  "autor": "Jules",
+  "descripcionBreve": "Unificar READMEs internos en el principal",
+  "tipoOperacion": "Refactor/Docs",
+  "contexto": "La tarea Actualizacion_Readme.md solicitaba unificar el contenido de los READMEs de src (Migrations y Seeds) en el README.md principal para tener una única fuente de verdad.",
+  "proyectoOrigenCambio": "Docs",
+  "impacto": "Mejora la documentación centralizada. Ningún impacto en código productivo o tests.",
+  "cambiosRealizados": [
+    {
+      "anterior": "Multiples README.md en el proyecto (uno en root, y otros en src/Infrastructure/Data/Seeds y src/Infrastructure/Migrations)",
+      "nuevo": "Un único README.md en la raíz del proyecto que incluye secciones específicas para Migraciones (con notas para DBs existentes) y Seeds de BD (con credenciales por defecto)."
+    }
+  ]
+}
