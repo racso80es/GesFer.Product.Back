@@ -73,3 +73,9 @@ Registro de cambios arquitectónicos y features del proyecto.
 **Description:** Removed redundant `DeletedAt == null` checks from Customer entity handlers (`UpdateCustomerCommandHandler`, `GetCustomerByIdCommandHandler`, `GetAllCustomersCommandHandler`, `CreateCustomerCommandHandler`) as EF Core Global Query Filter already handles logical deletes automatically.
 **Reference:** [docs/TASKS/DONE/Kaizen_2024_03_28_remove_redundant_deletedat_checks_customer.md]
 **Status:** DONE
+
+## [2024-04-01] feat/kaizen-dashboard-swagger
+- **Feature**: Improve Swagger Documentation for DashboardController
+- **Description**: Added ProducesResponseType attributes and complete XML comments to the DashboardController to improve API discoverability.
+- **Reference**: [Kaizen_2024_04_01_dashboard_swagger_docs.md](../TASKS/DONE/Kaizen_2024_04_01_dashboard_swagger_docs.md)
+- **Status**: Completed
