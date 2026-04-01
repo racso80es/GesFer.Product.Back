@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace GesFer.Product.Back.Api.Controllers;
 
 /// <summary>
-/// Controlador para la gestión de las familias de artículos.
+/// Controlador para la gestión de familias de artículos
 /// </summary>
 [ApiController]
 [Route("api/article-families")]
@@ -41,9 +41,12 @@ public class ArticleFamiliesController : ControllerBase
     }
 
     /// <summary>
-    /// Obtiene todas las familias de artículos de la empresa del usuario autenticado.
+    /// Obtiene todas las familias de artículos
     /// </summary>
-    /// <returns>Una lista de familias de artículos.</returns>
+    /// <returns>Lista de familias de artículos</returns>
+    /// Obtiene todas las familias de artículos de la empresa del usuario autenticado
+    /// </summary>
+    /// <returns>Una lista de familias de artículos</returns>
     [HttpGet]
     [ProducesResponseType(typeof(List<ArticleFamilyDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAll()
@@ -67,10 +70,16 @@ public class ArticleFamiliesController : ControllerBase
     }
 
     /// <summary>
-    /// Obtiene una familia de artículos por su ID.
+    /// Obtiene una familia de artículos por su identificador
     /// </summary>
-    /// <param name="id">El ID único de la familia de artículos.</param>
-    /// <returns>La familia de artículos solicitada o un 404 si no se encuentra.</returns>
+    /// <param name="id">Identificador de la familia de artículos</param>
+    /// <returns>La familia de artículos solicitada</returns>
+    /// Obtiene una familia de artículos por su ID
+    /// </summary>
+    /// <param name="id">El ID de la familia de artículos</param>
+    /// <returns>La familia de artículos solicitada</returns>
+    /// Obtiene una familia de artículos por ID
+    /// </summary>
     [HttpGet("{id}")]
     [ProducesResponseType(typeof(ArticleFamilyDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -97,10 +106,11 @@ public class ArticleFamiliesController : ControllerBase
     }
 
     /// <summary>
-    /// Crea una nueva familia de artículos.
+    /// Crea una nueva familia de artículos
     /// </summary>
-    /// <param name="dto">Los datos de la nueva familia de artículos.</param>
-    /// <returns>La familia de artículos creada con su nuevo ID.</returns>
+    /// <param name="dto">Datos de la familia de artículos a crear</param>
+    /// <param name="dto">Los datos de la familia de artículos a crear</param>
+    /// <returns>La familia de artículos creada</returns>
     [HttpPost]
     [ProducesResponseType(typeof(ArticleFamilyDto), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -129,11 +139,13 @@ public class ArticleFamiliesController : ControllerBase
     }
 
     /// <summary>
-    /// Actualiza una familia de artículos existente.
+    /// Actualiza una familia de artículos existente
     /// </summary>
-    /// <param name="id">El ID de la familia de artículos a actualizar.</param>
-    /// <param name="dto">Los nuevos datos de la familia de artículos.</param>
-    /// <returns>La familia de artículos actualizada.</returns>
+    /// <param name="id">Identificador de la familia de artículos a actualizar</param>
+    /// <param name="dto">Nuevos datos de la familia de artículos</param>
+    /// <param name="id">El ID de la familia de artículos a actualizar</param>
+    /// <param name="dto">Los nuevos datos de la familia de artículos</param>
+    /// <returns>La familia de artículos actualizada</returns>
     [HttpPut("{id}")]
     [ProducesResponseType(typeof(ArticleFamilyDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -160,10 +172,16 @@ public class ArticleFamiliesController : ControllerBase
     }
 
     /// <summary>
-    /// Elimina una familia de artículos por su ID.
+    /// Elimina una familia de artículos
     /// </summary>
-    /// <param name="id">El ID de la familia de artículos a eliminar.</param>
-    /// <returns>NoContent si se elimina con éxito, o un error 404 si no se encuentra.</returns>
+    /// <param name="id">Identificador de la familia de artículos a eliminar</param>
+    /// <returns>Respuesta sin contenido si la operación fue exitosa</returns>
+    /// Elimina una familia de artículos por su ID
+    /// </summary>
+    /// <param name="id">El ID de la familia de artículos a eliminar</param>
+    /// <returns>Respuesta vacía si se elimina correctamente</returns>
+    /// Elimina una familia de artículos (soft delete)
+    /// </summary>
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
