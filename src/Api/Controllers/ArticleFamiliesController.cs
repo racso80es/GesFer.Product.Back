@@ -21,6 +21,9 @@ public class ArticleFamiliesController : ControllerBase
     private readonly ICommandHandler<GetAllArticleFamiliesCommand, List<ArticleFamilyDto>> _getAllHandler;
     private readonly ILogger<ArticleFamiliesController> _logger;
 
+    /// <summary>
+    /// Constructor del controlador de familias de artículos.
+    /// </summary>
     public ArticleFamiliesController(
         ICommandHandler<CreateArticleFamilyCommand, ArticleFamilyDto> createHandler,
         ICommandHandler<UpdateArticleFamilyCommand, ArticleFamilyDto> updateHandler,
