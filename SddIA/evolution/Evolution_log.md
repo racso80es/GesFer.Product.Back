@@ -13,3 +13,4 @@
 | 4256a32c-6c40-4ba5-a115-e581dcc3fa62 | 2026-03-28T01:05:44.030826350+00:00 | Unificar readme.md principal con readme de src y eliminar duplicados |
 | 5cdf95c1-0541-4e81-b8fa-367b185a6194 | 2026-03-27T23:41:41.005244028+00:00 | Unificacion de la documentacion en README.md y eliminacion de archivos redundantes. |
 | ebf0140a-19fc-4939-b7cb-5a1ee8001c4e | 2026-03-29T10:25:10.088005094+00:00 | Reestructurar create-pattern y create-principle en SddIA/process/ |
+| f177079e-0494-45c3-a7f3-6b2c63773644 | 2026-04-02T20:30:27.066749018+00:00 | Add missing spec.json to SddIA processes |

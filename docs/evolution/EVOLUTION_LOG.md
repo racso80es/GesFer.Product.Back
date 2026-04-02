@@ -73,3 +73,9 @@ Registro de cambios arquitectónicos y features del proyecto.
 **Description:** Removed redundant `DeletedAt == null` checks from Customer entity handlers (`UpdateCustomerCommandHandler`, `GetCustomerByIdCommandHandler`, `GetAllCustomersCommandHandler`, `CreateCustomerCommandHandler`) as EF Core Global Query Filter already handles logical deletes automatically.
 **Reference:** [docs/TASKS/DONE/Kaizen_2024_03_28_remove_redundant_deletedat_checks_customer.md]
 **Status:** DONE
+
+## [2026-04-02] feat/kaizen-missing-spec-jsons
+**Feature:** Add missing spec.json files to SddIA processes
+**Description:** Añadidos los archivos spec.json faltantes en los diferentes subdirectorios de SddIA/process para cumplir el contrato de procesos.
+**Reference:** [docs/TASKS/DONE/Kaizen_2024_04_02_missing_spec_jsons.md]
+**Status:** DONE
