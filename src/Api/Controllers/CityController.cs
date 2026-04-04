@@ -58,7 +58,7 @@ public class CityController : ControllerBase
     }
 
     /// <summary>
-    /// Obtiene una ciudad por ID
+    /// Obtiene una ciudad por su ID
     /// </summary>
     [HttpGet("{id}")]
     [ProducesResponseType(typeof(CityDto), StatusCodes.Status200OK)]
@@ -136,7 +136,7 @@ public class CityController : ControllerBase
     }
 
     /// <summary>
-    /// Elimina una ciudad (soft delete)
+    /// Elimina una ciudad por su ID
     /// </summary>
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]

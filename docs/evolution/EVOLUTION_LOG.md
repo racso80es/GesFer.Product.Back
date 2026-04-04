@@ -73,3 +73,9 @@ Registro de cambios arquitectónicos y features del proyecto.
 **Description:** Removed redundant `DeletedAt == null` checks from Customer entity handlers (`UpdateCustomerCommandHandler`, `GetCustomerByIdCommandHandler`, `GetAllCustomersCommandHandler`, `CreateCustomerCommandHandler`) as EF Core Global Query Filter already handles logical deletes automatically.
 **Reference:** [docs/TASKS/DONE/Kaizen_2024_03_28_remove_redundant_deletedat_checks_customer.md]
 **Status:** DONE
+
+## [2024-04-04] feat/add-xml-docs-city-controller
+**Feature**: Add XML Summary Documentation to CityController
+**Description**: Added missing <summary> XML comments to endpoints in CityController to improve OpenAPI docs.
+**Reference**: docs/TASKS/DONE/Kaizen_2024_04_04_add_xml_docs_city_controller.md
+**Status**: DONE
