@@ -73,3 +73,8 @@ Registro de cambios arquitectónicos y features del proyecto.
 **Description:** Removed redundant `DeletedAt == null` checks from Customer entity handlers (`UpdateCustomerCommandHandler`, `GetCustomerByIdCommandHandler`, `GetAllCustomersCommandHandler`, `CreateCustomerCommandHandler`) as EF Core Global Query Filter already handles logical deletes automatically.
 **Reference:** [docs/TASKS/DONE/Kaizen_2024_03_28_remove_redundant_deletedat_checks_customer.md]
 **Status:** DONE
+## [2026-04-04] feat/correccion-auditoria
+**Feature:** Auditoria de backend 2026-04-04
+**Description:** Se realizó la auditoría, con un resultado de salud de 100%. No se registraron deudas técnicas.
+**Reference:** docs/features/correccion-auditoria-2026-04-04/
+**Status:** DONE
