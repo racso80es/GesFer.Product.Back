@@ -4,6 +4,14 @@ Registro de cambios arquitectónicos y features del proyecto.
 
 ---
 
+## [2024-04-06] fix/xunit2013-warnings
+**Feature:** Fix xUnit2013 warnings in Performance Tests
+**Description:** Replaced Assert.Equal(0, mockAdminApiClient.Invocations.Count) with Assert.Empty() in GetAllUsersCommandHandlerPerformanceTests.cs.
+**Reference:** [docs/TASKS/DONE/Kaizen_2024_04_06_fix-xunit2013-warnings.md]
+**Status:** DONE
+
+---
+
 ## 2026-03-28
 
 ### [fix/kaizen-namespace-fix] Renombrar namespace en GetAllUsersCommandHandlerPerformanceTests.cs — Completado
