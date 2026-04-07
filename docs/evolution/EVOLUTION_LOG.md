@@ -47,6 +47,12 @@ Registro de cambios arquitectónicos y features del proyecto.
 **Reference:** [docs/TASKS/DONE/Kaizen_2024_05_23.md]
 **Status:** DONE
 
+## [2026-03-29] feat/remove-todos-sddia
+**Feature:** Remove TODOs from SddIA specs
+**Description:** Replaced TODO strings with PENDING-TASK in sddia-difusion and automatic_task specs.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_03_29_remove-todos-sddia.md]
+**Status:** DONE
+
 ## [2026-03-29] feat/remove-template-todos
 - **Feature**: Remove TODOs from templates
 - **Description**: Replaced TODOs in SddIA templates with ACTION-REQUIRED.

@@ -1,14 +1,14 @@
 {
   "autor": "Jules",
-  "descripcionBreve": "Remove TODOs from spec-template",
-  "tipoOperacion": "Update",
-  "contexto": "Kaizen clean code",
-  "proyectoOrigenCambio": "templates",
+  "descripcionBreve": "Remove TODOs from SddIA specs",
+  "tipoOperacion": "update",
+  "contexto": "SddIA/actions y SddIA/process",
+  "proyectoOrigenCambio": "automatic_task",
   "impacto": "low",
   "cambiosRealizados": [
     {
       "anterior": "// TODO:",
-      "nuevo": "// [ACTION-REQUIRED]:"
+      "nuevo": "// [PENDING-TASK]:"
     }
   ]
 }
