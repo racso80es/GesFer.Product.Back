@@ -47,6 +47,11 @@ Registro de cambios arquitectónicos y features del proyecto.
 **Reference:** [docs/TASKS/DONE/Kaizen_2024_05_23.md]
 **Status:** DONE
 
+## [2026-03-29] feat/remove-template-todos
+- **Feature**: Remove TODOs from templates
+- **Description**: Replaced TODOs in SddIA templates with ACTION-REQUIRED.
+- **Reference**: [Kaizen_2026_03_29_remove_template_todos.md](../TASKS/DONE/Kaizen_2026_03_29_remove_template_todos.md)
+- **Status**: DONE
 ## [2026-03-29] feat/kaizen-2026-03-29-add-dummy-feature
 **Feature:** Add Dummy Feature
 **Description:** Created a dummy feature to test the automatic task execution process. Created 7 markdown files in docs/features/kaizen-2026-03-29-add-dummy-feature/.
