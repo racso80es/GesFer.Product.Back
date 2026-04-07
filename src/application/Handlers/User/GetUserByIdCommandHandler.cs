@@ -21,7 +21,7 @@ public class GetUserByIdCommandHandler : ICommandHandler<GetUserByIdCommand, Use
     public async Task<UserDto?> HandleAsync(GetUserByIdCommand command, CancellationToken cancellationToken = default)
     {
         var user = await _context.Users
-            .Where(u => u.Id == command.Id && u.DeletedAt == null)
+            .Where(u => u.Id == command.Id)
             .FirstOrDefaultAsync(cancellationToken);
         if (user == null) return null;
 

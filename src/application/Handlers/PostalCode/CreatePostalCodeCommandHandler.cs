@@ -22,7 +22,7 @@ public class CreatePostalCodeCommandHandler : ICommandHandler<CreatePostalCodeCo
         var city = await _context.Cities
             .Include(c => c.State)
                 .ThenInclude(s => s.Country)
-            .FirstOrDefaultAsync(c => c.Id == command.Dto.CityId && c.DeletedAt == null, cancellationToken);
+            .FirstOrDefaultAsync(c => c.Id == command.Dto.CityId, cancellationToken);
 
         if (city == null)
             throw new InvalidOperationException($"No se encontró la ciudad con ID {command.Dto.CityId}");
@@ -30,8 +30,7 @@ public class CreatePostalCodeCommandHandler : ICommandHandler<CreatePostalCodeCo
         // Validar que no exista un código postal con el mismo código en la misma ciudad
         var existingPostalCode = await _context.PostalCodes
             .FirstOrDefaultAsync(pc => pc.Code == command.Dto.Code
-                && pc.CityId == command.Dto.CityId
-                && pc.DeletedAt == null, cancellationToken);
+                && pc.CityId == command.Dto.CityId, cancellationToken);
 
         if (existingPostalCode != null)
             throw new InvalidOperationException($"Ya existe un código postal '{command.Dto.Code}' en esta ciudad");

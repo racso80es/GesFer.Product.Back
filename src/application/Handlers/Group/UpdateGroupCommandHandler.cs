@@ -18,14 +18,14 @@ public class UpdateGroupCommandHandler : ICommandHandler<UpdateGroupCommand, Gro
     public async Task<GroupDto> HandleAsync(UpdateGroupCommand command, CancellationToken cancellationToken = default)
     {
         var group = await _context.Groups
-            .FirstOrDefaultAsync(g => g.Id == command.Id && g.DeletedAt == null, cancellationToken);
+            .FirstOrDefaultAsync(g => g.Id == command.Id, cancellationToken);
 
         if (group == null)
             throw new InvalidOperationException($"No se encontró el grupo con ID {command.Id}");
 
         // Validar que no exista otro grupo con el mismo nombre (excepto el actual)
         var existingGroup = await _context.Groups
-            .FirstOrDefaultAsync(g => g.Name == command.Dto.Name && g.Id != command.Id && g.DeletedAt == null, cancellationToken);
+            .FirstOrDefaultAsync(g => g.Name == command.Dto.Name && g.Id != command.Id, cancellationToken);
 
         if (existingGroup != null)
             throw new InvalidOperationException($"Ya existe otro grupo con el nombre '{command.Dto.Name}'");

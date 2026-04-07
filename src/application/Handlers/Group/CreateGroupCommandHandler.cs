@@ -20,7 +20,7 @@ public class CreateGroupCommandHandler : ICommandHandler<CreateGroupCommand, Gro
     {
         // Validar que no exista un grupo con el mismo nombre
         var existingGroup = await _context.Groups
-            .FirstOrDefaultAsync(g => g.Name == command.Dto.Name && g.DeletedAt == null, cancellationToken);
+            .FirstOrDefaultAsync(g => g.Name == command.Dto.Name, cancellationToken);
 
         if (existingGroup != null)
             throw new InvalidOperationException($"Ya existe un grupo con el nombre '{command.Dto.Name}'");

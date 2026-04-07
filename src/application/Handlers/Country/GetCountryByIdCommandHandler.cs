@@ -18,7 +18,7 @@ public class GetCountryByIdCommandHandler : ICommandHandler<GetCountryByIdComman
     public async Task<CountryDto?> HandleAsync(GetCountryByIdCommand command, CancellationToken cancellationToken = default)
     {
         var country = await _context.Countries
-            .Where(c => c.Id == command.Id && c.DeletedAt == null)
+            .Where(c => c.Id == command.Id)
             .Select(c => new CountryDto
             {
                 Id = c.Id,

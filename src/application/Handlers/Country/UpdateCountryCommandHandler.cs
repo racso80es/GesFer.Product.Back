@@ -18,28 +18,28 @@ public class UpdateCountryCommandHandler : ICommandHandler<UpdateCountryCommand,
     public async Task<CountryDto> HandleAsync(UpdateCountryCommand command, CancellationToken cancellationToken = default)
     {
         var country = await _context.Countries
-            .FirstOrDefaultAsync(c => c.Id == command.Id && c.DeletedAt == null, cancellationToken);
+            .FirstOrDefaultAsync(c => c.Id == command.Id, cancellationToken);
 
         if (country == null)
             throw new InvalidOperationException($"No se encontró el país con ID {command.Id}");
 
         // Validar que no exista otro país con el mismo código (excepto el actual)
         var existingCountry = await _context.Countries
-            .FirstOrDefaultAsync(c => c.Code == command.Dto.Code && c.Id != command.Id && c.DeletedAt == null, cancellationToken);
+            .FirstOrDefaultAsync(c => c.Code == command.Dto.Code && c.Id != command.Id, cancellationToken);
 
         if (existingCountry != null)
             throw new InvalidOperationException($"Ya existe otro país con el código '{command.Dto.Code}'");
 
         // Validar que no exista otro país con el mismo nombre (excepto el actual)
         var existingCountryByName = await _context.Countries
-            .FirstOrDefaultAsync(c => c.Name == command.Dto.Name && c.Id != command.Id && c.DeletedAt == null, cancellationToken);
+            .FirstOrDefaultAsync(c => c.Name == command.Dto.Name && c.Id != command.Id, cancellationToken);
 
         if (existingCountryByName != null)
             throw new InvalidOperationException($"Ya existe otro país con el nombre '{command.Dto.Name}'");
 
         // Validar idioma
         var languageExists = await _context.Languages
-            .AnyAsync(l => l.Id == command.Dto.LanguageId && l.DeletedAt == null, cancellationToken);
+            .AnyAsync(l => l.Id == command.Dto.LanguageId, cancellationToken);
         if (!languageExists)
             throw new InvalidOperationException($"No se encontró el idioma con ID {command.Dto.LanguageId}");
 
