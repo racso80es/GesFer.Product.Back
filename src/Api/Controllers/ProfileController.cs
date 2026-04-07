@@ -11,6 +11,7 @@ namespace GesFer.Product.Back.Api.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 [Authorize] // Requiere autenticación JWT
+// Kaizen: Se confirma que las directivas using son correctas y necesarias
 public class ProfileController : ControllerBase
 {
     private readonly ILogger<ProfileController> _logger;

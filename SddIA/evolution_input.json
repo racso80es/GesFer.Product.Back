@@ -1,0 +1,18 @@
+{
+  "autor": "Jules",
+  "descripcionBreve": "Reestructurar create-pattern y create-principle en SddIA/process/",
+  "tipoOperacion": "Refactoring",
+  "contexto": "Kaizen action for better consistency in process and actions, moving them to skills/tools pattern.",
+  "proyectoOrigenCambio": "SddIA",
+  "impacto": "Mejora en la estructura del conocimiento.",
+  "cambiosRealizados": [
+    {
+      "anterior": "SddIA/process/create-pattern.md, SddIA/process/create-pattern.json",
+      "nuevo": "SddIA/process/create-pattern/spec.md, SddIA/process/create-pattern/spec.json"
+    },
+    {
+      "anterior": "SddIA/process/create-principle.md, SddIA/process/create-principle.json",
+      "nuevo": "SddIA/process/create-principle/spec.md, SddIA/process/create-principle/spec.json"
+    }
+  ]
+}
