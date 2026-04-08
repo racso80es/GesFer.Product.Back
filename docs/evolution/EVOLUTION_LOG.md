@@ -4,6 +4,14 @@ Registro de cambios arquitectónicos y features del proyecto.
 
 ---
 
+## [2024-04-06] fix/xunit2013-warnings
+**Feature:** Fix xUnit2013 warnings in Performance Tests
+**Description:** Replaced Assert.Equal(0, mockAdminApiClient.Invocations.Count) with Assert.Empty() in GetAllUsersCommandHandlerPerformanceTests.cs.
+**Reference:** [docs/TASKS/DONE/Kaizen_2024_04_06_fix-xunit2013-warnings.md]
+**Status:** DONE
+
+---
+
 ## 2026-03-28
 
 ### [fix/kaizen-namespace-fix] Renombrar namespace en GetAllUsersCommandHandlerPerformanceTests.cs — Completado
@@ -47,15 +55,6 @@ Registro de cambios arquitectónicos y features del proyecto.
 **Reference:** [docs/TASKS/DONE/Kaizen_2024_05_23.md]
 **Status:** DONE
 
-## [2026-03-29] feat/remove-template-todos
-- **Feature**: Remove TODOs from templates
-- **Description**: Replaced TODOs in SddIA templates with ACTION-REQUIRED.
-- **Reference**: [Kaizen_2026_03_29_remove_template_todos.md](../TASKS/DONE/Kaizen_2026_03_29_remove_template_todos.md)
-- **Status**: DONE
-## [2026-03-29] feat/kaizen-2026-03-29-add-dummy-feature
-**Feature:** Add Dummy Feature
-**Description:** Created a dummy feature to test the automatic task execution process. Created 7 markdown files in docs/features/kaizen-2026-03-29-add-dummy-feature/.
-**Reference:** [docs/TASKS/DONE/Kaizen_2026_03_29_add_dummy_feature.md]
 ## [2024-03-29] feat/cleanup-unnecessary-using-directives
 **Feature:** Cleanup Unnecessary Using Directives
 **Description:** Reviewed `ProfileController.cs` and confirmed existing using directives were correct. Added a small Kaizen comment to log completion. Executed via `automatic_task` protocol.

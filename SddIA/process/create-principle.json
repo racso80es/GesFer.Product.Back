@@ -1,0 +1,30 @@
+{
+  "process_id": "create-principle",
+  "name": "Creación de Principio Técnico",
+  "description": "Proceso estándar para añadir un nuevo principio técnico a paths.principlesPath (SddIA/principles/). Asegura cumplimiento del principles-contract.",
+  "phases": [
+    {
+      "name": "Definición",
+      "activities": [
+        "Elegir principle_id en kebab-case (ej. norma-nomenclatura).",
+        "Crear carpeta paths.principlesPath/<principle-id>/ (consultar Cúmulo).",
+        "Redactar spec.md: título, categoría, contenido, aplicación para arquitectos/tekton, referencias. Idioma es-ES.",
+        "Crear spec.json: id (UUID), principle_id, title, category, tags, metadata (difficulty, status), contract_ref. Opcional: blocking_for_pr, defined_by_agent."
+      ]
+    },
+    {
+      "name": "Validación",
+      "activities": [
+        "Verificar que spec.json cumple SddIA/principles/principles-contract.json.",
+        "Comprobar que spec.md tiene formato y contenido completo.",
+        "Si blocking_for_pr: true, asegurar que la acción validate incluye check de este principio."
+      ]
+    }
+  ],
+  "artifacts": [
+    { "path": "paths.principlesPath/<principle-id>/spec.md", "required": true },
+    { "path": "paths.principlesPath/<principle-id>/spec.json", "required": true }
+  ],
+  "contract_ref": "paths.processPath/process-contract.json",
+  "related_agents": ["cumulo", "architect", "qa-judge"]
+}

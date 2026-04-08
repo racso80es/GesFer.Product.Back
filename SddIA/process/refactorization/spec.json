@@ -1,0 +1,7 @@
+{
+  "spec_version": "1.0.0",
+  "process_id": "refactorization",
+  "name": "Refactorization",
+  "description": "Refactorización de código",
+  "contract_ref": "paths.processPath/process-contract.md"
+}

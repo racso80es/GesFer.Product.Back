@@ -156,7 +156,6 @@ try
 
     var app = builder.Build();
 
-    // Dummy comment to ensure diff for kaizen-2026-03-29-add-dummy-feature
     // Agregar sink de Admin API después de que los servicios estén disponibles
     // Esto permite que los logs se envíen a Admin API mediante AsyncLogPublisher
     var logPublisher = app.Services.GetService<IAsyncLogPublisher>();

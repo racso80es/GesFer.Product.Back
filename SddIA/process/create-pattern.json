@@ -1,0 +1,26 @@
+{
+  "process_id": "create-pattern",
+  "name": "Creation of Design Patterns",
+  "description": "Standard process for adding new design patterns to the knowledge base (SddIA/patterns).",
+  "phases": [
+    {
+      "name": "Definition",
+      "activities": [
+        "Create folder in SddIA/patterns/ with UUID as name.",
+        "Create spec.md with readable content (Spanish).",
+        "Create spec.json with metadata and interested agents."
+      ]
+    },
+    {
+      "name": "Validation",
+      "activities": [
+        "Verify spec.json structure against patterns-contract.json.",
+        "Ensure spec.md content is complete and formatted."
+      ]
+    }
+  ],
+  "artifacts": [
+    { "path": "SddIA/patterns/<uuid>/spec.md", "required": true },
+    { "path": "SddIA/patterns/<uuid>/spec.json", "required": true }
+  ]
+}
