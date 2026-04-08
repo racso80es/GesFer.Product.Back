@@ -1,0 +1,14 @@
+{
+  "autor": "Jules",
+  "descripcionBreve": "Remove TODOs from spec-template and difusion spec",
+  "tipoOperacion": "Refactor",
+  "contexto": "Clean Code",
+  "proyectoOrigenCambio": "SddIA",
+  "impacto": "Bajo",
+  "cambiosRealizados": [
+    {
+      "anterior": "// TODO:",
+      "nuevo": "// [ACTION-REQUIRED]:"
+    }
+  ]
+}
