@@ -1,0 +1,7 @@
+{
+  "spec_version": "1.0.0",
+  "process_id": "correccion-auditorias",
+  "name": "Corrección Auditorías",
+  "description": "Corrección de hallazgos de auditoría",
+  "contract_ref": "paths.processPath/process-contract.md"
+}

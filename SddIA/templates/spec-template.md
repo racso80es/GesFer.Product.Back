@@ -48,8 +48,8 @@ Para dar por cerrada esta especificación, se deben cumplir los siguientes punto
 
 Lista de etiquetas que se usarán en la fase de implementación:
 ```csharp
-// [ACTION-REQUIRED]: [REF-VO] - ...
-// [ACTION-REQUIRED]: [FIX-LOG] - ... (Activando AC-001 [LOGS])
+// TODO: [REF-VO] - ...
+// TODO: [FIX-LOG] - ... (Activando AC-001 [LOGS])
 ```
 
 ## 7. Trazabilidad de Auditoría
