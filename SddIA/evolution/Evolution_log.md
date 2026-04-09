@@ -14,3 +14,4 @@
 | 5cdf95c1-0541-4e81-b8fa-367b185a6194 | 2026-03-27T23:41:41.005244028+00:00 | Unificacion de la documentacion en README.md y eliminacion de archivos redundantes. |
 | ebf0140a-19fc-4939-b7cb-5a1ee8001c4e | 2026-03-29T10:25:10.088005094+00:00 | Reestructurar create-pattern y create-principle en SddIA/process/ |
 | e6a6c30c-a51d-4077-a803-b99579db24a4 | 2026-04-08T20:21:27.287229603+00:00 | Remove TODOs from spec-template and difusion spec |
+| 8749488f-48c4-46e9-94f8-4c97cc1d18dd | 2026-04-09T20:38:56.092597058+00:00 | Clarificar separacion de evolucion producto vs sddia para prevenir errores de logs |

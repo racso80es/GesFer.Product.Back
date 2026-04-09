@@ -1,0 +1,14 @@
+{
+  "autor": "Jules",
+  "descripcionBreve": "Clarificar separacion de evolucion producto vs sddia para prevenir errores de logs",
+  "tipoOperacion": "modificacion",
+  "contexto": "Solucionar bug_log_SddIA sobre confusion de logs",
+  "proyectoOrigenCambio": "GesFer",
+  "impacto": "Bajo",
+  "cambiosRealizados": [
+    {
+      "anterior": "Texto ambiguo en reglas de SddIA sobre Evolution Log",
+      "nuevo": "Restriccion explicita previniendo el uso de SddIA/evolution/Evolution_log.md para logs fuera de SddIA"
+    }
+  ]
+}
