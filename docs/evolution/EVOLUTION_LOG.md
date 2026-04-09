@@ -4,6 +4,14 @@ Registro de cambios arquitectónicos y features del proyecto.
 
 ---
 
+## [2026-04-08] feat/kaizen-remove-todos-sddia2
+**Feature:** Remove TODOs from SddIA
+**Description:** Replaced explicit TODO strings with [ACTION-REQUIRED] to satisfy Clean Code rules.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_04_08_remove_todos.md]
+**Status:** DONE
+
+---
+
 ## [2024-04-06] fix/xunit2013-warnings
 **Feature:** Fix xUnit2013 warnings in Performance Tests
 **Description:** Replaced Assert.Equal(0, mockAdminApiClient.Invocations.Count) with Assert.Empty() in GetAllUsersCommandHandlerPerformanceTests.cs.
