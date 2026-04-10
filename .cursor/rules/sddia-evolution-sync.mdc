@@ -14,3 +14,5 @@ alwaysApply: false
 **Checklist mínimo** al cambiar artefactos bajo `./SddIA/`: detalle `{uuid}.md` (UUID v4) + fila en `Evolution_log.md`; `tipo_operacion` alta | baja | modificación; registro vía binario Rust de la cápsula `paths.skillCapsules.sddia-evolution-register`, no `.ps1` como entrega principal.
 
 Si una regla del IDE contradice **SddIA** o **AGENTS.md**, prevalece SddIA. El cumplimiento fuerte está en CI y revisión humana.
+
+**IMPORTANTE (PREVENCIÓN DE ERRORES):** NO registrar cambios en `SddIA/evolution/Evolution_log.md` a menos que se hayan modificado archivos físicamente dentro de `./SddIA/`. La evolución general del proyecto (features, refactors fuera de SddIA) DEBE registrarse ÚNICAMENTE en `docs/evolution/EVOLUTION_LOG.md`.

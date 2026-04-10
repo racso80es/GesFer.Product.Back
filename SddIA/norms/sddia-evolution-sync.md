@@ -23,8 +23,8 @@ Toda **alta**, **baja** o **modificación** material bajo `./SddIA/` debe quedar
 
 ## 2. Separación respecto a evolución de producto
 
-- **`paths.sddiaEvolutionPath`** — protocolo de trazabilidad del **ecosistema SddIA** en este repositorio.
-- **`paths.evolutionPath`** / `docs/evolution/` — evolución de **producto** (features, cierres). No son intercambiables.
+- **`paths.sddiaEvolutionPath`** — protocolo de trazabilidad del **ecosistema SddIA** en este repositorio. (Uso EXCLUSIVO para modificaciones dentro de `./SddIA/`).
+- **`paths.evolutionPath`** / `docs/evolution/` — evolución de **producto** (features, cierres). No son intercambiables. TODO registro de log general, tareas y correcciones fuera de `./SddIA/` debe registrarse AQUÍ, en `docs/evolution/EVOLUTION_LOG.md`.
 
 ## 3. Implementación
 
