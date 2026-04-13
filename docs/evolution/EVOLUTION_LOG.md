@@ -4,6 +4,14 @@ Registro de cambios arquitectónicos y features del proyecto.
 
 ---
 
+## [2026-04-12] feat/kaizen-dashboard-produces
+**Feature:** Add ProducesResponseType to DashboardController
+**Description:** Added `[ProducesResponseType]` attributes to `GetStats` in `DashboardController.cs` to improve Swagger OpenAPI discoverability.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_04_12_dashboard_controller_produces.md]
+**Status:** DONE
+
+---
+
 ## [2026-04-10] fix/bug-log-sddia
 **Feature:** Corregir confusión en logs de evolución
 **Description:** Se añadieron restricciones explícitas en las normas de SddIA y reglas de IDE para asegurar que la evolución fuera de SddIA se registre en EVOLUTION_LOG.md y no en el log interno de SddIA.
