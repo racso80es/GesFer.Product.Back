@@ -4,10 +4,10 @@ Registro de cambios arquitectónicos y features del proyecto.
 
 ---
 
-## [2026-04-11] feat/kaizen-2026-04-11-routine-check
-**Feature:** Routine Code Health Check
-**Description:** Performed routine system integrity and code health check to comply with automatic task kaizen requirement.
-**Reference:** [docs/TASKS/DONE/Kaizen_2026_04_11_routine_check.md]
+## [2026-04-10] feat/kaizen-swagger-docs
+**Feature:** Enable XML Documentation in Swagger UI
+**Description:** Enabled XML documentation generation in `GesFer.Api.csproj` and configured SwaggerGen to include comments.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_04_10_swagger_docs.md]
 **Status:** DONE
 
 ---
