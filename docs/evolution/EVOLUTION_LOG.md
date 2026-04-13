@@ -4,6 +4,14 @@ Registro de cambios arquitectónicos y features del proyecto.
 
 ---
 
+## [2026-04-10] feat/kaizen-swagger-docs
+**Feature:** Enable XML Documentation in Swagger UI
+**Description:** Enabled XML documentation generation in `GesFer.Api.csproj` and configured SwaggerGen to include comments.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_04_10_swagger_docs.md]
+**Status:** DONE
+
+---
+
 ## [2026-04-10] fix/bug-log-sddia
 **Feature:** Corregir confusión en logs de evolución
 **Description:** Se añadieron restricciones explícitas en las normas de SddIA y reglas de IDE para asegurar que la evolución fuera de SddIA se registre en EVOLUTION_LOG.md y no en el log interno de SddIA.
