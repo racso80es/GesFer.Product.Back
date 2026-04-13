@@ -36,6 +36,9 @@ public class DashboardController : ControllerBase
     /// Protegido por Internal Secret (System) o Rol Admin
     /// </summary>
     [HttpGet("stats")]
+    [ProducesResponseType(typeof(DashboardSummaryDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> GetStats()
     {
         // Validación manual de Internal Secret (o usar atributo si se mueve a Common)
