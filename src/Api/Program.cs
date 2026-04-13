@@ -79,6 +79,9 @@ try
         // Configurar para mostrar valores por defecto desde el atributo [DefaultValue]
         c.SchemaFilter<GesFer.Product.Back.Api.Swagger.DefaultValueSchemaFilter>();
         c.UseInlineDefinitionsForEnums();
+
+        var xmlFilename = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml";
+        c.IncludeXmlComments(System.IO.Path.Combine(AppContext.BaseDirectory, xmlFilename));
     });
 
     // Configurar CORS

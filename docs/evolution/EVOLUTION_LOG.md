@@ -8,6 +8,10 @@ Registro de cambios arquitectónicos y features del proyecto.
 **Feature:** Add ProducesResponseType to DashboardController
 **Description:** Added `[ProducesResponseType]` attributes to `GetStats` in `DashboardController.cs` to improve Swagger OpenAPI discoverability.
 **Reference:** [docs/TASKS/DONE/Kaizen_2026_04_12_dashboard_controller_produces.md]
+## [2026-04-10] feat/kaizen-swagger-docs
+**Feature:** Enable XML Documentation in Swagger UI
+**Description:** Enabled XML documentation generation in `GesFer.Api.csproj` and configured SwaggerGen to include comments.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_04_10_swagger_docs.md]
 **Status:** DONE
 
 ---
