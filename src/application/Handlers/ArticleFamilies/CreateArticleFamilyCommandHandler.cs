@@ -23,12 +23,12 @@ public class CreateArticleFamilyCommandHandler : ICommandHandler<CreateArticleFa
             throw new InvalidOperationException("CompanyId es obligatorio.");
 
         var existsCode = await _context.ArticleFamilies
-            .AnyAsync(af => af.CompanyId == companyId && af.Code == command.Dto.Code && af.DeletedAt == null, cancellationToken);
+            .AnyAsync(af => af.CompanyId == companyId && af.Code == command.Dto.Code, cancellationToken);
         if (existsCode)
             throw new InvalidOperationException("Ya existe una familia de artículos con este código en la empresa.");
 
         var taxTypeExists = await _context.TaxTypes
-            .AnyAsync(t => t.Id == command.Dto.TaxTypeId && t.CompanyId == companyId && t.DeletedAt == null, cancellationToken);
+            .AnyAsync(t => t.Id == command.Dto.TaxTypeId && t.CompanyId == companyId, cancellationToken);
         if (!taxTypeExists)
             throw new InvalidOperationException("El tipo de tasa no existe o no pertenece a la empresa.");
 

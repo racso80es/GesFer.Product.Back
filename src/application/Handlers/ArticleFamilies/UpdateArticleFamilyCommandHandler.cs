@@ -19,7 +19,7 @@ public class UpdateArticleFamilyCommandHandler : ICommandHandler<UpdateArticleFa
     {
         var entity = await _context.ArticleFamilies
             .Include(af => af.TaxType)
-            .FirstOrDefaultAsync(af => af.Id == command.Id && af.DeletedAt == null, cancellationToken);
+            .FirstOrDefaultAsync(af => af.Id == command.Id, cancellationToken);
 
         if (entity == null)
             throw new InvalidOperationException($"No se encontró la familia de artículos con ID {command.Id}.");
@@ -27,7 +27,7 @@ public class UpdateArticleFamilyCommandHandler : ICommandHandler<UpdateArticleFa
         if (entity.Code != command.Dto.Code)
         {
             var existsCode = await _context.ArticleFamilies
-                .AnyAsync(af => af.CompanyId == entity.CompanyId && af.Code == command.Dto.Code && af.Id != command.Id && af.DeletedAt == null, cancellationToken);
+                .AnyAsync(af => af.CompanyId == entity.CompanyId && af.Code == command.Dto.Code && af.Id != command.Id, cancellationToken);
             if (existsCode)
                 throw new InvalidOperationException("Ya existe una familia de artículos con este código en la empresa.");
         }
@@ -35,7 +35,7 @@ public class UpdateArticleFamilyCommandHandler : ICommandHandler<UpdateArticleFa
         if (command.Dto.TaxTypeId != entity.TaxTypeId)
         {
             var taxTypeExists = await _context.TaxTypes
-                .AnyAsync(t => t.Id == command.Dto.TaxTypeId && t.CompanyId == entity.CompanyId && t.DeletedAt == null, cancellationToken);
+                .AnyAsync(t => t.Id == command.Dto.TaxTypeId && t.CompanyId == entity.CompanyId, cancellationToken);
             if (!taxTypeExists)
                 throw new InvalidOperationException("El tipo de tasa no existe o no pertenece a la empresa.");
         }
