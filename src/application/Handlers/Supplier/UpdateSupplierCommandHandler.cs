@@ -18,14 +18,14 @@ public class UpdateSupplierCommandHandler : ICommandHandler<UpdateSupplierComman
     public async Task<SupplierDto> HandleAsync(UpdateSupplierCommand command, CancellationToken cancellationToken = default)
     {
         var supplier = await _context.Suppliers
-            .FirstOrDefaultAsync(s => s.Id == command.Id && s.DeletedAt == null, cancellationToken);
+            .FirstOrDefaultAsync(s => s.Id == command.Id, cancellationToken);
 
         if (supplier == null)
             throw new InvalidOperationException($"No se encontró el proveedor con ID {command.Id}");
 
         // Validar que no exista otro proveedor con el mismo nombre en la misma empresa (excepto el actual)
         var existingSupplier = await _context.Suppliers
-            .FirstOrDefaultAsync(s => s.CompanyId == supplier.CompanyId && s.Name == command.Dto.Name && s.Id != command.Id && s.DeletedAt == null, cancellationToken);
+            .FirstOrDefaultAsync(s => s.CompanyId == supplier.CompanyId && s.Name == command.Dto.Name && s.Id != command.Id, cancellationToken);
 
         if (existingSupplier != null)
             throw new InvalidOperationException($"Ya existe otro proveedor con el nombre '{command.Dto.Name}' en esta empresa");
@@ -34,7 +34,7 @@ public class UpdateSupplierCommandHandler : ICommandHandler<UpdateSupplierComman
         if (command.Dto.BuyTariffId.HasValue)
         {
             var tariffExists = await _context.Tariffs
-                .AnyAsync(t => t.Id == command.Dto.BuyTariffId.Value && t.CompanyId == supplier.CompanyId && t.DeletedAt == null, cancellationToken);
+                .AnyAsync(t => t.Id == command.Dto.BuyTariffId.Value && t.CompanyId == supplier.CompanyId, cancellationToken);
             if (!tariffExists)
                 throw new InvalidOperationException($"No se encontró la tarifa de compra con ID {command.Dto.BuyTariffId.Value}");
         }
@@ -43,7 +43,7 @@ public class UpdateSupplierCommandHandler : ICommandHandler<UpdateSupplierComman
         if (command.Dto.PostalCodeId.HasValue)
         {
             var postalCodeExists = await _context.PostalCodes
-                .AnyAsync(pc => pc.Id == command.Dto.PostalCodeId.Value && pc.DeletedAt == null, cancellationToken);
+                .AnyAsync(pc => pc.Id == command.Dto.PostalCodeId.Value, cancellationToken);
             if (!postalCodeExists)
                 throw new InvalidOperationException($"No se encontró el código postal con ID {command.Dto.PostalCodeId.Value}");
         }
@@ -51,7 +51,7 @@ public class UpdateSupplierCommandHandler : ICommandHandler<UpdateSupplierComman
         if (command.Dto.CityId.HasValue)
         {
             var cityExists = await _context.Cities
-                .AnyAsync(c => c.Id == command.Dto.CityId.Value && c.DeletedAt == null, cancellationToken);
+                .AnyAsync(c => c.Id == command.Dto.CityId.Value, cancellationToken);
             if (!cityExists)
                 throw new InvalidOperationException($"No se encontró la ciudad con ID {command.Dto.CityId.Value}");
         }
@@ -59,7 +59,7 @@ public class UpdateSupplierCommandHandler : ICommandHandler<UpdateSupplierComman
         if (command.Dto.StateId.HasValue)
         {
             var stateExists = await _context.States
-                .AnyAsync(s => s.Id == command.Dto.StateId.Value && s.DeletedAt == null, cancellationToken);
+                .AnyAsync(s => s.Id == command.Dto.StateId.Value, cancellationToken);
             if (!stateExists)
                 throw new InvalidOperationException($"No se encontró la provincia con ID {command.Dto.StateId.Value}");
         }
@@ -67,7 +67,7 @@ public class UpdateSupplierCommandHandler : ICommandHandler<UpdateSupplierComman
         if (command.Dto.CountryId.HasValue)
         {
             var countryExists = await _context.Countries
-                .AnyAsync(c => c.Id == command.Dto.CountryId.Value && c.DeletedAt == null, cancellationToken);
+                .AnyAsync(c => c.Id == command.Dto.CountryId.Value, cancellationToken);
             if (!countryExists)
                 throw new InvalidOperationException($"No se encontró el país con ID {command.Dto.CountryId.Value}");
         }

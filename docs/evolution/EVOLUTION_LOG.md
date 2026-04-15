@@ -4,6 +4,14 @@ Registro de cambios arquitectónicos y features del proyecto.
 
 ---
 
+## [2026-04-13] feat/kaizen-2026-04-13-remove-redundant-deletedat-supplier
+**Feature:** Remove redundant DeletedAt checks in Supplier handlers
+**Description:** Removed redundant explicitly coded `DeletedAt == null` checks from EF Core queries in Supplier command handlers, relying on EF Core Global Query Filters.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_04_13_remove_redundant_deletedat_checks_supplier.md]
+**Status:** DONE
+
+---
+
 ## [2026-04-12] feat/kaizen-dashboard-produces
 **Feature:** Add ProducesResponseType to DashboardController
 **Description:** Added `[ProducesResponseType]` attributes to `GetStats` in `DashboardController.cs` to improve Swagger OpenAPI discoverability.
