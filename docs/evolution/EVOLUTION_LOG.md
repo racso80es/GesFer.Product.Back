@@ -115,3 +115,9 @@ Registro de cambios arquitectónicos y features del proyecto.
 **Description:** Generación de reporte `docs/audits/AUDITORIA_2026_04_08.md`. Validación de código, infraestructura y reglas async superada al 100%. No se registraron issues pendientes ni deuda técnica.
 **Reference:** [docs/features/correccion-auditoria-2026-04-08/objectives.md]
 **Status:** DONE
+
+## [2026-04-13] feat/remove-redundant-deletedat-checks-article-families
+**Feature:** Remove redundant DeletedAt checks in ArticleFamilies handlers
+**Description:** Removed redundant explicitly coded `DeletedAt == null` checks, relying on EF Core Global Query Filters.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_04_13_remove_redundant_deletedat_checks_article_families.md]
+**Status:** DONE

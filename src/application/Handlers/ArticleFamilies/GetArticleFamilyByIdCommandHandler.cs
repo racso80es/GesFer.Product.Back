@@ -19,7 +19,7 @@ public class GetArticleFamilyByIdCommandHandler : ICommandHandler<GetArticleFami
     {
         var query = _context.ArticleFamilies
             .Include(af => af.TaxType)
-            .Where(af => af.Id == command.Id && af.DeletedAt == null);
+            .Where(af => af.Id == command.Id);
 
         if (command.CompanyId.HasValue)
             query = query.Where(af => af.CompanyId == command.CompanyId.Value);

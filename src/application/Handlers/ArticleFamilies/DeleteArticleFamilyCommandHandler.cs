@@ -17,7 +17,7 @@ public class DeleteArticleFamilyCommandHandler : ICommandHandler<DeleteArticleFa
     public async Task HandleAsync(DeleteArticleFamilyCommand command, CancellationToken cancellationToken = default)
     {
         var entity = await _context.ArticleFamilies
-            .FirstOrDefaultAsync(af => af.Id == command.Id && af.DeletedAt == null, cancellationToken);
+            .FirstOrDefaultAsync(af => af.Id == command.Id, cancellationToken);
 
         if (entity == null)
             throw new InvalidOperationException($"No se encontró la familia de artículos con ID {command.Id}.");
