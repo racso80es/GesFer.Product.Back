@@ -17,7 +17,7 @@ public class DeleteSupplierCommandHandler : ICommandHandler<DeleteSupplierComman
     public async Task HandleAsync(DeleteSupplierCommand command, CancellationToken cancellationToken = default)
     {
         var supplier = await _context.Suppliers
-            .FirstOrDefaultAsync(s => s.Id == command.Id && s.DeletedAt == null, cancellationToken);
+            .FirstOrDefaultAsync(s => s.Id == command.Id, cancellationToken);
 
         if (supplier == null)
             throw new InvalidOperationException($"No se encontró el proveedor con ID {command.Id}");
