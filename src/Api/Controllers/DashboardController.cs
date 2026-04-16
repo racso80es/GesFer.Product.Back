@@ -59,7 +59,7 @@ public class DashboardController : ControllerBase
             {
                 // TotalCompanies: métrica eliminada; Companies es SSOT en Admin, Product no la expone.
                 TotalUsers = await _context.Users.CountAsync(),
-                ActiveUsers = await _context.Users.CountAsync(u => u.IsActive && u.DeletedAt == null),
+                ActiveUsers = await _context.Users.CountAsync(u => u.IsActive),
                 TotalArticles = await _context.Articles.CountAsync(),
                 TotalSuppliers = await _context.Suppliers.CountAsync(),
                 TotalCustomers = await _context.Customers.CountAsync(),

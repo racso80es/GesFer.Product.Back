@@ -17,7 +17,7 @@ public class DeleteCityCommandHandler : ICommandHandler<DeleteCityCommand>
     public async Task HandleAsync(DeleteCityCommand command, CancellationToken cancellationToken = default)
     {
         var city = await _context.Cities
-            .FirstOrDefaultAsync(c => c.Id == command.Id && c.DeletedAt == null, cancellationToken);
+            .FirstOrDefaultAsync(c => c.Id == command.Id, cancellationToken);
 
         if (city == null)
             throw new InvalidOperationException($"No se encontró la ciudad con ID {command.Id}");

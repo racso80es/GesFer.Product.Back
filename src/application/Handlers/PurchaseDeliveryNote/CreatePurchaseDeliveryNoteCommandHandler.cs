@@ -29,7 +29,7 @@ public class CreatePurchaseDeliveryNoteCommandHandler : ICommandHandler<CreatePu
         var supplier = await _context.Suppliers
             .Include(s => s.BuyTariff)
                 .ThenInclude(t => t!.TariffItems)
-            .FirstOrDefaultAsync(s => s.Id == command.SupplierId && s.CompanyId == command.CompanyId && s.DeletedAt == null, cancellationToken);
+            .FirstOrDefaultAsync(s => s.Id == command.SupplierId && s.CompanyId == command.CompanyId, cancellationToken);
 
         if (supplier == null)
             throw new InvalidOperationException($"El proveedor con ID {command.SupplierId} no existe o no pertenece a la empresa");
@@ -50,7 +50,7 @@ public class CreatePurchaseDeliveryNoteCommandHandler : ICommandHandler<CreatePu
         var articleIds = command.Lines.Select(l => l.ArticleId).Distinct().ToList();
         var articles = await _context.Articles
             .Include(a => a.ArticleFamily).ThenInclude(af => af.TaxType)
-            .Where(a => articleIds.Contains(a.Id) && a.CompanyId == command.CompanyId && a.DeletedAt == null)
+            .Where(a => articleIds.Contains(a.Id) && a.CompanyId == command.CompanyId)
             .ToDictionaryAsync(a => a.Id, cancellationToken);
 
         // Crear las líneas y calcular precios
@@ -107,7 +107,7 @@ public class CreatePurchaseDeliveryNoteCommandHandler : ICommandHandler<CreatePu
         if (supplier.BuyTariffId.HasValue && supplier.BuyTariff != null)
         {
             var tariffItem = supplier.BuyTariff.TariffItems
-                .FirstOrDefault(ti => ti.ArticleId == article.Id && ti.DeletedAt == null);
+                .FirstOrDefault(ti => ti.ArticleId == article.Id);
 
             if (tariffItem != null)
                 return tariffItem.Price;

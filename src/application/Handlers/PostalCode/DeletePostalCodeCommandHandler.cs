@@ -17,7 +17,7 @@ public class DeletePostalCodeCommandHandler : ICommandHandler<DeletePostalCodeCo
     public async Task HandleAsync(DeletePostalCodeCommand command, CancellationToken cancellationToken = default)
     {
         var postalCode = await _context.PostalCodes
-            .FirstOrDefaultAsync(pc => pc.Id == command.Id && pc.DeletedAt == null, cancellationToken);
+            .FirstOrDefaultAsync(pc => pc.Id == command.Id, cancellationToken);
 
         if (postalCode == null)
             throw new InvalidOperationException($"No se encontró el código postal con ID {command.Id}");

@@ -18,7 +18,7 @@ public class GetSupplierByIdCommandHandler : ICommandHandler<GetSupplierByIdComm
     public async Task<SupplierDto?> HandleAsync(GetSupplierByIdCommand command, CancellationToken cancellationToken = default)
     {
         var supplier = await _context.Suppliers
-            .Where(s => s.Id == command.Id && s.DeletedAt == null)
+            .Where(s => s.Id == command.Id)
             .Select(s => new SupplierDto
             {
                 Id = s.Id,

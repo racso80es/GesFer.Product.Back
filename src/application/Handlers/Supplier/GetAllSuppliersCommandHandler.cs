@@ -18,7 +18,7 @@ public class GetAllSuppliersCommandHandler : ICommandHandler<GetAllSuppliersComm
     public async Task<List<SupplierDto>> HandleAsync(GetAllSuppliersCommand command, CancellationToken cancellationToken = default)
     {
         var query = _context.Suppliers
-            .Where(s => s.DeletedAt == null);
+            .AsQueryable();
 
         if (command.CompanyId.HasValue)
         {

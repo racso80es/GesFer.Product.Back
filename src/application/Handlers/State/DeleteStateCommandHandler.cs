@@ -17,14 +17,14 @@ public class DeleteStateCommandHandler : ICommandHandler<DeleteStateCommand>
     public async Task HandleAsync(DeleteStateCommand command, CancellationToken cancellationToken = default)
     {
         var state = await _context.States
-            .FirstOrDefaultAsync(s => s.Id == command.Id && s.DeletedAt == null, cancellationToken);
+            .FirstOrDefaultAsync(s => s.Id == command.Id, cancellationToken);
 
         if (state == null)
             throw new InvalidOperationException($"No se encontró la provincia con ID {command.Id}");
 
         // Verificar que no tenga ciudades asociadas
         var hasCities = await _context.Cities
-            .AnyAsync(c => c.StateId == command.Id && c.DeletedAt == null, cancellationToken);
+            .AnyAsync(c => c.StateId == command.Id, cancellationToken);
 
         if (hasCities)
             throw new InvalidOperationException($"No se puede eliminar la provincia porque tiene ciudades asociadas");
