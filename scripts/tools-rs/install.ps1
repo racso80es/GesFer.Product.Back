@@ -42,6 +42,7 @@ $capsules = @(
     @{ exe = "invoke_mysql_seeds"; capsule = "invoke-mysql-seeds" },
     @{ exe = "start_api"; capsule = "start-api" },
     @{ exe = "run_tests_local"; capsule = "run-tests-local" },
+    @{ exe = "run_test_e2e_local"; capsule = "run-test-e2e-local" },
     @{ exe = "postman_mcp_validation"; capsule = "postman-mcp-validation" }
 )
 foreach ($cap in $capsules) {
@@ -56,4 +57,5 @@ Write-Host "  - prepare-full-env/prepare_full_env.exe" -ForegroundColor White
 Write-Host "  - invoke-mysql-seeds/invoke_mysql_seeds.exe" -ForegroundColor White
 Write-Host "  - start-api/start_api.exe" -ForegroundColor White
 Write-Host "  - run-tests-local/run_tests_local.exe" -ForegroundColor White
+Write-Host "  - run-test-e2e-local/run_test_e2e_local.exe" -ForegroundColor White
 Write-Host "  - postman-mcp-validation/postman_mcp_validation.exe" -ForegroundColor White

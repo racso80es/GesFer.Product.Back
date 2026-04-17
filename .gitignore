@@ -16,6 +16,9 @@ temp_*.txt# Carpetas temporales de compilación .NET (todos los proyectos)
 **/bin/
 **/obj/
 **/[Bb]in/
+# Fuente Rust de gesfer-tools (no confundir con artefactos bin/ de .NET)
+!scripts/tools-rs/src/bin/
+!scripts/tools-rs/src/bin/**/*.rs
 **/[Oo]bj/
 [Dd]ebug/
 [Rr]elease/

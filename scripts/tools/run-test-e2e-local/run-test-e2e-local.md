@@ -5,7 +5,8 @@
 
 ## Estado
 
-Implementación en **PowerShell** (`Run-Test-E2E-Local.ps1`), transición hasta binario Rust (`run_test_e2e_local.exe`) según contrato tools.
+- **Preferido:** `run_test_e2e_local.exe` (Rust) en esta carpeta; compilar con `scripts/tools-rs/install.ps1`.
+- **Reserva:** `Run-Test-E2E-Local.ps1` si el `.exe` no está presente (el `.bat` elige automáticamente).
 
 ## Uso (desde la raíz del repo)
 
@@ -13,22 +14,25 @@ Implementación en **PowerShell** (`Run-Test-E2E-Local.ps1`), transición hasta 
 .\scripts\tools\run-test-e2e-local\Run-Test-E2E-Local.bat
 ```
 
-Parámetros (PowerShell):
+Parámetros **Rust** (`run_test_e2e_local.exe`, flags con `--kebab-case`):
 
-| Parámetro | Descripción |
-|-----------|-------------|
-| `-AdminApiUrl` | URL base Admin (default `http://localhost:5010`) |
-| `-ProductApiUrl` | URL base Product → `E2E_BASE_URL` (default `http://localhost:5020`) |
-| `-OnlyTests` | Solo build + tests (sin Docker/seeds) |
-| `-SkipPrepare` / `-SkipSeeds` | Omitir herramientas dependientes |
-| `-SkipApiProbe` | No comprobar `/health` antes de tests |
-| `-OutputJson` | JSON resultado por stdout |
-| `-OutputPath` | Archivo JSON de resultado |
+| Flag | Descripción |
+|------|-------------|
+| `--admin-api-url` | URL base Admin (default `http://localhost:5010`) |
+| `--product-api-url` | URL base Product → `E2E_BASE_URL` (default `http://localhost:5020`) |
+| `--only-tests` | Solo build + tests (sin Docker/seeds) |
+| `--skip-prepare` / `--skip-seeds` | Omitir herramientas dependientes |
+| `--skip-api-probe` | No comprobar `/health` antes de tests |
+| `--output-json` | JSON resultado por stdout |
+| `--output-path` | Archivo JSON de resultado |
+| `--e2e-internal-secret` | Secreto interno (opcional; por defecto config o Development) |
+
+Parámetros **PowerShell** (reserva): `-AdminApiUrl`, `-ProductApiUrl`, etc.
 
 Ejemplo solo tests con APIs ya levantadas:
 
 ```powershell
-.\scripts\tools\run-test-e2e-local\Run-Test-E2E-Local.ps1 -OnlyTests -AdminApiUrl "http://localhost:5010" -ProductApiUrl "http://localhost:5020"
+.\scripts\tools\run-test-e2e-local\run_test_e2e_local.exe --only-tests --admin-api-url "http://localhost:5010" --product-api-url "http://localhost:5020"
 ```
 
 ## Referencia manual (equivalente)

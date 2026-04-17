@@ -11,6 +11,6 @@
     "bin": "run_test_e2e_local.exe"
   },
   "env": ["Windows 11", "PowerShell 7+", ".NET SDK 8"],
-  "implementation_status": "powershell_transition",
+  "implementation_status": "rust_exe_available",
   "definition_ref": "SddIA/tools/run-test-e2e-local/spec.md"
 }

@@ -99,15 +99,17 @@ Cumple `SddIA/tools/tools-contract.md`: `toolId`, `exitCode`, `success`, `timest
 
 **Formato objetivo:** Ejecutable Rust (`.exe`) en `scripts/tools/run-test-e2e-local/bin/`, launcher `.bat` según contrato. Fuente en `paths.toolsRustPath`.
 
-**Estado actual:** **Transición PowerShell** — `Run-Test-E2E-Local.ps1` + `Run-Test-E2E-Local.bat` en la cápsula; salida JSON y fases alineadas con `tools-contract.md`. Migración a `.exe` pendiente (misma política que `run-tests-local`).
+**Estado actual:** Binario **Rust** `run_test_e2e_local.exe` en la cápsula (compilar con `scripts/tools-rs/install.ps1`). Reserva: `Run-Test-E2E-Local.ps1` si el `.exe` no existe. El launcher `.bat` prioriza el ejecutable.
+
+**Fuente:** `paths.toolsRustPath` → `src/bin/run_test_e2e_local.rs`.
 
 ### Invocación
 
 ```powershell
-.\scripts\tools\run-test-e2e-local\Run-Test-E2E-Local.bat -AdminApiUrl "http://localhost:5010" -ProductApiUrl "http://localhost:5020"
+.\scripts\tools\run-test-e2e-local\Run-Test-E2E-Local.bat --admin-api-url "http://localhost:5010" --product-api-url "http://localhost:5020"
 ```
 
-Parámetros adicionales: `-OnlyTests`, `-SkipPrepare`, `-SkipSeeds`, `-SkipApiProbe`, `-OutputJson`, `-OutputPath`. Ver `scripts/tools/run-test-e2e-local/run-test-e2e-local.md`.
+(O el `.exe` con los mismos argumentos long de **clap**.) Parámetros: `--only-tests`, `--skip-prepare`, `--skip-seeds`, `--skip-api-probe`, `--output-json`, `--output-path`, `--e2e-internal-secret`. Ver `scripts/tools/run-test-e2e-local/run-test-e2e-local.md`.
 
 ---
 
