@@ -18,8 +18,10 @@ cargo build --release
 
 El script `install.ps1` compila y **copia los ejecutables a la carpeta `bin/` de cada cápsula** (rutas canónicas: Cúmulo **paths.toolCapsules**, `SddIA/agents/cumulo.json`):
 
-- **paths.toolCapsules['prepare-full-env']** + `bin/prepare_full_env.exe` — Prepare-FullEnv (Docker, MySQL)
-- **paths.toolCapsules['invoke-mysql-seeds']** + `bin/invoke_mysql_seeds.exe` — Invoke-MySqlSeeds (migraciones EF, seeds)
+- **paths.toolCapsules['prepare-full-env']** + `prepare_full_env.exe` — Prepare-FullEnv (Docker, MySQL)
+- **paths.toolCapsules['invoke-mysql-seeds']** + `invoke_mysql_seeds.exe` — Invoke-MySqlSeeds (migraciones EF, seeds)
+- **paths.toolCapsules['run-tests-local']** + `run_tests_local.exe` — Tests locales (unit/integration/e2e)
+- **paths.toolCapsules['run-test-e2e-local']** + `run_test_e2e_local.exe` — Solo E2E Product (`GesFer.Product.Back.E2ETests`, URLs Admin/Product)
 
 ## Uso
 
@@ -39,5 +41,6 @@ Argumentos:
 - `src/lib.rs` — Tipos del contrato (`ToolResult`, `FeedbackEntry`, `to_contract_json`).
 - `src/bin/prepare_full_env.rs` — Herramienta prepare-full-env.
 - `src/bin/invoke_mysql_seeds.rs` — Herramienta mysql-seeds.
+- `src/bin/run_test_e2e_local.rs` — Herramienta run-test-e2e-local.
 
 Referencia: `SddIA/tools/tools-contract.json`, `SddIA/agents/security-engineer.json`.

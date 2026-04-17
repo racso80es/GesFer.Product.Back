@@ -37,5 +37,9 @@ name = "run_tests_local"
 path = "src/bin/run_tests_local.rs"
 
 [[bin]]
+name = "run_test_e2e_local"
+path = "src/bin/run_test_e2e_local.rs"
+
+[[bin]]
 name = "postman_mcp_validation"
 path = "src/bin/postman_mcp_validation.rs"
