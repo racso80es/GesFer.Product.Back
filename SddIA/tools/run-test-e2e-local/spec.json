@@ -1,0 +1,33 @@
+{
+  "spec_version": "1.0.0",
+  "toolId": "run-test-e2e-local",
+  "version": "1.0.0",
+  "description": "Prepara entorno local (opcional), valida health de Admin y Product, y ejecuta todos los tests E2E del proyecto GesFer.Product.Back.E2ETests con E2E_BASE_URL apuntando a la API de producto parametrizada.",
+  "contract_ref": "SddIA/tools/tools-contract.md",
+  "implementation_path_ref": "paths.toolCapsules.run-test-e2e-local",
+  "depends_on_tools": ["prepare-full-env", "invoke-mysql-seeds"],
+  "test_project_glob": "src/GesFer.Product.Back.E2ETests/GesFer.Product.Back.E2ETests.csproj",
+  "e2e_filter": "Category=E2E",
+  "inputs": {
+    "AdminApiUrl": {
+      "type": "string",
+      "default": "http://localhost:5010",
+      "description": "URL base de la API Admin (health y coherencia con Product)."
+    },
+    "ProductApiUrl": {
+      "type": "string",
+      "default": "http://localhost:5020",
+      "description": "URL base de la API Product; se exporta como E2E_BASE_URL."
+    },
+    "OnlyTests": { "type": "boolean", "default": false },
+    "SkipPrepare": { "type": "boolean", "default": false },
+    "SkipSeeds": { "type": "boolean", "default": false },
+    "SkipApiProbe": { "type": "boolean", "default": false },
+    "OutputJson": { "type": "boolean", "default": false },
+    "OutputPath": { "type": "string", "required": false },
+    "E2EInternalSecret": { "type": "string", "required": false, "sensitive": true }
+  },
+  "env_defaults": {
+    "E2E_INTERNAL_SECRET": "dev-internal-secret-change-in-production"
+  }
+}
