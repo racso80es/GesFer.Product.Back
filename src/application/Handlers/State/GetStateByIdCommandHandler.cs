@@ -19,7 +19,7 @@ public class GetStateByIdCommandHandler : ICommandHandler<GetStateByIdCommand, S
     {
         var state = await _context.States
             .Include(s => s.Country)
-            .Where(s => s.Id == command.Id && s.DeletedAt == null)
+            .Where(s => s.Id == command.Id)
             .Select(s => new StateDto
             {
                 Id = s.Id,

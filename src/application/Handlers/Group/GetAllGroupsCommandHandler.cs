@@ -18,7 +18,7 @@ public class GetAllGroupsCommandHandler : ICommandHandler<GetAllGroupsCommand, L
     public async Task<List<GroupDto>> HandleAsync(GetAllGroupsCommand command, CancellationToken cancellationToken = default)
     {
         var groups = await _context.Groups
-            .Where(g => g.DeletedAt == null)
+            .AsQueryable()
             .OrderBy(g => g.Name)
             .Select(g => new GroupDto
             {

@@ -18,7 +18,7 @@ public class GetAllCountriesCommandHandler : ICommandHandler<GetAllCountriesComm
     public async Task<List<CountryDto>> HandleAsync(GetAllCountriesCommand command, CancellationToken cancellationToken = default)
     {
         var countries = await _context.Countries
-            .Where(c => c.DeletedAt == null)
+            .AsQueryable()
             .OrderBy(c => c.Name)
             .Select(c => new CountryDto
             {

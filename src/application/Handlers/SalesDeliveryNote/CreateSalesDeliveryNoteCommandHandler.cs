@@ -29,7 +29,7 @@ public class CreateSalesDeliveryNoteCommandHandler : ICommandHandler<CreateSales
         var customer = await _context.Customers
             .Include(c => c.SellTariff)
                 .ThenInclude(t => t!.TariffItems)
-            .FirstOrDefaultAsync(c => c.Id == command.CustomerId && c.CompanyId == command.CompanyId && c.DeletedAt == null, cancellationToken);
+            .FirstOrDefaultAsync(c => c.Id == command.CustomerId && c.CompanyId == command.CompanyId, cancellationToken);
 
         if (customer == null)
             throw new InvalidOperationException($"El cliente con ID {command.CustomerId} no existe o no pertenece a la empresa");
@@ -38,7 +38,7 @@ public class CreateSalesDeliveryNoteCommandHandler : ICommandHandler<CreateSales
         var articleIds = command.Lines.Select(l => l.ArticleId).Distinct().ToList();
         var articles = await _context.Articles
             .Include(a => a.ArticleFamily).ThenInclude(af => af.TaxType)
-            .Where(a => articleIds.Contains(a.Id) && a.CompanyId == command.CompanyId && a.DeletedAt == null)
+            .Where(a => articleIds.Contains(a.Id) && a.CompanyId == command.CompanyId)
             .ToDictionaryAsync(a => a.Id, cancellationToken);
 
         // Verificar stock antes de crear el albarán (acumulando cantidades por artículo)
@@ -122,7 +122,7 @@ public class CreateSalesDeliveryNoteCommandHandler : ICommandHandler<CreateSales
         if (customer.SellTariffId.HasValue && customer.SellTariff != null)
         {
             var tariffItem = customer.SellTariff.TariffItems
-                .FirstOrDefault(ti => ti.ArticleId == article.Id && ti.DeletedAt == null);
+                .FirstOrDefault(ti => ti.ArticleId == article.Id);
 
             if (tariffItem != null)
                 return tariffItem.Price;

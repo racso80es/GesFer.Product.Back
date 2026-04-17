@@ -21,7 +21,7 @@ public class GetCityByIdCommandHandler : ICommandHandler<GetCityByIdCommand, Cit
             .Include(c => c.State)
                 .ThenInclude(s => s.Country)
             .Include(c => c.PostalCodes)
-            .Where(c => c.Id == command.Id && c.DeletedAt == null)
+            .Where(c => c.Id == command.Id)
             .FirstOrDefaultAsync(cancellationToken);
 
         if (city == null)
@@ -35,7 +35,7 @@ public class GetCityByIdCommandHandler : ICommandHandler<GetCityByIdCommand, Cit
             CountryId = city.State.CountryId,
             CountryName = city.State.Country.Name,
             Name = city.Name,
-            PostalCodes = city.PostalCodes.Where(pc => pc.DeletedAt == null).Select(pc => pc.Code).ToList(),
+            PostalCodes = city.PostalCodes.AsQueryable().Select(pc => pc.Code).ToList(),
             IsActive = city.IsActive,
             CreatedAt = city.CreatedAt,
             UpdatedAt = city.UpdatedAt

@@ -21,7 +21,7 @@ public class UpdatePostalCodeCommandHandler : ICommandHandler<UpdatePostalCodeCo
             .Include(pc => pc.City)
                 .ThenInclude(c => c.State)
                     .ThenInclude(s => s.Country)
-            .FirstOrDefaultAsync(pc => pc.Id == command.Id && pc.DeletedAt == null, cancellationToken);
+            .FirstOrDefaultAsync(pc => pc.Id == command.Id, cancellationToken);
 
         if (postalCode == null)
             throw new InvalidOperationException($"No se encontró el código postal con ID {command.Id}");
@@ -30,8 +30,7 @@ public class UpdatePostalCodeCommandHandler : ICommandHandler<UpdatePostalCodeCo
         var existingPostalCode = await _context.PostalCodes
             .FirstOrDefaultAsync(pc => pc.Code == command.Dto.Code
                 && pc.CityId == postalCode.CityId
-                && pc.Id != command.Id
-                && pc.DeletedAt == null, cancellationToken);
+                && pc.Id != command.Id, cancellationToken);
 
         if (existingPostalCode != null)
             throw new InvalidOperationException($"Ya existe otro código postal '{command.Dto.Code}' en esta ciudad");

@@ -584,7 +584,7 @@ public class SetupService : ISetupService
 
             // Verificar que existe al menos un usuario
             var users = await context.Users
-                .Where(u => u.DeletedAt == null)
+                .AsQueryable()
                 .Select(u => new UserInfo
                 {
                     Username = u.Username,

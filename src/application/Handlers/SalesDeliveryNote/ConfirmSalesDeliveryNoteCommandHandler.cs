@@ -21,7 +21,7 @@ public class ConfirmSalesDeliveryNoteCommandHandler : ICommandHandler<ConfirmSal
     {
         var deliveryNote = await _context.SalesDeliveryNotes
             .Include(dn => dn.Lines)
-            .FirstOrDefaultAsync(dn => dn.Id == command.DeliveryNoteId && dn.DeletedAt == null, cancellationToken);
+            .FirstOrDefaultAsync(dn => dn.Id == command.DeliveryNoteId, cancellationToken);
 
         if (deliveryNote == null)
             throw new InvalidOperationException($"El albarán con ID {command.DeliveryNoteId} no existe");

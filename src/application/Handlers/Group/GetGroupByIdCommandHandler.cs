@@ -18,7 +18,7 @@ public class GetGroupByIdCommandHandler : ICommandHandler<GetGroupByIdCommand, G
     public async Task<GroupDto?> HandleAsync(GetGroupByIdCommand command, CancellationToken cancellationToken = default)
     {
         var group = await _context.Groups
-            .Where(g => g.Id == command.Id && g.DeletedAt == null)
+            .Where(g => g.Id == command.Id)
             .Select(g => new GroupDto
             {
                 Id = g.Id,

@@ -21,7 +21,7 @@ public class CreateCityCommandHandler : ICommandHandler<CreateCityCommand, CityD
         // Validar que la provincia existe
         var state = await _context.States
             .Include(s => s.Country)
-            .FirstOrDefaultAsync(s => s.Id == command.Dto.StateId && s.DeletedAt == null, cancellationToken);
+            .FirstOrDefaultAsync(s => s.Id == command.Dto.StateId, cancellationToken);
 
         if (state == null)
             throw new InvalidOperationException($"No se encontró la provincia con ID {command.Dto.StateId}");
@@ -29,8 +29,7 @@ public class CreateCityCommandHandler : ICommandHandler<CreateCityCommand, CityD
         // Validar que no exista una ciudad con el mismo nombre en la misma provincia
         var existingCity = await _context.Cities
             .FirstOrDefaultAsync(c => c.Name == command.Dto.Name
-                && c.StateId == command.Dto.StateId
-                && c.DeletedAt == null, cancellationToken);
+                && c.StateId == command.Dto.StateId, cancellationToken);
 
         if (existingCity != null)
             throw new InvalidOperationException($"Ya existe una ciudad con el nombre '{command.Dto.Name}' en esta provincia");
@@ -59,7 +58,7 @@ public class CreateCityCommandHandler : ICommandHandler<CreateCityCommand, CityD
             CountryId = city.State.CountryId,
             CountryName = city.State.Country.Name,
             Name = city.Name,
-            PostalCodes = city.PostalCodes.Where(pc => pc.DeletedAt == null).Select(pc => pc.Code).ToList(),
+            PostalCodes = city.PostalCodes.AsQueryable().Select(pc => pc.Code).ToList(),
             IsActive = city.IsActive,
             CreatedAt = city.CreatedAt,
             UpdatedAt = city.UpdatedAt

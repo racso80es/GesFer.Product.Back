@@ -21,7 +21,7 @@ public class GetPostalCodeByIdCommandHandler : ICommandHandler<GetPostalCodeById
             .Include(pc => pc.City)
                 .ThenInclude(c => c.State)
                     .ThenInclude(s => s.Country)
-            .Where(pc => pc.Id == command.Id && pc.DeletedAt == null)
+            .Where(pc => pc.Id == command.Id)
             .Select(pc => new PostalCodeDto
             {
                 Id = pc.Id,

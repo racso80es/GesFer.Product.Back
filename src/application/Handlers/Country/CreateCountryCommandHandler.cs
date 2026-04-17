@@ -20,21 +20,21 @@ public class CreateCountryCommandHandler : ICommandHandler<CreateCountryCommand,
     {
         // Validar que no exista un país con el mismo código
         var existingCountry = await _context.Countries
-            .FirstOrDefaultAsync(c => c.Code == command.Dto.Code && c.DeletedAt == null, cancellationToken);
+            .FirstOrDefaultAsync(c => c.Code == command.Dto.Code, cancellationToken);
 
         if (existingCountry != null)
             throw new InvalidOperationException($"Ya existe un país con el código '{command.Dto.Code}'");
 
         // Validar que no exista un país con el mismo nombre
         var existingCountryByName = await _context.Countries
-            .FirstOrDefaultAsync(c => c.Name == command.Dto.Name && c.DeletedAt == null, cancellationToken);
+            .FirstOrDefaultAsync(c => c.Name == command.Dto.Name, cancellationToken);
 
         if (existingCountryByName != null)
             throw new InvalidOperationException($"Ya existe un país con el nombre '{command.Dto.Name}'");
 
         // Validar idioma
         var languageExists = await _context.Languages
-            .AnyAsync(l => l.Id == command.Dto.LanguageId && l.DeletedAt == null, cancellationToken);
+            .AnyAsync(l => l.Id == command.Dto.LanguageId, cancellationToken);
         if (!languageExists)
             throw new InvalidOperationException($"No se encontró el idioma con ID {command.Dto.LanguageId}");
 

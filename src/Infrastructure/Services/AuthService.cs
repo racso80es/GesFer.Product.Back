@@ -72,7 +72,7 @@ public class AuthService : IAuthService
         // Permisos directos del usuario
         var directPermissions = await _context.UserPermissions
             .Include(up => up.Permission)
-            .Where(up => up.UserId == userId && up.DeletedAt == null)
+            .Where(up => up.UserId == userId)
             .Select(up => up.Permission.Key)
             .ToListAsync();
 
@@ -86,9 +86,9 @@ public class AuthService : IAuthService
             .Include(ug => ug.Group)
                 .ThenInclude(g => g!.GroupPermissions)
                     .ThenInclude(gp => gp!.Permission)
-            .Where(ug => ug.UserId == userId && ug.DeletedAt == null && ug.Group != null)
+            .Where(ug => ug.UserId == userId && ug.Group != null)
             .SelectMany(ug => ug.Group!.GroupPermissions
-                .Where(gp => gp != null && gp.DeletedAt == null && gp.Permission != null)
+                .Where(gp => gp != null && gp.Permission != null)
                 .Select(gp => gp!.Permission!.Key))
             .ToListAsync();
 

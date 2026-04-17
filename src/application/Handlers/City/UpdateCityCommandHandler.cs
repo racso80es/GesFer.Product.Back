@@ -20,7 +20,7 @@ public class UpdateCityCommandHandler : ICommandHandler<UpdateCityCommand, CityD
         var city = await _context.Cities
             .Include(c => c.State)
                 .ThenInclude(s => s.Country)
-            .FirstOrDefaultAsync(c => c.Id == command.Id && c.DeletedAt == null, cancellationToken);
+            .FirstOrDefaultAsync(c => c.Id == command.Id, cancellationToken);
 
         if (city == null)
             throw new InvalidOperationException($"No se encontró la ciudad con ID {command.Id}");
@@ -29,8 +29,7 @@ public class UpdateCityCommandHandler : ICommandHandler<UpdateCityCommand, CityD
         var existingCity = await _context.Cities
             .FirstOrDefaultAsync(c => c.Name == command.Dto.Name
                 && c.StateId == city.StateId
-                && c.Id != command.Id
-                && c.DeletedAt == null, cancellationToken);
+                && c.Id != command.Id, cancellationToken);
 
         if (existingCity != null)
             throw new InvalidOperationException($"Ya existe otra ciudad con el nombre '{command.Dto.Name}' en esta provincia");
@@ -52,7 +51,7 @@ public class UpdateCityCommandHandler : ICommandHandler<UpdateCityCommand, CityD
             CountryId = city.State.CountryId,
             CountryName = city.State.Country.Name,
             Name = city.Name,
-            PostalCodes = city.PostalCodes.Where(pc => pc.DeletedAt == null).Select(pc => pc.Code).ToList(),
+            PostalCodes = city.PostalCodes.AsQueryable().Select(pc => pc.Code).ToList(),
             IsActive = city.IsActive,
             CreatedAt = city.CreatedAt,
             UpdatedAt = city.UpdatedAt

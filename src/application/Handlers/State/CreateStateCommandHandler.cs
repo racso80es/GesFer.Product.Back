@@ -20,7 +20,7 @@ public class CreateStateCommandHandler : ICommandHandler<CreateStateCommand, Sta
     {
         // Validar que el país existe
         var country = await _context.Countries
-            .FirstOrDefaultAsync(c => c.Id == command.Dto.CountryId && c.DeletedAt == null, cancellationToken);
+            .FirstOrDefaultAsync(c => c.Id == command.Dto.CountryId, cancellationToken);
 
         if (country == null)
             throw new InvalidOperationException($"No se encontró el país con ID {command.Dto.CountryId}");
@@ -28,8 +28,7 @@ public class CreateStateCommandHandler : ICommandHandler<CreateStateCommand, Sta
         // Validar que no exista una provincia con el mismo nombre en el mismo país
         var existingState = await _context.States
             .FirstOrDefaultAsync(s => s.Name == command.Dto.Name
-                && s.CountryId == command.Dto.CountryId
-                && s.DeletedAt == null, cancellationToken);
+                && s.CountryId == command.Dto.CountryId, cancellationToken);
 
         if (existingState != null)
             throw new InvalidOperationException($"Ya existe una provincia con el nombre '{command.Dto.Name}' en este país");
