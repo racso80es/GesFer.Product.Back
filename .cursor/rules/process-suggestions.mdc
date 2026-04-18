@@ -11,7 +11,7 @@ Cuando el usuario escriba **#Process** (solo o en un mensaje), responde sugirien
 
 1. **Reconocer el disparador:** Si en el mensaje aparece `#Process`, interpretar que el usuario quiere ver o elegir un proceso.
 2. **Listar procesos existentes** con formato claro: `process_id` y descripción breve.
-3. **Fuente:** paths.processPath (Cúmulo): README.md y carpetas por proceso (feature/, bug-fix/, refactorization/, create-tool/), cada una con spec.md (frontmatter YAML).
+3. **Fuente:** paths.processPath (Cúmulo): README.md y carpetas por proceso (feature/, bug-fix/, refactorization/, create-tool/, validate-pull-requests/, etc.), cada una con spec.md (frontmatter YAML).
 
 ## Listado canónico (fuente: SddIA/process/ — Cúmulo paths.processPath)
 
@@ -22,8 +22,12 @@ Cuando el usuario escriba **#Process** (solo o en un mensaje), responde sugirien
 | **refactorization** | Refactorización: rama feat/refactorization-\<nombre_refactor\>, documentación en paths.featurePath/refactorization-\<nombre_refactor\>/ (Cúmulo). |
 | **create-tool** | Creación de una nueva herramienta: rama feat/create-tool-\<tool-id\>, cápsula en paths.toolCapsules, índice y Cúmulo actualizados. |
 | **correccion-auditorias** | Corrección de hallazgos de auditoría: rama feat/correccion-segun-auditorias; entrada paths.auditsPath; documentación en paths.featurePath. |
+| **create-pattern** | Creación de patrón de diseño: paths.patternsPath (spec.md, spec.json). Definición: [SddIA/process/create-pattern.json](../../SddIA/process/create-pattern.json). |
+| **create-principle** | Creación de principio técnico: paths.principlesPath (spec.md, spec.json). Definición: [SddIA/process/create-principle.json](../../SddIA/process/create-principle.json). |
 | **create-template** | Creación de plantilla: rama feat/create-template-\<template-id\>, carpeta en paths.templatesPath. Configuración predefinida de proceso con fin concreto. |
 | **audit-tool** | Auditoría de herramienta: verificación empírica del funcionamiento de una tool. Resultado: informe en paths.auditsPath/tools/\<tool-id\>/. |
+| **create-skill** | Creación de skill: rama feat/create-skill-\<skill-id\>, cápsula en paths.skillCapsules; implementación Rust (.exe). |
+| **validate-pull-requests** | Validación integral de PR (S+ Grade): revisión multi-agente (architect, qa-judge, security-engineer) sobre la rama origen; informe en paths.featurePath; semillas Kaizen en paths.tasksPath. Definición: [SddIA/process/validate-pull-requests/spec.md](../../SddIA/process/validate-pull-requests/spec.md). |
 
 ## Respuesta sugerida
 
