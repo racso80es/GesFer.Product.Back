@@ -3,7 +3,8 @@ feature_name: sddia-process-validate-pull-requests
 created: 2026-04-18
 process: feature
 ley_aplicada: L1_SSOT / soberanía SddIA + paths vía Cúmulo
-status: in_progress
+status: pr_opened
+pr: https://github.com/racso80es/GesFer.Product.Back/pull/87
 ---
 
 # Objetivos
