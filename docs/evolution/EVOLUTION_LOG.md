@@ -4,6 +4,14 @@ Registro de cambios arquitectónicos y features del proyecto.
 
 ---
 
+## [2026-04-18] feat/sddia-process-validate-pull-requests
+**Feature:** Proceso SddIA validate-pull-requests (validación integral de PRs, S+ Grade)
+**Description:** Nuevo proceso en `SddIA/process/validate-pull-requests/`, índices y difusión (#Process, AGENTS, normas PR, Cursor). Documentación de tarea en `docs/features/sddia-process-validate-pull-requests/`.
+**Reference:** [docs/features/sddia-process-validate-pull-requests/objectives.md]
+**Status:** PR en curso
+
+---
+
 ## [2026-04-13] feat/kaizen-2026-04-13-remove-redundant-deletedat-supplier
 **Feature:** Remove redundant DeletedAt checks in Supplier handlers
 **Description:** Removed redundant explicitly coded `DeletedAt == null` checks from EF Core queries in Supplier command handlers, relying on EF Core Global Query Filters.

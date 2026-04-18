@@ -1,0 +1,8 @@
+{
+  "result": "pass",
+  "branch": "feat/sddia-process-validate-pull-requests",
+  "checks": {
+    "documentation": "pass",
+    "sddia_process_contract": "pass"
+  }
+}
