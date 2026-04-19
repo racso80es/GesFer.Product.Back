@@ -41,11 +41,9 @@ public class ArticleFamiliesController : ControllerBase
     }
 
     /// <summary>
-    /// Obtiene todas las familias de artículos
-    /// </summary>
-    /// <returns>Lista de familias de artículos</returns>
     /// Obtiene todas las familias de artículos de la empresa del usuario autenticado
     /// </summary>
+    /// <returns>Lista de familias de artículos</returns>
     /// <returns>Una lista de familias de artículos</returns>
     [HttpGet]
     [ProducesResponseType(typeof(List<ArticleFamilyDto>), StatusCodes.Status200OK)]
@@ -74,12 +72,6 @@ public class ArticleFamiliesController : ControllerBase
     /// </summary>
     /// <param name="id">Identificador de la familia de artículos</param>
     /// <returns>La familia de artículos solicitada</returns>
-    /// Obtiene una familia de artículos por su ID
-    /// </summary>
-    /// <param name="id">El ID de la familia de artículos</param>
-    /// <returns>La familia de artículos solicitada</returns>
-    /// Obtiene una familia de artículos por ID
-    /// </summary>
     [HttpGet("{id}")]
     [ProducesResponseType(typeof(ArticleFamilyDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -109,7 +101,6 @@ public class ArticleFamiliesController : ControllerBase
     /// Crea una nueva familia de artículos
     /// </summary>
     /// <param name="dto">Datos de la familia de artículos a crear</param>
-    /// <param name="dto">Los datos de la familia de artículos a crear</param>
     /// <returns>La familia de artículos creada</returns>
     [HttpPost]
     [ProducesResponseType(typeof(ArticleFamilyDto), StatusCodes.Status201Created)]
@@ -143,8 +134,6 @@ public class ArticleFamiliesController : ControllerBase
     /// </summary>
     /// <param name="id">Identificador de la familia de artículos a actualizar</param>
     /// <param name="dto">Nuevos datos de la familia de artículos</param>
-    /// <param name="id">El ID de la familia de artículos a actualizar</param>
-    /// <param name="dto">Los nuevos datos de la familia de artículos</param>
     /// <returns>La familia de artículos actualizada</returns>
     [HttpPut("{id}")]
     [ProducesResponseType(typeof(ArticleFamilyDto), StatusCodes.Status200OK)]
@@ -176,12 +165,6 @@ public class ArticleFamiliesController : ControllerBase
     /// </summary>
     /// <param name="id">Identificador de la familia de artículos a eliminar</param>
     /// <returns>Respuesta sin contenido si la operación fue exitosa</returns>
-    /// Elimina una familia de artículos por su ID
-    /// </summary>
-    /// <param name="id">El ID de la familia de artículos a eliminar</param>
-    /// <returns>Respuesta vacía si se elimina correctamente</returns>
-    /// Elimina una familia de artículos (soft delete)
-    /// </summary>
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
