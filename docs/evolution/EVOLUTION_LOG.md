@@ -4,6 +4,11 @@ Registro de cambios arquitectónicos y features del proyecto.
 
 ---
 
+## [2026-04-18] feat/kaizen-customer-xml-docs
+**Feature:** Validate CustomerController XML docs
+**Description:** Validated that XML Docs and ProducesResponseType attributes correctly exist in CustomerController.cs. Added an inline comment for tracking.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_04_18_Customer_Xml_Docs.md]
+**Status:** DONE
 ## [2026-04-18] feat/sddia-process-validate-pull-requests
 **Feature:** Proceso SddIA validate-pull-requests (validación integral de PRs, S+ Grade)
 **Description:** Nuevo proceso en `SddIA/process/validate-pull-requests/`, índices y difusión (#Process, AGENTS, normas PR, Cursor). Documentación de tarea en `docs/features/sddia-process-validate-pull-requests/`.
