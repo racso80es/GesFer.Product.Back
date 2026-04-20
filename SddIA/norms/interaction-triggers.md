@@ -83,8 +83,12 @@
 | refactorization | Refactorización: rama feat/refactorization-&lt;nombre_refactor&gt;, documentación en paths.featurePath/refactorization-&lt;nombre_refactor&gt;/ (Cúmulo). | paths.processPath/refactorization/ |
 | create-tool | Creación de una nueva herramienta: rama feat/create-tool-&lt;tool-id&gt;, cápsula en paths.toolCapsules, índice y Cúmulo actualizados. | paths.processPath/create-tool/ |
 | correccion-auditorias | Corrección de hallazgos de auditoría: rama feat/correccion-segun-auditorias o feat/correccion-auditorias-&lt;id&gt;, documentación en paths.featurePath. Entrada: paths.auditsPath. | paths.processPath/correccion-auditorias/ |
+| create-pattern | Creación de patrón de diseño: carpeta en paths.patternsPath con spec.md y spec.json. | paths.processPath/create-pattern.json |
+| create-principle | Creación de principio técnico: carpeta en paths.principlesPath con spec.md y spec.json. | paths.processPath/create-principle.json |
 | create-template | Creación de plantilla: rama feat/create-template-&lt;template-id&gt;, carpeta en paths.templatesPath. Configuración predefinida de proceso con fin concreto. | paths.processPath/create-template/ |
 | audit-tool | Auditoría de herramienta: verificación empírica del funcionamiento de una tool. Resultado: informe en paths.auditsPath/tools/&lt;tool-id&gt;/. | paths.processPath/audit-tool/ |
+| create-skill | Creación de skill: rama feat/create-skill-&lt;skill-id&gt;, cápsula en paths.skillCapsules; implementación Rust (.exe). | paths.processPath/create-skill/ |
+| validate-pull-requests | Validación integral de PR (S+ Grade): revisión multi-agente sobre la rama origen; informe en paths.featurePath; semillas Kaizen en paths.tasksPath. | paths.processPath/validate-pull-requests/ |
 
 ---
 

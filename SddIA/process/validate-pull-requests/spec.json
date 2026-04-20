@@ -1,0 +1,7 @@
+{
+  "spec_version": "1.0.0",
+  "process_id": "validate-pull-requests",
+  "name": "Validación integral de Pull Requests (S+ Grade)",
+  "description": "Revisión multi-agente (architect, qa-judge, security-engineer) sobre la rama origen del PR; informe de consenso en paths.featurePath y semillas Kaizen en paths.tasksPath.",
+  "contract_ref": "paths.processPath/process-contract.md"
+}

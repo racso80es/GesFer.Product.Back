@@ -1,7 +1,9 @@
 {
-  "spec_version": "1.2.0",
+  "spec_version": "1.3.1",
   "process_id": "automatic_task",
   "name": "Automatic Task",
-  "description": "Procesa una tarea del backlog de forma autónoma",
-  "contract_ref": "paths.processPath/process-contract.md"
+  "description": "Backlog autónomo bajo paths.tasksPath (triaje, ACTIVE, DONE, Kaizen); delegación por defecto en proceso feature y paths.featurePath.",
+  "contract_ref": "paths.processPath/process-contract.md",
+  "principles_ref": "paths.principlesPath",
+  "persist_ref": "paths.tasksPath"
 }

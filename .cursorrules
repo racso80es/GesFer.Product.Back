@@ -9,3 +9,4 @@ AGENTS.md
 - Antes de realizar CUALQUIER push o crear un PR, debes ejecutar el protocolo de validación:
   `cargo run --manifest-path scripts/skills-rs/Cargo.toml --bin verify_pr_protocol`
 - Si este comando falla, NO debes proceder con el push.
+- Revisión multi-agente S+ (arquitectura, QA, seguridad) sobre la rama del PR: proceso [`SddIA/process/validate-pull-requests/spec.md`](./SddIA/process/validate-pull-requests/spec.md) (Cúmulo: paths.processPath/validate-pull-requests).
