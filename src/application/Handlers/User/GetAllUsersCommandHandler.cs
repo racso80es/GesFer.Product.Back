@@ -23,7 +23,7 @@ public class GetAllUsersCommandHandler : ICommandHandler<GetAllUsersCommand, Lis
     {
         try
         {
-            var query = _context.Users.Where(u => u.DeletedAt == null);
+            var query = _context.Users.AsQueryable();
             if (command.CompanyId.HasValue)
                 query = query.Where(u => u.CompanyId == command.CompanyId.Value);
 

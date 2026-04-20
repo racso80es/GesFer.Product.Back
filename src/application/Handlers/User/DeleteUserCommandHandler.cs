@@ -17,7 +17,7 @@ public class DeleteUserCommandHandler : ICommandHandler<DeleteUserCommand>
     public async Task HandleAsync(DeleteUserCommand command, CancellationToken cancellationToken = default)
     {
         var user = await _context.Users
-            .FirstOrDefaultAsync(u => u.Id == command.Id && u.DeletedAt == null, cancellationToken);
+            .FirstOrDefaultAsync(u => u.Id == command.Id, cancellationToken);
 
         if (user == null)
             throw new InvalidOperationException($"No se encontró el usuario con ID {command.Id}");

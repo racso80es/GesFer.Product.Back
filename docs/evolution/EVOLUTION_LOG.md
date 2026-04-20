@@ -4,6 +4,14 @@ Registro de cambios arquitectónicos y features del proyecto.
 
 ---
 
+## [2026-04-16] feat/kaizen-remove-redundant-deletedat-user
+**Feature:** Remove redundant DeletedAt checks in User handlers
+**Description:** Removed explicit DeletedAt checks as EF Core global filters handle them.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_04_16_remove_redundant_deletedat_checks_user.md]
+**Status:** DONE
+
+---
+
 ## [2026-04-13] feat/kaizen-2026-04-13-remove-redundant-deletedat-supplier
 **Feature:** Remove redundant DeletedAt checks in Supplier handlers
 **Description:** Removed redundant explicitly coded `DeletedAt == null` checks from EF Core queries in Supplier command handlers, relying on EF Core Global Query Filters.

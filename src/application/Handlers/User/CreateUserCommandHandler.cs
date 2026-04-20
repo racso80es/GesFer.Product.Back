@@ -30,7 +30,7 @@ public class CreateUserCommandHandler : ICommandHandler<CreateUserCommand, UserD
         var existingUser = await _context.Users
             .FirstOrDefaultAsync(u => u.Username == command.Dto.Username
                 && u.CompanyId == command.Dto.CompanyId
-                && u.DeletedAt == null, cancellationToken);
+, cancellationToken);
 
         if (existingUser != null)
             throw new InvalidOperationException($"Ya existe un usuario con el nombre '{command.Dto.Username}' en esta empresa");
@@ -39,7 +39,7 @@ public class CreateUserCommandHandler : ICommandHandler<CreateUserCommand, UserD
         if (command.Dto.PostalCodeId.HasValue)
         {
             var postalCodeExists = await _context.PostalCodes
-                .AnyAsync(pc => pc.Id == command.Dto.PostalCodeId.Value && pc.DeletedAt == null, cancellationToken);
+                .AnyAsync(pc => pc.Id == command.Dto.PostalCodeId.Value, cancellationToken);
             if (!postalCodeExists)
                 throw new InvalidOperationException($"No se encontró el código postal con ID {command.Dto.PostalCodeId.Value}");
         }
@@ -47,7 +47,7 @@ public class CreateUserCommandHandler : ICommandHandler<CreateUserCommand, UserD
         if (command.Dto.CityId.HasValue)
         {
             var cityExists = await _context.Cities
-                .AnyAsync(c => c.Id == command.Dto.CityId.Value && c.DeletedAt == null, cancellationToken);
+                .AnyAsync(c => c.Id == command.Dto.CityId.Value, cancellationToken);
             if (!cityExists)
                 throw new InvalidOperationException($"No se encontró la ciudad con ID {command.Dto.CityId.Value}");
         }
@@ -55,7 +55,7 @@ public class CreateUserCommandHandler : ICommandHandler<CreateUserCommand, UserD
         if (command.Dto.StateId.HasValue)
         {
             var stateExists = await _context.States
-                .AnyAsync(s => s.Id == command.Dto.StateId.Value && s.DeletedAt == null, cancellationToken);
+                .AnyAsync(s => s.Id == command.Dto.StateId.Value, cancellationToken);
             if (!stateExists)
                 throw new InvalidOperationException($"No se encontró la provincia con ID {command.Dto.StateId.Value}");
         }
@@ -63,7 +63,7 @@ public class CreateUserCommandHandler : ICommandHandler<CreateUserCommand, UserD
         if (command.Dto.CountryId.HasValue)
         {
             var countryExists = await _context.Countries
-                .AnyAsync(c => c.Id == command.Dto.CountryId.Value && c.DeletedAt == null, cancellationToken);
+                .AnyAsync(c => c.Id == command.Dto.CountryId.Value, cancellationToken);
             if (!countryExists)
                 throw new InvalidOperationException($"No se encontró el país con ID {command.Dto.CountryId.Value}");
         }
@@ -72,7 +72,7 @@ public class CreateUserCommandHandler : ICommandHandler<CreateUserCommand, UserD
         if (command.Dto.LanguageId.HasValue)
         {
             var languageExists = await _context.Languages
-                .AnyAsync(l => l.Id == command.Dto.LanguageId.Value && l.DeletedAt == null, cancellationToken);
+                .AnyAsync(l => l.Id == command.Dto.LanguageId.Value, cancellationToken);
             if (!languageExists)
                 throw new InvalidOperationException($"No se encontró el idioma con ID {command.Dto.LanguageId.Value}");
         }
