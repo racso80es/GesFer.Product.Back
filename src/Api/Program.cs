@@ -85,13 +85,25 @@ try
     });
 
     // Configurar CORS
+    var allowedOrigins = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>() ?? Array.Empty<string>();
+
     builder.Services.AddCors(options =>
     {
-        options.AddPolicy("AllowAll", policy =>
+        options.AddPolicy("GesFerCorsPolicy", policy =>
         {
-            policy.AllowAnyOrigin()
-                  .AllowAnyMethod()
-                  .AllowAnyHeader();
+            if (allowedOrigins.Length > 0)
+            {
+                policy.WithOrigins(allowedOrigins)
+                      .AllowAnyMethod()
+                      .AllowAnyHeader();
+            }
+            else
+            {
+                // Fallback seguro por defecto si no hay configuración: no se añade origin, o en este caso bloqueamos efectivamente.
+                // Requeriríamos añadir por defecto nada para origen.
+                policy.AllowAnyMethod()
+                      .AllowAnyHeader(); // Without WithOrigins or AllowAnyOrigins, no requests are allowed across origin.
+            }
         });
     });
 
@@ -193,7 +205,7 @@ try
 
     // CORS debe ir ANTES de UseHttpsRedirection para que las peticiones preflight funcionen.
     // Redirección HTTP → HTTPS en todos los entornos (puerto HTTPS en Development: 5001).
-    app.UseCors("AllowAll");
+    app.UseCors("GesFerCorsPolicy");
 
     // KAIZEN: Skip HTTPS Redirection in Testing/Development to allow start-api health check and local dev.
     if (!app.Environment.IsEnvironment("Testing") && !app.Environment.IsDevelopment())

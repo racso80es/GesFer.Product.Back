@@ -4,6 +4,14 @@ Registro de cambios arquitectónicos y features del proyecto.
 
 ---
 
+## [2023-10-25] fix/cors-vulnerability
+**Feature:** Fix overly permissive CORS policy
+**Description:** Corregida vulnerabilidad CORS (AllowAnyOrigin) configurando `AllowedOrigins` explícitamente en `appsettings.json` según el entorno de despliegue y renombrando la política a `GesFerCorsPolicy`. Añadidas pruebas de integración.
+**Reference:** [docs/bugs/fix-cors-vulnerability/objectives.md]
+**Status:** DONE
+
+---
+
 ## [2026-04-18] feat/kaizen-customer-xml-docs
 **Feature:** Validate CustomerController XML docs
 **Description:** Validated that XML Docs and ProducesResponseType attributes correctly exist in CustomerController.cs. Added an inline comment for tracking.

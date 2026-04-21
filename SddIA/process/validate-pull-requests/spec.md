@@ -183,7 +183,7 @@ Se identificó entropía estructural en `[Archivo]` que puede ser optimizada.
 
 ## Integración con agentes y normas
 
-* **Arquitecto, QA-Judge, Security-Engineer:** Cargar definiciones desde SddIA/agents/ según la tabla de identidad (misma convención que AGENTS.md).
+* **Arquitecto, QA-Judge, Security-Engineer:** Cargar definiciones desde paths.agentsPath según la tabla de identidad.
 * **Cúmulo:** Valida rutas vía paths-via-cumulo; paths.tasksPath para semillas Kaizen.
 * **Principios:** Coherencia paths.principlesPath (principles-contract) en diseño cuando aplique.
 
