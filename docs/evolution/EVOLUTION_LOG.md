@@ -159,3 +159,8 @@ Registro de cambios arquitectónicos y features del proyecto.
 **Description:** Ejecución de auditoría diaria estructural sin hallazgos de deuda técnica.
 **Reference:** [docs/TASKS/DONE/Kaizen_2026_04_18_audit-project.md]
 **Status:** DONE
+## [2026-04-18] feat/kaizen-auth-controller-xml-docs
+**Feature:** Add missing XML docs to AuthController
+**Description:** Added XML summary to AuthController constructor to comply with XML documentation standards.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_04_18_auth_controller_xml_docs.md]
+**Status:** DONE

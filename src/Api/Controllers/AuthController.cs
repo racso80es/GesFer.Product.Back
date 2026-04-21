@@ -16,6 +16,9 @@ public class AuthController : ControllerBase
     private readonly ICommandHandler<GetUserPermissionsCommand, List<string>> _getPermissionsHandler;
     private readonly ILogger<AuthController> _logger;
 
+    /// <summary>
+    /// Constructor del controlador de autenticación
+    /// </summary>
     public AuthController(
         ICommandHandler<LoginCommand, LoginResponseDto?> loginHandler,
         ICommandHandler<GetUserPermissionsCommand, List<string>> getPermissionsHandler,
