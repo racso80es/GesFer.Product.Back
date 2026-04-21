@@ -6,6 +6,7 @@ using Serilog;
 using Serilog.Events;
 using Serilog.Debugging;
 using GesFer.Product.Back.Infrastructure.Logging;
+using GesFer.Product.Back.Infrastructure.Security;
 using System.Text;
 
 // Habilitar self-logging de Serilog para diagnosticar problemas
@@ -118,16 +119,8 @@ try
     builder.Services.AddHealthChecks();
 
     // Configurar autenticación JWT
-    var jwtSecretKey = builder.Configuration["JwtSettings:SecretKey"]
-        ?? throw new InvalidOperationException("JwtSettings:SecretKey no está configurado");
-
-    // Validar que la clave tenga al menos 32 caracteres (256 bits) para SHA-256 (HS256)
-    if (jwtSecretKey.Length < 32)
-    {
-        throw new InvalidOperationException(
-            $"JwtSettings:SecretKey debe tener al menos 32 caracteres (256 bits) para cumplir con el algoritmo SHA-256 (HS256). " +
-            $"Longitud actual: {jwtSecretKey.Length} caracteres.");
-    }
+    var jwtSecretKey = SecretsConfigurationValidator.ValidateJwtSecretKey(builder.Configuration["JwtSettings:SecretKey"]);
+    SecretsConfigurationValidator.ValidateInternalSecretIfPresent(builder.Configuration["InternalSecret"]);
 
     var jwtIssuer = builder.Configuration["JwtSettings:Issuer"]
         ?? throw new InvalidOperationException("JwtSettings:Issuer no está configurado");

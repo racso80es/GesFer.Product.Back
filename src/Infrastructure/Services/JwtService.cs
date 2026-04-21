@@ -2,6 +2,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using GesFer.Product.Back.Infrastructure.Extensions;
+using GesFer.Product.Back.Infrastructure.Security;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
@@ -26,16 +27,7 @@ public class JwtService : IJwtService
     public JwtService(IConfiguration configuration)
     {
         _configuration = configuration;
-        _secretKey = _configuration["JwtSettings:SecretKey"]
-            ?? throw new InvalidOperationException("JwtSettings:SecretKey no está configurado");
-
-        // Validar que la clave tenga al menos 32 caracteres (256 bits) para SHA-256 (HS256)
-        if (_secretKey.Length < 32)
-        {
-            throw new InvalidOperationException(
-                $"JwtSettings:SecretKey debe tener al menos 32 caracteres (256 bits) para cumplir con el algoritmo SHA-256 (HS256). " +
-                $"Longitud actual: {_secretKey.Length} caracteres.");
-        }
+        _secretKey = SecretsConfigurationValidator.ValidateJwtSecretKey(_configuration["JwtSettings:SecretKey"]);
 
         _issuer = _configuration["JwtSettings:Issuer"]
             ?? throw new InvalidOperationException("JwtSettings:Issuer no está configurado");
