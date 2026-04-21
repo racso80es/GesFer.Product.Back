@@ -20,7 +20,7 @@ public class GetAllCitiesCommandHandler : ICommandHandler<GetAllCitiesCommand, L
         var query = _context.Cities
             .Include(c => c.State)
                 .ThenInclude(s => s.Country)
-            .Where(c => c.DeletedAt == null);
+            .AsQueryable();
 
         // Filtrar por StateId si se proporciona
         if (command.StateId.HasValue)
@@ -49,7 +49,7 @@ public class GetAllCitiesCommandHandler : ICommandHandler<GetAllCitiesCommand, L
             CountryId = c.State.CountryId,
             CountryName = c.State.Country.Name,
             Name = c.Name,
-            PostalCodes = c.PostalCodes.Where(pc => pc.DeletedAt == null).Select(pc => pc.Code).ToList(),
+            PostalCodes = c.PostalCodes.AsQueryable().Select(pc => pc.Code).ToList(),
             IsActive = c.IsActive,
             CreatedAt = c.CreatedAt,
             UpdatedAt = c.UpdatedAt

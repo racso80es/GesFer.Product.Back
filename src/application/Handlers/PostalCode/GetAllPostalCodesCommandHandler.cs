@@ -21,7 +21,7 @@ public class GetAllPostalCodesCommandHandler : ICommandHandler<GetAllPostalCodes
             .Include(pc => pc.City)
                 .ThenInclude(c => c.State)
                     .ThenInclude(s => s.Country)
-            .Where(pc => pc.DeletedAt == null);
+            .AsQueryable();
 
         // Filtrar por CityId si se proporciona
         if (command.CityId.HasValue)

@@ -39,6 +39,13 @@
       "manifest": "start-api/manifest.json",
       "wrapper_bat": "Start-Api.bat",
       "description": "Levanta la API del proyecto (Admin Back): build opcional, dotnet run, healthcheck. Completa el ciclo infra → datos → API. Ejecutable por terceros."
+    },
+    {
+      "toolId": "run-test-e2e-local",
+      "path": "run-test-e2e-local/",
+      "manifest": "run-test-e2e-local/manifest.json",
+      "wrapper_bat": "Run-Test-E2E-Local.bat",
+      "description": "Entorno local preparado (opcional), health Admin/Product, y ejecución de todos los tests E2E de GesFer.Product.Back con URLs parametrizables."
     }
   ]
 }

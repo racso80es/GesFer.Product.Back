@@ -18,6 +18,7 @@ Todo proceso cumple el **contrato** en [process-contract.json](./process-contrac
 | **create-template** | Creación de plantilla: rama feat/create-template-&lt;template-id&gt;, carpeta en paths.templatesPath con spec.md y spec.json. Configuración predefinida de un proceso con fin concreto. | [create-template/](./create-template/)           | Cúmulo, Arquitecto      |
 | **audit-tool** | Auditoría de herramienta: verificación empírica del funcionamiento de una tool. Resultado: informe en paths.auditsPath/tools/&lt;tool-id&gt;/. | [audit-tool/](./audit-tool/)                     | Auditor, Arquitecto     |
 | **create-skill** | Creación de skill: rama feat/create-skill-&lt;skill-id&gt;, cápsula en paths.skillCapsules. Implementación obligatoria en Rust (.exe). | [create-skill/](./create-skill/)                   | Tekton, Arquitecto      |
+| **validate-pull-requests** | Validación integral de PR (S+ Grade): revisión multi-agente (architect, qa-judge, security-engineer) sobre la rama origen; informe en paths.featurePath; semillas Kaizen en paths.tasksPath. | [validate-pull-requests/](./validate-pull-requests/) | Arquitecto, QA-Judge, Security-Engineer |
 
 ## Uso
 
@@ -29,6 +30,7 @@ Todo proceso cumple el **contrato** en [process-contract.json](./process-contrac
 6. **Create-template:** paths.processPath/create-template/. Ruta: Cúmulo (paths.featurePath/create-template-&lt;template-id&gt;). Entregable: paths.templatesPath/&lt;template-id&gt;/ (spec.md, spec.json).
 7. **Audit-tool:** paths.processPath/audit-tool/. Ruta: Cúmulo (paths.featurePath/audit-tool-&lt;tool-id&gt;). Resultado: paths.auditsPath/tools/&lt;tool-id&gt;/ (audit-report.md, audit-result.json).
 8. **Create-skill:** paths.processPath/create-skill/. Ruta: Cúmulo (paths.featurePath/create-skill-&lt;skill-id&gt;). Entregable: cápsula en paths.skillsPath/&lt;skill-id&gt;/.
+9. **Validate-pull-requests:** paths.processPath/validate-pull-requests/. Ruta: Cúmulo (paths.featurePath/validate-pull-requests-&lt;pr-slug&gt;). Semillas Kaizen: paths.tasksPath.
 
 Las **acciones** (spec, clarify, plan, implementation, execution, validate, finalize) siguen en paths.actionsPath (Cúmulo) y son invocadas por los procesos.
 

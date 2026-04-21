@@ -52,7 +52,7 @@ public class SetupControllerTests
 
         // Assert - Verificar que los usuarios se insertaron (ya están en la BD por el fixture)
         var users = await context.Users
-            .Where(u => u.DeletedAt == null)
+            .AsQueryable()
             .ToListAsync();
 
         users.Should().NotBeEmpty("Debería haber al menos un usuario insertado");
@@ -70,13 +70,13 @@ public class SetupControllerTests
 
         // Verificar que el usuario tiene grupo asignado
         var userGroups = await context.UserGroups
-            .Where(ug => ug.UserId == adminUser.Id && ug.DeletedAt == null)
+            .Where(ug => ug.UserId == adminUser.Id)
             .ToListAsync();
         userGroups.Should().NotBeEmpty("El usuario debería tener al menos un grupo asignado");
 
         // Verificar que el usuario tiene permisos
         var userPermissions = await context.UserPermissions
-            .Where(up => up.UserId == adminUser.Id && up.DeletedAt == null)
+            .Where(up => up.UserId == adminUser.Id)
             .ToListAsync();
 
         userPermissions.Should().NotBeEmpty("El usuario debería tener al menos un permiso directo");

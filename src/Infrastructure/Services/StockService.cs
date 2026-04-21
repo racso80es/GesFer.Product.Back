@@ -26,7 +26,7 @@ public class StockService : IStockService
             throw new ArgumentException("La cantidad debe ser mayor que cero", nameof(quantity));
 
         var article = await _context.Articles
-            .FirstOrDefaultAsync(a => a.Id == articleId && a.DeletedAt == null);
+            .FirstOrDefaultAsync(a => a.Id == articleId);
 
         if (article == null)
             throw new InvalidOperationException($"El artículo con ID {articleId} no existe");
@@ -45,7 +45,7 @@ public class StockService : IStockService
             throw new ArgumentException("La cantidad debe ser mayor que cero", nameof(quantity));
 
         var article = await _context.Articles
-            .FirstOrDefaultAsync(a => a.Id == articleId && a.DeletedAt == null);
+            .FirstOrDefaultAsync(a => a.Id == articleId);
 
         if (article == null)
             throw new InvalidOperationException($"El artículo con ID {articleId} no existe");
@@ -61,7 +61,7 @@ public class StockService : IStockService
     public async Task<bool> HasEnoughStockAsync(Guid articleId, decimal quantity)
     {
         var article = await _context.Articles
-            .FirstOrDefaultAsync(a => a.Id == articleId && a.DeletedAt == null);
+            .FirstOrDefaultAsync(a => a.Id == articleId);
 
         if (article == null)
             return false;

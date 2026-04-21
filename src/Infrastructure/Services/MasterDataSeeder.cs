@@ -93,7 +93,7 @@ public class MasterDataSeeder
             .IgnoreQueryFilters()
             .FirstOrDefaultAsync(c => c.Code == "ES");
 
-        if (spain != null && spain.DeletedAt == null)
+        if (spain != null)
         {
             _logger.LogInformation("España ya existe en la base de datos. Omitiendo carga de datos maestros.");
             return;
@@ -159,7 +159,7 @@ public class MasterDataSeeder
                 .IgnoreQueryFilters()
                 .FirstOrDefaultAsync(s => s.CountryId == countryId && s.Code == code);
 
-            if (existingState != null && existingState.DeletedAt == null)
+            if (existingState != null)
             {
                 continue; // Ya existe, omitir
             }
@@ -199,7 +199,7 @@ public class MasterDataSeeder
 
         // Obtener todas las provincias de España
         var states = await _context.States
-            .Where(s => s.CountryId == countryId && s.DeletedAt == null)
+            .Where(s => s.CountryId == countryId)
             .ToListAsync();
 
         // Ciudades principales por provincia (capitales y ciudades importantes)

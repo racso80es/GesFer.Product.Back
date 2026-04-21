@@ -4,6 +4,16 @@ Registro de cambios arquitectónicos y features del proyecto.
 
 ---
 
+## [2026-04-18] feat/kaizen-customer-xml-docs
+**Feature:** Validate CustomerController XML docs
+**Description:** Validated that XML Docs and ProducesResponseType attributes correctly exist in CustomerController.cs. Added an inline comment for tracking.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_04_18_Customer_Xml_Docs.md]
+**Status:** DONE
+## [2026-04-18] feat/sddia-process-validate-pull-requests
+**Feature:** Proceso SddIA validate-pull-requests (validación integral de PRs, S+ Grade)
+**Description:** Nuevo proceso en `SddIA/process/validate-pull-requests/`, índices y difusión (#Process, AGENTS, normas PR, Cursor). Documentación de tarea en `docs/features/sddia-process-validate-pull-requests/`.
+**Reference:** [docs/features/sddia-process-validate-pull-requests/objectives.md]
+**Status:** PR en curso
 ## [2026-04-16] feat/kaizen-remove-redundant-deletedat-user
 **Feature:** Remove redundant DeletedAt checks in User handlers
 **Description:** Removed explicit DeletedAt checks as EF Core global filters handle them.
@@ -136,4 +146,16 @@ Registro de cambios arquitectónicos y features del proyecto.
 **Feature:** Remove redundant DeletedAt checks in ArticleFamilies handlers
 **Description:** Removed redundant explicitly coded `DeletedAt == null` checks, relying on EF Core Global Query Filters.
 **Reference:** [docs/TASKS/DONE/Kaizen_2026_04_13_remove_redundant_deletedat_checks_article_families.md]
+**Status:** DONE
+
+## [2026-04-17] jules-7135794475779878235-04d0b836
+- **Feature:** Corrección de Auditoría 2026-04-17
+- **Description:** Ejecución del proceso correccion-auditorias sin hallazgos (100% de salud).
+- **Reference:** docs/features/correccion-auditoria-2026-04-17/objectives.md
+- **Status:** Done
+
+## [2026-04-18] feat/kaizen-audit-2026-04-18
+**Feature:** Auditoría del Proyecto (2026-04-18)
+**Description:** Ejecución de auditoría diaria estructural sin hallazgos de deuda técnica.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_04_18_audit-project.md]
 **Status:** DONE

@@ -19,7 +19,7 @@ public class GetAllStatesCommandHandler : ICommandHandler<GetAllStatesCommand, L
     {
         var query = _context.States
             .Include(s => s.Country)
-            .Where(s => s.DeletedAt == null);
+            .AsQueryable();
 
         // Filtrar por CountryId si se proporciona
         if (command.CountryId.HasValue)

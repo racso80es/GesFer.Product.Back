@@ -19,7 +19,7 @@ public class UpdateStateCommandHandler : ICommandHandler<UpdateStateCommand, Sta
     {
         var state = await _context.States
             .Include(s => s.Country)
-            .FirstOrDefaultAsync(s => s.Id == command.Id && s.DeletedAt == null, cancellationToken);
+            .FirstOrDefaultAsync(s => s.Id == command.Id, cancellationToken);
 
         if (state == null)
             throw new InvalidOperationException($"No se encontró la provincia con ID {command.Id}");
@@ -28,8 +28,7 @@ public class UpdateStateCommandHandler : ICommandHandler<UpdateStateCommand, Sta
         var existingState = await _context.States
             .FirstOrDefaultAsync(s => s.Name == command.Dto.Name
                 && s.CountryId == state.CountryId
-                && s.Id != command.Id
-                && s.DeletedAt == null, cancellationToken);
+                && s.Id != command.Id, cancellationToken);
 
         if (existingState != null)
             throw new InvalidOperationException($"Ya existe otra provincia con el nombre '{command.Dto.Name}' en este país");

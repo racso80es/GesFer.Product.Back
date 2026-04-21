@@ -1,0 +1,16 @@
+{
+  "toolId": "run-test-e2e-local",
+  "version": "1.0.0",
+  "description": "Prepara entorno local (opcional), comprueba health de Admin y Product, ejecuta dotnet test E2E (GesFer.Product.Back.E2ETests) con E2E_BASE_URL = ProductApiUrl.",
+  "contract_ref": "SddIA/tools/tools-contract.json",
+  "components": {
+    "launcher_bat": "Run-Test-E2E-Local.bat",
+    "script_ps1": "Run-Test-E2E-Local.ps1",
+    "config": "run-test-e2e-local-config.json",
+    "doc": "run-test-e2e-local.md",
+    "bin": "run_test_e2e_local.exe"
+  },
+  "env": ["Windows 11", "PowerShell 7+", ".NET SDK 8"],
+  "implementation_status": "rust_exe_available",
+  "definition_ref": "SddIA/tools/run-test-e2e-local/spec.md"
+}

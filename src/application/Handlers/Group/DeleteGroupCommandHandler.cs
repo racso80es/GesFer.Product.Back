@@ -17,7 +17,7 @@ public class DeleteGroupCommandHandler : ICommandHandler<DeleteGroupCommand>
     public async Task HandleAsync(DeleteGroupCommand command, CancellationToken cancellationToken = default)
     {
         var group = await _context.Groups
-            .FirstOrDefaultAsync(g => g.Id == command.Id && g.DeletedAt == null, cancellationToken);
+            .FirstOrDefaultAsync(g => g.Id == command.Id, cancellationToken);
 
         if (group == null)
             throw new InvalidOperationException($"No se encontró el grupo con ID {command.Id}");

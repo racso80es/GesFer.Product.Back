@@ -23,6 +23,10 @@ Este documento define las **condiciones obligatorias** que deben cumplirse antes
 4.  **Ejecución:**
     - Se debe utilizar la skill `verify-pr-protocol` (Rust) para garantizar la ejecución uniforme de estos chequeos.
 
+## Complemento: revisión multi-agente (S+ Grade)
+
+Para una revisión estructurada (arquitectura, QA, seguridad) sobre la **rama origen del PR**, documentación y artefactos en Cúmulo: proceso **validate-pull-requests** — [`SddIA/process/validate-pull-requests/spec.md`](../process/validate-pull-requests/spec.md) (`paths.processPath/validate-pull-requests`). No sustituye los requisitos obligatorios anteriores.
+
 ## Violaciones
 Cualquier intento de eludir este protocolo resultará en:
 - Rechazo automático del PR por GitHub Actions.

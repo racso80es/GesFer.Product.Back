@@ -17,7 +17,7 @@ public class DeleteCustomerCommandHandler : ICommandHandler<DeleteCustomerComman
     public async Task HandleAsync(DeleteCustomerCommand command, CancellationToken cancellationToken = default)
     {
         var customer = await _context.Customers
-            .FirstOrDefaultAsync(c => c.Id == command.Id && c.DeletedAt == null, cancellationToken);
+            .FirstOrDefaultAsync(c => c.Id == command.Id, cancellationToken);
 
         if (customer == null)
             throw new InvalidOperationException($"No se encontró el cliente con ID {command.Id}");

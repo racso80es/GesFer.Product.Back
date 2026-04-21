@@ -31,8 +31,7 @@ public class UpdateUserCommandHandler : ICommandHandler<UpdateUserCommand, UserD
         var existingUser = await _context.Users
             .FirstOrDefaultAsync(u => u.Username == command.Dto.Username
                 && u.CompanyId == user.CompanyId
-                && u.Id != command.Id
-, cancellationToken);
+                && u.Id != command.Id, cancellationToken);
 
         if (existingUser != null)
             throw new InvalidOperationException($"Ya existe otro usuario con el nombre '{command.Dto.Username}' en esta empresa");
