@@ -22,6 +22,11 @@ Registro de cambios arquitectónicos y features del proyecto.
 **Description:** Nuevo proceso en `SddIA/process/validate-pull-requests/`, índices y difusión (#Process, AGENTS, normas PR, Cursor). Documentación de tarea en `docs/features/sddia-process-validate-pull-requests/`.
 **Reference:** [docs/features/sddia-process-validate-pull-requests/objectives.md]
 **Status:** PR en curso
+## [2026-04-16] feat/kaizen-remove-redundant-deletedat-user
+**Feature:** Remove redundant DeletedAt checks in User handlers
+**Description:** Removed explicit DeletedAt checks as EF Core global filters handle them.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_04_16_remove_redundant_deletedat_checks_user.md]
+**Status:** DONE
 
 ---
 
@@ -161,4 +166,9 @@ Registro de cambios arquitectónicos y features del proyecto.
 **Feature:** Auditoría del Proyecto (2026-04-18)
 **Description:** Ejecución de auditoría diaria estructural sin hallazgos de deuda técnica.
 **Reference:** [docs/TASKS/DONE/Kaizen_2026_04_18_audit-project.md]
+**Status:** DONE
+## [2026-04-18] feat/kaizen-auth-controller-xml-docs
+**Feature:** Add missing XML docs to AuthController
+**Description:** Added XML summary to AuthController constructor to comply with XML documentation standards.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_04_18_auth_controller_xml_docs.md]
 **Status:** DONE
