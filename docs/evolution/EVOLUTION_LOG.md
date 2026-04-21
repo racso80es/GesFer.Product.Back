@@ -4,6 +4,14 @@ Registro de cambios arquitectónicos y features del proyecto.
 
 ---
 
+## [2026-04-21] fix/hardcoded-jwt-secret-14196445710699879921
+**Feature:** Validación de secreto JWT anti-placeholder en arranque
+**Description:** Validated JWT secret keys to prevent repositories' versioned placeholders from being used in runtime, adding UserSecretsId and enforcing use of User Secrets or ENV vars.
+**Reference:** [docs/TASKS/DONE/20260421-Refactor-validacion-secreto-jwt-no-placeholder.md]
+**Status:** DONE
+
+---
+
 ## [2023-10-25] fix/cors-vulnerability
 **Feature:** Fix overly permissive CORS policy
 **Description:** Corregida vulnerabilidad CORS (AllowAnyOrigin) configurando `AllowedOrigins` explícitamente en `appsettings.json` según el entorno de despliegue y renombrando la política a `GesFerCorsPolicy`. Añadidas pruebas de integración.
