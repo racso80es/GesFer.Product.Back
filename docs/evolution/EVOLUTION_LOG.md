@@ -14,6 +14,11 @@ Registro de cambios arquitectónicos y features del proyecto.
 **Description:** Nuevo proceso en `SddIA/process/validate-pull-requests/`, índices y difusión (#Process, AGENTS, normas PR, Cursor). Documentación de tarea en `docs/features/sddia-process-validate-pull-requests/`.
 **Reference:** [docs/features/sddia-process-validate-pull-requests/objectives.md]
 **Status:** PR en curso
+## [2026-04-16] feat/kaizen-remove-redundant-deletedat-user
+**Feature:** Remove redundant DeletedAt checks in User handlers
+**Description:** Removed explicit DeletedAt checks as EF Core global filters handle them.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_04_16_remove_redundant_deletedat_checks_user.md]
+**Status:** DONE
 
 ---
 
