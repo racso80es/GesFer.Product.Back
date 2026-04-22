@@ -87,6 +87,7 @@ public class IntegrationTestWebAppFactory<TProgram> : WebApplicationFactory<TPro
         });
 
         builder.UseEnvironment("Testing");
+        Environment.SetEnvironmentVariable("JwtSettings__SecretKey", "ThisIsASecretKeyForTestingThatIsAtLeast32CharsLong123!@#");
     }
 
     public async Task InitializeAsync()
