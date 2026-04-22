@@ -4,6 +4,14 @@ Registro de cambios arquitectónicos y features del proyecto.
 
 ---
 
+## [2026-04-22] feat/audit-documentar-contexto-user
+**Feature:** Auditoría y Documentación de Contexto User
+**Description:** Extracción de la especificación técnica completa de la entidad User y generación del documento formal `docs/DocumentacionUsuarios.md` estructurado en vectores clave como esquema, semillas, handlers y legacy mapping, sin modificaciones de código fuente.
+**Reference:** [docs/TASKS/DONE/documentar_contexto_user.md]
+**Status:** DONE
+
+---
+
 ## [2026-04-21] fix/hardcoded-jwt-secret-14196445710699879921
 **Feature:** Validación de secreto JWT anti-placeholder en arranque
 **Description:** Validated JWT secret keys to prevent repositories' versioned placeholders from being used in runtime, adding UserSecretsId and enforcing use of User Secrets or ENV vars.
