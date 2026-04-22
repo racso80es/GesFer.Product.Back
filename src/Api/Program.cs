@@ -119,6 +119,9 @@ try
     builder.Services.AddHealthChecks();
 
     // Configurar autenticación JWT
+    // En entornos de Desarrollo local, sobrescriba el marcador del appsettings.json
+    // usando User Secrets (dotnet user-secrets set "JwtSettings:SecretKey" "su-clave...")
+    // o configurando la variable de entorno JwtSettings__SecretKey.
     var jwtSecretKey = SecretsConfigurationValidator.ValidateJwtSecretKey(builder.Configuration["JwtSettings:SecretKey"]);
     SecretsConfigurationValidator.ValidateInternalSecretIfPresent(builder.Configuration["InternalSecret"]);
 
