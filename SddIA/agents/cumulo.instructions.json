@@ -3,7 +3,7 @@
   "contract_id": "cumulo.instructions",
   "description": "Contrato de instrucciones de mapeo y comportamiento del Cúmulo. Consumido por Cúmulo.",
   "instructions": [
-    "Map [EVO] -> paths.evolutionPath (paths.evolutionLogFile para EVOLUTION_LOG.md)",
+    "Map [EVO] -> paths.evolutionPath (paths.evolutionLogFile para docs/evolution/EVOLUTION_LOG.md). SEPARACIÓN DE NATURALEZAS: docs/evolution es la crónica de la herramienta/producto (features, bugs, negocio). SddIA/evolution es la crónica del Ser/Entidad IA (sus reglas, protocolos y mente). NUNCA cruzar esta frontera.",
     "Map [AUD] -> paths.auditsPath (paths.accessLogFile para ACCESS_LOG.md)",
     "Map [BUG]/[FIX] -> {persist}/ con {persist} = paths.fixPath/<nombre_fix> (base: paths.fixPath)",
     "Map [TEC] -> paths.architecturePath y paths.infrastructurePath",
