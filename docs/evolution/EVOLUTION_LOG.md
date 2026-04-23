@@ -4,6 +4,14 @@ Registro de cambios arquitectónicos y features del proyecto.
 
 ---
 
+## [2026-04-23] fix/analyze-sddia-evolution-log-bug
+**Feature:** Corrección de persistencia errónea en logs de sistema
+**Description:** Análisis y corrección del error donde agentes IA escribían logs de producto en la bitácora evolutiva de SddIA. Se incluyeron directrices explícitas para separación de naturalezas y mecanismo de validación pre-escritura en `sddia-evolution-sync.md`.
+**Reference:** [docs/TASKS/DONE/20260423-bug_log_SddIA.md]
+**Status:** DONE
+
+---
+
 ## [2026-04-22] feat/audit-documentar-contexto-user
 **Feature:** Auditoría y Documentación de Contexto User
 **Description:** Extracción de la especificación técnica completa de la entidad User y generación del documento formal `docs/DocumentacionUsuarios.md` estructurado en vectores clave como esquema, semillas, handlers y legacy mapping, sin modificaciones de código fuente.
@@ -187,4 +195,3 @@ Registro de cambios arquitectónicos y features del proyecto.
 **Feature:** Add missing XML docs to AuthController
 **Description:** Added XML summary to AuthController constructor to comply with XML documentation standards.
 **Reference:** [docs/TASKS/DONE/Kaizen_2026_04_18_auth_controller_xml_docs.md]
-**Status:** DONE

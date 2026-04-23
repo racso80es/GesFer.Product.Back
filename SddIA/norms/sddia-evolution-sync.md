@@ -23,8 +23,14 @@ Toda **alta**, **baja** o **modificación** material bajo `./SddIA/` debe quedar
 
 ## 2. Separación respecto a evolución de producto
 
-- **`paths.sddiaEvolutionPath`** — protocolo de trazabilidad del **ecosistema SddIA** en este repositorio. (Uso EXCLUSIVO para modificaciones dentro de `./SddIA/`).
-- **`paths.evolutionPath`** / `docs/evolution/` — evolución de **producto** (features, cierres). No son intercambiables. TODO registro de log general, tareas y correcciones fuera de `./SddIA/` debe registrarse AQUÍ, en `docs/evolution/EVOLUTION_LOG.md`.
+- **`paths.sddiaEvolutionPath`** — protocolo de trazabilidad del **ecosistema SddIA** en este repositorio. (Uso EXCLUSIVO para modificaciones dentro de la carpeta `./SddIA/` que modifiquen normas, agentes o reglas SddIA). **NO USE ESTA RUTA BAJO NINGUNA CIRCUNSTANCIA PARA TAREAS O BUGS REGULARES DE PRODUCTO.**
+- **`paths.evolutionPath`** / `docs/evolution/` — evolución de **producto** (features, cierres, bugs, kaizen). No son intercambiables. TODO registro de log general, tareas y correcciones (incluso aquellas sobre el log de bugs o tareas de gestión) debe registrarse AQUÍ, en `docs/evolution/EVOLUTION_LOG.md`. NUNCA modifique `SddIA/evolution/Evolution_log.md` salvo que esté modificando las propias reglas de la IA en la carpeta `SddIA`.
+
+### Mecanismo de Validación Pre-Escritura (Principio de Independencia)
+Antes de escribir en cualquier log de evolución, el agente **debe** hacerse la siguiente pregunta:
+> *"¿Este cambio afecta mi capacidad de razonamiento/protocolos (SddIA) o afecta a una funcionalidad del usuario/sistema (Producto)?"*
+
+Cualquier violación de esta frontera (es decir, registrar cambios de producto en la crónica de SddIA o viceversa) será tratada como **Ruido Degenerativo** (Filtro A), comprometiendo la integridad ontológica del sistema.
 
 ## 3. Implementación
 
