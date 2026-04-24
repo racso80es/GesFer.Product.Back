@@ -4,6 +4,14 @@ Registro de cambios arquitectónicos y features del proyecto.
 
 ---
 
+## [2026-04-24] feat/kaizen-2026-04-24-tax-types-controller-xml-docs
+**Feature:** Documentación XML y ResponseTypes en Controladores
+**Description:** Se añadieron etiquetas XML faltantes y atributos ProducesResponseType, en especial el Status401Unauthorized en los controladores TaxTypes, City y State, según los requerimientos de la tarea Kaizen.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_04_24_tax_types_controller_xml_docs.md]
+**Status:** DONE
+
+---
+
 ## [2026-04-23] fix/analyze-sddia-evolution-log-bug
 **Feature:** Corrección de persistencia errónea en logs de sistema
 **Description:** Análisis y corrección del error donde agentes IA escribían logs de producto en la bitácora evolutiva de SddIA. Se incluyeron directrices explícitas para separación de naturalezas y mecanismo de validación pre-escritura en `sddia-evolution-sync.md`.

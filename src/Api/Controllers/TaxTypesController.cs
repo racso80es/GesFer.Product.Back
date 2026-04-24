@@ -37,8 +37,10 @@ public class TaxTypesController : ControllerBase
     /// <summary>
     /// Obtiene todos los tipos de impuestos de la empresa del usuario autenticado
     /// </summary>
+    /// <returns>Lista de tipos de impuestos</returns>
     [HttpGet]
     [ProducesResponseType(typeof(List<TaxTypeDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> GetTaxTypes(CancellationToken cancellationToken)
     {
         try
@@ -57,8 +59,10 @@ public class TaxTypesController : ControllerBase
     /// <summary>
     /// Obtiene un tipo de impuesto por ID
     /// </summary>
+    /// <returns>El tipo de impuesto solicitado</returns>
     [HttpGet("{id}")]
     [ProducesResponseType(typeof(TaxTypeDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetTaxTypeById(Guid id, CancellationToken cancellationToken)
     {
@@ -80,9 +84,11 @@ public class TaxTypesController : ControllerBase
     /// <summary>
     /// Crea un nuevo tipo de impuesto
     /// </summary>
+    /// <returns>El ID del tipo de impuesto creado</returns>
     [HttpPost]
     [ProducesResponseType(typeof(Guid), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> CreateTaxType([FromBody] CreateTaxTypeDto request, CancellationToken cancellationToken)
     {
         try
@@ -105,10 +111,12 @@ public class TaxTypesController : ControllerBase
     /// <summary>
     /// Actualiza un tipo de impuesto existente
     /// </summary>
+    /// <returns>Sin contenido en caso de éxito</returns>
     [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> UpdateTaxType(Guid id, [FromBody] UpdateTaxTypeDto request, CancellationToken cancellationToken)
     {
         if (id != request.Id)
@@ -136,8 +144,10 @@ public class TaxTypesController : ControllerBase
     /// <summary>
     /// Elimina un tipo de impuesto (soft delete)
     /// </summary>
+    /// <returns>Sin contenido en caso de éxito</returns>
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> DeleteTaxType(Guid id, CancellationToken cancellationToken)
     {
