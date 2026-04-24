@@ -1,0 +1,33 @@
+steps:
+  # 1. Obtener el código del repositorio (Imprescindible para leer SddIA)
+  - name: Checkout del código fuente
+    uses: actions/checkout@v4
+
+  # (Opcional) Tu acción personalizada si tiene una función específica de pre-procesamiento
+  - name: Ejecutar normasSddIA Custom Action
+    uses: actions/normasSddIA@v1 
+
+  # 2. Inyección de la Fuente Canónica en el Entorno
+  - name: Leer y Empaquetar Normativas SddIA
+    id: read_sddia
+    run: |
+      # Creamos un delimitador aleatorio seguro para evitar colisiones de string
+      EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
+      
+      # Opción A: Si quieres inyectar TODA la carpeta de normas (Recomendado para SddIA)
+      INSTRUCTIONS=$(cat SddIA/norms/*.md)
+      
+      # Opción B: Si solo quieres el archivo de touchpoints, comenta la de arriba y usa esta:
+      # INSTRUCTIONS=$(cat SddIA/norms/touchpoints-ia.md)
+
+      # Inyectar en las variables de entorno de GitHub Actions
+      echo "JULES_INSTRUCTIONS<<$EOF" >> $GITHUB_ENV
+      echo "$INSTRUCTIONS" >> $GITHUB_ENV
+      echo "$EOF" >> $GITHUB_ENV
+
+  # 3. Despliegue de Tekton con su Núcleo Rúnico actualizado
+  - name: Invocar a Tekton (Jules)
+    uses: google-labs/jules-action@vX # Asegura poner la versión correcta aquí
+    with:
+      github-token: ${{ secrets.GITHUB_TOKEN }}
+      system-prompt: ${{ env.JULES_INSTRUCTIONS }}
