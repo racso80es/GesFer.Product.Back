@@ -40,8 +40,10 @@ public class StateController : ControllerBase
     /// <summary>
     /// Obtiene todas las provincias/estados, opcionalmente filtradas por país
     /// </summary>
+    /// <returns>Lista de provincias/estados</returns>
     [HttpGet]
     [ProducesResponseType(typeof(List<StateDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> GetAll([FromQuery] Guid? countryId = null)
     {
         try
@@ -60,8 +62,10 @@ public class StateController : ControllerBase
     /// <summary>
     /// Obtiene una provincia/estado por ID
     /// </summary>
+    /// <returns>La provincia/estado solicitada</returns>
     [HttpGet("{id}")]
     [ProducesResponseType(typeof(StateDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetById(Guid id)
     {
@@ -85,9 +89,11 @@ public class StateController : ControllerBase
     /// <summary>
     /// Crea una nueva provincia/estado
     /// </summary>
+    /// <returns>La provincia/estado creada</returns>
     [HttpPost]
     [ProducesResponseType(typeof(StateDto), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> Create([FromBody] CreateStateDto dto)
     {
         try
@@ -110,10 +116,12 @@ public class StateController : ControllerBase
     /// <summary>
     /// Actualiza una provincia/estado existente
     /// </summary>
+    /// <returns>La provincia/estado actualizada</returns>
     [HttpPut("{id}")]
     [ProducesResponseType(typeof(StateDto), StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Update(Guid id, [FromBody] UpdateStateDto dto)
     {
         try
@@ -138,10 +146,12 @@ public class StateController : ControllerBase
     /// <summary>
     /// Elimina una provincia/estado (soft delete)
     /// </summary>
+    /// <returns>Sin contenido en caso de éxito</returns>
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(Guid id)
     {
         try
