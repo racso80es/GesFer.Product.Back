@@ -4,6 +4,14 @@ Registro de cambios arquitectónicos y features del proyecto.
 
 ---
 
+## [2026-04-25] feat/kaizen-clean-usings-controllers
+**Feature:** Limpieza de directivas using no utilizadas
+**Description:** Se eliminaron directivas using innecesarias (ej. System.Security.Claims) en DashboardController.cs para mejorar la salud del código según la tarea Kaizen.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_04_25_clean_usings_controllers.md]
+**Status:** DONE
+
+---
+
 ## [2026-04-24] feat/kaizen-2026-04-24-tax-types-controller-xml-docs
 **Feature:** Documentación XML y ResponseTypes en Controladores
 **Description:** Se añadieron etiquetas XML faltantes y atributos ProducesResponseType, en especial el Status401Unauthorized en los controladores TaxTypes, City y State, según los requerimientos de la tarea Kaizen.

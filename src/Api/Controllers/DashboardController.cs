@@ -4,7 +4,6 @@ using GesFer.Product.Back.Infrastructure.Logging;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
 
 namespace GesFer.Product.Back.Api.Controllers;
 
