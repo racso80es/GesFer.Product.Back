@@ -4,6 +4,10 @@ Registro de cambios arquitectónicos y features del proyecto.
 
 ---
 
+## [2026-04-25] feat/kaizen-clean-usings-controllers
+**Feature:** Limpieza de directivas using no utilizadas
+**Description:** Se eliminaron directivas using innecesarias (ej. System.Security.Claims) en DashboardController.cs para mejorar la salud del código según la tarea Kaizen.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_04_25_clean_usings_controllers.md]
 ## [2026-04-24] fix/correccion-auditorias-2026-04-24
 **Feature:** Refactorización de permisos en AuthService
 **Description:** Se optimizó el método GetUserPermissionsAsync eliminando los bucles foreach e inicializando el HashSet usando colecciones nativas y UnionWith.
