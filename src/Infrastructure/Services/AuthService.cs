@@ -67,8 +67,6 @@ public class AuthService : IAuthService
     /// </summary>
     public async Task<HashSet<string>> GetUserPermissionsAsync(Guid userId)
     {
-        var permissions = new HashSet<string>();
-
         // Permisos directos del usuario
         var directPermissions = await _context.UserPermissions
             .Include(up => up.Permission)
@@ -76,10 +74,7 @@ public class AuthService : IAuthService
             .Select(up => up.Permission.Key)
             .ToListAsync();
 
-        foreach (var perm in directPermissions)
-        {
-            permissions.Add(perm);
-        }
+        var permissions = new HashSet<string>(directPermissions);
 
         // Permisos de los grupos a los que pertenece el usuario
         var groupPermissions = await _context.UserGroups
@@ -92,13 +87,7 @@ public class AuthService : IAuthService
                 .Select(gp => gp!.Permission!.Key))
             .ToListAsync();
 
-        foreach (var perm in groupPermissions)
-        {
-            if (!string.IsNullOrEmpty(perm))
-            {
-                permissions.Add(perm);
-            }
-        }
+        permissions.UnionWith(groupPermissions.Where(p => !string.IsNullOrEmpty(p)));
 
         return permissions;
     }
