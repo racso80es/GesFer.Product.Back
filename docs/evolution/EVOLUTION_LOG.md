@@ -4,6 +4,14 @@ Registro de cambios arquitectónicos y features del proyecto.
 
 ---
 
+## [2026-04-24] fix/correccion-auditorias-2026-04-24
+**Feature:** Refactorización de permisos en AuthService
+**Description:** Se optimizó el método GetUserPermissionsAsync eliminando los bucles foreach e inicializando el HashSet usando colecciones nativas y UnionWith.
+**Reference:** [docs/features/correccion-auditorias-2026-04-24]
+**Status:** DONE
+
+---
+
 ## [2026-04-24] feat/kaizen-2026-04-24-tax-types-controller-xml-docs
 **Feature:** Documentación XML y ResponseTypes en Controladores
 **Description:** Se añadieron etiquetas XML faltantes y atributos ProducesResponseType, en especial el Status401Unauthorized en los controladores TaxTypes, City y State, según los requerimientos de la tarea Kaizen.
