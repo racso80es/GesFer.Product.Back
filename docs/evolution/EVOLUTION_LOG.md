@@ -4,6 +4,14 @@ Registro de cambios arquitectónicos y features del proyecto.
 
 ---
 
+## [2026-04-27] feat/add-xml-docs-postal-code-and-state-controllers
+**Feature:** Agregar documentación XML a controladores
+**Description:** Se agregó documentación XML faltante a los constructores de PostalCodeController y StateController, así como al método Create de PostalCodeController.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_04_27_add_xml_docs_postal_code_and_state_controllers.md]
+**Status:** DONE
+
+---
+
 ## [2026-04-24] feat/kaizen-2026-04-24-tax-types-controller-xml-docs
 **Feature:** Documentación XML y ResponseTypes en Controladores
 **Description:** Se añadieron etiquetas XML faltantes y atributos ProducesResponseType, en especial el Status401Unauthorized en los controladores TaxTypes, City y State, según los requerimientos de la tarea Kaizen.

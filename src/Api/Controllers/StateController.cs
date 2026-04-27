@@ -21,6 +21,15 @@ public class StateController : ControllerBase
     private readonly ICommandHandler<GetAllStatesCommand, List<StateDto>> _getAllHandler;
     private readonly ILogger<StateController> _logger;
 
+    /// <summary>
+    /// Constructor del controlador de provincias/estados
+    /// </summary>
+    /// <param name="createHandler">Handler para crear estado</param>
+    /// <param name="updateHandler">Handler para actualizar estado</param>
+    /// <param name="deleteHandler">Handler para eliminar estado</param>
+    /// <param name="getByIdHandler">Handler para obtener estado por Id</param>
+    /// <param name="getAllHandler">Handler para obtener todos los estados</param>
+    /// <param name="logger">Logger del controlador</param>
     public StateController(
         ICommandHandler<CreateStateCommand, StateDto> createHandler,
         ICommandHandler<UpdateStateCommand, StateDto> updateHandler,
