@@ -4,6 +4,10 @@ Registro de cambios arquitectónicos y features del proyecto.
 
 ---
 
+## [2026-04-27] feat/add-xml-docs-postal-code-and-state-controllers
+**Feature:** Agregar documentación XML a controladores
+**Description:** Se agregó documentación XML faltante a los constructores de PostalCodeController y StateController, así como al método Create de PostalCodeController.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_04_27_add_xml_docs_postal_code_and_state_controllers.md]
 ## [2026-04-25] feat/kaizen-clean-usings-controllers
 **Feature:** Limpieza de directivas using no utilizadas
 **Description:** Se eliminaron directivas using innecesarias (ej. System.Security.Claims) en DashboardController.cs para mejorar la salud del código según la tarea Kaizen.
