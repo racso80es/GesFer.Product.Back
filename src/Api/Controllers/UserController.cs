@@ -41,7 +41,7 @@ public class UserController : ControllerBase
     /// Obtiene todos los usuarios de la empresa del usuario autenticado
     /// </summary>
     [HttpGet]
-    [ProducesResponseType(typeof(List<UserDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType<List<UserDto>>(StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAll()
     {
         try
@@ -62,7 +62,7 @@ public class UserController : ControllerBase
     /// Obtiene un usuario por ID
     /// </summary>
     [HttpGet("{id}")]
-    [ProducesResponseType(typeof(UserDto), StatusCodes.Status200OK)]
+    [ProducesResponseType<UserDto>(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetById(Guid id)
     {
@@ -87,7 +87,7 @@ public class UserController : ControllerBase
     /// Crea un nuevo usuario
     /// </summary>
     [HttpPost]
-    [ProducesResponseType(typeof(UserDto), StatusCodes.Status201Created)]
+    [ProducesResponseType<UserDto>(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Create([FromBody] CreateUserDto dto)
     {
@@ -117,7 +117,7 @@ public class UserController : ControllerBase
     /// Actualiza un usuario existente
     /// </summary>
     [HttpPut("{id}")]
-    [ProducesResponseType(typeof(UserDto), StatusCodes.Status200OK)]
+    [ProducesResponseType<UserDto>(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Update(Guid id, [FromBody] UpdateUserDto dto)

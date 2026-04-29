@@ -4,6 +4,14 @@ Registro de cambios arquitectónicos y features del proyecto.
 
 ---
 
+## [2026-04-29] feat/kaizen-fix-produces-response-type-user-controller
+**Feature:** Refactor ProducesResponseType attributes in UserController
+**Description:** Se refactorizaron los atributos ProducesResponseType en UserController.cs para usar la sintaxis genérica de .NET 8 (ProducesResponseType<T>) en lugar de typeof().
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_04_29_fix_produces_response_type_user_controller.md]
+**Status:** DONE
+
+---
+
 ## [2026-04-27] feat/add-xml-docs-postal-code-and-state-controllers
 **Feature:** Agregar documentación XML a controladores
 **Description:** Se agregó documentación XML faltante a los constructores de PostalCodeController y StateController, así como al método Create de PostalCodeController.
