@@ -41,7 +41,7 @@ public class CountryController : ControllerBase
     /// Obtiene todos los países
     /// </summary>
     [HttpGet]
-    [ProducesResponseType(typeof(List<CountryDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType<List<CountryDto>>(StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAll()
     {
         try
@@ -61,7 +61,7 @@ public class CountryController : ControllerBase
     /// Obtiene un país por ID
     /// </summary>
     [HttpGet("{id}")]
-    [ProducesResponseType(typeof(CountryDto), StatusCodes.Status200OK)]
+    [ProducesResponseType<CountryDto>(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetById(Guid id)
     {
@@ -86,7 +86,7 @@ public class CountryController : ControllerBase
     /// Crea un nuevo país
     /// </summary>
     [HttpPost]
-    [ProducesResponseType(typeof(CountryDto), StatusCodes.Status201Created)]
+    [ProducesResponseType<CountryDto>(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Create([FromBody] CreateCountryDto dto)
     {
@@ -111,7 +111,7 @@ public class CountryController : ControllerBase
     /// Actualiza un país existente
     /// </summary>
     [HttpPut("{id}")]
-    [ProducesResponseType(typeof(CountryDto), StatusCodes.Status200OK)]
+    [ProducesResponseType<CountryDto>(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Update(Guid id, [FromBody] UpdateCountryDto dto)

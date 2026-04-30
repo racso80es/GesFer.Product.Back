@@ -8,6 +8,10 @@ Registro de cambios arquitectónicos y features del proyecto.
 **Feature:** Refactor ProducesResponseType attributes in UserController
 **Description:** Se refactorizaron los atributos ProducesResponseType en UserController.cs para usar la sintaxis genérica de .NET 8 (ProducesResponseType<T>) en lugar de typeof().
 **Reference:** [docs/TASKS/DONE/Kaizen_2026_04_29_fix_produces_response_type_user_controller.md]
+## [2026-04-30] feat/refactor-produces-response-type-generic
+**Feature:** Refactor ProducesResponseType to generic syntax
+**Description:** Refactor API controllers to use modern generic ProducesResponseType attributes.
+**Reference:** [docs/TASKS/DONE/2026-04-30-refactor-produces-response-type-generic.md]
 ## [2026-04-28] fix/correccion-auditorias-2026-04-26
 **Feature:** Documentación de auditoría exitosa S+
 **Description:** Se registraron los documentos de la auditoría 100% exitosa sin requerir cambios de código.

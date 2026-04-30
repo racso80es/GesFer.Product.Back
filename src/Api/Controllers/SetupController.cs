@@ -39,8 +39,8 @@ public class SetupController : ControllerBase
     /// ⚠️ ADVERTENCIA: Este endpoint elimina todos los datos existentes en la base de datos.
     /// </remarks>
     [HttpPost("initialize")]
-    [ProducesResponseType(typeof(SetupResult), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(SetupResult), StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType<SetupResult>(StatusCodes.Status200OK)]
+    [ProducesResponseType<SetupResult>(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> Initialize()
     {
         try
@@ -76,7 +76,7 @@ public class SetupController : ControllerBase
     /// Obtiene el estado actual del entorno
     /// </summary>
     [HttpGet("status")]
-    [ProducesResponseType(typeof(object), StatusCodes.Status200OK)]
+    [ProducesResponseType<object>(StatusCodes.Status200OK)]
     public IActionResult GetStatus()
     {
         return Ok(new
