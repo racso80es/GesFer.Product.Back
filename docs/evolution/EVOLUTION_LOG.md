@@ -4,6 +4,14 @@ Registro de cambios arquitectónicos y features del proyecto.
 
 ---
 
+## [2026-04-30] feat/refactor-produces-response-type-generic
+**Feature:** Refactor ProducesResponseType to generic syntax
+**Description:** Refactor API controllers to use modern generic ProducesResponseType attributes.
+**Reference:** [docs/TASKS/DONE/2026-04-30-refactor-produces-response-type-generic.md]
+**Status:** DONE
+
+---
+
 ## [2026-04-27] feat/add-xml-docs-postal-code-and-state-controllers
 **Feature:** Agregar documentación XML a controladores
 **Description:** Se agregó documentación XML faltante a los constructores de PostalCodeController y StateController, así como al método Create de PostalCodeController.

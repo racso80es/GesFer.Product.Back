@@ -14,7 +14,7 @@ public class HealthController : ControllerBase
     /// </summary>
     /// <returns>Estado actual del servicio</returns>
     [HttpGet]
-    [ProducesResponseType(typeof(object), StatusCodes.Status200OK)]
+    [ProducesResponseType<object>(StatusCodes.Status200OK)]
     public IActionResult Get()
     {
         return Ok(new
