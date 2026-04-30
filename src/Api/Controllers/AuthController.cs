@@ -45,7 +45,7 @@ public class AuthController : ControllerBase
     ///     }
     /// </remarks>
     [HttpPost("login")]
-    [ProducesResponseType(typeof(LoginResponseDto), StatusCodes.Status200OK)]
+    [ProducesResponseType<LoginResponseDto>(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> Login([FromBody] LoginRequestDto request)
     {
@@ -86,7 +86,7 @@ public class AuthController : ControllerBase
     /// <param name="userId">ID del usuario</param>
     /// <returns>Lista de permisos del usuario</returns>
     [HttpGet("permissions/{userId}")]
-    [ProducesResponseType(typeof(List<string>), StatusCodes.Status200OK)]
+    [ProducesResponseType<List<string>>(StatusCodes.Status200OK)]
     public async Task<IActionResult> GetUserPermissions(Guid userId)
     {
         try

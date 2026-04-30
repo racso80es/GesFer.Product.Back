@@ -26,7 +26,7 @@ public class MyCompanyController : ControllerBase
     /// Obtiene los datos de la empresa del usuario actual
     /// </summary>
     [HttpGet]
-    [ProducesResponseType(typeof(AdminCompanyDto), StatusCodes.Status200OK)]
+    [ProducesResponseType<AdminCompanyDto>(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetMyCompany()
     {
@@ -55,7 +55,7 @@ public class MyCompanyController : ControllerBase
     /// Actualiza los datos de la empresa del usuario actual
     /// </summary>
     [HttpPut]
-    [ProducesResponseType(typeof(AdminCompanyDto), StatusCodes.Status200OK)]
+    [ProducesResponseType<AdminCompanyDto>(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> UpdateMyCompany([FromBody] AdminUpdateCompanyDto dto)
     {
