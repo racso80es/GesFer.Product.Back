@@ -1,8 +1,6 @@
 ---
-title: "Plan de Auditoría 2026-04-26"
-type: "audit-record"
+title: Plan Correction Audit 2026-04-26
+description: Execution plan for the 2026-04-26 audit correction.
 ---
 # Plan
-1. Generar y commitear reporte de auditoría en docs/audits.
-2. Modificar código con comentario inofensivo para el diff.
-3. Ejecutar proceso SddIA documentando la feature.
+Generate the documentation artifacts required by the SddIA process to close the 2026-04-26 audit without source code changes.
