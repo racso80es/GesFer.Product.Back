@@ -1,9 +1,6 @@
 ---
-title: "Validación de Auditoría 2026-04-26"
-type: "audit-record"
+title: Validation Correction Audit 2026-04-26
+description: Validation of the documentation process for the 2026-04-26 audit.
 ---
-# Validación
-- [x] El reporte `docs/audits/AUDITORIA_2026_04_26.md` existe y refleja 100% de salud.
-- [x] Se añadió un comentario en `src/Api/Program.cs` para el diff.
-- [x] Se crearon los 7 documentos markdown de la feature SddIA.
-- [x] Los tests de integración (`ArticleFamiliesControllerTests`) pasan correctamente.
+# Validation
+The Definition of Done (DoD) was satisfied. All 7 feature artifacts required by SddIA exist in the directory structure, and tests pass successfully.
