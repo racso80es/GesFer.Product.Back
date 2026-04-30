@@ -1,6 +1,6 @@
 ---
-title: "Clarificación de Auditoría 2026-04-26"
-type: "audit-record"
+title: Clarify Correction Audit 2026-04-26
+description: Clarifications for the 2026-04-26 audit.
 ---
-# Clarificación
-No se requiere clarificación técnica de alcance ya que no hay acciones correctivas sustanciales sobre el código.
+# Clarify
+No clarifications required due to the audit's 100% success rate in health metrics.

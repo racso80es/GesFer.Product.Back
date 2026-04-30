@@ -1,6 +1,6 @@
 ---
-title: "Ejecución de Auditoría 2026-04-26"
-type: "audit-record"
+title: Execution Correction Audit 2026-04-26
+description: Execution of the documentation record for the 2026-04-26 audit.
 ---
-# Ejecución
-Se generaron los 7 artefactos documentales requeridos por el proceso SddIA para asentar formalmente el resultado de la auditoría y se validó el comportamiento del código.
+# Execution
+Execution was limited to creating and persisting the required .md artifacts in the repository.
