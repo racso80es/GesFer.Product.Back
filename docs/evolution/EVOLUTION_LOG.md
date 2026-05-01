@@ -4,6 +4,12 @@ Registro de cambios arquitectónicos y features del proyecto.
 
 ---
 
+## [2026-05-01] feat/create-skill-git-close-cycle
+**Feature:** Skill git-close-cycle y enlace finalize-process
+**Description:** Nueva skill Rust para cierre de ciclo local tras fusión remota; acción finalize-process orquesta su invocación; registro SddIA evolution cf1dbcaf-471a-4fd5-8e3c-47cae9884128.
+**Reference:** [docs/features/create-skill-git-close-cycle/objectives.md]
+**PR:** https://github.com/racso80es/GesFer.Product.Back/pull/116
+
 ## [2026-04-29] feat/kaizen-fix-produces-response-type-user-controller
 **Feature:** Refactor ProducesResponseType attributes in UserController
 **Description:** Se refactorizaron los atributos ProducesResponseType en UserController.cs para usar la sintaxis genérica de .NET 8 (ProducesResponseType<T>) en lugar de typeof().

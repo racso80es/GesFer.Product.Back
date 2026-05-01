@@ -25,6 +25,7 @@ Cuando el usuario escriba **#Skill** (solo o en un mensaje), responde sugiriendo
 | **git-sync-remote** | fetch, pull o push contra remoto. Cápsula: paths.skillCapsules.git-sync-remote |
 | **git-tactical-retreat** | Stash / reset / clean con confirmación destructiva. Cápsula: paths.skillCapsules.git-tactical-retreat |
 | **git-create-pr** | Crear PR con GitHub CLI (`gh`). Cápsula: paths.skillCapsules.git-create-pr |
+| **git-close-cycle** | Cierre de ciclo local tras fusión remota (troncal, pull, fetch --prune, borrar rama). Cápsula: paths.skillCapsules.git-close-cycle |
 | **git-operations** | Uso seguro de Git (ramas feat/fix, commits convencionales). Solo definición. |
 | **documentation** | Estándares SSOT y gestión de documentación. Solo definición. |
 | **filesystem-ops** | Operaciones de archivo seguras (PowerShell). Solo definición. |

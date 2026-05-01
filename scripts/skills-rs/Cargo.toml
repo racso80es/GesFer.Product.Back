@@ -77,3 +77,7 @@ path = "src/bin/git_tactical_retreat.rs"
 [[bin]]
 name = "git_create_pr"
 path = "src/bin/git_create_pr.rs"
+
+[[bin]]
+name = "git_close_cycle"
+path = "src/bin/git_close_cycle.rs"
