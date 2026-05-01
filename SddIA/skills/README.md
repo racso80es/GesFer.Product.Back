@@ -29,6 +29,12 @@ Cada skill tiene en este directorio una carpeta con:
 | iniciar-rama | Crea rama feat/ o fix/ actualizada con master; inicio de acción. | iniciar-rama |
 | finalizar-git | Aceptar PR a master, unificar, eliminar rama, volver a master. | finalizar-git |
 | invoke-command | Interceptor de comandos de sistema (git, dotnet, npm, pwsh). | invoke-command |
+| git-workspace-recon | Inspección del workspace Git (rama, porcelana, ahead/behind). | git-workspace-recon |
+| git-branch-manager | Crear, checkout o eliminar ramas. | git-branch-manager |
+| git-save-snapshot | Stage y commit con mensaje. | git-save-snapshot |
+| git-sync-remote | fetch / pull / push contra remoto. | git-sync-remote |
+| git-tactical-retreat | Stash, reset duro, clean (confirmación destructiva). | git-tactical-retreat |
+| git-create-pr | Crear PR con `gh`. | git-create-pr |
 | git-operations | Uso seguro de Git (ramas feat/fix, commits convencionales). | — |
 | documentation | Estándares SSOT y gestión de documentación. | — |
 | filesystem-ops | Operaciones de archivo seguras (PowerShell). | — |

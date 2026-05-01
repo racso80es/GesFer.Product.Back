@@ -4,6 +4,7 @@
 
 | ID (GUID) | Fecha | Descripción breve |
 | :--- | :--- | :--- |
+| e2a4b6c8-0d1e-43a9-8b7c-5d4e3f2a1b0c | 2026-05-01T18:30:00+00:00 | Alta 6 skills Git ejecutables (workspace-recon, branch-manager, save-snapshot, sync-remote, tactical-retreat, create-pr); Cúmulo, índice, interaction-triggers, skill_common |
 | a1b7c8d9-0e2f-4a3b-b4c5-d6e7f8a9b0c1 | 2026-05-01T16:00:00+00:00 | Guía portabilidad skills (reproducir-skills-en-otros-entornos-sddia) + README skills + refs create-skill |
 | f3a9c1d2-8e4b-4a1c-9f6d-2b7e8c4a1d90 | 2026-05-01T14:00:00+00:00 | create-skill: AGENTS + spec paths Cúmulo + README proceso + process-contract |
 | c91d4e8a-2b6f-4c1e-9d3a-8f5e2c1b0a4d | 2026-05-01T12:00:00+00:00 | Guía portabilidad create-skill (reproducir-create-skill-en-otros-entornos-sddia) |

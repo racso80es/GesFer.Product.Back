@@ -1,0 +1,12 @@
+{
+  "skillId": "git-branch-manager",
+  "version": "1.0.0",
+  "description": "Crear, checkout o eliminar ramas Git.",
+  "contract_ref": "SddIA/skills/skills-contract.json",
+  "components": {
+    "launcher_bat": "Git-Branch-Manager.bat",
+    "doc": "git-branch-manager.md",
+    "bin": "bin/git_branch_manager.exe"
+  },
+  "env": ["Windows 11", "PowerShell 7+", "Git"]
+}

@@ -1,0 +1,5 @@
+{
+  "skill_id": "git-create-pr",
+  "spec_version": "1.0.0",
+  "implementation_path_ref": "paths.skillCapsules.git-create-pr"
+}

@@ -1,6 +1,8 @@
 //! Biblioteca auxiliar para skills GesFer (Rust).
 //! Tipos y helpers para emitir resultado JSON según skills-contract (skillId, exitCode, success, feedback).
 
+pub mod skill_common;
+
 use chrono::Utc;
 use serde::{Deserialize, Serialize};
 

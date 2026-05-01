@@ -39,6 +39,48 @@
       "manifest": "sddia-evolution/manifest.json",
       "launcher_bat": "sddia-evolution/Register.bat",
       "description": "Registro evolution SddIA (UUID, índice, hash); validate y watch en la misma cápsula."
+    },
+    {
+      "skillId": "git-workspace-recon",
+      "path": "git-workspace-recon/",
+      "manifest": "git-workspace-recon/manifest.json",
+      "launcher_bat": "git-workspace-recon/Git-Workspace-Recon.bat",
+      "description": "Inspección del workspace Git (rama, porcelana, ahead/behind, remoto)."
+    },
+    {
+      "skillId": "git-branch-manager",
+      "path": "git-branch-manager/",
+      "manifest": "git-branch-manager/manifest.json",
+      "launcher_bat": "git-branch-manager/Git-Branch-Manager.bat",
+      "description": "Crear, checkout o eliminar ramas Git."
+    },
+    {
+      "skillId": "git-save-snapshot",
+      "path": "git-save-snapshot/",
+      "manifest": "git-save-snapshot/manifest.json",
+      "launcher_bat": "git-save-snapshot/Git-Save-Snapshot.bat",
+      "description": "Stage y commit (mensaje obligatorio)."
+    },
+    {
+      "skillId": "git-sync-remote",
+      "path": "git-sync-remote/",
+      "manifest": "git-sync-remote/manifest.json",
+      "launcher_bat": "git-sync-remote/Git-Sync-Remote.bat",
+      "description": "fetch, pull o push contra remoto."
+    },
+    {
+      "skillId": "git-tactical-retreat",
+      "path": "git-tactical-retreat/",
+      "manifest": "git-tactical-retreat/manifest.json",
+      "launcher_bat": "git-tactical-retreat/Git-Tactical-Retreat.bat",
+      "description": "Stash / reset duro / clean con confirmación para destructivo."
+    },
+    {
+      "skillId": "git-create-pr",
+      "path": "git-create-pr/",
+      "manifest": "git-create-pr/manifest.json",
+      "launcher_bat": "git-create-pr/Git-Create-PR.bat",
+      "description": "Crear PR con GitHub CLI (gh)."
     }
   ]
 }
