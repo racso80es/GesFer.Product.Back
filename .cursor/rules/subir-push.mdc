@@ -8,4 +8,4 @@ Cuando el usuario escriba **subir**, **subir la rama**, **subir a la nube** o pi
 2. Ejecutar **git-sync-remote** (skill) para publicar la rama al remoto (push con tracking si aplica), desde la raíz del repo.
 3. Mostrar la salida de la skill y confirmar si la rama quedó subida o reportar el error.
 
-Norma completa: SddIA/norms/interaction-triggers.md (disparador «subir»). Acción finalize: paths.actionsPath/finalize/ (paso 4 obligatorio).
+Norma completa: SddIA/norms/interaction-triggers.md (disparador «subir»). Acción finalize-process: paths.actionsPath/finalize-process/ (paso obligatorio de publicación vía git-sync-remote).

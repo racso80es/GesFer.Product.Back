@@ -26,7 +26,7 @@ phases:
 - description: Acción validate.
   id: '7'
   name: Validar
-- description: Cierre del ciclo. Ejecutar git-sync-remote; seguidamente git-create-pr con resumen de objectives.md y validacion.md en el cuerpo del Pull Request. Acción finalize y Evolution Logs.
+- description: Cierre del ciclo. Ejecutar git-sync-remote; seguidamente git-create-pr con resumen de objectives.md y validacion.md en el cuerpo del Pull Request. Acción finalize-process y Evolution Logs.
   id: '8'
   name: Finalizar
 process_id: refactorization
@@ -37,7 +37,7 @@ related_actions:
 - implementation
 - execution
 - validate
-- finalize
+- finalize-process
 related_skills:
 - git-workspace-recon
 - git-branch-manager
@@ -56,7 +56,7 @@ Este documento define el **proceso de tarea** para una refactorización. Está u
 
 ## Propósito
 
-El proceso **refactorization** define el procedimiento formal de ciclo completo para una refactorización: mismo flujo que feature (rama, documentación, spec, implementación, validación, cierre), adaptado al contexto de refactor (cambios estructurales o de dominio sin añadir funcionalidad nueva). Orquesta las acciones **spec**, **clarify**, **planning**, **implementation**, **execution**, **validate** y **finalize** en secuencia y garantiza trazabilidad en los logs de evolución.
+El proceso **refactorization** define el procedimiento formal de ciclo completo para una refactorización: mismo flujo que feature (rama, documentación, spec, implementación, validación, cierre), adaptado al contexto de refactor (cambios estructurales o de dominio sin añadir funcionalidad nueva). Orquesta las acciones **spec**, **clarify**, **planning**, **implementation**, **execution**, **validate** y **finalize-process** en secuencia y garantiza trazabilidad en los logs de evolución.
 
 Proporciona un flujo repetible y auditado, alineado con las Leyes Universales. Desde el punto de vista de SddIA, el dominio no referencia **scripts** sino **skills** o **herramientas** (paths.skillCapsules, paths.toolCapsules, definiciones en paths.skillsDefinitionPath / paths.toolsDefinitionPath).
 
@@ -74,7 +74,7 @@ Ruta de la tarea: Cúmulo (paths.featurePath/refactorization-<nombre_refactor>).
 | **5** | Implementación (doc) | Acción implementation. Salida: implementation.md, implementation.json. |
 | **6** | Ejecución | Acción execution. **git-save-snapshot** para hitos atómicos; **git-tactical-retreat** si el entorno queda irrecuperable. Salida: execution.json. |
 | **7** | Validar | Acción validate. Salida: validacion.json. |
-| **8** | Finalizar | **git-sync-remote**; **git-create-pr** con objectives.md y validacion.md en el cuerpo del PR. Acción finalize. Evolution Logs. |
+| **8** | Finalizar | **git-sync-remote**; **git-create-pr** con objectives.md y validacion.md en el cuerpo del PR. Acción finalize-process. Evolution Logs. |
 
 ## Contenido mínimo de la carpeta de la tarea (Cúmulo)
 

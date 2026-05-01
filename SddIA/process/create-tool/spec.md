@@ -23,7 +23,7 @@ phases:
 - description: Acción validate; evidencias de contrato tools.
   id: '3'
   name: Validar
-- description: Cierre. git-sync-remote; git-create-pr con objectives/spec/validacion enlazados en el cuerpo del Pull Request. Acción finalize.
+- description: Cierre. git-sync-remote; git-create-pr con objectives/spec/validacion enlazados en el cuerpo del Pull Request. Acción finalize-process.
   id: '4'
   name: Finalizar
 process_doc_ref: paths.processPath/create-tool/
@@ -33,7 +33,7 @@ related_actions:
 - spec
 - implementation
 - validate
-- finalize
+- finalize-process
 related_skills:
 - git-workspace-recon
 - git-branch-manager

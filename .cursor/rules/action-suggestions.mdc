@@ -11,7 +11,7 @@ Cuando el usuario escriba **#Action** (solo o en un mensaje), responde sugiriend
 
 1. **Reconocer el disparador:** Si en el mensaje aparece `#Action`, interpretar que el usuario quiere ver o elegir una acción.
 2. **Listar acciones existentes** con formato claro: `action_id` y propósito breve.
-3. **Fuente:** paths.actionsPath (Cúmulo); cada acción en carpeta paths.actionsPath/<action-id>/ (spec.md con frontmatter YAML). Orden en el proceso feature: spec → clarify → planning → implementation → execution → validate → finalize. Incluye sddia-difusion.
+3. **Fuente:** paths.actionsPath (Cúmulo); cada acción en carpeta paths.actionsPath/<action-id>/ (spec.md con frontmatter YAML). Orden en el proceso feature: spec → clarify → planning → implementation → execution → validate → finalize-process. Incluye sddia-difusion.
 
 ## Listado canónico (fuente: SddIA/actions/)
 
@@ -23,7 +23,7 @@ Cuando el usuario escriba **#Action** (solo o en un mensaje), responde sugiriend
 | **implementation** | Implementación (doc): touchpoints en código; no modifica código. |
 | **execution** | Ejecución: aplicar al código los cambios del documento de implementación. |
 | **validate** | Validación: calidad pre-PR (build, tests, docs); validacion.json. |
-| **finalize** | Finalizar: cierre (commits, Evolution Logs, push, PR). Suite táctica: git-save-snapshot / invoke-commit, git-sync-remote, git-create-pr; emergencia git-tactical-retreat. |
+| **finalize-process** | Finalizar proceso/tarea: cierre (commits, Evolution Logs, push, PR). Suite táctica: git-save-snapshot / invoke-commit, git-sync-remote, git-create-pr; emergencia git-tactical-retreat. |
 | **sddia-difusion** | Difusión de SddIA: mantener .cursor/rules, .github y otros gestores IA alineados con AGENTS y SddIA/norms. |
 
 ## Respuesta sugerida

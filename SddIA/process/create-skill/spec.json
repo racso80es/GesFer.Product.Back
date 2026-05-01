@@ -27,7 +27,7 @@
     { "id": "6", "name": "Validación", "description": "Verificar .exe, JSON I/O (capsule-json-io), skills-contract" },
     { "id": "7", "name": "Cierre", "description": "git-sync-remote; git-create-pr con artefactos de la tarea en el PR; Evolution Logs" }
   ],
-  "related_actions": ["spec", "implementation", "validate", "finalize"],
+  "related_actions": ["spec", "implementation", "validate", "finalize-process"],
   "related_skills": [
     "git-workspace-recon",
     "git-branch-manager",

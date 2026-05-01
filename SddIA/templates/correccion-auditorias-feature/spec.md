@@ -20,7 +20,7 @@ related_actions:
 - implementation
 - execution
 - validate
-- finalize
+- finalize-process
 related_skills:
 - git-workspace-recon
 - git-branch-manager
@@ -45,7 +45,7 @@ Esta plantilla procedimenta la **corrección de hallazgos de auditoría** median
 
 ## Proceso asociado
 
-- **process_ref:** correccion-auditorias (paths.processPath/correccion-auditorias/). El ciclo de corrección sigue las fases de ese proceso e integra las acciones del ciclo feature (spec, clarify, planning, implementation, execution, validate, finalize).
+- **process_ref:** correccion-auditorias (paths.processPath/correccion-auditorias/). El ciclo de corrección sigue las fases de ese proceso e integra las acciones del ciclo feature (spec, clarify, planning, implementation, execution, validate, finalize-process).
 
 ## Orígenes de entrada (input_sources)
 
@@ -66,7 +66,7 @@ El agente que ejecute la plantilla resolverá estas referencias según la norma 
 
 1. **Análisis:** Revisar el origen indicado (paths.auditsPath o el fichero/ruta proporcionado) con los agentes Auditor (Back/Front/Process) según el tipo de informe.
 2. **Objetivos:** Redactar objectives.md con hallazgos consolidados y prioridades (críticos/medios/bajos).
-3. **Ciclo feature:** Ejecutar acciones spec → clarify → planning → implementation → execution → validate → finalize según paths.actionsPath y el proceso correccion-auditorias.
+3. **Ciclo feature:** Ejecutar acciones spec → clarify → planning → implementation → execution → validate → finalize-process según paths.actionsPath y el proceso correccion-auditorias.
 4. **Persistencia:** Documentación en paths.featurePath/<nombre_correccion>/ (Cúmulo). Rama: feat/correccion-segun-auditorias o feat/correccion-auditorias-<id>.
 
 ## Agentes y skills

@@ -8,7 +8,7 @@
 
 - **Skill:** suite táctica Git: **git-workspace-recon**, **git-branch-manager**, **git-save-snapshot**, **git-sync-remote**, **git-tactical-retreat**, **git-create-pr**; además **invoke-commit** para commits y **invoke-command** como interceptor cuando no exista skill dedicada. Contrato: paths.skillsDefinitionPath/\<skill-id\>/ (archivo .md con frontmatter YAML).
 - **Herramienta (tool):** definida en paths.toolsDefinitionPath, implementación en paths.toolCapsules[tool-id].
-- **Acción:** definida en paths.actionsPath (spec, planning, implementation, execution, validate, finalize, etc.). Las acciones pueden orquestar skills o herramientas que ejecuten git.
+- **Acción:** definida en paths.actionsPath (spec, planning, implementation, execution, validate, finalize-process, etc.). Las acciones pueden orquestar skills o herramientas que ejecuten git.
 - **Proceso:** definido en paths.processPath (feature, bug-fix, create-tool, create-principle, etc.). Los procesos invocan acciones y skills; la IA sigue el proceso en lugar de lanzar git por su cuenta.
 
 ## Justificación

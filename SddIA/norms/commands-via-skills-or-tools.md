@@ -8,7 +8,7 @@
 
 - **Skill:** p. ej. **git-workspace-recon**, **git-branch-manager**, **git-save-snapshot** / **invoke-commit**, **git-sync-remote**, **git-tactical-retreat**, **git-create-pr** (suite táctica Git) y **invoke-command** como interceptor genérico cuando no exista skill dedicada. Contrato: paths.skillsDefinitionPath/\<skill-id\>/. Implementación obligatoria en Rust (paths.skillsRustPath); launcher .bat invoca solo .exe en bin/.
 - **Herramienta (tool):** definida en paths.toolsDefinitionPath, implementación en paths.toolCapsules[tool-id] o paths.toolsRustPath. Implementación por defecto en Rust (binarios .exe).
-- **Acción:** definida en paths.actionsPath (spec, planning, implementation, execution, validate, finalize, sddia-difusion, etc.). Las acciones orquestan skills o herramientas que ejecutan los comandos.
+- **Acción:** definida en paths.actionsPath (spec, planning, implementation, execution, validate, finalize-process, sddia-difusion, etc.). Las acciones orquestan skills o herramientas que ejecutan los comandos; no ejecutan el SO ni scripts directamente (contrato paths.actionsPath/actions-contract.md).
 - **Proceso:** definido en paths.processPath (feature, bug-fix, create-tool, etc.). Los procesos invocan acciones y skills; la IA sigue el proceso en lugar de lanzar comandos por su cuenta.
 
 ## Contexto de implementación (Rust)

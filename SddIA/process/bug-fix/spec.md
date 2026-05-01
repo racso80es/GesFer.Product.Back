@@ -30,7 +30,7 @@ phases:
 - description: Acción validate; validacion.md (frontmatter YAML + Markdown).
   id: '6'
   name: Validar
-- description: Cierre del ciclo. Ejecutar git-sync-remote para publicar la rama; seguidamente git-create-pr enlazando objectives.md y validacion.md en el cuerpo del Pull Request. Acción finalize y Evolution Logs.
+- description: Cierre del ciclo. Ejecutar git-sync-remote para publicar la rama; seguidamente git-create-pr enlazando objectives.md y validacion.md en el cuerpo del Pull Request. Acción finalize-process y Evolution Logs.
   id: '7'
   name: Finalizar
 principles_ref: paths.principlesPath
@@ -42,7 +42,7 @@ related_actions:
 - implementation
 - execution
 - validate
-- finalize
+- finalize-process
 related_skills:
 - git-workspace-recon
 - git-branch-manager

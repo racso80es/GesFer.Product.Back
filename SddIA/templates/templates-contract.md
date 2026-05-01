@@ -39,7 +39,7 @@ json_schema:
       description: 'Proceso que orquesta la tarea (feature, correccion-auditorias, bug-fix, etc.). Referencia: paths.processPath/<process-id>.'
       type: string
     related_actions:
-      description: Acciones del ciclo que aplican (spec, clarify, planning, implementation, execution, validate, finalize).
+      description: Acciones del ciclo que aplican (spec, clarify, planning, implementation, execution, validate, finalize-process).
       items:
         type: string
       type: array

@@ -1,6 +1,6 @@
 ---
 common_workflows:
-  finalize: git-sync-remote (push) + git-create-pr
+  finalize_process: git-sync-remote (push) + git-create-pr
   save_progress: invoke-commit o git-save-snapshot
   start_task: git-workspace-recon + git-branch-manager
 contract_ref: paths.skillsDefinitionPath/skills-contract.md (Cúmulo)
@@ -31,7 +31,7 @@ Uso seguro y semántico de Git: ramas feat/fix, commits convencionales, pre-push
 
 - start_task: git-workspace-recon → git-branch-manager (crear/checkout rama feat/ o fix/)
 - save_progress: invoke-commit (o git-save-snapshot) con Conventional Commits
-- finalize: git-sync-remote (push) → git-create-pr
+- finalize-process (acción): git-sync-remote (push) → git-create-pr
 
 ## Alcance
 
