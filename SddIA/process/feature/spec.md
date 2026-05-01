@@ -2,7 +2,7 @@
 contract_ref: paths.processPath/process-contract.md
 persist_ref: paths.featurePath/<nombre_feature>
 phases:
-- description: Rama feat desde master; skill iniciar-rama.
+- description: Ejecutar git-workspace-recon para validar entorno limpio. Tras confirmar, crear rama feat/<nombre> o fix/<nombre> desde master usando git-branch-manager.
   id: '0'
   name: Preparar entorno
 - description: objectives.md en carpeta de la tarea.
@@ -20,13 +20,13 @@ phases:
 - description: Acción implementation; implementation.md (frontmatter YAML + Markdown).
   id: '5'
   name: Implementación (doc)
-- description: Acción execution; execution.md (frontmatter YAML + Markdown).
+- description: Aplicar el plan al código. Consolidar hitos ejecutando git-save-snapshot (commits atómicos). Si el entorno se corrompe severamente, usar git-tactical-retreat.
   id: '6'
   name: Ejecución
-- description: Acción validate; validacion.md (frontmatter YAML + Markdown).
+- description: Ejecutar validación pre-PR. Invocar git-workspace-recon para verificar la coherencia de los archivos mutados contra el plan. Generar validacion.md.
   id: '7'
   name: Validar
-- description: Acción finalize; Evolution Logs, PR.
+- description: Cierre del ciclo. Ejecutar git-sync-remote para subida segura al Leviatán, seguido de git-create-pr inyectando el resumen de objectives.md y validacion.md en el cuerpo del Pull Request. Actualizar Evolution Logs.
   id: '8'
   name: Finalizar
 principles_ref: paths.principlesPath
@@ -40,9 +40,13 @@ related_actions:
 - validate
 - finalize
 related_skills:
-- iniciar-rama
-- finalizar-git
-spec_version: 1.0.0
+- git-workspace-recon
+- git-branch-manager
+- git-save-snapshot
+- git-sync-remote
+- git-tactical-retreat
+- git-create-pr
+spec_version: 2.0.0
 ---
 
 # Proceso: Feature
@@ -63,15 +67,15 @@ Ruta de la tarea: Cúmulo (paths.featurePath/<nombre_feature>).
 
 | Fase | Nombre | Descripción |
 | :--- | :--- | :--- |
-| **0** | Preparar entorno | Crear rama feat/<nombre_feature> (o `fix/` si aplica) desde `master` actualizado. No trabajar en `master`. **Skill:** iniciar-rama — invocar según contrato (paths.skillsDefinitionPath/iniciar-rama/). Tekton invoca la implementación (paths.skillCapsules[\"iniciar-rama\"]). Parámetros: BranchType feat, BranchName <nombre_feature>. |
+| **0** | Preparar entorno | Ejecutar **git-workspace-recon** para validar entorno limpio. Tras confirmar, crear rama `feat/<nombre_feature>` o `fix/<nombre_feature>` desde `master` con **git-branch-manager**. No trabajar en `master`. Invocación según contrato (paths.skillsDefinitionPath y paths.skillCapsules). |
 | **1** | Documentación con objetivos | Documentar objetivo, alcance y ley aplicada. La documentación de la tarea se ubica en la carpeta de la tarea (Cúmulo)/objectives.md. |
 | **2** | Especificación | Ejecutar o generar SPEC (acción **spec**). Entrada: requerimiento o borrador, carpeta de la tarea (Cúmulo)/objectives.md; salida: especificación técnica en carpeta de la tarea (Cúmulo)/spec.md (frontmatter YAML + Markdown). |
 | **3** | Clarificación | Ejecutar o generar clarificaciones (acción **clarify**). Entrada: carpeta de la tarea (Cúmulo)/objectives.md, spec.md; salida: carpeta de la tarea (Cúmulo)/clarify.md (frontmatter YAML + Markdown). |
 | **4** | Planificación | Ejecutar o generar plan (acción **plan**). Entrada: Especificación, Clarificación. Salida: carpeta de la tarea (Cúmulo)/plan.md (frontmatter YAML + Markdown). |
 | **5** | Implementación | Generar documento de implementación. Entrada: carpeta de la tarea (Cúmulo)/objectives.md, spec.md, clarify.md; salida: carpeta de la tarea (Cúmulo)/implementation.md (frontmatter YAML + Markdown). |
-| **6** | Ejecución | Aplicar el plan al código (Tekton Developer). Entrada: carpeta de la tarea (Cúmulo)/implementation.md; salida: carpeta de la tarea (Cúmulo)/execution.md (frontmatter YAML + Markdown). |
-| **7** | Validar | Ejecutar validación pre-PR. Entrada: carpeta de la tarea (Cúmulo); salida: carpeta de la tarea (Cúmulo)/validacion.md (frontmatter YAML + Markdown). |
-| **8** | Finalizar | Cierre y PR. Especificación técnica: paths.actionsPath/finalize/. Entrada: carpeta de la tarea (Cúmulo); salida: Evolution Logs y Pull Request. |
+| **6** | Ejecución | Aplicar el plan al código (Tekton Developer). Consolidar hitos con **git-save-snapshot** (commits atómicos). Si el entorno se corrompe severamente, **git-tactical-retreat**. Entrada: carpeta de la tarea (Cúmulo)/implementation.md; salida: carpeta de la tarea (Cúmulo)/execution.md (frontmatter YAML + Markdown). |
+| **7** | Validar | Validación pre-PR; **git-workspace-recon** para verificar coherencia de archivos mutados frente al plan. Entrada: carpeta de la tarea (Cúmulo); salida: carpeta de la tarea (Cúmulo)/validacion.md (frontmatter YAML + Markdown). |
+| **8** | Finalizar | Cierre del ciclo: **git-sync-remote** (subida segura al remoto), **git-create-pr** con resumen de objectives.md y validacion.md en el cuerpo del PR. Acción **finalize** y paths.actionsPath/finalize/ donde aplique. Actualizar Evolution Logs. |
 
 ## Implementación
 
