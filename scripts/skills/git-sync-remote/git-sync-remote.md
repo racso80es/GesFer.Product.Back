@@ -11,7 +11,12 @@
 | `branch` | string | Opcional (ref para fetch/pull/push) |
 | `workingDirectory` | string | Opcional |
 
-Push sin rama: `git push <remote> HEAD`.
+Push sin rama explícita en JSON:
+
+- Si la rama actual **tiene** upstream: `git push <remote> HEAD`.
+- Si **no** tiene upstream: `git push -u <remote> HEAD` (crea seguimiento; evita `push` “pelado” que falla o desvía el flujo).
+
+Fallos de Git devuelven JSON con `success: false`, `exitCode` ≠ 0, `message` y `data.error` con el detalle.
 
 ## Binario
 
