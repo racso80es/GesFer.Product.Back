@@ -23,7 +23,7 @@ Cuando el usuario escriba **#Action** (solo o en un mensaje), responde sugiriend
 | **implementation** | Implementación (doc): touchpoints en código; no modifica código. |
 | **execution** | Ejecución: aplicar al código los cambios del documento de implementación. |
 | **validate** | Validación: calidad pre-PR (build, tests, docs); validacion.json. |
-| **finalize-process** | Finalizar proceso/tarea: cierre (commits, Evolution Logs, push, PR). Suite táctica: git-save-snapshot / invoke-commit, git-sync-remote, git-create-pr; emergencia git-tactical-retreat. |
+| **finalize-process** | Finalizar proceso/tarea: cierre (commits, Evolution Logs, push, PR). Suite táctica: git-save-snapshot / invoke-commit, git-sync-remote, git-create-pr; tras fusión remota, git-close-cycle; emergencia git-tactical-retreat. |
 | **sddia-difusion** | Difusión de SddIA: mantener .cursor/rules, .github y otros gestores IA alineados con AGENTS y SddIA/norms. |
 
 ## Respuesta sugerida
