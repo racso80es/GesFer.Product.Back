@@ -16,4 +16,6 @@ status: completed
 | Acción `finalize-process` | Directriz de orquestación añadida |
 | Difusión (normas, README skills, regla Cursor, proceso feature) | Actualizada |
 
-**Compilación:** ejecutar `scripts/skills-rs/install.ps1` para generar `git_close_cycle.exe` en la cápsula.
+**Compilación:** `cargo build --release` + `install.ps1` ejecutados localmente.
+
+**PR:** https://github.com/racso80es/GesFer.Product.Back/pull/116

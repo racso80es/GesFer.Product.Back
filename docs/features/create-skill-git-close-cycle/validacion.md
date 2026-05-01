@@ -1,7 +1,9 @@
 ---
 feature_id: create-skill-git-close-cycle
 artifact: validacion
-status: draft
+status: completed
+pr_url: https://github.com/racso80es/GesFer.Product.Back/pull/116
+evolution_id: cf1dbcaf-471a-4fd5-8e3c-47cae9884128
 ---
 
 # Validación pre-PR
@@ -10,7 +12,7 @@ status: draft
 
 **Mutación bajo `./SddIA/`:** sí (skills, norms, actions, process, agents paths, evolution pendiente de registro).
 
-**Acción obligatoria antes de push:** invocar **sddia-evolution-register** con JSON camelCase (Tekton: `.tekton_request.json` + `run-capsule-from-tekton-request.ps1 -Skill sddia-evolution-register`) y consolidar con **git-save-snapshot** adicional, según proceso feature fase 8.
+**Acción obligatoria antes de push:** ejecutado **sddia-evolution-register** → detalle `SddIA/evolution/cf1dbcaf-471a-4fd5-8e3c-47cae9884128.md`; snapshot adicional aplicado.
 
 ## Checks manuales
 
