@@ -81,6 +81,13 @@
       "manifest": "git-create-pr/manifest.json",
       "launcher_bat": "git-create-pr/Git-Create-PR.bat",
       "description": "Crear PR con GitHub CLI (gh)."
+    },
+    {
+      "skillId": "git-close-cycle",
+      "path": "git-close-cycle/",
+      "manifest": "git-close-cycle/manifest.json",
+      "launcher_bat": "git-close-cycle/Git-Close-Cycle.bat",
+      "description": "Cierre de ciclo local: checkout troncal, pull, fetch --prune, borrar rama de trabajo."
     }
   ]
 }

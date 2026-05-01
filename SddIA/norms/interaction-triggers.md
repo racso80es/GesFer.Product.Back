@@ -30,6 +30,7 @@
 | git-sync-remote | fetch, pull o push contra remoto. | paths.skillCapsules.git-sync-remote |
 | git-tactical-retreat | Stash / reset / clean con confirmación destructiva. | paths.skillCapsules.git-tactical-retreat |
 | git-create-pr | Crear PR con GitHub CLI (`gh`). | paths.skillCapsules.git-create-pr |
+| git-close-cycle | Cierre de ciclo local tras fusión remota (troncal, pull, fetch --prune, borrar rama). | paths.skillCapsules.git-close-cycle |
 | git-operations | Uso seguro de Git (ramas feat/fix, commits convencionales). | — |
 | documentation | Estándares SSOT y gestión de documentación. | — |
 | filesystem-ops | Operaciones de archivo seguras (PowerShell). | — |

@@ -6,6 +6,7 @@ flow_steps:
 - Commits atómicos vía skill registrada
 - Evolution Logs (producto y/o SddIA según alcance)
 - Publicación y PR vía suite táctica Git (skills)
+- Cierre de ciclo local vía git-close-cycle (rama de trabajo integrada en remoto)
 - Opcional persistencia finalize-process.md en carpeta de tarea
 inputs:
 - Carpeta de tarea (paths.featurePath o paths.fixPath según Cúmulo)
@@ -53,7 +54,8 @@ El ejecutor sigue este orden lógico invocando las **skills** publicadas en Cúm
 3. **Evaluación de impacto SddIA:** Si hubo mutación bajo `./SddIA/`, cumplir norma de evolución (paths.sddiaEvolutionPath) **antes** de publicar; registrar con **sddia-evolution-register** (binario en paths.skillCapsules.sddia-evolution-register).
 4. **Publicación:** **git-sync-remote** con operación `push` (y tracking si aplica).
 5. **Pull Request:** **git-create-pr** (`gh` debe estar disponible y autenticado en el entorno del ejecutor).
-6. **Emergencia / reversión táctica:** **git-tactical-retreat** solo con confirmación explícita (Ley VISIÓN ZERO).
+6. **Cierre de ciclo local (paso final orquestado):** Cuando la **tarea está finalizada** en el sentido de que la **rama de trabajo ya está fusionada en remoto**, el ejecutor invoca la skill **git-close-cycle** (Cúmulo: `paths.skillCapsules.git-close-cycle`) pasando **targetBranch** con el **nombre de la rama de trabajo** que se da de baja en local (la misma rama `feat/` o `fix/` documentada en la carpeta de tarea y usada durante el ciclo). Este paso ejecuta, en el repo, la secuencia definida en `paths.skillsDefinitionPath/git-close-cycle/spec.md` (checkout de la troncal, `git pull origin HEAD`, `git fetch --prune`, borrado local `-d`/`-D`). No sustituye al PR ni al push; aplica **después** de la integración remota confirmada.
+7. **Emergencia / reversión táctica:** **git-tactical-retreat** solo con confirmación explícita (Ley VISIÓN ZERO).
 
 Opcionalmente, si el proyecto mantiene una skill de verificación pre-PR (p. ej. verify-pr-protocol), debe invocarse **como skill registrada**, no como comando suelto en esta spec.
 

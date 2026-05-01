@@ -49,7 +49,8 @@ $capsules = @(
     @{ exe = "git_save_snapshot"; capsule = "git-save-snapshot" },
     @{ exe = "git_sync_remote"; capsule = "git-sync-remote" },
     @{ exe = "git_tactical_retreat"; capsule = "git-tactical-retreat" },
-    @{ exe = "git_create_pr"; capsule = "git-create-pr" }
+    @{ exe = "git_create_pr"; capsule = "git-create-pr" },
+    @{ exe = "git_close_cycle"; capsule = "git-close-cycle" }
 )
 foreach ($cap in $capsules) {
     $src = Join-Path $releaseDir "$($cap.exe).exe"

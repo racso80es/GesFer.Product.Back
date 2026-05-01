@@ -46,6 +46,7 @@ related_skills:
 - git-sync-remote
 - git-tactical-retreat
 - git-create-pr
+- git-close-cycle
 - sddia-evolution-register
 spec_version: 2.1.0
 ---

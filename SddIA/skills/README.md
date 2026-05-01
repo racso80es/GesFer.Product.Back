@@ -32,6 +32,7 @@ Cada skill tiene en este directorio una carpeta con:
 | git-sync-remote | fetch, pull o push contra remoto. | git-sync-remote |
 | git-tactical-retreat | Stash / reset / clean con confirmación destructiva. | git-tactical-retreat |
 | git-create-pr | Crear PR con GitHub CLI (`gh`). | git-create-pr |
+| git-close-cycle | Cierre de ciclo local (troncal, pull, fetch --prune, borrar rama de trabajo). | git-close-cycle |
 | invoke-command | Interceptor de comandos de sistema (git, dotnet, npm, pwsh). | invoke-command |
 | git-workspace-recon | Inspección del workspace Git (rama, porcelana, ahead/behind). | git-workspace-recon |
 | git-branch-manager | Crear, checkout o eliminar ramas. | git-branch-manager |
@@ -39,6 +40,7 @@ Cada skill tiene en este directorio una carpeta con:
 | git-sync-remote | fetch / pull / push contra remoto. | git-sync-remote |
 | git-tactical-retreat | Stash, reset duro, clean (confirmación destructiva). | git-tactical-retreat |
 | git-create-pr | Crear PR con `gh`. | git-create-pr |
+| git-close-cycle | Cierre de ciclo local (troncal, pull, fetch --prune, borrar rama de trabajo). | git-close-cycle |
 | git-operations | Uso seguro de Git (ramas feat/fix, commits convencionales). | — |
 | documentation | Estándares SSOT y gestión de documentación. | — |
 | filesystem-ops | Operaciones de archivo seguras (PowerShell). | — |

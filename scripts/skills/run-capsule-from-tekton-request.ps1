@@ -6,8 +6,8 @@
     .tekton_request.json. El directorio de trabajo del proceso es la raíz del repositorio.
     Para sddia-evolution-register el JSON debe usar claves camelCase (p. ej. descripcionBreve, tipoOperacion).
 .PARAMETER Skill
-    Identificador de cápsula: git-workspace-recon, git-branch-manager, git-save-snapshot,
-    git-sync-remote, git-tactical-retreat, git-create-pr, sddia-evolution-register, invoke-command, invoke-commit, etc.
+    Identificador de cápsula:     git-workspace-recon, git-branch-manager, git-save-snapshot,
+    git-sync-remote, git-tactical-retreat, git-create-pr, git-close-cycle, sddia-evolution-register, invoke-command, invoke-commit, etc.
 #>
 param(
     [Parameter(Mandatory = $true)]
@@ -30,6 +30,7 @@ $skillExeMap = @{
     "git-sync-remote"          = "scripts\skills\git-sync-remote\bin\git_sync_remote.exe"
     "git-tactical-retreat"     = "scripts\skills\git-tactical-retreat\bin\git_tactical_retreat.exe"
     "git-create-pr"            = "scripts\skills\git-create-pr\bin\git_create_pr.exe"
+    "git-close-cycle"          = "scripts\skills\git-close-cycle\bin\git_close_cycle.exe"
     "sddia-evolution-register" = "scripts\skills\sddia-evolution\bin\sddia_evolution_register.exe"
     "invoke-command"           = "scripts\skills\invoke-command\bin\invoke_command.exe"
     "invoke-commit"            = "scripts\skills\invoke-commit\bin\invoke_commit.exe"
