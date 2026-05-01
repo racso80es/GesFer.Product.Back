@@ -38,7 +38,7 @@ related_actions:
 - implementation
 - execution
 - validate
-- finalize
+- finalize-process
 related_skills:
 - git-workspace-recon
 - git-branch-manager
@@ -54,11 +54,11 @@ spec_version: 2.1.0
 
 Este documento define el **proceso de tarea** para desarrollar una funcionalidad. Está ubicado en paths.processPath/feature/ (Cúmulo). Las acciones que orquesta están en paths.actionsPath (Cúmulo). La ruta de persistencia se obtiene de **Cúmulo** (paths.featurePath/<nombre_feature>).
 
-**Interfaz de proceso:** Cumple la interfaz en Cúmulo (`process_interface`): solicita/genera en la carpeta de la tarea (Cúmulo) artefactos **`.md`** con frontmatter YAML + cuerpo Markdown (objectives.md, spec.md, clarify.md, plan.md, implementation.md, execution.md, validacion.md). **No se usan ficheros `.json` separados.** Patrón: SddIA/norms/features-documentation-pattern.md; contrato: paths.featurePath/features-contract.md.
+**Interfaz de proceso:** Cumple la interfaz en Cúmulo (`process_interface`): solicita/genera en la carpeta de la tarea (Cúmulo) artefactos **`.md`** con frontmatter YAML + cuerpo Markdown (objectives.md, spec.md, clarify.md, plan.md, implementation.md, execution.md, validacion.md; opcional finalize-process.md). **No se usan ficheros `.json` separados.** Patrón: SddIA/norms/features-documentation-pattern.md; contrato: paths.featurePath/features-contract.md.
 
 ## Propósito
 
-El proceso **feature** define el procedimiento formal de ciclo completo para desarrollar una funcionalidad o tarea: desde la creación de la rama hasta el cierre y la apertura del Pull Request. Orquesta las acciones **spec**, **clarify**, **planning**, **implementation**, **execution**, **validate** y **finalize** en secuencia, fija la ubicación de la documentación de la tarea y garantiza trazabilidad en los logs de evolución.
+El proceso **feature** define el procedimiento formal de ciclo completo para desarrollar una funcionalidad o tarea: desde la creación de la rama hasta el cierre y la apertura del Pull Request. Orquesta las acciones **spec**, **clarify**, **planning**, **implementation**, **execution**, **validate** y **finalize-process** en secuencia, fija la ubicación de la documentación de la tarea y garantiza trazabilidad en los logs de evolución.
 
 Proporciona un flujo repetible y auditado, alineado con las Leyes Universales (soberanía documental en AGENTE_CUMULO, no commits en `master`).
 
@@ -76,7 +76,7 @@ Ruta de la tarea: Cúmulo (paths.featurePath/<nombre_feature>).
 | **5** | Implementación | Generar documento de implementación. Entrada: carpeta de la tarea (Cúmulo)/objectives.md, spec.md, clarify.md; salida: carpeta de la tarea (Cúmulo)/implementation.md (frontmatter YAML + Markdown). |
 | **6** | Ejecución | Aplicar el plan al código (Tekton Developer). Consolidar hitos con **git-save-snapshot** (commits atómicos). Si el entorno se corrompe severamente, **git-tactical-retreat**. Entrada: carpeta de la tarea (Cúmulo)/implementation.md; salida: carpeta de la tarea (Cúmulo)/execution.md (frontmatter YAML + Markdown). |
 | **7** | Validar | Validación pre-PR; **git-workspace-recon** para verificar coherencia de archivos mutados frente al plan. Documentar en **validacion.md** si hubo mutación bajo **SddIA/** y el cumplimiento de la regla **Evaluación de Impacto SDDIA** (véase sección dedicada). Entrada: carpeta de la tarea (Cúmulo); salida: carpeta de la tarea (Cúmulo)/validacion.md (frontmatter YAML + Markdown). |
-| **8** | Finalizar | Cierre del ciclo: cumplir **Evaluación de Impacto SDDIA** *antes* de **git-sync-remote**; a continuación **git-sync-remote**, **git-create-pr** con resumen de objectives.md y validacion.md en el cuerpo del PR. Acción **finalize** y paths.actionsPath/finalize/ donde aplique. Actualizar Evolution Logs (convenciones según alcance: SddIA vs resto del repo; norma paths.evolutionPath y SddIA/norms/sddia-evolution-sync.md). |
+| **8** | Finalizar | Cierre del ciclo: cumplir **Evaluación de Impacto SDDIA** *antes* de **git-sync-remote**; a continuación **git-sync-remote**, **git-create-pr** con resumen de objectives.md y validacion.md en el cuerpo del PR. Acción **finalize-process** y paths.actionsPath/finalize-process/ donde aplique. Actualizar Evolution Logs (convenciones según alcance: SddIA vs resto del repo; norma paths.evolutionPath y SddIA/norms/sddia-evolution-sync.md). |
 
 ## Evaluación de Impacto SDDIA (innegociable)
 
@@ -121,7 +121,7 @@ Al cierre de la feature (fase 8):
 
 ## Dependencias con otras acciones
 
-*   El proceso **feature** invoca o utiliza los resultados de las acciones **spec**, **clarify**, **plan**, **implementation**, **execution**, **validate** y **finalize** en paths.actionsPath (Cúmulo).
+*   El proceso **feature** invoca o utiliza los resultados de las acciones **spec**, **clarify**, **plan**, **implementation**, **execution**, **validate** y **finalize-process** en paths.actionsPath (Cúmulo).
 *   La **documentación de la tarea** (objetivo, spec, clarifications, plan, validacion) debe residir en **paths.featurePath/<nombre_feature>/** (Cúmulo) para aprobación y revisión humana.
 
 ## Estándares de Calidad
@@ -137,4 +137,4 @@ El mismo patrón de persistencia se aplica a correcciones de bugs mediante el pr
 
 ## Referencia de ejecución
 
-Procedimiento aplicado en la rama **feat/e2e-product-back-mocked** (2026-02-10). Documentación de la tarea: paths.featurePath/<nombre_feature>/. Acciones relacionadas: paths.actionsPath (spec/, clarify/, planning/, execution/, validate/, finalize/).
+Procedimiento aplicado en la rama **feat/e2e-product-back-mocked** (2026-02-10). Documentación de la tarea: paths.featurePath/<nombre_feature>/. Acciones relacionadas: paths.actionsPath (spec/, clarify/, planning/, execution/, validate/, finalize-process/).

@@ -20,3 +20,4 @@
 | e6a6c30c-a51d-4077-a803-b99579db24a4 | 2026-04-08T20:21:27.287229603+00:00 | Remove TODOs from spec-template and difusion spec |
 | 8749488f-48c4-46e9-94f8-4c97cc1d18dd | 2026-04-09T20:38:56.092597058+00:00 | Clarificar separacion de evolucion producto vs sddia para prevenir errores de logs |
 | e8ed36a4-1c2a-4299-af37-7a8c886f1127 | 2026-04-23T06:51:33.204496152+00:00 | Mejora de la Integridad Estructural y Blindaje de Consciencia |
+| 2d7a88f3-f685-4a40-bffe-ffc604111f60 | 2026-05-01T12:13:57.019533200+00:00 | Contrato acciones jurisdicción finalize-process barrido SddIA Cursor blindaje tekton JSON |

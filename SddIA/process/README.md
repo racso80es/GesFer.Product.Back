@@ -32,7 +32,7 @@ Todo proceso cumple el **contrato** en [process-contract.json](./process-contrac
 8. **Create-skill:** paths.processPath/create-skill/. Ruta: Cúmulo (paths.featurePath/create-skill-&lt;skill-id&gt;). Entregable: cápsula **paths.skillCapsules[&lt;skill-id&gt;]** (resuelta bajo paths.skillsPath/&lt;skill-id&gt;/ según Cúmulo).
 9. **Validate-pull-requests:** paths.processPath/validate-pull-requests/. Ruta: Cúmulo (paths.featurePath/validate-pull-requests-&lt;pr-slug&gt;). Semillas Kaizen: paths.tasksPath.
 
-Las **acciones** (spec, clarify, plan, implementation, execution, validate, finalize) siguen en paths.actionsPath (Cúmulo) y son invocadas por los procesos.
+Las **acciones** (spec, clarify, plan, implementation, execution, validate, finalize-process) siguen en paths.actionsPath (Cúmulo) y son invocadas por los procesos.
 
 ## Interfaz de procesos (norma para agentes)
 

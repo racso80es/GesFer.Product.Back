@@ -30,7 +30,7 @@ La acción **validate** (validación) comprueba que la feature cumple los criter
 
 - **Asumir que está roto:** No se aprueba hasta que las comprobaciones definidas pasen.
 - **Evidencia auditable:** Todo resultado (éxito/fallo por categoría) se registra en un archivo de validación.
-- **Bloqueo explícito:** Si la validación falla, la acción debe dejar constancia y el proceso de finalización (finalize) puede bloquear el PR hasta corrección.
+- **Bloqueo explícito:** Si la validación falla, la acción debe dejar constancia y el proceso de finalización (finalize-process) puede bloquear el PR hasta corrección.
 
 ## Entradas
 
@@ -135,7 +135,7 @@ No se requiere un agente nuevo: **QA Judge** asume la fase de validación. Si se
 ## Dependencias con otras acciones
 
 - **execution:** Proporciona `execution.md`; validate puede usarlo para saber qué archivos/cambios revisar o priorizar tests.
-- **finalize:** Consume `validacion.md`; si global es fail o blocking es true, finalize no debe hacer push/PR sin advertencia o bloqueo.
+- **finalize-process:** Consume `validacion.md`; si global es fail o blocking es true, finalize-process no debe hacer push/PR sin advertencia o bloqueo.
 
 ## Resumen
 

@@ -30,7 +30,7 @@ La acción **difusión de SddIA** (sddia-difusion) mantiene alineados los **punt
 | **SddIA/norms/** | Normas de interacción (interaction-triggers.md, paths-via-cumulo.md) y listados canónicos. |
 | **SddIA/agents/** | Definiciones de agentes y Cúmulo (paths, instructions). |
 | **SddIA/process/** | Procesos de tarea (listado canónico en paths.processPath/README.md: feature, bug-fix, refactorization, create-tool, correccion-auditorias, create-pattern, create-principle, create-template, audit-tool, create-skill, validate-pull-requests, …). |
-| **SddIA/actions/** | Acciones del ciclo (spec, clarify, …, finalize, **sddia-difusion**). |
+| **SddIA/actions/** | Acciones del ciclo (spec, clarify, …, finalize-process, **sddia-difusion**). |
 
 Las rutas concretas se resuelven desde **Cúmulo** (paths.actionsPath, paths.processPath, paths.normsPath, etc.); no usar rutas literales en documentación de comportamiento.
 

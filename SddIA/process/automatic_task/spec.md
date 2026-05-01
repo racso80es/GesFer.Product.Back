@@ -26,7 +26,7 @@ phases:
 - description: Ejecutar proceso objetivo (por defecto feature); leer carpeta-tarea si existe spec/plan; generar artefactos en paths.featurePath si aplica. Hitos intermedios con git-save-snapshot; ante fallo estructural, git-tactical-retreat.
   id: '3'
   name: Ejecución
-- description: Mover unidad a DONE/; Evolution Log; finalize.md cuando aplique. git-sync-remote; git-create-pr enlazando artefactos de la tarea al cuerpo del Pull Request cuando el cierre lo requiera.
+- description: Mover unidad a DONE/; Evolution Log; finalize-process.md cuando aplique. git-sync-remote; git-create-pr enlazando artefactos de la tarea al cuerpo del Pull Request cuando el cierre lo requiera.
   id: '4'
   name: Finalización y archivo
 principles_ref: paths.principlesPath
@@ -64,7 +64,7 @@ Este documento define el **proceso de tarea** para que una unidad de ejecución 
 Una **unidad de tarea** es lo que se selecciona, activa, ejecuta y archiva como un solo bloque. Puede ser:
 
 - **(A) Fichero suelto:** un único `.md` en la **raíz** de `paths.tasksPath` (no dentro de subcarpetas de primer nivel, salvo las reservadas).
-- **(B) Carpeta-tarea:** un subdirectorio de primer nivel bajo `paths.tasksPath` cuyo nombre siga convención legible (p. ej. kebab-case: `s-plus-pr54-mycompany/`), que agrupe uno o varios `.md` del ciclo SDdIA (objectives, spec, plan, implementation, validacion, finalize, etc.) según `SddIA/norms/features-documentation-pattern.md`. Puede incluir `README.md` como índice opcional.
+- **(B) Carpeta-tarea:** un subdirectorio de primer nivel bajo `paths.tasksPath` cuyo nombre siga convención legible (p. ej. kebab-case: `s-plus-pr54-mycompany/`), que agrupe uno o varios `.md` del ciclo SDdIA (objectives, spec, plan, implementation, validacion, finalize-process, etc.) según `SddIA/norms/features-documentation-pattern.md`. Puede incluir `README.md` como índice opcional.
 
 **Carpetas reservadas** (no son unidades de tarea en cola; excluir del triaje en §1.1): `ACTIVE/`, `DONE/`, `CLARIFY/`, `KAIZEN/`. No deben mezclarse tareas sueltas con el mismo nombre que una carpeta reservada.
 
@@ -124,7 +124,7 @@ Transición a estado `DONE` tras el cumplimiento del proceso.
 - Mueve la unidad de tarea desde `paths.tasksPath/ACTIVE/` a `paths.tasksPath/DONE/` (mismo criterio: un solo `.md` o **carpeta completa**).
 - Actualiza el log de evolución del producto (`paths.evolutionPath` / `paths.evolutionLogFile` según Cúmulo) con un resumen de la intervención, enlazando al archivo o a la carpeta en `DONE/`.
 - **git-sync-remote** y **git-create-pr** cuando el cierre requiera PR, inyectando resumen de artefactos de la tarea en el cuerpo del Pull Request.
-- Genera la documentación de finalización del proceso feature (`finalize.md`) cuando aplique.
+- Genera la documentación de finalización del proceso feature (`finalize-process.md`) cuando aplique.
 
 ## Estructura de carpetas requerida
 

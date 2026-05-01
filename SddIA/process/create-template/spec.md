@@ -22,7 +22,7 @@ phases:
 - description: Acción validate según templates-contract.
   id: '3'
   name: Validar
-- description: Cierre. git-sync-remote; git-create-pr con objectives/spec/validacion en el cuerpo del Pull Request. Acción finalize.
+- description: Cierre. git-sync-remote; git-create-pr con objectives/spec/validacion en el cuerpo del Pull Request. Acción finalize-process.
   id: '4'
   name: Finalizar
 process_doc_ref: paths.processPath/create-template/
@@ -31,7 +31,7 @@ process_interface_compliance: 'Genera en carpeta de la tarea al menos un .md y u
 related_actions:
 - spec
 - validate
-- finalize
+- finalize-process
 related_skills:
 - git-workspace-recon
 - git-branch-manager
