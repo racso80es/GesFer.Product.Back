@@ -4,6 +4,7 @@
 .DESCRIPTION
     Evita inyección de JSON complejo directamente en consola. Tras la ejecución exitosa, elimina
     .tekton_request.json. El directorio de trabajo del proceso es la raíz del repositorio.
+    Para sddia-evolution-register el JSON debe usar claves camelCase (p. ej. descripcionBreve, tipoOperacion).
 .PARAMETER Skill
     Identificador de cápsula: git-workspace-recon, git-branch-manager, git-save-snapshot,
     git-sync-remote, git-tactical-retreat, git-create-pr, sddia-evolution-register, invoke-command, invoke-commit, etc.
