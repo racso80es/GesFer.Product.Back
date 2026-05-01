@@ -63,10 +63,13 @@ public class MasterDataSeeder
             }
         };
 
+        var existingLanguages = await _context.Languages
+            .IgnoreQueryFilters()
+            .ToDictionaryAsync(l => l.Code ?? string.Empty);
+
         foreach (var lang in languages)
         {
-            var existing = await _context.Languages.IgnoreQueryFilters().FirstOrDefaultAsync(l => l.Code == lang.Code);
-            if (existing == null)
+            if (!existingLanguages.TryGetValue(lang.Code ?? string.Empty, out var existing))
             {
                 _context.Languages.Add(lang);
             }
@@ -153,37 +156,35 @@ public class MasterDataSeeder
             ("CE", "Ceuta"), ("ME", "Melilla")
         };
 
+        var existingStates = await _context.States
+            .IgnoreQueryFilters()
+            .Where(s => s.CountryId == countryId)
+            .ToDictionaryAsync(s => s.Code ?? string.Empty);
+
         foreach (var (code, name) in spanishProvinces)
         {
-            var existingState = await _context.States
-                .IgnoreQueryFilters()
-                .FirstOrDefaultAsync(s => s.CountryId == countryId && s.Code == code);
-
-            if (existingState != null)
+            if (existingStates.TryGetValue(code, out var existingState))
             {
-                continue; // Ya existe, omitir
-            }
-
-            if (existingState != null && existingState.DeletedAt != null)
-            {
-                // Restaurar si está eliminada
-                existingState.DeletedAt = null;
-                existingState.IsActive = true;
-            }
-            else
-            {
-                // Crear nueva provincia
-                existingState = new State
+                if (existingState.DeletedAt != null)
                 {
-                    Id = _guidGenerator.NewSequentialGuid(),
-                    CountryId = countryId,
-                    Name = name,
-                    Code = code,
-                    CreatedAt = DateTime.UtcNow,
-                    IsActive = true
-                };
-                _context.States.Add(existingState);
+                    // Restaurar si está eliminada
+                    existingState.DeletedAt = null;
+                    existingState.IsActive = true;
+                }
+                continue; // Ya existe o ha sido restaurada, omitir creación
             }
+
+            // Crear nueva provincia
+            var newState = new State
+            {
+                Id = _guidGenerator.NewSequentialGuid(),
+                CountryId = countryId,
+                Name = name,
+                Code = code,
+                CreatedAt = DateTime.UtcNow,
+                IsActive = true
+            };
+            _context.States.Add(newState);
         }
 
         await _context.SaveChangesAsync();
@@ -231,38 +232,48 @@ public class MasterDataSeeder
         int citiesCreated = 0;
         int postalCodesCreated = 0;
 
+        var stateIds = states.Select(s => s.Id).ToList();
+
+        var existingCities = await _context.Cities
+            .IgnoreQueryFilters()
+            .Where(c => stateIds.Contains(c.StateId))
+            .ToDictionaryAsync(c => new { c.StateId, c.Name });
+
+        // Get cities to process
+        var citiesToProcess = new List<City>();
+        var newCities = new List<City>();
+
         foreach (var state in states)
         {
-            // Buscar ciudades para esta provincia
             var provinceKey = state.Code ?? string.Empty;
             if (string.IsNullOrEmpty(provinceKey) || !citiesByProvince.ContainsKey(provinceKey))
             {
-                // Si no hay ciudades específicas, crear al menos la capital de provincia
                 var capitalName = state.Name;
-                var city = await _context.Cities
-                    .IgnoreQueryFilters()
-                    .FirstOrDefaultAsync(c => c.StateId == state.Id && c.Name == capitalName);
+                var cityKey = new { StateId = state.Id, Name = capitalName };
 
-                if (city == null || city.DeletedAt != null)
+                if (existingCities.TryGetValue(cityKey, out var existingCity))
                 {
-                    if (city == null)
+                    if (existingCity.DeletedAt != null)
                     {
-                        city = new City
-                        {
-                            Id = _guidGenerator.NewSequentialGuid(),
-                            StateId = state.Id,
-                            Name = capitalName,
-                            CreatedAt = DateTime.UtcNow,
-                            IsActive = true
-                        };
-                        _context.Cities.Add(city);
-                        citiesCreated++;
+                        existingCity.DeletedAt = null;
+                        existingCity.IsActive = true;
                     }
-                    else
+                    citiesToProcess.Add(existingCity);
+                }
+                else
+                {
+                    var newCity = new City
                     {
-                        city.DeletedAt = null;
-                        city.IsActive = true;
-                    }
+                        Id = _guidGenerator.NewSequentialGuid(),
+                        StateId = state.Id,
+                        Name = capitalName,
+                        CreatedAt = DateTime.UtcNow,
+                        IsActive = true
+                    };
+                    _context.Cities.Add(newCity);
+                    citiesCreated++;
+                    citiesToProcess.Add(newCity);
+                    newCities.Add(newCity);
                 }
                 continue;
             }
@@ -270,60 +281,89 @@ public class MasterDataSeeder
             var citiesData = citiesByProvince[provinceKey];
             foreach (var (cityName, postalCodes) in citiesData)
             {
-                // Verificar si la ciudad ya existe
-                var city = await _context.Cities
-                    .IgnoreQueryFilters()
-                    .FirstOrDefaultAsync(c => c.StateId == state.Id && c.Name == cityName);
+                var cityKey = new { StateId = state.Id, Name = cityName };
+                City currentCity;
 
-                if (city == null || city.DeletedAt != null)
+                if (existingCities.TryGetValue(cityKey, out var existingCity))
                 {
-                    if (city == null)
+                    if (existingCity.DeletedAt != null)
                     {
-                        city = new City
+                        existingCity.DeletedAt = null;
+                        existingCity.IsActive = true;
+                    }
+                    currentCity = existingCity;
+                }
+                else
+                {
+                    currentCity = new City
+                    {
+                        Id = _guidGenerator.NewSequentialGuid(),
+                        StateId = state.Id,
+                        Name = cityName,
+                        CreatedAt = DateTime.UtcNow,
+                        IsActive = true
+                    };
+                    _context.Cities.Add(currentCity);
+                    citiesCreated++;
+                    newCities.Add(currentCity);
+                }
+
+                citiesToProcess.Add(currentCity);
+            }
+        }
+
+        // Now handle postal codes
+        var cityIds = existingCities.Values.Select(c => c.Id).Concat(newCities.Select(c => c.Id)).ToList();
+
+        var existingPostalCodes = await _context.PostalCodes
+            .IgnoreQueryFilters()
+            .Where(pc => cityIds.Contains(pc.CityId))
+            .ToDictionaryAsync(pc => new { pc.CityId, pc.Code });
+
+        foreach (var state in states)
+        {
+            var provinceKey = state.Code ?? string.Empty;
+            if (string.IsNullOrEmpty(provinceKey) || !citiesByProvince.ContainsKey(provinceKey))
+            {
+                continue;
+            }
+
+            var citiesData = citiesByProvince[provinceKey];
+            foreach (var (cityName, postalCodes) in citiesData)
+            {
+                var cityKey = new { StateId = state.Id, Name = cityName };
+
+                // We know it exists either in existing or new lists, but we need its instance/Id
+                City? targetCity = null;
+                if (existingCities.TryGetValue(cityKey, out var ec)) targetCity = ec;
+                else targetCity = newCities.FirstOrDefault(c => c.StateId == state.Id && c.Name == cityName);
+
+                if (targetCity == null) continue;
+
+                foreach (var postalCode in postalCodes)
+                {
+                    var pcKey = new { CityId = targetCity.Id, Code = postalCode };
+
+                    if (existingPostalCodes.TryGetValue(pcKey, out var existingPc))
+                    {
+                        if (existingPc.DeletedAt != null)
                         {
-                            Id = _guidGenerator.NewSequentialGuid(),
-                            StateId = state.Id,
-                            Name = cityName,
-                            CreatedAt = DateTime.UtcNow,
-                            IsActive = true
-                        };
-                        _context.Cities.Add(city);
-                        citiesCreated++;
+                            existingPc.DeletedAt = null;
+                            existingPc.IsActive = true;
+                        }
                     }
                     else
                     {
-                        city.DeletedAt = null;
-                        city.IsActive = true;
-                    }
-                }
-
-                // Crear códigos postales para esta ciudad
-                foreach (var postalCode in postalCodes)
-                {
-                    var existingPostalCode = await _context.PostalCodes
-                        .IgnoreQueryFilters()
-                        .FirstOrDefaultAsync(pc => pc.CityId == city.Id && pc.Code == postalCode);
-
-                    if (existingPostalCode == null || existingPostalCode.DeletedAt != null)
-                    {
-                        if (existingPostalCode == null)
+                        var newPostalCode = new PostalCode
                         {
-                            var newPostalCode = new PostalCode
-                            {
-                                Id = _guidGenerator.NewSequentialGuid(),
-                                CityId = city.Id,
-                                Code = postalCode,
-                                CreatedAt = DateTime.UtcNow,
-                                IsActive = true
-                            };
-                            _context.PostalCodes.Add(newPostalCode);
-                            postalCodesCreated++;
-                        }
-                        else
-                        {
-                            existingPostalCode.DeletedAt = null;
-                            existingPostalCode.IsActive = true;
-                        }
+                            Id = _guidGenerator.NewSequentialGuid(),
+                            CityId = targetCity.Id,
+                            Code = postalCode,
+                            CreatedAt = DateTime.UtcNow,
+                            IsActive = true
+                        };
+                        _context.PostalCodes.Add(newPostalCode);
+                        postalCodesCreated++;
                     }
                 }
             }

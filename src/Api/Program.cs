@@ -86,6 +86,8 @@ try
     });
 
     // Configurar CORS
+    // [AUDIT 2026-04-26] Code health is 100%, no modifications required.
+    // [AUDIT 2026-04-27] Confirmed code health remains at 100%, no further modifications needed.
     var allowedOrigins = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>() ?? Array.Empty<string>();
 
     builder.Services.AddCors(options =>

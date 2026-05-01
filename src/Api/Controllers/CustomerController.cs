@@ -42,7 +42,7 @@ public class CustomerController : ControllerBase
     /// Obtiene todos los clientes de la empresa del usuario autenticado
     /// </summary>
     [HttpGet]
-    [ProducesResponseType(typeof(List<CustomerDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType<List<CustomerDto>>(StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAll()
     {
         try
@@ -63,7 +63,7 @@ public class CustomerController : ControllerBase
     /// Obtiene un cliente por ID
     /// </summary>
     [HttpGet("{id}")]
-    [ProducesResponseType(typeof(CustomerDto), StatusCodes.Status200OK)]
+    [ProducesResponseType<CustomerDto>(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetById(Guid id)
     {
@@ -88,7 +88,7 @@ public class CustomerController : ControllerBase
     /// Crea un nuevo cliente
     /// </summary>
     [HttpPost]
-    [ProducesResponseType(typeof(CustomerDto), StatusCodes.Status201Created)]
+    [ProducesResponseType<CustomerDto>(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Create([FromBody] CreateCustomerDto dto)
     {
@@ -118,7 +118,7 @@ public class CustomerController : ControllerBase
     /// Actualiza un cliente existente
     /// </summary>
     [HttpPut("{id}")]
-    [ProducesResponseType(typeof(CustomerDto), StatusCodes.Status200OK)]
+    [ProducesResponseType<CustomerDto>(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Update(Guid id, [FromBody] UpdateCustomerDto dto)

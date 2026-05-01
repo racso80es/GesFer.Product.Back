@@ -4,7 +4,6 @@ using GesFer.Product.Back.Infrastructure.Logging;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
 
 namespace GesFer.Product.Back.Api.Controllers;
 
@@ -36,9 +35,9 @@ public class DashboardController : ControllerBase
     /// Protegido por Internal Secret (System) o Rol Admin
     /// </summary>
     [HttpGet("stats")]
-    [ProducesResponseType(typeof(DashboardSummaryDto), StatusCodes.Status200OK)]
+    [ProducesResponseType<DashboardSummaryDto>(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-    [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType<object>(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> GetStats()
     {
         // Validación manual de Internal Secret (o usar atributo si se mueve a Common)

@@ -21,6 +21,15 @@ public class PostalCodeController : ControllerBase
     private readonly ICommandHandler<GetAllPostalCodesCommand, List<PostalCodeDto>> _getAllHandler;
     private readonly ILogger<PostalCodeController> _logger;
 
+    /// <summary>
+    /// Constructor del controlador de códigos postales
+    /// </summary>
+    /// <param name="createHandler">Handler para crear código postal</param>
+    /// <param name="updateHandler">Handler para actualizar código postal</param>
+    /// <param name="deleteHandler">Handler para eliminar código postal</param>
+    /// <param name="getByIdHandler">Handler para obtener código postal por Id</param>
+    /// <param name="getAllHandler">Handler para obtener todos los códigos postales</param>
+    /// <param name="logger">Logger del controlador</param>
     public PostalCodeController(
         ICommandHandler<CreatePostalCodeCommand, PostalCodeDto> createHandler,
         ICommandHandler<UpdatePostalCodeCommand, PostalCodeDto> updateHandler,
@@ -41,7 +50,7 @@ public class PostalCodeController : ControllerBase
     /// Obtiene todos los códigos postales, opcionalmente filtrados por ciudad, provincia o país
     /// </summary>
     [HttpGet]
-    [ProducesResponseType(typeof(List<PostalCodeDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType<List<PostalCodeDto>>(StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAll([FromQuery] Guid? cityId = null, [FromQuery] Guid? stateId = null, [FromQuery] Guid? countryId = null)
     {
         try
@@ -61,7 +70,7 @@ public class PostalCodeController : ControllerBase
     /// Obtiene un código postal por ID
     /// </summary>
     [HttpGet("{id}")]
-    [ProducesResponseType(typeof(PostalCodeDto), StatusCodes.Status200OK)]
+    [ProducesResponseType<PostalCodeDto>(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetById(Guid id)
     {
@@ -85,8 +94,9 @@ public class PostalCodeController : ControllerBase
     /// <summary>
     /// Crea un nuevo código postal
     /// </summary>
+    /// <param name="dto">Datos para crear el código postal</param>
     [HttpPost]
-    [ProducesResponseType(typeof(PostalCodeDto), StatusCodes.Status201Created)]
+    [ProducesResponseType<PostalCodeDto>(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Create([FromBody] CreatePostalCodeDto dto)
     {
@@ -111,7 +121,7 @@ public class PostalCodeController : ControllerBase
     /// Actualiza un código postal existente
     /// </summary>
     [HttpPut("{id}")]
-    [ProducesResponseType(typeof(PostalCodeDto), StatusCodes.Status200OK)]
+    [ProducesResponseType<PostalCodeDto>(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Update(Guid id, [FromBody] UpdatePostalCodeDto dto)

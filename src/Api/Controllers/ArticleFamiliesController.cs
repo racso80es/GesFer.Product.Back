@@ -46,7 +46,7 @@ public class ArticleFamiliesController : ControllerBase
     /// <returns>Lista de familias de artículos</returns>
     /// <returns>Una lista de familias de artículos</returns>
     [HttpGet]
-    [ProducesResponseType(typeof(List<ArticleFamilyDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType<List<ArticleFamilyDto>>(StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAll()
     {
         try
@@ -73,7 +73,7 @@ public class ArticleFamiliesController : ControllerBase
     /// <param name="id">Identificador de la familia de artículos</param>
     /// <returns>La familia de artículos solicitada</returns>
     [HttpGet("{id}")]
-    [ProducesResponseType(typeof(ArticleFamilyDto), StatusCodes.Status200OK)]
+    [ProducesResponseType<ArticleFamilyDto>(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetById(Guid id)
     {
@@ -103,7 +103,7 @@ public class ArticleFamiliesController : ControllerBase
     /// <param name="dto">Datos de la familia de artículos a crear</param>
     /// <returns>La familia de artículos creada</returns>
     [HttpPost]
-    [ProducesResponseType(typeof(ArticleFamilyDto), StatusCodes.Status201Created)]
+    [ProducesResponseType<ArticleFamilyDto>(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Create([FromBody] CreateArticleFamilyDto dto)
     {
@@ -136,7 +136,7 @@ public class ArticleFamiliesController : ControllerBase
     /// <param name="dto">Nuevos datos de la familia de artículos</param>
     /// <returns>La familia de artículos actualizada</returns>
     [HttpPut("{id}")]
-    [ProducesResponseType(typeof(ArticleFamilyDto), StatusCodes.Status200OK)]
+    [ProducesResponseType<ArticleFamilyDto>(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Update(Guid id, [FromBody] UpdateArticleFamilyDto dto)

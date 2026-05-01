@@ -41,7 +41,7 @@ public class SupplierController : ControllerBase
     /// Obtiene todos los proveedores de la empresa del usuario autenticado
     /// </summary>
     [HttpGet]
-    [ProducesResponseType(typeof(List<SupplierDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType<List<SupplierDto>>(StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAll()
     {
         try
@@ -62,7 +62,7 @@ public class SupplierController : ControllerBase
     /// Obtiene un proveedor por ID
     /// </summary>
     [HttpGet("{id}")]
-    [ProducesResponseType(typeof(SupplierDto), StatusCodes.Status200OK)]
+    [ProducesResponseType<SupplierDto>(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetById(Guid id)
     {
@@ -87,7 +87,7 @@ public class SupplierController : ControllerBase
     /// Crea un nuevo proveedor
     /// </summary>
     [HttpPost]
-    [ProducesResponseType(typeof(SupplierDto), StatusCodes.Status201Created)]
+    [ProducesResponseType<SupplierDto>(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Create([FromBody] CreateSupplierDto dto)
     {
@@ -113,7 +113,7 @@ public class SupplierController : ControllerBase
     /// Actualiza un proveedor existente
     /// </summary>
     [HttpPut("{id}")]
-    [ProducesResponseType(typeof(SupplierDto), StatusCodes.Status200OK)]
+    [ProducesResponseType<SupplierDto>(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Update(Guid id, [FromBody] UpdateSupplierDto dto)

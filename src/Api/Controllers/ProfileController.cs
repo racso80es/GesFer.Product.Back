@@ -26,7 +26,7 @@ public class ProfileController : ControllerBase
     /// Extrae el Cursor ID del Claim NameIdentifier
     /// </summary>
     [HttpGet("me")]
-    [ProducesResponseType(typeof(object), StatusCodes.Status200OK)]
+    [ProducesResponseType<object>(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public IActionResult GetMyProfile()
     {
@@ -67,7 +67,7 @@ public class ProfileController : ControllerBase
     /// Endpoint de ejemplo que requiere autenticación
     /// </summary>
     [HttpGet("protected")]
-    [ProducesResponseType(typeof(object), StatusCodes.Status200OK)]
+    [ProducesResponseType<object>(StatusCodes.Status200OK)]
     public IActionResult GetProtectedData()
     {
         var cursorId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;

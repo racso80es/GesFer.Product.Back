@@ -4,6 +4,38 @@ Registro de cambios arquitectónicos y features del proyecto.
 
 ---
 
+## [2026-04-29] feat/kaizen-fix-produces-response-type-user-controller
+**Feature:** Refactor ProducesResponseType attributes in UserController
+**Description:** Se refactorizaron los atributos ProducesResponseType en UserController.cs para usar la sintaxis genérica de .NET 8 (ProducesResponseType<T>) en lugar de typeof().
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_04_29_fix_produces_response_type_user_controller.md]
+## [2026-04-30] feat/refactor-produces-response-type-generic
+**Feature:** Refactor ProducesResponseType to generic syntax
+**Description:** Refactor API controllers to use modern generic ProducesResponseType attributes.
+**Reference:** [docs/TASKS/DONE/2026-04-30-refactor-produces-response-type-generic.md]
+## [2026-04-28] fix/correccion-auditorias-2026-04-26
+**Feature:** Documentación de auditoría exitosa S+
+**Description:** Se registraron los documentos de la auditoría 100% exitosa sin requerir cambios de código.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_04_28_audit_2026_04_26.md]
+**Status:** DONE
+
+---
+
+## [2026-04-27] feat/add-xml-docs-postal-code-and-state-controllers
+**Feature:** Agregar documentación XML a controladores
+**Description:** Se agregó documentación XML faltante a los constructores de PostalCodeController y StateController, así como al método Create de PostalCodeController.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_04_27_add_xml_docs_postal_code_and_state_controllers.md]
+## [2026-04-25] feat/kaizen-clean-usings-controllers
+**Feature:** Limpieza de directivas using no utilizadas
+**Description:** Se eliminaron directivas using innecesarias (ej. System.Security.Claims) en DashboardController.cs para mejorar la salud del código según la tarea Kaizen.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_04_25_clean_usings_controllers.md]
+## [2026-04-24] fix/correccion-auditorias-2026-04-24
+**Feature:** Refactorización de permisos en AuthService
+**Description:** Se optimizó el método GetUserPermissionsAsync eliminando los bucles foreach e inicializando el HashSet usando colecciones nativas y UnionWith.
+**Reference:** [docs/features/correccion-auditorias-2026-04-24]
+**Status:** DONE
+
+---
+
 ## [2026-04-24] feat/kaizen-2026-04-24-tax-types-controller-xml-docs
 **Feature:** Documentación XML y ResponseTypes en Controladores
 **Description:** Se añadieron etiquetas XML faltantes y atributos ProducesResponseType, en especial el Status401Unauthorized en los controladores TaxTypes, City y State, según los requerimientos de la tarea Kaizen.

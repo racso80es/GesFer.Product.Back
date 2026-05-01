@@ -41,7 +41,7 @@ public class GroupController : ControllerBase
     /// Obtiene todos los grupos
     /// </summary>
     [HttpGet]
-    [ProducesResponseType(typeof(List<GroupDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType<List<GroupDto>>(StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAll()
     {
         try
@@ -61,7 +61,7 @@ public class GroupController : ControllerBase
     /// Obtiene un grupo por ID
     /// </summary>
     [HttpGet("{id}")]
-    [ProducesResponseType(typeof(GroupDto), StatusCodes.Status200OK)]
+    [ProducesResponseType<GroupDto>(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetById(Guid id)
     {
@@ -86,7 +86,7 @@ public class GroupController : ControllerBase
     /// Crea un nuevo grupo
     /// </summary>
     [HttpPost]
-    [ProducesResponseType(typeof(GroupDto), StatusCodes.Status201Created)]
+    [ProducesResponseType<GroupDto>(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Create([FromBody] CreateGroupDto dto)
     {
@@ -111,7 +111,7 @@ public class GroupController : ControllerBase
     /// Actualiza un grupo existente
     /// </summary>
     [HttpPut("{id}")]
-    [ProducesResponseType(typeof(GroupDto), StatusCodes.Status200OK)]
+    [ProducesResponseType<GroupDto>(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Update(Guid id, [FromBody] UpdateGroupDto dto)

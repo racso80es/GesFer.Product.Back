@@ -21,6 +21,15 @@ public class StateController : ControllerBase
     private readonly ICommandHandler<GetAllStatesCommand, List<StateDto>> _getAllHandler;
     private readonly ILogger<StateController> _logger;
 
+    /// <summary>
+    /// Constructor del controlador de provincias/estados
+    /// </summary>
+    /// <param name="createHandler">Handler para crear estado</param>
+    /// <param name="updateHandler">Handler para actualizar estado</param>
+    /// <param name="deleteHandler">Handler para eliminar estado</param>
+    /// <param name="getByIdHandler">Handler para obtener estado por Id</param>
+    /// <param name="getAllHandler">Handler para obtener todos los estados</param>
+    /// <param name="logger">Logger del controlador</param>
     public StateController(
         ICommandHandler<CreateStateCommand, StateDto> createHandler,
         ICommandHandler<UpdateStateCommand, StateDto> updateHandler,
@@ -42,7 +51,7 @@ public class StateController : ControllerBase
     /// </summary>
     /// <returns>Lista de provincias/estados</returns>
     [HttpGet]
-    [ProducesResponseType(typeof(List<StateDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType<List<StateDto>>(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> GetAll([FromQuery] Guid? countryId = null)
     {
@@ -64,7 +73,7 @@ public class StateController : ControllerBase
     /// </summary>
     /// <returns>La provincia/estado solicitada</returns>
     [HttpGet("{id}")]
-    [ProducesResponseType(typeof(StateDto), StatusCodes.Status200OK)]
+    [ProducesResponseType<StateDto>(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetById(Guid id)
@@ -91,7 +100,7 @@ public class StateController : ControllerBase
     /// </summary>
     /// <returns>La provincia/estado creada</returns>
     [HttpPost]
-    [ProducesResponseType(typeof(StateDto), StatusCodes.Status201Created)]
+    [ProducesResponseType<StateDto>(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> Create([FromBody] CreateStateDto dto)
@@ -118,7 +127,7 @@ public class StateController : ControllerBase
     /// </summary>
     /// <returns>La provincia/estado actualizada</returns>
     [HttpPut("{id}")]
-    [ProducesResponseType(typeof(StateDto), StatusCodes.Status200OK)]
+    [ProducesResponseType<StateDto>(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
