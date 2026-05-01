@@ -33,7 +33,7 @@ outputs:
   type: file_pattern
 persist_ref: paths.featurePath/validate-pull-requests-<pr-slug>
 phases:
-- description: Verificar contexto Karma2Token según contrato (paths.tokensPath). Sincronizar el working tree con la rama origen del PR solo mediante skill, herramienta, acción o proceso (norma SddIA/norms/git-via-skills-or-process.md); p. ej. paths.skillCapsules.invoke-command u orquestación equivalente documentada. Confirmar que el análisis se aplicará al código propuesto en el PR, no a la rama de integración destino.
+- description: Verificar contexto Karma2Token (paths.tokensPath). Ejecutar git-workspace-recon para validar entorno limpio. Alinear el working tree con la rama origen del PR mediante git-branch-manager (u orquestación equivalente autorizada; norma SddIA/norms/git-via-skills-or-process.md). Confirmar que el análisis se aplicará al código propuesto en el PR, no a la rama de integración destino.
   id: '0'
   name: Preparar contexto y rama del PR
 - description: Escrutinio de alineación y estructura (Clean Architecture, separación de responsabilidades, modularidad, ecosistema de nombres). Agente SddIA/agents/architect.json (System Architect).
@@ -48,7 +48,7 @@ phases:
 - description: Integrar dictámenes, aplicar criterios de veredicto y redactar el informe en el formato de consenso definido en este spec.
   id: '4'
   name: Consenso e informe final
-- description: Persistir validacion.md bajo persist_ref. Escribir semillas Kaizen en paths.tasksPath con nombre [YYYYMMDD]-Refactor-[Tema].md y plantilla indicada en este documento.
+- description: Persistir validacion.md bajo persist_ref. Consolidar el hito documental con git-save-snapshot cuando el flujo incluya commits en la rama de revisión; ante fallo estructural, git-tactical-retreat. Escribir semillas Kaizen en paths.tasksPath con nombre [YYYYMMDD]-Refactor-[Tema].md y plantilla indicada en este documento.
   id: '5'
   name: Persistencia y Cúmulo Kaizen
 principles_ref: paths.principlesPath
@@ -64,11 +64,16 @@ related_agents:
 - ref: SddIA/agents/security-engineer.json
   role: security-engineer
 related_skills:
-- invoke-command
+- git-workspace-recon
+- git-branch-manager
+- git-save-snapshot
+- git-sync-remote
+- git-tactical-retreat
+- git-create-pr
 norms_ref:
 - SddIA/norms/git-via-skills-or-process.md
 - SddIA/norms/paths-via-cumulo.md
-spec_version: 1.0.0
+spec_version: 2.0.0
 name: Validación integral de Pull Requests (S+ Grade)
 description: >-
   Nodo de control que orquesta architect, qa-judge y security-engineer sobre la rama origen del PR;
@@ -111,12 +116,12 @@ Toda alteración o sugerencia debe estar contenida en este entorno aislado (la r
 
 | Fase | Nombre | Descripción |
 |:-----|:-------|:------------|
-| 0 | Preparar contexto y rama del PR | Token/trazabilidad; checkout o equivalente autorizado a la rama del PR; confirmación de alcance. |
+| 0 | Preparar contexto y rama del PR | Token/trazabilidad; **git-workspace-recon**; **git-branch-manager** (u equivalente) sobre la rama origen del PR; confirmación de alcance. |
 | 1 | Escrutinio architect | Arquitectura: Clean Architecture y separación de responsabilidades. Modularidad y estándar: reutilización y ecosistema de nombres. Si la mejora es válida pero fuera de alcance del PR, marcar como **Semilla Kaizen** para Cúmulo. |
 | 2 | Escrutinio qa-judge | Necesidad: el cambio corresponde a lo solicitado. Ausencia de alucinación: llamadas y APIs existen en la rama actual. Estados frontera y rendimiento. |
 | 3 | Escrutinio security-engineer | Exposición de datos, sanitización de inputs, vulnerabilidades. **Hallazgos de seguridad bloqueantes (🔴).** |
 | 4 | Consenso e informe final | Unificar dictámenes y generar el formato de salida obligatorio (ver sección siguiente). |
-| 5 | Persistencia y Cúmulo Kaizen | objectives.md y validacion.md en persist_ref; ficheros Kaizen en paths.tasksPath cuando aplique. |
+| 5 | Persistencia y Cúmulo Kaizen | objectives.md y validacion.md en persist_ref; **git-save-snapshot** / **git-tactical-retreat** si aplica; **git-sync-remote** y **git-create-pr** enlazando informe y artefactos al PR cuando el cierre requiera integración; Kaizen en paths.tasksPath. |
 
 ## Criterios de veredicto
 

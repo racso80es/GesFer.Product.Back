@@ -12,6 +12,22 @@ paths:
   skillsRustPath_ref: paths.skillsRustPath (Cúmulo)
 capsule_io_ref: SddIA/norms/capsule-json-io.md
 persist_ref: paths.featurePath/create-skill-<skill-id>
+phases:
+- description: Ejecutar git-workspace-recon para validar entorno limpio. Tras confirmar, crear rama feat/create-skill-<skill-id> con git-branch-manager.
+  id: '0'
+  name: Preparar entorno
+- description: Objetivos, spec, definición SddIA, cápsula Rust, índice y Cúmulo (ver cuerpo del proceso).
+  id: '1'
+  name: Ciclo de creación de skill
+- description: Durante la implementación, consolidar hitos con git-save-snapshot. Ante fallo estructural, git-tactical-retreat como protocolo de emergencia.
+  id: '2'
+  name: Implementación y commits atómicos
+- description: Acción validate; evidencias de contrato skills.
+  id: '3'
+  name: Validar
+- description: Cierre. git-sync-remote; git-create-pr con objectives/spec/validacion enlazados en el cuerpo del Pull Request. Acción finalize.
+  id: '4'
+  name: Finalizar
 portability_ref: SddIA/skills/reproducir-create-skill-en-otros-entornos-sddia.md
 process_doc_ref: paths.processPath/create-skill/
 process_id: create-skill
@@ -22,8 +38,13 @@ related_actions:
 - validate
 - finalize
 related_skills:
-- iniciar-rama
-spec_version: 1.0.0
+- git-workspace-recon
+- git-branch-manager
+- git-save-snapshot
+- git-sync-remote
+- git-tactical-retreat
+- git-create-pr
+spec_version: 2.0.0
 skills_contract_ref: SddIA/skills/skills-contract.md
 triggers:
 - Crear nueva skill en paths.skillsPath
@@ -46,7 +67,7 @@ El proceso **create-skill** define el procedimiento para incorporar una nueva sk
 - **Definición (SddIA):** paths.skillsDefinitionPath/<skill-id>/ con spec.md (implementation_path_ref obligatorio).
 - **Cápsula (implementación):** paths.skillCapsules[<skill-id>].
 
-Fases: 0 Preparar entorno | 1 Objetivos y especificación | 1b Definición en SddIA | 2–6 Cápsula, manifest, launcher, índice, Cúmulo | 7 Validación | 8 Cierre.
+Fases (detalle): 0 **git-workspace-recon** + **git-branch-manager** | 1 Objetivos y especificación | 1b Definición en SddIA | 2–6 Cápsula, manifest, launcher, índice, Cúmulo (**git-save-snapshot**; emergencia **git-tactical-retreat**) | 7 Validación | 8 Cierre (**git-sync-remote**, **git-create-pr** con artefactos de la tarea en el PR).
 
 ## Restricciones
 

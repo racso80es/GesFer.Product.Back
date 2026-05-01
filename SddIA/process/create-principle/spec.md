@@ -1,3 +1,34 @@
+---
+contract_ref: paths.processPath/process-contract.md
+persist_ref: paths.principlesPath/<principle-id>
+phases:
+- description: Ejecutar git-workspace-recon para validar entorno limpio. Tras confirmar, aislar el cambio con git-branch-manager (p. ej. rama de trabajo para el nuevo principio).
+  id: '0'
+  name: Preparar entorno
+- description: Elegir principle_id, crear carpeta, spec.md y spec.json (ver §1 Definición).
+  id: '1'
+  name: Definición
+- description: Durante la redacción, consolidar hitos con git-save-snapshot. Ante fallo estructural, git-tactical-retreat.
+  id: '2'
+  name: Versionado atómico
+- description: Verificar principles-contract y checks blocking_for_pr si aplica (ver §2 Validación).
+  id: '3'
+  name: Validación
+- description: git-sync-remote; git-create-pr enlazando paths.principlesPath/<principle-id> y artefactos en el cuerpo del Pull Request.
+  id: '4'
+  name: Finalizar
+principles_ref: paths.principlesPath
+process_id: create-principle
+related_skills:
+- git-workspace-recon
+- git-branch-manager
+- git-save-snapshot
+- git-sync-remote
+- git-tactical-retreat
+- git-create-pr
+spec_version: 2.0.0
+---
+
 # Proceso: Creación de Principio (create-principle)
 
 Este documento define el **proceso** para añadir nuevos principios técnicos a `paths.principlesPath` (SddIA/principles/).
@@ -13,6 +44,8 @@ Estandarizar la incorporación de principios (guías técnicas, normas de nomenc
 - **Contenido:** spec.md (legible) y spec.json (metadatos). Ambos obligatorios según principles-contract.
 
 ## Fases del Proceso
+
+**Fase 0 (Git):** Obligatorio **git-workspace-recon** antes de **git-branch-manager**. Cierre con **git-sync-remote** y **git-create-pr** enlazando el principio nuevo al PR.
 
 ### 1. Definición
 

@@ -10,6 +10,22 @@ paths:
   toolsIndexPath_ref: paths.toolsIndexPath (Cúmulo)
   toolsPath_ref: paths.toolsPath (Cúmulo)
 persist_ref: paths.featurePath/create-tool-<tool-id>
+phases:
+- description: Ejecutar git-workspace-recon para validar entorno limpio. Tras confirmar, crear rama feat/create-tool-<tool-id> con git-branch-manager.
+  id: '0'
+  name: Preparar entorno
+- description: Objetivos, spec, definición SddIA, cápsula, índice y Cúmulo (ver cuerpo del proceso).
+  id: '1'
+  name: Ciclo de creación de herramienta
+- description: Durante la implementación, consolidar hitos con git-save-snapshot. Ante fallo estructural, git-tactical-retreat como protocolo de emergencia.
+  id: '2'
+  name: Implementación y commits atómicos
+- description: Acción validate; evidencias de contrato tools.
+  id: '3'
+  name: Validar
+- description: Cierre. git-sync-remote; git-create-pr con objectives/spec/validacion enlazados en el cuerpo del Pull Request. Acción finalize.
+  id: '4'
+  name: Finalizar
 process_doc_ref: paths.processPath/create-tool/
 process_id: create-tool
 process_interface_compliance: 'Genera en carpeta de la tarea al menos un .md y un .json; entrega ejecutable: cápsula en paths.toolsPath/<tool-id>/.'
@@ -19,8 +35,13 @@ related_actions:
 - validate
 - finalize
 related_skills:
-- iniciar-rama
-spec_version: 1.0.0
+- git-workspace-recon
+- git-branch-manager
+- git-save-snapshot
+- git-sync-remote
+- git-tactical-retreat
+- git-create-pr
+spec_version: 2.0.0
 tools_contract_ref: SddIA/tools/tools-contract.md
 triggers:
 - Crear nueva herramienta en paths.toolsPath
@@ -43,7 +64,7 @@ El proceso **create-tool** define el procedimiento para incorporar una nueva her
 - **Definición (SddIA):** paths.toolsDefinitionPath/<tool-id>/ con spec.md y spec.json (implementation_path_ref obligatorio).
 - **Cápsula (implementación):** paths.toolCapsules[<tool-id>].
 
-Fases: 0 Preparar entorno | 1 Objetivos y especificación | 1b Definición en SddIA | 2–6 Cápsula, manifest, scripts, índice, Cúmulo | 7 Opcional Rust | 8 Validación | 9 Cierre.
+Fases (detalle operativo): 0 **git-workspace-recon** + **git-branch-manager** (rama feat/create-tool-&lt;tool-id&gt;) | 1 Objetivos y especificación | 1b Definición en SddIA | 2–6 Cápsula, manifest, scripts, índice, Cúmulo (hitos con **git-save-snapshot**; emergencia **git-tactical-retreat**) | 7 Opcional Rust | 8 Validación | 9 Cierre con **git-sync-remote** y **git-create-pr** (enlazar artefactos de la tarea al PR).
 
 ## Restricciones
 

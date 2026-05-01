@@ -1,5 +1,5 @@
 {
-  "spec_version": "1.0.0",
+  "spec_version": "2.0.0",
   "process_id": "create-skill",
   "name": "create-skill",
   "description": "Creación de skill: rama feat/create-skill-<skill-id>, cápsula en paths.skillCapsules. Implementación obligatoria en Rust (.exe en bin/).",
@@ -18,17 +18,24 @@
     "skillsRustPath_ref": "paths.skillsRustPath"
   },
   "phases": [
-    { "id": "0", "name": "Preparar entorno", "description": "Rama feat/create-skill-<skill-id>; skill iniciar-rama" },
+    { "id": "0", "name": "Preparar entorno", "description": "git-workspace-recon; git-branch-manager para rama feat/create-skill-<skill-id>" },
     { "id": "1", "name": "Objetivos y especificación", "description": "objectives.md, spec.md en carpeta de tarea" },
     { "id": "2", "name": "Definición en SddIA", "description": "paths.skillsDefinitionPath/<skill-id>/ con spec.md y spec.json" },
-    { "id": "3", "name": "Implementación Rust", "description": "Binario en paths.skillsRustPath; compilar y copiar .exe a paths.skillCapsules[<skill-id>]/bin/" },
+    { "id": "3", "name": "Implementación Rust", "description": "Binario en paths.skillsRustPath; compilar y copiar .exe a paths.skillCapsules[<skill-id>]/bin/; git-save-snapshot para hitos; git-tactical-retreat si fallo estructural" },
     { "id": "4", "name": "Cápsula", "description": "bin/<nombre>.exe, manifest.json, launcher .bat, documentación .md (skills-contract)" },
     { "id": "5", "name": "Índice y Cúmulo", "description": "Actualizar paths.skillsIndexPath y cumulo.paths.json (skillCapsules)" },
     { "id": "6", "name": "Validación", "description": "Verificar .exe, JSON I/O (capsule-json-io), skills-contract" },
-    { "id": "7", "name": "Cierre", "description": "PR, merge, Evolution Logs" }
+    { "id": "7", "name": "Cierre", "description": "git-sync-remote; git-create-pr con artefactos de la tarea en el PR; Evolution Logs" }
   ],
   "related_actions": ["spec", "implementation", "validate", "finalize"],
-  "related_skills": ["iniciar-rama"],
+  "related_skills": [
+    "git-workspace-recon",
+    "git-branch-manager",
+    "git-save-snapshot",
+    "git-sync-remote",
+    "git-tactical-retreat",
+    "git-create-pr"
+  ],
   "triggers": [
     "Crear nueva skill en paths.skillsPath",
     "Solicitud de creación de skill con skill-id"
