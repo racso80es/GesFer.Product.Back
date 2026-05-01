@@ -44,7 +44,7 @@ json_schema:
         type: string
       type: array
     related_skills:
-      description: Skills recomendadas (iniciar-rama, finalizar-git, documentation, etc.).
+      description: Skills recomendadas (suite táctica Git: git-workspace-recon, git-branch-manager, git-save-snapshot, git-sync-remote, git-tactical-retreat, git-create-pr; además invoke-commit, documentation, etc.).
       items:
         type: string
       type: array

@@ -17,8 +17,6 @@ Cuando el usuario escriba **#Skill** (solo o en un mensaje), responde sugiriendo
 
 | skill_id | Descripción |
 |----------|-------------|
-| **iniciar-rama** | Crea rama feat/ o fix/ actualizada con master/main. Inicio de acción o tarea. Cápsula: paths.skillCapsules.iniciar-rama |
-| **finalizar-git** | Aceptar PR a master, unificar, eliminar rama, volver a master. Pre-pr / post_pr. Cápsula: paths.skillCapsules.finalizar-git |
 | **invoke-command** | Interceptor de comandos de sistema (git, dotnet, npm, pwsh). Telemetría y registro por rama. Cápsula: paths.skillCapsules.invoke-command |
 | **invoke-commit** | Operaciones de commit con parámetros directos (--message, --files, --all). Sin ficheros .txt. Cápsula: paths.skillCapsules.invoke-commit |
 | **git-workspace-recon** | Inspección del workspace Git (rama, porcelana, ahead/behind). Cápsula: paths.skillCapsules.git-workspace-recon |

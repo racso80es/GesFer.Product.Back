@@ -104,7 +104,7 @@ Si **no** hay ningún candidato pendiente según §1.1, revisa **`paths.tasksPat
 
 Transición a estado `ACTIVE` para evitar colisiones con otras IAs (Jules/Cursor). Tras **git-workspace-recon** (fase 0), usar **git-branch-manager** para `feat/<nombre_feature>` o `fix/<nombre_fix>`.
 
-- Crea o selecciona la rama de trabajo según el contrato de skills (no iniciar-rama legacy).
+- Crea o selecciona la rama de trabajo según el contrato de skills (suite táctica; no usar skills legacy obsoletas).
 - Mueve la **unidad de tarea** desde su origen (raíz de `paths.tasksPath` o `paths.tasksPath/KAIZEN/`) hacia `paths.tasksPath/ACTIVE/`:
   - Si es un **fichero suelto:** mueve solo ese `.md` a `ACTIVE/`.
   - Si es una **carpeta-tarea:** mueve **toda la carpeta** a `ACTIVE/<mismo-nombre>/` sin alterar su contenido interno.
@@ -142,7 +142,7 @@ Para el correcto funcionamiento de este proceso, el repositorio debe mantener la
 
 ## Historial de versión del spec
 
-- **2.0.0:** Suite táctica Git (git-workspace-recon, git-branch-manager, git-save-snapshot, git-sync-remote, git-tactical-retreat, git-create-pr); fase 0 de reconocimiento; cierre con sync/PR; obsolescencia iniciar-rama/finalizar-git en este spec.
+- **2.0.0:** Suite táctica Git (git-workspace-recon, git-branch-manager, git-save-snapshot, git-sync-remote, git-tactical-retreat, git-create-pr); fase 0 de reconocimiento; cierre con sync/PR.
 - **1.3.1:** Frontmatter alineado con process-contract (contract_ref, principles_ref, persist_ref, phases, paths, process_interface_compliance, related_skills); introducción estándar con ubicación e interfaz de proceso.
 - **1.3.0:** Soporte explícito de **carpetas-tarea** además de ficheros `.md` sueltos; activación y archivo mueven carpeta completa; triaje unificado y carpetas reservadas nombradas.
 - **1.2.0:** Versión anterior (solo ficheros sueltos en la raíz para la bandeja principal).

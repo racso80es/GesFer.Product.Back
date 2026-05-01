@@ -15,7 +15,7 @@ alwaysApply: true
 - **Herramienta (tool)** (paths.toolCapsules[tool-id], paths.toolsDefinitionPath)
 - **Acción** (paths.actionsPath) o **Proceso** (paths.processPath)
 
-Ejemplos: usar la skill **iniciar-rama** para crear ramas, **finalizar-git** para push/PR, **invoke-command** para ejecutar comandos de sistema de forma trazada.
+Ejemplos: usar **git-workspace-recon** para validar entorno limpio, **git-branch-manager** para crear/checkout de rama, **git-save-snapshot** o **invoke-commit** para commits atómicos, **git-sync-remote** para fetch/pull/push y **git-create-pr** para abrir PR; **invoke-command** queda para comandos de sistema trazados cuando no existe skill dedicada.
 
 ## Implementación estándar: Rust
 
@@ -28,7 +28,7 @@ En SddIA la implementación por defecto de skills y tools es **Rust** (binarios 
 
 ## Comportamiento en Cursor
 
-- Si necesitas ejecutar un comando, propón o documenta la invocación mediante la skill o herramienta correspondiente (p. ej. "Ejecutar skill iniciar-rama con BranchType feat y BranchName X" o "Invocar invoke-command con el comando Y"), **nunca** escribiendo el comando directamente en la terminal.
+- Si necesitas ejecutar un comando, propón o documenta la invocación mediante la skill o herramienta correspondiente (p. ej. "Ejecutar git-workspace-recon y luego git-branch-manager", "Consolidar con git-save-snapshot", "Publicar con git-sync-remote", "Crear PR con git-create-pr" o "Invocar invoke-command con el comando Y"), **nunca** escribiendo el comando directamente en la terminal.
 - Para git en particular, sigue además SddIA/norms/git-via-skills-or-process.md (referenciada en AGENTS.md).
 
 ---
