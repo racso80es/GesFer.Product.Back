@@ -4,6 +4,8 @@
 
 | ID (GUID) | Fecha | Descripción breve |
 | :--- | :--- | :--- |
+| f3a9c1d2-8e4b-4a1c-9f6d-2b7e8c4a1d90 | 2026-05-01T14:00:00+00:00 | create-skill: AGENTS + spec paths Cúmulo + README proceso + process-contract |
+| c91d4e8a-2b6f-4c1e-9d3a-8f5e2c1b0a4d | 2026-05-01T12:00:00+00:00 | Guía portabilidad create-skill (reproducir-create-skill-en-otros-entornos-sddia) |
 | *(pendiente primer registro por binario `sddia_evolution_register`)* | — | — |
 | d50066f8-59e9-48c8-83ef-c24f74efb78e | 2026-03-27T16:44:30.204823857+00:00 | Añadida acción alternativa Kaizen si docs/TASKS está vacío |
 | cfa4d773-1004-4d00-892e-2d5f0f13afd0 | 2026-03-27T21:13:59.680415627+00:00 | Add XML documentation to HealthController for OpenAPI standards |

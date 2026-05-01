@@ -5,14 +5,17 @@ inputs:
   skill_id: kebab-case. Obligatorio.
 paths:
   featurePath_ref: paths.featurePath (Cúmulo)
-  skillCapsulesRef: paths.skillCapsules
-  skillsDefinitionPath: ./SddIA/skills/
+  skillCapsules_ref: paths.skillCapsules (Cúmulo)
+  skillsDefinitionPath_ref: paths.skillsDefinitionPath (Cúmulo)
   skillsIndexPath_ref: paths.skillsIndexPath (Cúmulo)
   skillsPath_ref: paths.skillsPath (Cúmulo)
+  skillsRustPath_ref: paths.skillsRustPath (Cúmulo)
+capsule_io_ref: SddIA/norms/capsule-json-io.md
 persist_ref: paths.featurePath/create-skill-<skill-id>
+portability_ref: SddIA/skills/reproducir-create-skill-en-otros-entornos-sddia.md
 process_doc_ref: paths.processPath/create-skill/
 process_id: create-skill
-process_interface_compliance: 'Genera en carpeta de la tarea al menos un .md; entrega ejecutable: cápsula en paths.skillsPath/<skill-id>/.'
+process_interface_compliance: 'Genera en carpeta de la tarea al menos un .md; entregable ejecutable: cápsula paths.skillCapsules[<skill-id>] con bin/<nombre>.exe, manifest.json, launcher .bat y doc .md según skills-contract.'
 related_actions:
 - spec
 - implementation
@@ -66,18 +69,15 @@ scripts/skills/<skill-id>/
 
 **Fuente Rust:**
 
-El código fuente Rust debe ubicarse en:
-```
-scripts/skills-rs/src/bin/<skill-name>.rs
-```
+El código fuente Rust vive en **paths.skillsRustPath** (Cúmulo), típicamente `src/bin/<skill-name>.rs` del crate de skills-rs.
 
-**Proceso de compilación:**
+**Proceso de compilación e integración:**
 
-1. Desarrollar en `scripts/skills-rs/src/bin/<skill-name>.rs`
-2. Añadir entrada `[[bin]]` en `scripts/skills-rs/Cargo.toml`
-3. Ejecutar `scripts/skills-rs/install.ps1` para compilar y copiar el .exe a la cápsula
-4. Actualizar el índice: `scripts/skills/index.json`
-5. Actualizar Cúmulo: `SddIA/agents/cumulo.paths.json` (campo `skillCapsules`)
+1. Implementar el binario bajo paths.skillsRustPath (p. ej. `src/bin/<skill-name>.rs`).
+2. Registrar el binario en el `Cargo.toml` del crate (entrada `[[bin]]`).
+3. Compilar y copiar el `.exe` a **paths.skillCapsules[&lt;skill-id&gt;]/bin/** según el flujo del proyecto (instalación del crate en paths.skillsRustPath). La **invocación de comandos** debe cumplir `SddIA/norms/commands-via-skills-or-tools.md` (p. ej. skill **invoke-command** o cápsula/skill de instalación trazada), no ejecutar scripts sueltos desde el agente.
+4. Actualizar **paths.skillsIndexPath** (Cúmulo).
+5. Actualizar **paths** en `SddIA/agents/cumulo.paths.json` (mapeo **skillCapsules** para &lt;skill-id&gt;).
 
 **Prohibiciones:**
 
@@ -99,6 +99,8 @@ Si estás migrando una skill existente desde `.ps1` a `.exe`:
 
 ## Referencias
 
-- Contrato: SddIA/skills/skills-contract.md.
-- Cúmulo: paths.skillsDefinitionPath, paths.skillsPath, paths.skillCapsules, paths.skillsIndexPath.
+- Contrato skills: SddIA/skills/skills-contract.md.
+- E/S JSON cápsulas: SddIA/norms/capsule-json-io.md.
+- Cúmulo: paths.skillsDefinitionPath, paths.skillsPath, paths.skillCapsules, paths.skillsIndexPath, paths.skillsRustPath.
+- Portabilidad del proceso a otros repos: SddIA/skills/reproducir-create-skill-en-otros-entornos-sddia.md.
 - Proceso machine-readable: paths.processPath/create-skill/spec.json.
