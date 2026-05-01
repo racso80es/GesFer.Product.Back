@@ -7,6 +7,7 @@
   "skills_contract_ref": "SddIA/skills/skills-contract.md",
   "capsule_io_ref": "SddIA/norms/capsule-json-io.md",
   "portability_ref": "SddIA/skills/reproducir-create-skill-en-otros-entornos-sddia.md",
+  "skills_portability_ref": "SddIA/skills/reproducir-skills-en-otros-entornos-sddia.md",
   "persist_ref": "paths.featurePath/create-skill-<skill-id>",
   "paths": {
     "featurePath_ref": "paths.featurePath",

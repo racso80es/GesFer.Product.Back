@@ -9,6 +9,7 @@ skills_contract_ref: SddIA/skills/skills-contract.md
 evolution_ref: SddIA/norms/sddia-evolution-sync.md
 cumulo_ref: SddIA/agents/cumulo.json
 paths_contract_ref: SddIA/agents/cumulo.paths.json
+skills_entities_portability_ref: SddIA/skills/reproducir-skills-en-otros-entornos-sddia.md
 idioma: es-ES
 version: "1.0.0"
 descripcion: >-
@@ -16,7 +17,7 @@ descripcion: >-
   listados y difusión) en otro repositorio o entorno SddIA.
 nota_entorno_gesfer: >-
   En GesFer.Product.Back el proceso create-skill, su carpeta bajo paths.processPath,
-  el README de procesos, interaction-triggers (#Process), AGENTS.md (tabla §3 y rol CREATE-SKILL §4),
+  el README de procesos, interaction-triggers (#Process), AGENTS.md (tabla de procesos y rol CREATE-SKILL),
   AGENTS.norms.md (#Process) y la difusión Cursor ya están alineados.
   Este documento sirve como SSOT de portabilidad hacia otros repos; no implica duplicar aquí.
 ---
@@ -25,7 +26,7 @@ nota_entorno_gesfer: >-
 
 Esta guía describe **qué artefactos copiar, qué índices actualizar y cómo validar** para que el proceso **`create-skill`** exista y sea descubrible en **otro repo** que siga el mismo ecosistema SddIA. Las rutas lógicas son siempre las del **Cúmulo** (`SddIA/agents/cumulo.json` → `pathsContract` → `SddIA/agents/cumulo.paths.json`); no documentar rutas físicas como SSOT sin anclarlas a claves `paths.*`.
 
-**Alcance de este documento:** portar la **definición del proceso** (`paths.processPath/create-skill/`) y su **visibilidad** (README de procesos, disparador `#Process`, difusión Cursor si aplica). **No** incluye portar skills concretas; para eso usar `SddIA/skills/reproducir-skills-en-otros-entornos-sddia.md` (crear o traer ese documento hermano en el destino si aún no existe).
+**Alcance de este documento:** portar la **definición del proceso** (`paths.processPath/create-skill/`) y su **visibilidad** (README de procesos, disparador `#Process`, difusión Cursor si aplica). **No** incluye portar skills concretas; para eso usar `SddIA/skills/reproducir-skills-en-otros-entornos-sddia.md`.
 
 ## 1. Prerrequisitos del entorno destino
 

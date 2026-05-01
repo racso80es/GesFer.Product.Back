@@ -103,4 +103,5 @@ Si estás migrando una skill existente desde `.ps1` a `.exe`:
 - E/S JSON cápsulas: SddIA/norms/capsule-json-io.md.
 - Cúmulo: paths.skillsDefinitionPath, paths.skillsPath, paths.skillCapsules, paths.skillsIndexPath, paths.skillsRustPath.
 - Portabilidad del proceso a otros repos: SddIA/skills/reproducir-create-skill-en-otros-entornos-sddia.md.
+- Portabilidad de skills ya existentes a otros repos: SddIA/skills/reproducir-skills-en-otros-entornos-sddia.md.
 - Proceso machine-readable: paths.processPath/create-skill/spec.json.
