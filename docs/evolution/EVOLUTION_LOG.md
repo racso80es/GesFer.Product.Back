@@ -4,6 +4,12 @@ Registro de cambios arquitectónicos y features del proyecto.
 
 ---
 
+## [2026-05-01] feat/kaizen-refactor-usings
+**Feature:** Refactor unused using directives
+**Description:** Se removió el using no utilizado GesFer.Product.Back.Infrastructure.Logging en el controlador DashboardController.cs para mejorar la limpieza del código.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_05_01_refactor_usings.md]
+**Status:** DONE
+
 ## [2026-04-29] feat/kaizen-fix-produces-response-type-user-controller
 **Feature:** Refactor ProducesResponseType attributes in UserController
 **Description:** Se refactorizaron los atributos ProducesResponseType en UserController.cs para usar la sintaxis genérica de .NET 8 (ProducesResponseType<T>) en lugar de typeof().

@@ -1,6 +1,5 @@
 using GesFer.Product.Back.Application.DTOs.Admin;
 using GesFer.Product.Back.Infrastructure.Data;
-using GesFer.Product.Back.Infrastructure.Logging;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
