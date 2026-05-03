@@ -1,0 +1,12 @@
+{
+  "skillId": "git-close-cycle",
+  "version": "1.0.0",
+  "description": "Cierre de ciclo local: checkout troncal, pull, fetch --prune, borrar rama de trabajo.",
+  "contract_ref": "SddIA/skills/skills-contract.json",
+  "components": {
+    "launcher_bat": "Git-Close-Cycle.bat",
+    "doc": "git-close-cycle.md",
+    "bin": "bin/git_close_cycle.exe"
+  },
+  "env": ["Windows 11", "PowerShell 7+", "Git"]
+}

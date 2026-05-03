@@ -42,7 +42,7 @@ outputs:
   type: file
 persist_ref: paths.featurePath/audit-tool-<tool-id>
 phases:
-- description: Verificar existencia en paths.toolCapsules y clasificar tipología (Daemon, Batch, Pure-CLI).
+- description: Ejecutar git-workspace-recon para validar entorno limpio. Opcionalmente aislar con git-branch-manager (p. ej. feat/audit-tool-<tool-id>). Verificar existencia en paths.toolCapsules y clasificar tipología (Daemon, Batch, Pure-CLI).
   id: '0'
   name: Preparar entorno y Clasificar
 - description: Documentar criterios de éxito en objectives.md, anclados al tool_spec_ref.
@@ -54,7 +54,7 @@ phases:
 - description: Crear casos de prueba garantizando cobertura contractual para cada Input y flag definidos en la especificación.
   id: '3'
   name: Diseñar pruebas
-- description: Invocar ejecutable (.exe). Capturar JSON emitido por stdout o por archivo configurado por la propia tool (si aplica).
+- description: Invocar ejecutable (.exe). Capturar JSON emitido por stdout o por archivo configurado por la propia tool (si aplica). Si la auditoría muta el repo (informes, notas), consolidar hitos con git-save-snapshot; ante fallo estructural, git-tactical-retreat.
   id: '4'
   name: Ejecutar herramienta
 - description: Validar estructura contra tools-contract.md (v2) y comparar feedback[].phase contra tool_spec_ref.output.phases_feedback.
@@ -66,7 +66,7 @@ phases:
 - description: Crear audit-report.md y audit-result.json con veredicto PASS/FAIL/PARTIAL.
   id: '7'
   name: Generar informe
-- description: Ejecutar cleanup_after_audit según tipología y escribir entregables bajo audit_output_ref. Evolution Log solo en FAIL/PARTIAL.
+- description: Ejecutar cleanup_after_audit según tipología y escribir entregables bajo audit_output_ref. Evolution Log solo en FAIL/PARTIAL. Publicar cambios con git-sync-remote; abrir git-create-pr enlazando objectives.md, validacion.md y rutas de audit_output_ref en el cuerpo del Pull Request cuando corresponda integración.
   id: '8'
   name: Cierre y Limpieza
 principles_ref: paths.principlesPath
@@ -78,8 +78,14 @@ description: >
 related_actions:
 - spec
 - validate
-related_skills: []
-spec_version: 3.0.0
+related_skills:
+- git-workspace-recon
+- git-branch-manager
+- git-save-snapshot
+- git-sync-remote
+- git-tactical-retreat
+- git-create-pr
+spec_version: 4.0.0
 tools_contract_ref: SddIA/tools/tools-contract.md
 ---
 
@@ -127,7 +133,7 @@ En Fase 0 la herramienta se clasifica en una tipología que determina la estrate
 
 | Fase | Nombre | Descripción |
 |:-----|:-------|:------------|
-| 0 | Preparar entorno | Verificar que la herramienta existe en paths.toolCapsules. Rama opcional feat/audit-tool-<tool-id>. |
+| 0 | Preparar entorno | **git-workspace-recon**; opcional **git-branch-manager** (feat/audit-tool-<tool-id>). Verificar herramienta en paths.toolCapsules. |
 | 1 | Definir objetivos | Documentar qué se va a auditar: objectives.md con criterios de éxito. |
 | 2 | Analizar especificación | Revisar manifest.json y documentación de la herramienta para identificar criterios de validación. |
 | 3 | Diseñar pruebas | Definir casos de prueba: invocación, parámetros, validaciones esperadas. |
@@ -135,7 +141,7 @@ En Fase 0 la herramienta se clasifica en una tipología que determina la estrate
 | 5 | Validar retorno JSON | Verificar estructura y campos según tools-contract.md. |
 | 6 | Validar objetivos funcionales | Confirmar que la herramienta logra su objetivo (ej: API levantada, health OK). |
 | 7 | Generar informe | audit-report.md y audit-result.json con resultado: PASS/FAIL, evidencias. |
-| 8 | Cierre | Actualizar paths.auditsPath, opcional Evolution Log. |
+| 8 | Cierre | Actualizar paths.auditsPath; **git-sync-remote** y **git-create-pr** con artefactos de la tarea cuando proceda; opcional Evolution Log. |
 
 ## Entradas
 
@@ -197,7 +203,7 @@ El archivo `audit-report-YYYY-MM-DD-##.md` debe seguir este esqueleto.
 ```markdown
 ---
 process_id: audit-tool
-spec_version: 3.0.0
+spec_version: 4.0.0
 tool_id: <tool-id>
 audit_date: YYYY-MM-DD
 audit_id: audit-YYYY-MM-DD-##
@@ -310,6 +316,7 @@ El archivo `audit-result-YYYY-MM-DD-##.json` debe seguir este esquema (ejemplo).
 {
   "schema_version": "1.0.0",
   "process_id": "audit-tool",
+  "spec_version": "4.0.0",
   "audit_date": "YYYY-MM-DD",
   "audit_id": "audit-YYYY-MM-DD-##",
   "tool_id": "<tool-id>",

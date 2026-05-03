@@ -39,12 +39,12 @@ json_schema:
       description: 'Proceso que orquesta la tarea (feature, correccion-auditorias, bug-fix, etc.). Referencia: paths.processPath/<process-id>.'
       type: string
     related_actions:
-      description: Acciones del ciclo que aplican (spec, clarify, planning, implementation, execution, validate, finalize).
+      description: Acciones del ciclo que aplican (spec, clarify, planning, implementation, execution, validate, finalize-process).
       items:
         type: string
       type: array
     related_skills:
-      description: Skills recomendadas (iniciar-rama, finalizar-git, documentation, etc.).
+      description: Skills recomendadas (suite táctica Git: git-workspace-recon, git-branch-manager, git-save-snapshot, git-sync-remote, git-tactical-retreat, git-create-pr; además invoke-commit, documentation, etc.).
       items:
         type: string
       type: array

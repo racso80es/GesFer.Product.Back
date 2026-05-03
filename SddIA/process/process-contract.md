@@ -1,7 +1,7 @@
 ---
 constraints:
 - Cumplimiento obligatorio de Karma2Token para trazabilidad y seguridad.
-- process_id en kebab-case (feature, bug-fix, refactorization, create-tool).
+- process_id en kebab-case (feature, bug-fix, refactorization, create-tool, create-skill).
 - Rutas canónicas solo desde Cúmulo (paths.processPath, paths.featurePath, paths.fixPath, paths.actionsPath, paths.principlesPath).
 - Un proceso sin spec.md (con frontmatter YAML) en su carpeta no se considera completo.
 - 'Fases de diseño/implementación: validar principios según principles-contract.'

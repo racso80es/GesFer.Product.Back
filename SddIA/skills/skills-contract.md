@@ -85,15 +85,15 @@ Toda skill con implementación ejecutable debe soportar **entrada y salida en JS
 | Campo | Tipo | Descripción |
 |-------|------|-------------|
 | `skillId` | string | Identificador del skill (kebab-case). |
-| *(parámetros)* | — | Parámetros específicos del skill según su spec (ej. BranchType, BranchName para iniciar-rama). |
+| *(parámetros)* | — | Parámetros específicos del skill según su spec (ej. branch_type, branch_name en git-branch-manager). |
 
 **Formas de entrega:**
 - **stdin:** JSON por stdin cuando el skill se invoca en modo piping.
 - **--input-path:** Ruta a fichero JSON con los parámetros.
 
-**Ejemplo (iniciar-rama):**
+**Ejemplo (git-branch-manager):**
 ```json
-{"skillId":"iniciar-rama","BranchType":"feat","BranchName":"mi-feature"}
+{"skillId":"git-branch-manager","action":"create","branch_type":"feat","branch_name":"mi-feature"}
 ```
 
 ### 2.2 Salida JSON

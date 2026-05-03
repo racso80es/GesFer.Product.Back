@@ -6,9 +6,9 @@
 
 **La IA nunca debe ejecutar comandos de sistema directamente** en la shell (ni `git`, `dotnet`, `npm`, `pwsh`, `cargo`, ni cualquier otro comando). Toda ejecución de comandos ha de realizarse **siempre** a través de al menos uno de los siguientes canales:
 
-- **Skill:** p. ej. paths.skillCapsules.invoke-command (interceptor de comandos de sistema), paths.skillCapsules.iniciar-rama, paths.skillCapsules.finalizar-git. Contrato: paths.skillsDefinitionPath/\<skill-id\>/. Implementación obligatoria en Rust (paths.skillsRustPath); launcher .bat invoca solo .exe en bin/.
+- **Skill:** p. ej. **git-workspace-recon**, **git-branch-manager**, **git-save-snapshot** / **invoke-commit**, **git-sync-remote**, **git-tactical-retreat**, **git-create-pr** (suite táctica Git) y **invoke-command** como interceptor genérico cuando no exista skill dedicada. Contrato: paths.skillsDefinitionPath/\<skill-id\>/. Implementación obligatoria en Rust (paths.skillsRustPath); launcher .bat invoca solo .exe en bin/.
 - **Herramienta (tool):** definida en paths.toolsDefinitionPath, implementación en paths.toolCapsules[tool-id] o paths.toolsRustPath. Implementación por defecto en Rust (binarios .exe).
-- **Acción:** definida en paths.actionsPath (spec, planning, implementation, execution, validate, finalize, sddia-difusion, etc.). Las acciones orquestan skills o herramientas que ejecutan los comandos.
+- **Acción:** definida en paths.actionsPath (spec, planning, implementation, execution, validate, finalize-process, sddia-difusion, etc.). Las acciones orquestan skills o herramientas que ejecutan los comandos; no ejecutan el SO ni scripts directamente (contrato paths.actionsPath/actions-contract.md).
 - **Proceso:** definido en paths.processPath (feature, bug-fix, create-tool, etc.). Los procesos invocan acciones y skills; la IA sigue el proceso en lugar de lanzar comandos por su cuenta.
 
 ## Contexto de implementación (Rust)
@@ -33,6 +33,6 @@ En SddIA, la **implementación estándar** de skills y tools es **Rust** (binari
 
 ## Aplicación
 
-- Si la IA necesita ejecutar cualquier comando (git, dotnet, npm, etc.), debe **proponer** o **ejecutar** la invocación mediante la skill, herramienta, acción o proceso correspondiente (p. ej. "Ejecutar skill iniciar-rama" o "Invocar invoke-command con el comando indicado"), **nunca** escribiendo el comando directamente en la terminal.
+- Si la IA necesita ejecutar cualquier comando (git, dotnet, npm, etc.), debe **proponer** o **ejecutar** la invocación mediante la skill, herramienta, acción o proceso correspondiente (p. ej. "Ejecutar git-workspace-recon y git-branch-manager", "Consolidar con git-save-snapshot o invoke-commit", "Publicar con git-sync-remote", "Crear PR con git-create-pr" o "Invocar invoke-command con el comando indicado"), **nunca** escribiendo el comando directamente en la terminal.
 - Los agentes que ejecutan código (p. ej. Tekton) tienen esta restricción en su contrato; esta norma la extiende a **cualquier** contexto de IA en el proyecto.
-- **Referencia en protocolo:** AGENTS.md (ley GIT y esta norma). Norma específica para git: git-via-skills-or-process.md. Skills: paths.skillCapsules.invoke-command, paths.skillCapsules.iniciar-rama, paths.skillCapsules.finalizar-git.
+- **Referencia en protocolo:** AGENTS.md (ley GIT y esta norma). Norma específica para git: git-via-skills-or-process.md. Skills: suite táctica Git (git-workspace-recon, git-branch-manager, git-save-snapshot, git-sync-remote, git-tactical-retreat, git-create-pr) + invoke-commit + invoke-command (fallback).

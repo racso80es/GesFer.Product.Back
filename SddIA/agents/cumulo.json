@@ -28,7 +28,7 @@
       {
         "ext": ".md",
         "format": "frontmatter_yaml",
-        "purpose": "Un .md por acción con frontmatter YAML + cuerpo Markdown. Sin .json separados. Artefactos: objectives.md, spec.md, clarify.md, plan.md, implementation.md, execution.md, validacion.md."
+        "purpose": "Un .md por acción con frontmatter YAML + cuerpo Markdown. Sin .json separados. Artefactos: objectives.md, spec.md, clarify.md, plan.md, implementation.md, execution.md, validacion.md, finalize-process.md (opc.)."
       }
     ]
   },

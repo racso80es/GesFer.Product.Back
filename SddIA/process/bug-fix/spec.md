@@ -8,6 +8,31 @@ paths:
   bugPath_ref: paths.bugPath (Cúmulo)
   fixPath_ref: paths.fixPath (Cúmulo)
 persist_ref: paths.fixPath/<nombre_fix>
+phases:
+- description: Ejecutar git-workspace-recon para validar entorno limpio. Tras confirmar, crear rama fix/<nombre_fix> desde master usando git-branch-manager (aislar contexto; no trabajar en master).
+  id: '0'
+  name: Preparar entorno
+- description: objectives.md en carpeta de la tarea.
+  id: '1'
+  name: Documentación con objetivos
+- description: Acción spec; salida spec.md (frontmatter YAML + Markdown).
+  id: '2'
+  name: Especificación
+- description: Acción clarify si aplica; clarify.md (frontmatter YAML + Markdown).
+  id: '3'
+  name: Clarificación
+- description: Acción implementation; implementation.md (frontmatter YAML + Markdown).
+  id: '4'
+  name: Implementación (doc)
+- description: Acción execution; aplicar corrección al código. Consolidar hitos con git-save-snapshot (commits atómicos). Ante fallo estructural del entorno, git-tactical-retreat como protocolo de emergencia.
+  id: '5'
+  name: Ejecución
+- description: Acción validate; validacion.md (frontmatter YAML + Markdown).
+  id: '6'
+  name: Validar
+- description: Cierre del ciclo. Ejecutar git-sync-remote para publicar la rama; seguidamente git-create-pr enlazando objectives.md y validacion.md en el cuerpo del Pull Request. Acción finalize-process y Evolution Logs.
+  id: '7'
+  name: Finalizar
 principles_ref: paths.principlesPath
 process_id: bug-fix
 process_interface_compliance: Solicita/genera en carpeta de la tarea artefactos .md con frontmatter YAML (objectives.md, spec.md, clarify.md, validacion.md). Sin .json separados. Patrón: SddIA/norms/features-documentation-pattern.md.
@@ -17,15 +42,19 @@ related_actions:
 - implementation
 - execution
 - validate
-- finalize
+- finalize-process
 related_skills:
-- iniciar-rama
+- git-workspace-recon
+- git-branch-manager
+- git-save-snapshot
+- git-sync-remote
+- git-tactical-retreat
+- git-create-pr
 skills:
 - documentation
 - filesystem-ops
 - dotnet-development
-- iniciar-rama
-spec_version: 1.0.0
+spec_version: 2.0.0
 triggers:
 - Reporte de bug
 - Fallo en CI o tests
@@ -46,7 +75,7 @@ El proceso **bug-fix** orquesta el ciclo de vida del bug: triaje, documentación
 
 - **Rama:** fix/<nombre_fix> (nunca master).
 - **Documentación:** Carpeta paths.fixPath/<nombre_fix>/ con objectives.md, spec.md, clarify.md si aplica, implementation.md, validacion.md (todos con frontmatter YAML + Markdown). Sin .json separados.
-- **Skills:** iniciar-rama, documentation, filesystem-ops, dotnet-development.
+- **Skills Git (suite táctica):** git-workspace-recon, git-branch-manager, git-save-snapshot, git-sync-remote, git-tactical-retreat, git-create-pr; más documentation, filesystem-ops, dotnet-development.
 - **Restricciones:** Alcance mínimo (solo causa raíz); no refactorizar ni ampliar funcionalidad en la misma rama.
 
 ## Integración

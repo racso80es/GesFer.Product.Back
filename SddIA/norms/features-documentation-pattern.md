@@ -17,8 +17,8 @@ La documentación de features y fixes sigue el **mismo patrón que skills, tools
 
 ## Obligaciones
 
-1. **Un artefacto por acción:** Cada fase del proceso (spec, clarify, planning, implementation, execution, validate, finalize) produce **exclusivamente** un archivo `.md` con frontmatter YAML + cuerpo Markdown.
-2. **Sin duplicación JSON:** No se generan ni mantienen archivos `spec.json`, `clarify.json`, `plan.json`, `implementation.json`, `execution.json`, `validacion.json` ni `finalize.json`. Los datos estructurados residen en el frontmatter YAML del `.md` correspondiente.
+1. **Un artefacto por acción:** Cada fase del proceso (spec, clarify, planning, implementation, execution, validate, finalize-process) produce **exclusivamente** un archivo `.md` con frontmatter YAML + cuerpo Markdown.
+2. **Sin duplicación JSON:** No se generan ni mantienen archivos `spec.json`, `clarify.json`, `plan.json`, `implementation.json`, `execution.json`, `validacion.json` ni `finalize-process.json`. Los datos estructurados residen en el frontmatter YAML del `.md` correspondiente.
 3. **Estructura canónica:** Cada `.md` debe tener:
    - **Frontmatter YAML** (entre `---`): metadatos machine-readable (feature_name, created, scope, checks, etc. según el tipo de artefacto).
    - **Cuerpo Markdown:** contenido legible para humanos (secciones, tablas, listas).
@@ -35,7 +35,7 @@ La documentación de features y fixes sigue el **mismo patrón que skills, tools
 | implementation | implementation.md | feature_name, created, items | Touchpoints y propuestas |
 | execution | execution.md | feature_name, created, items_applied | Registro de ejecución |
 | validate | validacion.md | feature_name, branch, global, checks, git_changes | Informe de validación |
-| finalize | finalize.md (opc.) | feature_name, pr_url, timestamp | Resumen de cierre |
+| finalize-process | finalize-process.md (opc.) | feature_name, pr_url, timestamp | Resumen de cierre |
 
 Detalle completo en **docs/features/features-contract.md** (Cúmulo: paths.featurePath/features-contract.md).
 

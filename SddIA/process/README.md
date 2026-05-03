@@ -29,10 +29,10 @@ Todo proceso cumple el **contrato** en [process-contract.json](./process-contrac
 5. **Corrección según auditorías:** paths.processPath/correccion-auditorias/. Ruta: Cúmulo (paths.featurePath/&lt;nombre_correccion&gt;). Entrada: paths.auditsPath (informes de auditoría).
 6. **Create-template:** paths.processPath/create-template/. Ruta: Cúmulo (paths.featurePath/create-template-&lt;template-id&gt;). Entregable: paths.templatesPath/&lt;template-id&gt;/ (spec.md, spec.json).
 7. **Audit-tool:** paths.processPath/audit-tool/. Ruta: Cúmulo (paths.featurePath/audit-tool-&lt;tool-id&gt;). Resultado: paths.auditsPath/tools/&lt;tool-id&gt;/ (audit-report.md, audit-result.json).
-8. **Create-skill:** paths.processPath/create-skill/. Ruta: Cúmulo (paths.featurePath/create-skill-&lt;skill-id&gt;). Entregable: cápsula en paths.skillsPath/&lt;skill-id&gt;/.
+8. **Create-skill:** paths.processPath/create-skill/. Ruta: Cúmulo (paths.featurePath/create-skill-&lt;skill-id&gt;). Entregable: cápsula **paths.skillCapsules[&lt;skill-id&gt;]** (resuelta bajo paths.skillsPath/&lt;skill-id&gt;/ según Cúmulo).
 9. **Validate-pull-requests:** paths.processPath/validate-pull-requests/. Ruta: Cúmulo (paths.featurePath/validate-pull-requests-&lt;pr-slug&gt;). Semillas Kaizen: paths.tasksPath.
 
-Las **acciones** (spec, clarify, plan, implementation, execution, validate, finalize) siguen en paths.actionsPath (Cúmulo) y son invocadas por los procesos.
+Las **acciones** (spec, clarify, plan, implementation, execution, validate, finalize-process) siguen en paths.actionsPath (Cúmulo) y son invocadas por los procesos.
 
 ## Interfaz de procesos (norma para agentes)
 

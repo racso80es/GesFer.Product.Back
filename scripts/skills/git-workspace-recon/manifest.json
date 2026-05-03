@@ -1,0 +1,12 @@
+{
+  "skillId": "git-workspace-recon",
+  "version": "1.0.0",
+  "description": "Inspección del workspace Git: rama, HEAD, porcelana, remoto, ahead/behind si hay upstream.",
+  "contract_ref": "SddIA/skills/skills-contract.json",
+  "components": {
+    "launcher_bat": "Git-Workspace-Recon.bat",
+    "doc": "git-workspace-recon.md",
+    "bin": "bin/git_workspace_recon.exe"
+  },
+  "env": ["Windows 11", "PowerShell 7+", "Git"]
+}

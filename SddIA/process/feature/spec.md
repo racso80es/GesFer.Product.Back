@@ -2,7 +2,7 @@
 contract_ref: paths.processPath/process-contract.md
 persist_ref: paths.featurePath/<nombre_feature>
 phases:
-- description: Rama feat desde master; skill iniciar-rama.
+- description: Ejecutar git-workspace-recon para validar entorno limpio. Tras confirmar, crear rama feat/<nombre> o fix/<nombre> desde master usando git-branch-manager.
   id: '0'
   name: Preparar entorno
 - description: objectives.md en carpeta de la tarea.
@@ -20,13 +20,13 @@ phases:
 - description: Acción implementation; implementation.md (frontmatter YAML + Markdown).
   id: '5'
   name: Implementación (doc)
-- description: Acción execution; execution.md (frontmatter YAML + Markdown).
+- description: Aplicar el plan al código. Consolidar hitos ejecutando git-save-snapshot (commits atómicos). Si el entorno se corrompe severamente, usar git-tactical-retreat.
   id: '6'
   name: Ejecución
-- description: Acción validate; validacion.md (frontmatter YAML + Markdown).
+- description: Ejecutar validación pre-PR. Invocar git-workspace-recon para verificar la coherencia de los archivos mutados contra el plan. Incluir en el informe (validacion.md) el resultado del análisis de impacto bajo la regla «Evaluación de Impacto SDDIA» (árbol SddIA/ mutado o no). Generar validacion.md.
   id: '7'
   name: Validar
-- description: Acción finalize; Evolution Logs, PR.
+- description: Cierre del ciclo. Aplicar la regla innegociable «Evaluación de Impacto SDDIA» antes de git-sync-remote (mutación en SddIA/ implica sddia_evolution_register y git-save-snapshot adicional). Luego git-sync-remote, git-create-pr con objectives.md y validacion.md, y actualizar Evolution Logs donde corresponda.
   id: '8'
   name: Finalizar
 principles_ref: paths.principlesPath
@@ -38,22 +38,28 @@ related_actions:
 - implementation
 - execution
 - validate
-- finalize
+- finalize-process
 related_skills:
-- iniciar-rama
-- finalizar-git
-spec_version: 1.0.0
+- git-workspace-recon
+- git-branch-manager
+- git-save-snapshot
+- git-sync-remote
+- git-tactical-retreat
+- git-create-pr
+- git-close-cycle
+- sddia-evolution-register
+spec_version: 2.1.0
 ---
 
 # Proceso: Feature
 
 Este documento define el **proceso de tarea** para desarrollar una funcionalidad. Está ubicado en paths.processPath/feature/ (Cúmulo). Las acciones que orquesta están en paths.actionsPath (Cúmulo). La ruta de persistencia se obtiene de **Cúmulo** (paths.featurePath/<nombre_feature>).
 
-**Interfaz de proceso:** Cumple la interfaz en Cúmulo (`process_interface`): solicita/genera en la carpeta de la tarea (Cúmulo) artefactos **`.md`** con frontmatter YAML + cuerpo Markdown (objectives.md, spec.md, clarify.md, plan.md, implementation.md, execution.md, validacion.md). **No se usan ficheros `.json` separados.** Patrón: SddIA/norms/features-documentation-pattern.md; contrato: paths.featurePath/features-contract.md.
+**Interfaz de proceso:** Cumple la interfaz en Cúmulo (`process_interface`): solicita/genera en la carpeta de la tarea (Cúmulo) artefactos **`.md`** con frontmatter YAML + cuerpo Markdown (objectives.md, spec.md, clarify.md, plan.md, implementation.md, execution.md, validacion.md; opcional finalize-process.md). **No se usan ficheros `.json` separados.** Patrón: SddIA/norms/features-documentation-pattern.md; contrato: paths.featurePath/features-contract.md.
 
 ## Propósito
 
-El proceso **feature** define el procedimiento formal de ciclo completo para desarrollar una funcionalidad o tarea: desde la creación de la rama hasta el cierre y la apertura del Pull Request. Orquesta las acciones **spec**, **clarify**, **planning**, **implementation**, **execution**, **validate** y **finalize** en secuencia, fija la ubicación de la documentación de la tarea y garantiza trazabilidad en los logs de evolución.
+El proceso **feature** define el procedimiento formal de ciclo completo para desarrollar una funcionalidad o tarea: desde la creación de la rama hasta el cierre y la apertura del Pull Request. Orquesta las acciones **spec**, **clarify**, **planning**, **implementation**, **execution**, **validate** y **finalize-process** en secuencia, fija la ubicación de la documentación de la tarea y garantiza trazabilidad en los logs de evolución.
 
 Proporciona un flujo repetible y auditado, alineado con las Leyes Universales (soberanía documental en AGENTE_CUMULO, no commits en `master`).
 
@@ -63,15 +69,22 @@ Ruta de la tarea: Cúmulo (paths.featurePath/<nombre_feature>).
 
 | Fase | Nombre | Descripción |
 | :--- | :--- | :--- |
-| **0** | Preparar entorno | Crear rama feat/<nombre_feature> (o `fix/` si aplica) desde `master` actualizado. No trabajar en `master`. **Skill:** iniciar-rama — invocar según contrato (paths.skillsDefinitionPath/iniciar-rama/). Tekton invoca la implementación (paths.skillCapsules[\"iniciar-rama\"]). Parámetros: BranchType feat, BranchName <nombre_feature>. |
+| **0** | Preparar entorno | Ejecutar **git-workspace-recon** para validar entorno limpio. Tras confirmar, crear rama `feat/<nombre_feature>` o `fix/<nombre_feature>` desde `master` con **git-branch-manager**. No trabajar en `master`. Invocación según contrato (paths.skillsDefinitionPath y paths.skillCapsules). |
 | **1** | Documentación con objetivos | Documentar objetivo, alcance y ley aplicada. La documentación de la tarea se ubica en la carpeta de la tarea (Cúmulo)/objectives.md. |
 | **2** | Especificación | Ejecutar o generar SPEC (acción **spec**). Entrada: requerimiento o borrador, carpeta de la tarea (Cúmulo)/objectives.md; salida: especificación técnica en carpeta de la tarea (Cúmulo)/spec.md (frontmatter YAML + Markdown). |
 | **3** | Clarificación | Ejecutar o generar clarificaciones (acción **clarify**). Entrada: carpeta de la tarea (Cúmulo)/objectives.md, spec.md; salida: carpeta de la tarea (Cúmulo)/clarify.md (frontmatter YAML + Markdown). |
 | **4** | Planificación | Ejecutar o generar plan (acción **plan**). Entrada: Especificación, Clarificación. Salida: carpeta de la tarea (Cúmulo)/plan.md (frontmatter YAML + Markdown). |
 | **5** | Implementación | Generar documento de implementación. Entrada: carpeta de la tarea (Cúmulo)/objectives.md, spec.md, clarify.md; salida: carpeta de la tarea (Cúmulo)/implementation.md (frontmatter YAML + Markdown). |
-| **6** | Ejecución | Aplicar el plan al código (Tekton Developer). Entrada: carpeta de la tarea (Cúmulo)/implementation.md; salida: carpeta de la tarea (Cúmulo)/execution.md (frontmatter YAML + Markdown). |
-| **7** | Validar | Ejecutar validación pre-PR. Entrada: carpeta de la tarea (Cúmulo); salida: carpeta de la tarea (Cúmulo)/validacion.md (frontmatter YAML + Markdown). |
-| **8** | Finalizar | Cierre y PR. Especificación técnica: paths.actionsPath/finalize/. Entrada: carpeta de la tarea (Cúmulo); salida: Evolution Logs y Pull Request. |
+| **6** | Ejecución | Aplicar el plan al código (Tekton Developer). Consolidar hitos con **git-save-snapshot** (commits atómicos). Si el entorno se corrompe severamente, **git-tactical-retreat**. Entrada: carpeta de la tarea (Cúmulo)/implementation.md; salida: carpeta de la tarea (Cúmulo)/execution.md (frontmatter YAML + Markdown). |
+| **7** | Validar | Validación pre-PR; **git-workspace-recon** para verificar coherencia de archivos mutados frente al plan. Documentar en **validacion.md** si hubo mutación bajo **SddIA/** y el cumplimiento de la regla **Evaluación de Impacto SDDIA** (véase sección dedicada). Entrada: carpeta de la tarea (Cúmulo); salida: carpeta de la tarea (Cúmulo)/validacion.md (frontmatter YAML + Markdown). |
+| **8** | Finalizar | Cierre del ciclo: cumplir **Evaluación de Impacto SDDIA** *antes* de **git-sync-remote**; a continuación **git-sync-remote**, **git-create-pr** con resumen de objectives.md y validacion.md en el cuerpo del PR. Acción **finalize-process** y paths.actionsPath/finalize-process/ donde aplique. Actualizar Evolution Logs (convenciones según alcance: SddIA vs resto del repo; norma paths.evolutionPath y SddIA/norms/sddia-evolution-sync.md). |
+
+## Evaluación de Impacto SDDIA (innegociable)
+
+**Evaluación de Impacto SDDIA:** Antes de ejecutar **git-sync-remote**, debes analizar los archivos modificados. Si existe **cualquier** mutación dentro del directorio **SddIA/**, es obligatorio ejecutar **sddia_evolution_register** (skill **sddia-evolution-register**, cápsula `paths.skillCapsules.sddia-evolution-register`) y realizar un **git-save-snapshot** adicional para consolidar el registro de evolución antes de abrir el Pull Request.
+
+*   **Fase 7:** El análisis y su resultado deben quedar explícitos en **validacion.md**.
+*   **Fase 8:** Si aplica mutación en **SddIA/**, no invocar **git-sync-remote** hasta haber ejecutado **sddia_evolution_register** y el **git-save-snapshot** extra; después, **git-sync-remote** y **git-create-pr**.
 
 ## Implementación
 
@@ -98,6 +111,7 @@ Al cierre de la feature (fase 8):
 
 *   **paths.evolutionPath + paths.evolutionLogFile:** Añadir una línea con formato `[YYYY-MM-DD] [feat/<nombre>] [Descripción breve del resultado.] [Estado].`
 *   **paths.evolutionPath + paths.evolutionLogFile:** Añadir una sección con fecha y título de la feature, resumen y referencia a la carpeta de la tarea (Cúmulo)/objectives.md.
+*   Si la tarea mutó artefactos bajo **SddIA/**, el registro formal de evolución SddIA sigue el contrato en **paths.sddiaEvolutionPath** / norma **SddIA/norms/sddia-evolution-sync.md**, consolidado vía **sddia_evolution_register** antes del push (véase **Evaluación de Impacto SDDIA**).
 
 ## Integración con Agentes
 
@@ -108,7 +122,7 @@ Al cierre de la feature (fase 8):
 
 ## Dependencias con otras acciones
 
-*   El proceso **feature** invoca o utiliza los resultados de las acciones **spec**, **clarify**, **plan**, **implementation**, **execution**, **validate** y **finalize** en paths.actionsPath (Cúmulo).
+*   El proceso **feature** invoca o utiliza los resultados de las acciones **spec**, **clarify**, **plan**, **implementation**, **execution**, **validate** y **finalize-process** en paths.actionsPath (Cúmulo).
 *   La **documentación de la tarea** (objetivo, spec, clarifications, plan, validacion) debe residir en **paths.featurePath/<nombre_feature>/** (Cúmulo) para aprobación y revisión humana.
 
 ## Estándares de Calidad
@@ -116,6 +130,7 @@ Al cierre de la feature (fase 8):
 *   **Grado S+:** Trazabilidad desde el objetivo hasta el PR: rama → paths.featurePath → spec/clarify/plan → implementación → execution → validación → Evolution Logs → PR.
 *   **Ley GIT:** Ningún commit en `master`; todo el trabajo en rama `feat/` o `fix/` con documentación en paths.featurePath/<nombre_feature>/ (Cúmulo).
 *   **Single Source of Truth:** Para cada feature, la documentación canónica de la tarea es paths.featurePath/<nombre_feature>/ (Cúmulo); la referencia en PR y en Evolution Log es esa ruta.
+*   **Evaluación de Impacto SDDIA:** Obligatoria antes de **git-sync-remote** cuando exista mutación bajo **SddIA/** (registro + commit adicional); incumplimiento bloquea el cierre conforme a este proceso.
 
 ## Alcance para Fix (bug)
 
@@ -123,4 +138,4 @@ El mismo patrón de persistencia se aplica a correcciones de bugs mediante el pr
 
 ## Referencia de ejecución
 
-Procedimiento aplicado en la rama **feat/e2e-product-back-mocked** (2026-02-10). Documentación de la tarea: paths.featurePath/<nombre_feature>/. Acciones relacionadas: paths.actionsPath (spec/, clarify/, planning/, execution/, validate/, finalize/).
+Procedimiento aplicado en la rama **feat/e2e-product-back-mocked** (2026-02-10). Documentación de la tarea: paths.featurePath/<nombre_feature>/. Acciones relacionadas: paths.actionsPath (spec/, clarify/, planning/, execution/, validate/, finalize-process/).

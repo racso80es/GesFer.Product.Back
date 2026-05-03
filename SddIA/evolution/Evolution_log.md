@@ -4,6 +4,11 @@
 
 | ID (GUID) | Fecha | Descripción breve |
 | :--- | :--- | :--- |
+| e7c2b4a1-9f3d-4e8c-b2a6-1d5f8e9c0a7b | 2026-05-01T20:00:00+00:00 | Hotfix git-sync-remote (upstream, push -u, errores JSON); norma git-operations Ley de Hierro anti-primitivos Git |
+| e2a4b6c8-0d1e-43a9-8b7c-5d4e3f2a1b0c | 2026-05-01T18:30:00+00:00 | Alta 6 skills Git ejecutables (workspace-recon, branch-manager, save-snapshot, sync-remote, tactical-retreat, create-pr); Cúmulo, índice, interaction-triggers, skill_common |
+| a1b7c8d9-0e2f-4a3b-b4c5-d6e7f8a9b0c1 | 2026-05-01T16:00:00+00:00 | Guía portabilidad skills (reproducir-skills-en-otros-entornos-sddia) + README skills + refs create-skill |
+| f3a9c1d2-8e4b-4a1c-9f6d-2b7e8c4a1d90 | 2026-05-01T14:00:00+00:00 | create-skill: AGENTS + spec paths Cúmulo + README proceso + process-contract |
+| c91d4e8a-2b6f-4c1e-9d3a-8f5e2c1b0a4d | 2026-05-01T12:00:00+00:00 | Guía portabilidad create-skill (reproducir-create-skill-en-otros-entornos-sddia) |
 | *(pendiente primer registro por binario `sddia_evolution_register`)* | — | — |
 | d50066f8-59e9-48c8-83ef-c24f74efb78e | 2026-03-27T16:44:30.204823857+00:00 | Añadida acción alternativa Kaizen si docs/TASKS está vacío |
 | cfa4d773-1004-4d00-892e-2d5f0f13afd0 | 2026-03-27T21:13:59.680415627+00:00 | Add XML documentation to HealthController for OpenAPI standards |
@@ -16,3 +21,5 @@
 | e6a6c30c-a51d-4077-a803-b99579db24a4 | 2026-04-08T20:21:27.287229603+00:00 | Remove TODOs from spec-template and difusion spec |
 | 8749488f-48c4-46e9-94f8-4c97cc1d18dd | 2026-04-09T20:38:56.092597058+00:00 | Clarificar separacion de evolucion producto vs sddia para prevenir errores de logs |
 | e8ed36a4-1c2a-4299-af37-7a8c886f1127 | 2026-04-23T06:51:33.204496152+00:00 | Mejora de la Integridad Estructural y Blindaje de Consciencia |
+| 2d7a88f3-f685-4a40-bffe-ffc604111f60 | 2026-05-01T12:13:57.019533200+00:00 | Contrato acciones jurisdicción finalize-process barrido SddIA Cursor blindaje tekton JSON |
+| cf1dbcaf-471a-4fd5-8e3c-47cae9884128 | 2026-05-01T14:06:44.927519900+00:00 | Skill git-close-cycle, finalize-process y difusión SddIA |

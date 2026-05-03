@@ -1,0 +1,12 @@
+{
+  "skillId": "git-save-snapshot",
+  "version": "1.0.0",
+  "description": "Stage y commit con mensaje (git add + git commit).",
+  "contract_ref": "SddIA/skills/skills-contract.json",
+  "components": {
+    "launcher_bat": "Git-Save-Snapshot.bat",
+    "doc": "git-save-snapshot.md",
+    "bin": "bin/git_save_snapshot.exe"
+  },
+  "env": ["Windows 11", "PowerShell 7+", "Git"]
+}

@@ -10,7 +10,7 @@ consumers:
 - SddIA/agents/*.json
 - SddIA/norms/interaction-triggers.md
 - .cursor/rules
-contract_version: 1.0.0
+contract_version: 1.1.0
 definition_artefacts:
 - ext: .md
   format: frontmatter_yaml
@@ -31,6 +31,16 @@ security_model:
 
 **Alcance:** paths.actionsPath (SddIA/actions/). Toda acción del ciclo debe cumplir este contrato.
 
+## Jurisdicción de las acciones (innegociable)
+
+Una **acción** es un artefacto **documental y de orquestación**: define propósito, entradas, salidas y el **orden lógico** de pasos del ciclo. **No** tiene jurisdicción para:
+
+- Ejecutar comandos del sistema operativo directamente.
+- Invocar scripts (`.ps1`, `.bat`, `.sh`) ni encadenar shell como mecanismo de implementación de la acción.
+- Lanzar binarios que **no** estén publicados y referenciados como **skill** o **tool** en Cúmulo (`paths.skillCapsules`, `paths.toolCapsules`).
+
+La **única** forma permitida de materializar el trabajo operativo es: la acción **nombra y ordena** qué **skills** o **tools** debe invocar el ejecutor (agente/humano), conforme a `SddIA/norms/commands-via-skills-or-tools.md` y a la implementación estándar Rust del proyecto.
+
 ## Definición por acción
 
 Cada acción tiene una **carpeta** en paths.actionsPath con identificador `<action-id>` (kebab-case). Dentro de la carpeta:
@@ -41,7 +51,7 @@ Cada acción tiene una **carpeta** en paths.actionsPath con identificador `<acti
 
 ## Restricciones
 
-- action_id en kebab-case (spec, clarify, planning, implementation, execution, validate, finalize, sddia-difusion).
+- action_id en kebab-case (spec, clarify, planning, implementation, execution, validate, finalize-process, sddia-difusion).
 - Salida de acciones en carpeta de tarea (paths.featurePath, paths.fixPath): un .md por acción con frontmatter YAML + Markdown. Sin .json separados. Patrón: SddIA/norms/features-documentation-pattern.md.
 - Rutas solo vía Cúmulo.
 
