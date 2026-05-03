@@ -4,6 +4,14 @@ Registro de cambios arquitectónicos y features del proyecto.
 
 ---
 
+## [2026-05-03] fix/fix-idor-vulnerability-customer-controller
+**Feature:** Corrección de vulnerabilidad IDOR en gestión de clientes
+**Description:** Se securizaron los comandos y endpoints de GetById, Update y Delete en CustomerController para requerir CompanyId, previniendo accesos cruzados entre inquilinos.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_05_03_fix_idor_vulnerability_customer_controller.md]
+**Status:** DONE
+
+---
+
 ## [2026-05-01] feat/create-skill-git-close-cycle
 **Feature:** Skill git-close-cycle y enlace finalize-process
 **Description:** Nueva skill Rust para cierre de ciclo local tras fusión remota; acción finalize-process orquesta su invocación; registro SddIA evolution cf1dbcaf-471a-4fd5-8e3c-47cae9884128.

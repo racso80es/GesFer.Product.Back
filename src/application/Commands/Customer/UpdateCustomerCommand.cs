@@ -3,5 +3,5 @@ using GesFer.Product.Back.Application.DTOs.Customer;
 
 namespace GesFer.Product.Back.Application.Commands.Customer;
 
-public record UpdateCustomerCommand(Guid Id, UpdateCustomerDto Dto) : ICommand<CustomerDto>;
+public record UpdateCustomerCommand(Guid Id, Guid CompanyId, UpdateCustomerDto Dto) : ICommand<CustomerDto>;
 
