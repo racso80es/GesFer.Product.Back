@@ -4,6 +4,11 @@ Registro de cambios arquitectónicos y features del proyecto.
 
 ---
 
+## [2026-05-01] feat/kaizen-refactor-usings
+**Feature:** Refactor unused using directives
+**Description:** Se removió el using no utilizado GesFer.Product.Back.Infrastructure.Logging en el controlador DashboardController.cs para mejorar la limpieza del código.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_05_01_refactor_usings.md]
+**Status:** DONE
 ## [2026-05-01] feat/refactor-telemetry-produces-response-type
 **Feature:** Refactor ProducesResponseType attributes in TelemetryController
 **Description:** Refactor TelemetryController to use modern generic ProducesResponseType attributes.
