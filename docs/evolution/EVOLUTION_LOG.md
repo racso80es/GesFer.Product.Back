@@ -4,6 +4,11 @@ Registro de cambios arquitectónicos y features del proyecto.
 
 ---
 
+## [2026-05-01] feat/refactor-telemetry-produces-response-type
+**Feature:** Refactor ProducesResponseType attributes in TelemetryController
+**Description:** Refactor TelemetryController to use modern generic ProducesResponseType attributes.
+**Reference:** [docs/TASKS/DONE/2026_04_30_refactor_telemetry_produces.md]
+
 ## [2026-05-01] feat/create-skill-git-close-cycle
 **Feature:** Skill git-close-cycle y enlace finalize-process
 **Description:** Nueva skill Rust para cierre de ciclo local tras fusión remota; acción finalize-process orquesta su invocación; registro SddIA evolution cf1dbcaf-471a-4fd5-8e3c-47cae9884128.
