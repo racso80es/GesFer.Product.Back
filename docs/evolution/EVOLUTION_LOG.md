@@ -9,6 +9,15 @@ Registro de cambios arquitectónicos y features del proyecto.
 **Description:** Se registraron los documentos de la auditoría 100% exitosa sin requerir cambios de código para la fecha 2026-05-02.
 **Reference:** [docs/features/correccion-auditorias-2026-05-02]
 **Status:** DONE
+## [2026-05-01] feat/kaizen-refactor-usings
+**Feature:** Refactor unused using directives
+**Description:** Se removió el using no utilizado GesFer.Product.Back.Infrastructure.Logging en el controlador DashboardController.cs para mejorar la limpieza del código.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_05_01_refactor_usings.md]
+**Status:** DONE
+## [2026-05-01] feat/refactor-telemetry-produces-response-type
+**Feature:** Refactor ProducesResponseType attributes in TelemetryController
+**Description:** Refactor TelemetryController to use modern generic ProducesResponseType attributes.
+**Reference:** [docs/TASKS/DONE/2026_04_30_refactor_telemetry_produces.md]
 
 ## [2026-05-01] feat/create-skill-git-close-cycle
 **Feature:** Skill git-close-cycle y enlace finalize-process
