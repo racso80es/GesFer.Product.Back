@@ -42,8 +42,8 @@ public class TelemetryController : ControllerBase
     /// <param name="logDto">Log estructurado del frontend</param>
     /// <returns>Resultado de la operación</returns>
     [HttpPost("logs")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType<object>(StatusCodes.Status200OK)]
+    [ProducesResponseType<object>(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> ReceiveLog([FromBody] CreateLogDto logDto)
     {
         try

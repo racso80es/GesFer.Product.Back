@@ -4,13 +4,20 @@ Registro de cambios arquitectónicos y features del proyecto.
 
 ---
 
-## [2026-05-03] fix/fix-idor-vulnerability-customer-controller
-**Feature:** Corrección de vulnerabilidad IDOR en gestión de clientes
-**Description:** Se securizaron los comandos y endpoints de GetById, Update y Delete en CustomerController para requerir CompanyId, previniendo accesos cruzados entre inquilinos.
-**Reference:** [docs/TASKS/DONE/Kaizen_2026_05_03_fix_idor_vulnerability_customer_controller.md]
+## [2026-05-02] fix/correccion-auditorias-2026-05-02
+**Feature:** Documentación de auditoría exitosa S+
+**Description:** Se registraron los documentos de la auditoría 100% exitosa sin requerir cambios de código para la fecha 2026-05-02.
+**Reference:** [docs/features/correccion-auditorias-2026-05-02]
 **Status:** DONE
-
----
+## [2026-05-01] feat/kaizen-refactor-usings
+**Feature:** Refactor unused using directives
+**Description:** Se removió el using no utilizado GesFer.Product.Back.Infrastructure.Logging en el controlador DashboardController.cs para mejorar la limpieza del código.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_05_01_refactor_usings.md]
+**Status:** DONE
+## [2026-05-01] feat/refactor-telemetry-produces-response-type
+**Feature:** Refactor ProducesResponseType attributes in TelemetryController
+**Description:** Refactor TelemetryController to use modern generic ProducesResponseType attributes.
+**Reference:** [docs/TASKS/DONE/2026_04_30_refactor_telemetry_produces.md]
 
 ## [2026-05-01] feat/create-skill-git-close-cycle
 **Feature:** Skill git-close-cycle y enlace finalize-process
