@@ -69,7 +69,8 @@ public class CustomerController : ControllerBase
     {
         try
         {
-            var command = new GetCustomerByIdCommand(id);
+            var companyId = this.GetCompanyId();
+            var command = new GetCustomerByIdCommand(id, companyId);
             var result = await _getByIdHandler.HandleAsync(command);
 
             if (result == null)
@@ -125,7 +126,8 @@ public class CustomerController : ControllerBase
     {
         try
         {
-            var command = new UpdateCustomerCommand(id, dto);
+            var companyId = this.GetCompanyId();
+            var command = new UpdateCustomerCommand(id, companyId, dto);
             var result = await _updateHandler.HandleAsync(command);
             return Ok(result);
         }
@@ -156,7 +158,8 @@ public class CustomerController : ControllerBase
     {
         try
         {
-            var command = new DeleteCustomerCommand(id);
+            var companyId = this.GetCompanyId();
+            var command = new DeleteCustomerCommand(id, companyId);
             await _deleteHandler.HandleAsync(command);
             return NoContent();
         }

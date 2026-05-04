@@ -18,7 +18,7 @@ public class GetCustomerByIdCommandHandler : ICommandHandler<GetCustomerByIdComm
     public async Task<CustomerDto?> HandleAsync(GetCustomerByIdCommand command, CancellationToken cancellationToken = default)
     {
         var customer = await _context.Customers
-            .Where(c => c.Id == command.Id)
+            .Where(c => c.Id == command.Id && c.CompanyId == command.CompanyId)
             .Select(c => new CustomerDto
             {
                 Id = c.Id,
