@@ -4,6 +4,12 @@ Registro de cambios arquitectónicos y features del proyecto.
 
 ---
 
+## [2026-05-03] feat/kaizen-optimize-jsondataseeder-hashset
+**Feature:** Optimizar adición a HashSet en JsonDataSeeder
+**Description:** Se optimizó la adición múltiple de usuarios válidos al HashSet `validUserIds` en `JsonDataSeeder.cs` utilizando un listado local intermedio y finalizando con `validUserIds.UnionWith()`.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_05_03_optimize_jsondataseeder_hashset.md]
+**Status:** DONE
+
 ## [2026-05-03] fix/correccion-auditorias-2026-05-03
 **Feature:** Documentación de auditoría exitosa S+
 **Description:** Se registraron los documentos de la auditoría 100% exitosa sin requerir cambios de código para la fecha 2026-05-03.

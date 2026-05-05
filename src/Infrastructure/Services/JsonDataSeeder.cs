@@ -674,6 +674,7 @@ public class JsonDataSeeder
 
         int skippedCount = 0;
         int processedCount = 0;
+        var newValidUserIds = new List<Guid>();
 
         foreach (var userData in users)
         {
@@ -747,7 +748,7 @@ public class JsonDataSeeder
                     };
                     _context.Users.Add(user);
                     // CASCADA RESILIENTE: Agregar ID a lista blanca solo si el usuario pasa validación
-                    validUserIds.Add(user.Id);
+                    newValidUserIds.Add(user.Id);
                     processedCount++;
                     _logger.LogInformation("[SEED] Cargado registro específico para test: User '{Username}' (Id: {Id})",
                         userData.Username, userData.Id);
@@ -762,7 +763,7 @@ public class JsonDataSeeder
                         existing.PasswordHash = passwordHash;
                     }
                     // CASCADA RESILIENTE: Agregar ID a lista blanca si se reactiva
-                    validUserIds.Add(existing.Id);
+                    newValidUserIds.Add(existing.Id);
                     processedCount++;
                     _logger.LogInformation("[SEED] Reactivado registro existente: User '{Username}' (Id: {Id})",
                         userData.Username, userData.Id);
@@ -774,7 +775,7 @@ public class JsonDataSeeder
                     {
                         existing.PasswordHash = passwordHash;
                     }
-                    validUserIds.Add(existing.Id);
+                    newValidUserIds.Add(existing.Id);
                 }
             }
             catch (Exception ex)
@@ -794,6 +795,9 @@ public class JsonDataSeeder
 
         _logger.LogInformation("[SEED] Users procesados: {ProcessedCount} exitoso(s), {SkippedCount} ignorado(s) de {TotalCount} totales",
             processedCount, skippedCount, users.Count);
+
+        validUserIds.UnionWith(newValidUserIds);
+
         // NOTA: SaveChangesAsync se llama explícitamente en SeedTestDataAsync después de SeedUsersAsync
         // para garantizar persistencia inmediata y evitar problemas de concurrencia
     }
