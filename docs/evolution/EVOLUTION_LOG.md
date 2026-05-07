@@ -1,6 +1,12 @@
 # Evolution Log
 
 Registro de cambios arquitectónicos y features del proyecto.
+## [2026-05-03] feat/kaizen-refactor-produces-response-type-profile-controller
+**Feature:** Refactor ProducesResponseType in remaining controllers
+**Description:** Se refactorizaron los atributos [ProducesResponseType] en los controladores de la API para utilizar la sintaxis genérica moderna.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_05_03_refactor_produces_response_type_profile_controller.md]
+**Status:** DONE
+
 
 ---
 

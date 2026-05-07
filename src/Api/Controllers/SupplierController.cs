@@ -63,7 +63,7 @@ public class SupplierController : ControllerBase
     /// </summary>
     [HttpGet("{id}")]
     [ProducesResponseType<SupplierDto>(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType<object>(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetById(Guid id)
     {
         try
@@ -88,7 +88,7 @@ public class SupplierController : ControllerBase
     /// </summary>
     [HttpPost]
     [ProducesResponseType<SupplierDto>(StatusCodes.Status201Created)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType<object>(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Create([FromBody] CreateSupplierDto dto)
     {
         try
@@ -114,8 +114,8 @@ public class SupplierController : ControllerBase
     /// </summary>
     [HttpPut("{id}")]
     [ProducesResponseType<SupplierDto>(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType<object>(StatusCodes.Status404NotFound)]
+    [ProducesResponseType<object>(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Update(Guid id, [FromBody] UpdateSupplierDto dto)
     {
         try
@@ -142,7 +142,7 @@ public class SupplierController : ControllerBase
     /// </summary>
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType<object>(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(Guid id)
     {
         try

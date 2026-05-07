@@ -35,7 +35,7 @@ public class DashboardController : ControllerBase
     /// </summary>
     [HttpGet("stats")]
     [ProducesResponseType<DashboardSummaryDto>(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType<object>(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType<object>(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> GetStats()
     {
