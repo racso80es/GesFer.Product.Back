@@ -4,6 +4,12 @@ Registro de cambios arquitectónicos y features del proyecto.
 
 ---
 
+## [2026-05-03] feat/kaizen-refactor-produces-response-type-profile
+**Feature:** Refactor ProducesResponseType in controllers
+**Description:** Se refactorizaron los controladores de la API para utilizar el atributo genérico `[ProducesResponseType<object>(statusCode)]` en lugar del antiguo no genérico en los statusCode comunes (400, 401, 404).
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_05_03_refactor_produces_response_type_profile_controller.md]
+**Status:** DONE
+
 ## [2026-05-03] feat/kaizen-optimize-jsondataseeder-hashset
 **Feature:** Optimizar adición a HashSet en JsonDataSeeder
 **Description:** Se optimizó la adición múltiple de usuarios válidos al HashSet `validUserIds` en `JsonDataSeeder.cs` utilizando un listado local intermedio y finalizando con `validUserIds.UnionWith()`.

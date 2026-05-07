@@ -27,7 +27,7 @@ public class ProfileController : ControllerBase
     /// </summary>
     [HttpGet("me")]
     [ProducesResponseType<object>(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType<object>(StatusCodes.Status401Unauthorized)]
     public IActionResult GetMyProfile()
     {
         try

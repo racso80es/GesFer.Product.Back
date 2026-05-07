@@ -27,7 +27,7 @@ public class MyCompanyController : ControllerBase
     /// </summary>
     [HttpGet]
     [ProducesResponseType<AdminCompanyDto>(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType<object>(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetMyCompany()
     {
         try
@@ -56,7 +56,7 @@ public class MyCompanyController : ControllerBase
     /// </summary>
     [HttpPut]
     [ProducesResponseType<AdminCompanyDto>(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType<object>(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> UpdateMyCompany([FromBody] AdminUpdateCompanyDto dto)
     {
         try

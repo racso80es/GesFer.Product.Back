@@ -71,7 +71,7 @@ public class PostalCodeController : ControllerBase
     /// </summary>
     [HttpGet("{id}")]
     [ProducesResponseType<PostalCodeDto>(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType<object>(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetById(Guid id)
     {
         try
@@ -97,7 +97,7 @@ public class PostalCodeController : ControllerBase
     /// <param name="dto">Datos para crear el código postal</param>
     [HttpPost]
     [ProducesResponseType<PostalCodeDto>(StatusCodes.Status201Created)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType<object>(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Create([FromBody] CreatePostalCodeDto dto)
     {
         try
@@ -122,8 +122,8 @@ public class PostalCodeController : ControllerBase
     /// </summary>
     [HttpPut("{id}")]
     [ProducesResponseType<PostalCodeDto>(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType<object>(StatusCodes.Status404NotFound)]
+    [ProducesResponseType<object>(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Update(Guid id, [FromBody] UpdatePostalCodeDto dto)
     {
         try
@@ -150,7 +150,7 @@ public class PostalCodeController : ControllerBase
     /// </summary>
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType<object>(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(Guid id)
     {
         try

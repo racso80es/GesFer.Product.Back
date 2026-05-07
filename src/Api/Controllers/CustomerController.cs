@@ -64,7 +64,7 @@ public class CustomerController : ControllerBase
     /// </summary>
     [HttpGet("{id}")]
     [ProducesResponseType<CustomerDto>(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType<object>(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetById(Guid id)
     {
         try
@@ -90,7 +90,7 @@ public class CustomerController : ControllerBase
     /// </summary>
     [HttpPost]
     [ProducesResponseType<CustomerDto>(StatusCodes.Status201Created)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType<object>(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Create([FromBody] CreateCustomerDto dto)
     {
         try
@@ -120,8 +120,8 @@ public class CustomerController : ControllerBase
     /// </summary>
     [HttpPut("{id}")]
     [ProducesResponseType<CustomerDto>(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType<object>(StatusCodes.Status404NotFound)]
+    [ProducesResponseType<object>(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Update(Guid id, [FromBody] UpdateCustomerDto dto)
     {
         try
@@ -153,7 +153,7 @@ public class CustomerController : ControllerBase
     /// </summary>
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType<object>(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(Guid id)
     {
         try
