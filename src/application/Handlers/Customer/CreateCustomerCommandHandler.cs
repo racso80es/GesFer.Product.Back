@@ -21,18 +21,27 @@ public class CreateCustomerCommandHandler : ICommandHandler<CreateCustomerComman
 
     public async Task<CustomerDto> HandleAsync(CreateCustomerCommand command, CancellationToken cancellationToken = default)
     {
+        await ValidateAsync(command, cancellationToken);
+        var customer = MapToEntity(command);
+
+        _context.Customers.Add(customer);
+        await _context.SaveChangesAsync(cancellationToken);
+
+        return MapToDto(customer);
+    }
+
+    private async Task ValidateAsync(CreateCustomerCommand command, CancellationToken cancellationToken)
+    {
         var company = await _adminApiClient.GetCompanyAsync(command.Dto.CompanyId);
         if (company == null)
             throw new InvalidOperationException($"No se encontró la empresa con ID {command.Dto.CompanyId}");
 
-        // Validar que no exista un cliente con el mismo nombre en la misma empresa
         var existingCustomer = await _context.Customers
             .FirstOrDefaultAsync(c => c.CompanyId == command.Dto.CompanyId && c.Name == command.Dto.Name, cancellationToken);
 
         if (existingCustomer != null)
             throw new InvalidOperationException($"Ya existe un cliente con el nombre '{command.Dto.Name}' en esta empresa");
 
-        // Validar tarifa de venta si se proporciona
         if (command.Dto.SellTariffId.HasValue)
         {
             var tariffExists = await _context.Tariffs
@@ -41,7 +50,6 @@ public class CreateCustomerCommandHandler : ICommandHandler<CreateCustomerComman
                 throw new InvalidOperationException($"No se encontró la tarifa de venta con ID {command.Dto.SellTariffId.Value}");
         }
 
-        // Validar IDs de dirección si se proporcionan
         if (command.Dto.PostalCodeId.HasValue)
         {
             var postalCodeExists = await _context.PostalCodes
@@ -73,22 +81,23 @@ public class CreateCustomerCommandHandler : ICommandHandler<CreateCustomerComman
             if (!countryExists)
                 throw new InvalidOperationException($"No se encontró el país con ID {command.Dto.CountryId.Value}");
         }
+    }
 
-        // Validar y convertir TaxId si se proporciona
+    private Product.Back.Domain.Entities.Customer MapToEntity(CreateCustomerCommand command)
+    {
         TaxId? taxId = null;
         if (!string.IsNullOrWhiteSpace(command.Dto.TaxId))
         {
             taxId = TaxId.Create(command.Dto.TaxId);
         }
 
-        // Validar y convertir Email si se proporciona
         Email? email = null;
         if (!string.IsNullOrWhiteSpace(command.Dto.Email))
         {
             email = Email.Create(command.Dto.Email);
         }
 
-        var customer = new Product.Back.Domain.Entities.Customer
+        return new Product.Back.Domain.Entities.Customer
         {
             CompanyId = command.Dto.CompanyId,
             Name = command.Dto.Name,
@@ -104,10 +113,10 @@ public class CreateCustomerCommandHandler : ICommandHandler<CreateCustomerComman
             CreatedAt = DateTime.UtcNow,
             IsActive = true
         };
+    }
 
-        _context.Customers.Add(customer);
-        await _context.SaveChangesAsync(cancellationToken);
-
+    private CustomerDto MapToDto(Product.Back.Domain.Entities.Customer customer)
+    {
         return new CustomerDto
         {
             Id = customer.Id,
@@ -128,4 +137,3 @@ public class CreateCustomerCommandHandler : ICommandHandler<CreateCustomerComman
         };
     }
 }
-

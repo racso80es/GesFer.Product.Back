@@ -20,18 +20,27 @@ public class CreateSupplierCommandHandler : ICommandHandler<CreateSupplierComman
 
     public async Task<SupplierDto> HandleAsync(CreateSupplierCommand command, CancellationToken cancellationToken = default)
     {
+        await ValidateAsync(command, cancellationToken);
+        var supplier = MapToEntity(command);
+
+        _context.Suppliers.Add(supplier);
+        await _context.SaveChangesAsync(cancellationToken);
+
+        return MapToDto(supplier);
+    }
+
+    private async Task ValidateAsync(CreateSupplierCommand command, CancellationToken cancellationToken)
+    {
         var company = await _adminApiClient.GetCompanyAsync(command.Dto.CompanyId);
         if (company == null)
             throw new InvalidOperationException($"No se encontró la empresa con ID {command.Dto.CompanyId}");
 
-        // Validar que no exista un proveedor con el mismo nombre en la misma empresa
         var existingSupplier = await _context.Suppliers
             .FirstOrDefaultAsync(s => s.CompanyId == command.Dto.CompanyId && s.Name == command.Dto.Name, cancellationToken);
 
         if (existingSupplier != null)
             throw new InvalidOperationException($"Ya existe un proveedor con el nombre '{command.Dto.Name}' en esta empresa");
 
-        // Validar tarifa de compra si se proporciona
         if (command.Dto.BuyTariffId.HasValue)
         {
             var tariffExists = await _context.Tariffs
@@ -40,7 +49,6 @@ public class CreateSupplierCommandHandler : ICommandHandler<CreateSupplierComman
                 throw new InvalidOperationException($"No se encontró la tarifa de compra con ID {command.Dto.BuyTariffId.Value}");
         }
 
-        // Validar IDs de dirección si se proporcionan
         if (command.Dto.PostalCodeId.HasValue)
         {
             var postalCodeExists = await _context.PostalCodes
@@ -72,8 +80,11 @@ public class CreateSupplierCommandHandler : ICommandHandler<CreateSupplierComman
             if (!countryExists)
                 throw new InvalidOperationException($"No se encontró el país con ID {command.Dto.CountryId.Value}");
         }
+    }
 
-        var supplier = new Product.Back.Domain.Entities.Supplier
+    private Product.Back.Domain.Entities.Supplier MapToEntity(CreateSupplierCommand command)
+    {
+        return new Product.Back.Domain.Entities.Supplier
         {
             CompanyId = command.Dto.CompanyId,
             Name = command.Dto.Name,
@@ -89,10 +100,10 @@ public class CreateSupplierCommandHandler : ICommandHandler<CreateSupplierComman
             CreatedAt = DateTime.UtcNow,
             IsActive = true
         };
+    }
 
-        _context.Suppliers.Add(supplier);
-        await _context.SaveChangesAsync(cancellationToken);
-
+    private SupplierDto MapToDto(Product.Back.Domain.Entities.Supplier supplier)
+    {
         return new SupplierDto
         {
             Id = supplier.Id,
@@ -113,4 +124,3 @@ public class CreateSupplierCommandHandler : ICommandHandler<CreateSupplierComman
         };
     }
 }
-
