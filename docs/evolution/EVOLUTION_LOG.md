@@ -1,6 +1,13 @@
 # Evolution Log
 
 Registro de cambios arquitectónicos y features del proyecto.
+
+## [2026-05-14] feat/kaizen-fix-testing-secret
+**Feature:** Remove Zero-Trust violation in test appsettings
+**Description:** Se eliminó el secreto JWT harcodeado en `src/IntegrationTests/appsettings.Testing.json` reemplazándolo por el placeholder estándar para cumplir con la política Zero-Trust. El secreto necesario se inyecta dinámicamente durante los tests de integración en `IntegrationTestWebAppFactory.cs`.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_05_14_fix_testing_secret.md]
+**Status:** DONE
+
 ## [2026-05-03] feat/kaizen-refactor-produces-response-type-profile-controller
 **Feature:** Refactor ProducesResponseType in remaining controllers
 **Description:** Se refactorizaron los atributos [ProducesResponseType] en los controladores de la API para utilizar la sintaxis genérica moderna.
