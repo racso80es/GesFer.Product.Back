@@ -10,6 +10,13 @@ namespace GesFer.Product.Back.Api.Controllers;
 public class HealthController : ControllerBase
 {
     /// <summary>
+    /// Inicializa una nueva instancia de <see cref="HealthController"/>
+    /// </summary>
+    public HealthController()
+    {
+    }
+
+    /// <summary>
     /// Verifica el estado de la API
     /// </summary>
     /// <returns>Estado actual del servicio</returns>

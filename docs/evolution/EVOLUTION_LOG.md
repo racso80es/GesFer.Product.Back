@@ -1,6 +1,13 @@
 # Evolution Log
 
 Registro de cambios arquitectónicos y features del proyecto.
+
+## [2026-05-03] feat/kaizen-health-controller-xml-docs
+**Feature:** Add missing XML docs to HealthController
+**Description:** Added XML summary to HealthController constructor to comply with XML documentation standards.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_05_03_create_new_task/]
+**Status:** DONE
+
 ## [2026-05-03] feat/kaizen-refactor-produces-response-type-profile-controller
 **Feature:** Refactor ProducesResponseType in remaining controllers
 **Description:** Se refactorizaron los atributos [ProducesResponseType] en los controladores de la API para utilizar la sintaxis genérica moderna.
