@@ -1,6 +1,13 @@
 # Evolution Log
 
 Registro de cambios arquitectónicos y features del proyecto.
+
+## [2026-05-22] feat/kaizen-cleanup-usings-authservice
+**Feature:** Cleanup redundant usings in AuthService
+**Description:** Removed redundant using directives `GesFer.Product.Back.Infrastructure.Services` and `BCrypt.Net` in `AuthService.cs`.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_05_22_cleanup_usings_authservice.md]
+**Status:** DONE
+
 ## [2026-05-03] feat/kaizen-refactor-produces-response-type-profile-controller
 **Feature:** Refactor ProducesResponseType in remaining controllers
 **Description:** Se refactorizaron los atributos [ProducesResponseType] en los controladores de la API para utilizar la sintaxis genérica moderna.
