@@ -1,6 +1,13 @@
 # Evolution Log
 
 Registro de cambios arquitectónicos y features del proyecto.
+
+## [2026-05-26] feat/kaizen-clean-code-todo
+**Feature:** Verify Clean Code No TODOs
+**Description:** Se realizó una auditoría de código confirmando la ausencia de deuda técnica marcada con TODO.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_05_26_clean-code-todo.md]
+**Status:** DONE
+
 ## [2026-05-03] feat/kaizen-refactor-produces-response-type-profile-controller
 **Feature:** Refactor ProducesResponseType in remaining controllers
 **Description:** Se refactorizaron los atributos [ProducesResponseType] en los controladores de la API para utilizar la sintaxis genérica moderna.
