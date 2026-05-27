@@ -1,0 +1,6 @@
+---
+feature_name: Kaizen_2026_05_27_remove_useless_comments
+created: 2026-05-27
+---
+# Specifications
+- Search and remove useless comments such as "// Kaizen: Xml Docs validated".

@@ -1,6 +1,12 @@
 # Evolution Log
 
 Registro de cambios arquitectónicos y features del proyecto.
+## [2026-05-27] feat/kaizen-remove-useless-comments
+**Feature:** Limpiar comentarios inútiles en controladores
+**Description:** Se eliminaron comentarios innecesarios como `// Kaizen: Xml Docs validated` en `CustomerController.cs` y `ProfileController.cs`.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_05_27_remove_useless_comments.md]
+**Status:** DONE
+
 ## [2026-05-03] feat/kaizen-refactor-produces-response-type-profile-controller
 **Feature:** Refactor ProducesResponseType in remaining controllers
 **Description:** Se refactorizaron los atributos [ProducesResponseType] en los controladores de la API para utilizar la sintaxis genérica moderna.
