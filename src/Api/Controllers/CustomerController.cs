@@ -12,7 +12,6 @@ namespace GesFer.Product.Back.Api.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 [Authorize]
-// Kaizen: Xml Docs validated
 public class CustomerController : ControllerBase
 {
     private readonly ICommandHandler<CreateCustomerCommand, CustomerDto> _createHandler;
