@@ -1,6 +1,14 @@
 # Evolution Log
 
 Registro de cambios arquitectónicos y features del proyecto.
+## [2026-05-28] feat/kaizen-add-sensitivedatasanitizer-tests
+**Feature:** Add unit tests for SensitiveDataSanitizer
+**Description:** Implement unit tests for SensitiveDataSanitizer service methods using xUnit and FluentAssertions.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_05_28_add_sensitivedatasanitizer_tests.md]
+**Status:** DONE
+
+---
+
 ## [2026-05-03] feat/kaizen-refactor-produces-response-type-profile-controller
 **Feature:** Refactor ProducesResponseType in remaining controllers
 **Description:** Se refactorizaron los atributos [ProducesResponseType] en los controladores de la API para utilizar la sintaxis genérica moderna.
