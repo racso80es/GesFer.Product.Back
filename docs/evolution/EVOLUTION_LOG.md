@@ -1,6 +1,13 @@
 # Evolution Log
 
 Registro de cambios arquitectónicos y features del proyecto.
+
+## [2026-05-29] feat/correccion-auditorias-2026-05-29
+**Feature:** Ejecución de auditoría diaria estructural
+**Description:** Generación de reporte `docs/audits/AUDITORIA_2026_05_29.md`. Validación de código, infraestructura y reglas async superada al 100%. No se registraron issues pendientes ni deuda técnica.
+**Reference:** [docs/features/correccion-auditorias-2026-05-29/objectives.md]
+**Status:** DONE
+
 ## [2026-05-03] feat/kaizen-refactor-produces-response-type-profile-controller
 **Feature:** Refactor ProducesResponseType in remaining controllers
 **Description:** Se refactorizaron los atributos [ProducesResponseType] en los controladores de la API para utilizar la sintaxis genérica moderna.
