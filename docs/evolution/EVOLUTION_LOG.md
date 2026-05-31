@@ -280,3 +280,9 @@ Registro de cambios arquitectónicos y features del proyecto.
 **Feature:** Add missing XML docs to AuthController
 **Description:** Added XML summary to AuthController constructor to comply with XML documentation standards.
 **Reference:** [docs/TASKS/DONE/Kaizen_2026_04_18_auth_controller_xml_docs.md]
+
+## [2026-05-31] feat/kaizen-dependency-optimization
+**Feature:** Dependency Optimization
+**Description:** Verified controllers for unused dependencies and dead code. Clean state documented via SDDIA 7 standard artifacts. No code changes needed.
+**Reference:** [docs/TASKS/DONE/Kaizen_2024_05_31_dependency_optimization.md]
+**Status:** DONE
