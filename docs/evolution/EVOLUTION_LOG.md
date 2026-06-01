@@ -1,6 +1,15 @@
 # Evolution Log
 
 Registro de cambios arquitectónicos y features del proyecto.
+
+## [2026-06-01] feat/kaizen-routine-audit-2026-06-01
+**Feature:** Routine structural audit 2026-06-01
+**Description:** Ejecución de proceso automatic_task sin hallazgos de deuda técnica ni TODOs pendientes. Generado reporte AUDITORIA_2026_06_01.md (100% de salud).
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_06_01_routine_audit.md]
+**Status:** DONE
+
+---
+
 ## [2026-05-03] feat/kaizen-refactor-produces-response-type-profile-controller
 **Feature:** Refactor ProducesResponseType in remaining controllers
 **Description:** Se refactorizaron los atributos [ProducesResponseType] en los controladores de la API para utilizar la sintaxis genérica moderna.
