@@ -1,5 +1,2 @@
----
-date: "2026-05-03"
----
 # Implementation
-Replace individual `.Add` calls with `.UnionWith` using a local collection.
+No code changes required as the target file `JsonDataSeeder.cs` is already optimized per the guidelines.

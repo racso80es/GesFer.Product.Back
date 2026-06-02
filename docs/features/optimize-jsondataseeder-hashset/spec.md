@@ -1,5 +1,4 @@
----
-date: "2026-05-03"
----
-# Specification
-The `JsonDataSeeder.cs` class iterates over `users` and adds them one by one to `validUserIds` HashSet via `.Add()`. This plan replaces it with collecting to a local list and utilizing `validUserIds.UnionWith()` after the loop.
+# Spec
+Scope: `src/Infrastructure/Services/JsonDataSeeder.cs`
+Requirements: Verify HashSet constructors and `.UnionWith` usages as per guidelines.
+Result: The file uses optimized HashSet patterns as discovered in exploration. No code changes needed.
