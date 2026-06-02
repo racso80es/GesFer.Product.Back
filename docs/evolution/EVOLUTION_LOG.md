@@ -1,6 +1,12 @@
 # Evolution Log
 
 Registro de cambios arquitectónicos y features del proyecto.
+## [2026-06-02] feat/kaizen-optimize-jsondataseeder-hashset-creation
+**Feature:** Optimize HashSet initialization in JsonDataSeeder
+**Description:** Completed an automatic task Kaizen audit for HashSet initializations. Confirmed the class successfully applies the optimizations, requiring no code modifications.
+**Reference:** [docs/TASKS/DONE/Kaizen_2026_06_02_optimize_jsondataseeder_hashset_creation.md]
+**Status:** DONE
+
 ## [2026-05-03] feat/kaizen-refactor-produces-response-type-profile-controller
 **Feature:** Refactor ProducesResponseType in remaining controllers
 **Description:** Se refactorizaron los atributos [ProducesResponseType] en los controladores de la API para utilizar la sintaxis genérica moderna.

@@ -1,6 +1,4 @@
----
-date: "2026-05-03"
----
 # Plan
-1. Modificar `src/Infrastructure/Services/JsonDataSeeder.cs` para colectar en `newValidUserIds` List<Guid>.
-2. Usar `validUserIds.UnionWith(newValidUserIds)`.
+1. Analyze HashSet occurrences in `JsonDataSeeder.cs`.
+2. Confirm patterns match `.UnionWith` or are properly instantiated.
+3. Log results.
