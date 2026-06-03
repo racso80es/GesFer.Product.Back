@@ -1,6 +1,3 @@
----
-title: "Especificación de corrección de auditoría 2026-05-03"
-date: 2026-05-03
----
-# Especificación
-No se requieren cambios de código. La auditoría encontró un 100% de salud.
+# Specifications
+- Target: Full solution codebase.
+- Standard: Zero tolerance for unused variables, missing async/await implementations, or undocumented API surface.
