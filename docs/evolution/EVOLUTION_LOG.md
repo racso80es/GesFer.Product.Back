@@ -1,6 +1,13 @@
 # Evolution Log
 
 Registro de cambios arquitectónicos y features del proyecto.
+
+## [2024-06-14] feat/api-documentation-discoverability
+**Feature:** API Documentation Discoverability
+**Description:** Verified that all API endpoints have proper XML documentation. No code changes were needed.
+**Reference:** [docs/TASKS/DONE/Kaizen_2024_06_14_api_documentation_discoverability.md]
+**Status:** DONE
+
 ## [2026-05-03] feat/kaizen-refactor-produces-response-type-profile-controller
 **Feature:** Refactor ProducesResponseType in remaining controllers
 **Description:** Se refactorizaron los atributos [ProducesResponseType] en los controladores de la API para utilizar la sintaxis genérica moderna.

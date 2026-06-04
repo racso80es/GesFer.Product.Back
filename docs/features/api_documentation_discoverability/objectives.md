@@ -1,8 +1,7 @@
 ---
+feature_name: API Documentation Discoverability
 created: 2024-06-14
-type: kaizen
-status: DONE
+process: automatic_task
 ---
-# Action: API Documentation Discoverability
-
+# Objectives
 Enhance the API documentation by ensuring all endpoints have proper XML documentation.
