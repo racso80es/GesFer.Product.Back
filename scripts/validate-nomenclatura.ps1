@@ -37,7 +37,7 @@ function Test-KebabCase {
 function Test-BranchName {
     param([string]$b)
     if ($b -eq "main" -or $b -eq "master" -or $b -match "^jules-") { return $true }
-    if ($b -match '^(feat|feature)/(.+)$') { $suffix = $Matches[2]; return (Test-KebabCase $suffix) -or ($suffix -match '^refactorization-[a-z0-9]+(-[a-z0-9]+)*$') }
+    if ($b -match '^(feat|feature|audit)/(.+)$') { $suffix = $Matches[2]; return (Test-KebabCase $suffix) -or ($suffix -match '^refactorization-[a-z0-9]+(-[a-z0-9]+)*$') }
     if ($b -match '^fix/(.+)$') { return Test-KebabCase $Matches[1] }
     return $false
 }
@@ -60,9 +60,9 @@ $result = @{
 # 1) Rama
 if (-not (Test-BranchName $branch)) {
     $result.result = "fail"
-    $result.message = "Rama '$branch' no cumple nomenclatura: debe ser feat/<kebab>, fix/<kebab> o feat/refactorization-<kebab>. main/master OK en integración."
+    $result.message = "Rama '$branch' no cumple nomenclatura: debe ser feat/<kebab>, fix/<kebab>, audit/<kebab> o feat/refactorization-<kebab>. main/master OK en integración."
     $result.detail.branch = $branch
-    $result.detail.expected = "feat/<nombre> o fix/<nombre> en kebab-case"
+    $result.detail.expected = "feat/<nombre>, fix/<nombre> o audit/<nombre> en kebab-case"
     Write-Output ($result | ConvertTo-Json -Depth 4)
     exit 1
 }
