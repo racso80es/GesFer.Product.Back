@@ -674,7 +674,7 @@ public class JsonDataSeeder
 
         int skippedCount = 0;
         int processedCount = 0;
-        var newValidUserIds = new List<Guid>();
+        var newValidUserIds = new HashSet<Guid>();
 
         foreach (var userData in users)
         {
