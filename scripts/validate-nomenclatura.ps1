@@ -39,6 +39,8 @@ function Test-BranchName {
     if ($b -eq "main" -or $b -eq "master" -or $b -match "^jules-") { return $true }
     if ($b -match '^(feat|feature)/(.+)$') { $suffix = $Matches[2]; return (Test-KebabCase $suffix) -or ($suffix -match '^refactorization-[a-z0-9]+(-[a-z0-9]+)*$') }
     if ($b -match '^fix/(.+)$') { return Test-KebabCase $Matches[1] }
+    if ($b -match '^audit/(.+)$') { return Test-KebabCase $Matches[1] }
+    if ($b -match '^auditoria(-kaizen)?-[a-z0-9]+(-[a-z0-9]+)*$') { return $true }
     return $false
 }
 
