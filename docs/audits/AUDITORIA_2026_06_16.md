@@ -13,5 +13,5 @@
 ## 3. Acciones Kaizen
 *   **roadmap:** Ajustar el entorno Git local para cumplir con las políticas del pipeline.
 *   **instructions:** Utilizar comandos Git para forzar el renombrado de la rama activa hacia un prefijo válido que no sea bloqueado por el validador.
-*   **code snippets:** `git branch -M audit/<nombre-rama>`
-*   **Definition of Done:** La rama tiene un prefijo válido (`audit/`), la pipeline la acepta, y el proyecto compila con 0 warnings y los tests continúan pasando al 100%.
+*   **code snippets:** `git branch -M jules-<nombre-rama>`
+*   **Definition of Done:** La rama tiene un prefijo válido (`jules-`), la pipeline la acepta, y el proyecto compila con 0 warnings y los tests continúan pasando al 100%.
