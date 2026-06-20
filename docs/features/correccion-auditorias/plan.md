@@ -1,5 +1,6 @@
 ---
 title: Plan de Corrección de Auditoría
+status: DONE
 ---
 # Plan
 

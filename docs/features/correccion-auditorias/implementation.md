@@ -1,5 +1,6 @@
 ---
 title: Implementación de Corrección de Auditoría
+status: DONE
 ---
 # Implementación
 

@@ -1,5 +1,6 @@
 ---
 title: Ejecución de Corrección de Auditoría
+status: DONE
 ---
 # Ejecución
 
