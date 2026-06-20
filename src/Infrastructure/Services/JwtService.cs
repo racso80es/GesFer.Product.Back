@@ -60,10 +60,7 @@ public class JwtService : IJwtService
         };
 
         // Agregar permisos como claims
-        foreach (var permission in permissions)
-        {
-            claims.Add(new Claim("Permission", permission));
-        }
+        claims.AddRange(permissions.Select(permission => new Claim("Permission", permission)));
 
         var token = new JwtSecurityToken(
             issuer: _issuer,
