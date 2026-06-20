@@ -1,5 +1,6 @@
 ---
 title: Clarificación de Corrección de Auditoría
+status: DONE
 ---
 # Clarificación
 
